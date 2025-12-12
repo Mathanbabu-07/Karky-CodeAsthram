@@ -1,0 +1,116 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="daily_temps">daily_temps</variable>
+    <variable id="average_temp">average_temp</variable>
+  </variables>
+  <block type="essentials_var_set" x="10" y="10">
+    <field name="VAR" id="daily_temps">daily_temps</field>
+    <value name="VALUE">
+      <block type="essentials_list_create">
+        <mutation items="7"></mutation>
+        <value name="ITEM0">
+          <block type="essentials_num_literal">
+            <field name="NUM">32</field>
+          </block>
+        </value>
+        <value name="ITEM1">
+          <block type="essentials_num_literal">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+        <value name="ITEM2">
+          <block type="essentials_num_literal">
+            <field name="NUM">29</field>
+          </block>
+        </value>
+        <value name="ITEM3">
+          <block type="essentials_num_literal">
+            <field name="NUM">31</field>
+          </block>
+        </value>
+        <value name="ITEM4">
+          <block type="essentials_num_literal">
+            <field name="NUM">33</field>
+          </block>
+        </value>
+        <value name="ITEM5">
+          <block type="essentials_num_literal">
+            <field name="NUM">28</field>
+          </block>
+        </value>
+        <value name="ITEM6">
+          <block type="essentials_num_literal">
+            <field name="NUM">27</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="essentials_var_set">
+        <field name="VAR" id="average_temp">average_temp</field>
+        <value name="VALUE">
+          <block type="essentials_num_arithmetic">
+            <field name="OP">DIVIDE</field>
+            <value name="A">
+              <block type="control_math_stats">
+                <field name="OP">SUM</field>
+                <value name="LIST">
+                  <block type="essentials_var_get">
+                    <field name="VAR" id="daily_temps">daily_temps</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="essentials_list_length">
+                <value name="LIST">
+                  <block type="essentials_var_get">
+                    <field name="VAR" id="daily_temps">daily_temps</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print">
+            <value name="TEXT">
+              <block type="text_format">
+                <mutation items="1"></mutation>
+                <value name="TEXT">
+                  <block type="text_literal">
+                    <field name="TEXT">Daily Temperatures (Weather): {}</field>
+                  </block>
+                </value>
+                <value name="ARG0">
+                  <block type="essentials_var_get">
+                    <field name="VAR" id="daily_temps">daily_temps</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="text_print">
+                <value name="TEXT">
+                  <block type="text_format">
+                    <mutation items="1"></mutation>
+                    <value name="TEXT">
+                      <block type="text_literal">
+                        <field name="TEXT">Average Temperature for the period (Climate Indicator): {:.1f}°C</field>
+                      </block>
+                    </value>
+                    <value name="ARG0">
+                      <block type="essentials_var_get">
+                        <field name="VAR" id="average_temp">average_temp</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

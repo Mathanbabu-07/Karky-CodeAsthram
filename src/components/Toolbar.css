@@ -1,0 +1,557 @@
+/* src/components/Toolbar.css */
+
+/* "Glass Horizon" Theme Variables */
+:root {
+  --toolbar-gradient-start: var(--surface-1);
+  --toolbar-gradient-end: var(--surface-1);
+  --capsule-bg-color: color-mix(in srgb, var(--primary-500) 6%, var(--bg-0));
+  --capsule-border-color: color-mix(in srgb, var(--primary-500) 18%, transparent);
+  --capsule-divider-glow: color-mix(in srgb, var(--primary-500) 30%, transparent);
+  --toolbar-icon-color: var(--text);
+  --button-hover-glow: var(--focus-ring);
+  --toolbar-shadow-color: color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 72px;
+  background: var(--toolbar-bg);
+  box-shadow: var(--shadow-1);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Lightweight alive canvas sits behind content */
+.toolbar .toolbar-alive-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure toolbar content is above quantum effects */
+.toolbar > .toolbar-left,
+.toolbar > .toolbar-control-capsule {
+  position: relative;
+  z-index: 2; /* Above alive canvas */
+}
+
+/* Cyber Tech Lines Animation */
+.toolbar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Quantum Data Flow Background */
+.quantum-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.quantum-bg { display: none !important; }
+
+/* Wave Layer - Optimized for smoothness */
+.wave-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.wave-layer { display: none !important; }
+
+.wave {
+  position: absolute;
+  width: 250%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--primary-a04) 20%,
+    var(--primary-a08) 40%,
+    var(--primary-a12) 50%,
+    var(--primary-a08) 60%,
+    var(--primary-a04) 80%,
+    transparent 100%
+  );
+  animation: waveFlow 15s infinite ease-in-out;
+}
+.wave { display: none !important; }
+
+.path-1 {
+  animation-delay: 0s;
+  stroke: var(--primary-500);
+  stroke-opacity: 0.6;
+}
+
+.path-2 {
+  animation-delay: -5s;
+  stroke-width: 1.3;
+  stroke: var(--primary-600);
+  stroke-opacity: 0.5;
+}
+
+.wave-3 {
+  top: 65%;
+  animation-delay: -10s;
+  height: 35%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--primary-a04) 20%,
+    var(--primary-a08) 40%,
+    var(--primary-a12) 50%,
+    var(--primary-a08) 60%,
+    var(--primary-a04) 80%,
+    transparent 100%
+  );
+}
+
+@keyframes waveFlow {
+  0% {
+    transform: translateX(-50%);
+  }
+  25% {
+    transform: translateX(-25%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  75% {
+    transform: translateX(25%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+/* Particle System - Optimized and standardized */
+.particle-system {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.particle-system { display: none !important; }
+
+.particle {
+  position: absolute;
+  color: var(--primary-a30);
+  font-size: 10px;
+  font-weight: bold;
+  animation: particleFloat 20s infinite ease-in-out;
+  text-shadow: 0 0 3px var(--primary-a30);
+  z-index: 2;
+}
+
+/* Full scope positioning with better distribution - 20 particles */
+.particle-1 { top: 12%; left: 8%; animation-delay: 0s; animation-duration: 24s; }
+.particle-2 { top: 35%; left: 22%; animation-delay: -2.3s; animation-duration: 28s; color: color-mix(in srgb, var(--text) 30%, transparent); }
+.particle-3 { top: 18%; left: 42%; animation-delay: -4.7s; animation-duration: 26s; }
+.particle-4 { top: 55%; left: 15%; animation-delay: -1.8s; animation-duration: 30s; color: var(--primary-a30); }
+.particle-5 { top: 28%; left: 68%; animation-delay: -3.9s; animation-duration: 25s; }
+.particle-6 { top: 45%; left: 35%; animation-delay: -6.1s; animation-duration: 29s; color: var(--primary-a30); }
+.particle-7 { top: 8%; left: 75%; animation-delay: -0.7s; animation-duration: 27s; }
+.particle-8 { top: 62%; left: 55%; animation-delay: -5.4s; animation-duration: 23s; color: color-mix(in srgb, var(--text) 25%, transparent); }
+.particle-9 { top: 38%; left: 88%; animation-delay: -2.9s; animation-duration: 31s; }
+.particle-10 { top: 22%; left: 95%; animation-delay: -4.2s; animation-duration: 22s; color: var(--primary-a30); }
+.particle-11 { top: 58%; left: 3%; animation-delay: -1.1s; animation-duration: 32s; }
+.particle-12 { top: 15%; left: 58%; animation-delay: -3.6s; animation-duration: 24s; color: var(--primary-a30); }
+.particle-13 { top: 48%; left: 78%; animation-delay: -5.8s; animation-duration: 28s; }
+.particle-14 { top: 32%; left: 28%; animation-delay: -0.4s; animation-duration: 26s; color: color-mix(in srgb, var(--text) 20%, transparent); }
+.particle-15 { top: 68%; left: 48%; animation-delay: -4.9s; animation-duration: 30s; }
+.particle-16 { top: 25%; left: 12%; animation-delay: -2.1s; animation-duration: 26s; color: var(--primary-a30); }
+.particle-17 { top: 42%; left: 82%; animation-delay: -3.2s; animation-duration: 29s; }
+.particle-18 { top: 5%; left: 45%; animation-delay: -1.4s; animation-duration: 25s; color: color-mix(in srgb, var(--text) 30%, transparent); }
+.particle-19 { top: 72%; left: 25%; animation-delay: -4.5s; animation-duration: 31s; color: var(--primary-a30); }
+.particle-20 { top: 50%; left: 65%; animation-delay: -0.9s; animation-duration: 27s; }
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateY(-10px) rotate(90deg) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-5px) rotate(180deg) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-12px) rotate(270deg) scale(1.15);
+    opacity: 0.6;
+  }
+}
+
+/* Data Streams - Enhanced with varied directions and slower speeds */
+.data-streams {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stream {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: streamFlow 25s infinite ease-in-out;
+}
+
+/* Optimized Dynamic Nodal Network */
+.nodal-network {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+}
+
+.wandering-node {
+  position: absolute;
+  font-size: 16px;
+  color: var(--primary-500);
+  text-shadow: 0 0 8px var(--primary-a30);
+  filter: drop-shadow(0 0 6px var(--primary-a30));
+  transition: opacity 0.3s ease;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.connection-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.connection-canvas line {
+  stroke-linecap: round;
+  will-change: stroke-opacity;
+}
+
+
+
+
+
+
+
+@keyframes connectionFade {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Circuit Overlay - Solid modern lines */
+.circuit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.circuit-overlay { display: none !important; }
+
+.circuit-path {
+  fill: none;
+  stroke: rgba(74, 144, 226, 0.4);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 2px rgba(74, 144, 226, 0.3));
+  animation: circuitFlow 10s infinite ease-in-out;
+}
+
+.connection-node {
+  fill: rgba(74, 144, 226, 0.7);
+  filter: drop-shadow(0 0 3px rgba(74, 144, 226, 0.5));
+  animation: nodePulse 5s infinite ease-in-out;
+}
+
+
+.node-intersection {
+  fill: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 0 6px rgba(74, 144, 226, 0.8));
+  animation: intersectionPulse 3s infinite ease-in-out;
+}
+
+@keyframes circuitFlow {
+  0%, 100% {
+    opacity: 0.3;
+    stroke-width: 1;
+  }
+  50% {
+    opacity: 0.8;
+    stroke-width: 1.8;
+  }
+}
+
+@keyframes intersectionPulse {
+  0%, 100% {
+    r: 4;
+    fill-opacity: 0.9;
+  }
+  50% {
+    r: 6;
+    fill-opacity: 0.6;
+  }
+}
+
+/* Performance optimizations */
+.quantum-bg *,
+.particle-system *,
+.data-streams *,
+.circuit-overlay * {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Add subtle mathematical pattern overlay */
+.quantum-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(74, 144, 226, 0.015) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.008) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(0, 91, 154, 0.012) 1px, transparent 1px);
+  background-size: 50px 50px, 70px 70px, 90px 90px;
+  background-position: 0 0, 25px 25px, 50px 50px;
+  animation: patternShift 25s infinite linear;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+@keyframes patternShift {
+  0% {
+    background-position: 0 0, 25px 25px, 50px 50px;
+  }
+  100% {
+    background-position: 50px 50px, 75px 75px, 100px 100px;
+  }
+}
+
+@keyframes cyberFlow1 {
+  0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  100% { background-position: 200% 200%, 200% 200%, 300% 100%, 300% 100%, 100% 400%, 50px 50px, 50px 50px, 50px 50px; }
+}
+
+@keyframes cyberFlow2 {
+  0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  100% { background-position: -200% -200%, -200% -200%, -300% -100%, -300% -100%, -100% -400%, -50px -50px, -50px -50px, -50px -50px; }
+}
+
+@keyframes cyberFlow3 {
+  0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  100% { background-position: 400% 0%, 400% 0%, 600% 0%, 600% 0%, 200% 0%, 100px 0px, 100px 0px, 100px 0px; }
+}
+
+@keyframes cyberFlow4 {
+  0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  100% { background-position: -400% 0%, -400% 0%, -600% 0%, -600% 0%, -200% 0%, -100px 0px, -100px 0px, -100px 0px; }
+}
+
+@keyframes cyberFlow5 {
+  0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  100% { background-position: 0% 800%, 0% 800%, 0% 800%, 0% 800%, 0% 800%, 0% 800%, 0% 800%, 0% 800%; }
+}
+
+@keyframes cyberDots {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-logo-full {
+  height: 58px; /* Slightly adjusted for vertical balance */
+  object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.toolbar-logo-full:hover {
+    transform: scale(1.03);
+}
+
+/* Floating Control Capsule */
+.toolbar-control-capsule {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background-color: var(--capsule-bg-color);
+  border: 1px solid var(--capsule-border-color);
+  border-radius: 50px; /* Pill shape */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toolbar-control-capsule:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.toolbar-logo-short {
+  height: 36px;
+  object-fit: contain;
+  margin-right: 0.25rem;
+}
+
+.capsule-divider {
+  width: 1.5px;
+  height: 28px;
+  background-color: var(--capsule-divider-glow);
+  border-radius: 1px;
+}
+
+.capsule-button-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Tighter gap for a unified group */
+}
+
+/* Buttons inside the capsule */
+.toolbar button,
+.toolbar .load-label {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%; /* Circular buttons */
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--toolbar-icon-color);
+  transition: all 0.2s ease-in-out;
+  position: relative; /* For glow effect */
+}
+
+/* .toolbar button:hover,
+.toolbar .load-label:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px 2px var(--button-hover-glow);
+} */
+
+.toolbar button:active,
+.toolbar .load-label:active {
+  transform: scale(0.95);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.toolbar button svg,
+.toolbar .load-label svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* --- FINAL FIX: Unify all toolbar buttons including load-label --- */
+.toolbar button,
+.toolbar .load-label {
+  all: unset; /* Remove native button/label styles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--toolbar-icon-color);
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.15s ease-in-out;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.toolbar button:hover,
+.toolbar .load-label:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px 2px var(--button-hover-glow);
+}
+
+.toolbar button:active,
+.toolbar .load-label:active {
+  transform: scale(0.95);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.toolbar button svg,
+.toolbar .load-label svg {
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
+
+/* Duo-tone button styles per theme */
+[data-theme="light"] .toolbar .capsule-button-group button,
+[data-theme="light"] .toolbar .capsule-button-group .load-label {
+  background-color: var(--primary-500);
+  color: var(--text-white);
+}
+[data-theme="light"] .toolbar .capsule-button-group button:hover,
+[data-theme="light"] .toolbar .capsule-button-group .load-label:hover,
+[data-theme="light"] .toolbar .capsule-button-group button:active,
+[data-theme="light"] .toolbar .capsule-button-group .load-label:active {
+  background-color: var(--accent-500);
+  color: var(--text); /* dark icon on gold */
+}
+
+[data-theme="dark"] .toolbar .capsule-button-group button,
+[data-theme="dark"] .toolbar .capsule-button-group .load-label {
+  background-color: var(--accent-500);
+  color: var(--text-dark); /* dark icon on gold in dark mode */
+}
+[data-theme="dark"] .toolbar .capsule-button-group button:hover,
+[data-theme="dark"] .toolbar .capsule-button-group .load-label:hover,
+[data-theme="dark"] .toolbar .capsule-button-group button:active,
+[data-theme="dark"] .toolbar .capsule-button-group .load-label:active {
+  background-color: var(--primary-600);
+  color: var(--text-white); /* white icon on blue */
+}
+
+/* Swap logo appearance by theme; use filter to render white logos as dark on light bg */
+[data-theme="light"] .toolbar-logo-full,
+[data-theme="light"] .toolbar-logo-short {
+  filter: invert(1) brightness(0.1) saturate(0);
+}
+[data-theme="dark"] .toolbar-logo-full,
+[data-theme="dark"] .toolbar-logo-short {
+  filter: none;
+}

@@ -1,0 +1,263 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_dna_strand">dna_strand</variable>
+    <variable id="var_mutated_dna">mutated_dna</variable>
+    <variable id="var_mutation_index">mutation_index</variable>
+    <variable id="var_new_base">new_base</variable>
+    <variable id="var_i">i</variable>
+    <variable id="var_possible_bases">possible_bases</variable>
+  </variables>
+  <block type="essentials_var_set" id="set_dna_strand" x="10" y="10">
+    <field name="VAR" id="var_dna_strand">dna_strand</field>
+    <value name="VALUE">
+      <block type="text" id="dna_sequence">
+        <field name="TEXT">AGCTTCGA</field>
+      </block>
+    </value>
+    <next>
+      <block type="essentials_var_set" id="set_possible_bases">
+        <field name="VAR" id="var_possible_bases">possible_bases</field>
+        <value name="VALUE">
+          <block type="essentials_list_create" id="list_of_bases">
+            <mutation items="4"></mutation>
+            <value name="ITEM0">
+              <block type="text">
+                <field name="TEXT">A</field>
+              </block>
+            </value>
+            <value name="ITEM1">
+              <block type="text">
+                <field name="TEXT">G</field>
+              </block>
+            </value>
+            <value name="ITEM2">
+              <block type="text">
+                <field name="TEXT">C</field>
+              </block>
+            </value>
+            <value name="ITEM3">
+              <block type="text">
+                <field name="TEXT">T</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="essentials_var_set" id="set_mutation_index">
+            <field name="VAR" id="var_mutation_index">mutation_index</field>
+            <value name="VALUE">
+              <block type="math_random_int" id="random_index">
+                <value name="FROM">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="essentials_num_arithmetic">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <block type="essentials_list_length">
+                        <value name="LIST">
+                          <block type="essentials_var_get">
+                            <field name="VAR" id="var_dna_strand">dna_strand</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="essentials_num_literal">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="essentials_var_set" id="set_new_base">
+                <field name="VAR" id="var_new_base">new_base</field>
+                <value name="VALUE">
+                  <block type="essentials_list_get">
+                    <value name="INDEX">
+                      <block type="math_random_int">
+                        <value name="FROM">
+                          <block type="essentials_num_literal">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="essentials_num_literal">
+                            <field name="NUM">3</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="LIST">
+                      <block type="essentials_var_get">
+                        <field name="VAR" id="var_possible_bases">possible_bases</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="essentials_var_set" id="set_mutated_dna">
+                    <field name="VAR" id="var_mutated_dna">mutated_dna</field>
+                    <value name="VALUE">
+                      <block type="text" id="empty_string">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_for" id="loop_through_dna">
+                        <field name="VAR" id="var_i">i</field>
+                        <value name="FROM">
+                          <block type="essentials_num_literal">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="essentials_num_arithmetic">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <block type="essentials_list_length">
+                                <value name="LIST">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="var_dna_strand">dna_strand</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="essentials_num_literal">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="BY">
+                          <block type="essentials_num_literal">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="controls_if" id="if_mutation">
+                            <value name="IF0">
+                              <block type="essentials_compare">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="var_i">i</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="var_mutation_index">mutation_index</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set">
+                                <field name="VAR" id="var_mutated_dna">mutated_dna</field>
+                                <value name="VALUE">
+                                  <block type="text_concat">
+                                    <value name="ADD0">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="var_mutated_dna">mutated_dna</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="var_new_base">new_base</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="variables_set">
+                                <field name="VAR" id="var_mutated_dna">mutated_dna</field>
+                                <value name="VALUE">
+                                  <block type="text_concat">
+                                    <value name="ADD0">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="var_mutated_dna">mutated_dna</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="text_getSubstring">
+                                        <mutation at1="true" at2="true"></mutation>
+                                        <field name="WHERE1">FROM_START</field>
+                                        <field name="WHERE2">FROM_START</field>
+                                        <value name="STRING">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="var_dna_strand">dna_strand</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT1">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="var_i">i</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT2">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="var_i">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="text_print" id="print_results">
+                            <value name="TEXT">
+                              <block type="text_concat">
+                                <value name="ADD0">
+                                  <block type="text">
+                                    <field name="TEXT">Original: </field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="text_concat">
+                                    <value name="ADD0">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="var_dna_strand">dna_strand</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="text_concat">
+                                        <value name="ADD0">
+                                          <block type="text">
+                                            <field name="TEXT"> | Mutated: </field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD1">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="var_mutated_dna">mutated_dna</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

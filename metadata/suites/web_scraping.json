@@ -1,0 +1,50 @@
+{
+  "name": "Web Scraping",
+  "modules": {
+    "beautifulsoup": {
+      "name": "beautifulsoup",
+      "blocks": [
+        {
+          "id": "beautifulsoup_parse_html",
+          "title": "parse HTML text %1 with parser %2",
+          "description": "Parse HTML content into a BeautifulSoup object.",
+          "suiteId": "web_scraping",
+          "moduleId": "beautifulsoup",
+          "categoryId": "cat_beautifulsoup"
+        },
+        {
+          "id": "beautifulsoup_find",
+          "title": "in soup %1 find first tag %2 with attributes %3",
+          "description": "Find the first tag that matches the given criteria.",
+          "suiteId": "web_scraping",
+          "moduleId": "beautifulsoup",
+          "categoryId": "cat_beautifulsoup"
+        },
+        {
+          "id": "beautifulsoup_find_all",
+          "title": "in soup %1 find all tags %2 with attributes %3 limit %4",
+          "description": "Find all tags that match the given criteria.",
+          "suiteId": "web_scraping",
+          "moduleId": "beautifulsoup",
+          "categoryId": "cat_beautifulsoup"
+        },
+        {
+          "id": "beautifulsoup_get_text",
+          "title": "get text from element %1",
+          "description": "Get all the text from a tag or a soup object.",
+          "suiteId": "web_scraping",
+          "moduleId": "beautifulsoup",
+          "categoryId": "cat_beautifulsoup"
+        },
+        {
+          "id": "beautifulsoup_get_attribute",
+          "title": "from element %1 get attribute %2",
+          "description": "Get the value of an attribute from a tag.",
+          "suiteId": "web_scraping",
+          "moduleId": "beautifulsoup",
+          "categoryId": "cat_beautifulsoup"
+        }
+      ]
+    }
+  }
+}

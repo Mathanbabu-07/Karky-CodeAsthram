@@ -1,0 +1,287 @@
+/* src/CodePanel.css */
+
+:root {
+  /* Map to Python Pop tokens */
+  --panel-header-bg: var(--surface-1);
+  --panel-body-bg: var(--editor-bg);
+  --panel-border-color: var(--editor-gutter);
+  --panel-glow: var(--primary-a12);
+  --panel-text-light: var(--text);
+  --action-pod-bg: color-mix(in srgb, var(--primary-500) 8%, transparent);
+  --action-pod-border: var(--primary-a30);
+  --success-color: var(--success);
+  /* Code panel header contrast variable (overridden per theme below) */
+  --codepanel-header-bg: color-mix(in srgb, var(--accent-500) 18%, var(--panel-header-bg));
+}
+
+/* Increase header/body contrast by theme */
+[data-theme="dark"] {
+  --codepanel-header-bg: color-mix(in srgb, var(--primary-600) 24%, var(--panel-header-bg));
+}
+
+/* Main Code Panel Container */
+.code-panel {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 420px; /* Reduced width for a more refined feel */
+  background-color: var(--panel-body-bg);
+  border: 1px solid var(--panel-border-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow-1);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 110px);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
+  transform: translateX(0);
+  opacity: 1;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.code-panel.collapsed {
+  transform: translateX(calc(100% + 32px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Header Section */
+.code-panel-header {
+  display: flex;
+  justify-content: space-between; /* Balance icon and pod */
+  align-items: center;
+  padding: 10px 10px 10px 20px; /* Adjusted padding */
+  background: var(--codepanel-header-bg);
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid var(--panel-border-color);
+  overflow: hidden;
+}
+
+/* Animated header background effect */
+.code-panel-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background-image: linear-gradient(
+    110deg,
+    transparent 20%,
+    var(--primary-a08) 45%,
+    var(--primary-a08) 55%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 5s infinite linear;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.header-icon-container {
+  flex-shrink: 0;
+}
+
+.code-panel-action-pod {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  background-color: var(--action-pod-bg);
+  border: 1px solid var(--action-pod-border);
+  border-radius: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.code-panel-action-pod button {
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--panel-text-light);
+  transition: transform 180ms cubic-bezier(.2,.9,.2,1),
+              box-shadow 180ms cubic-bezier(.2,.9,.2,1),
+              background-color 160ms linear,
+              color 120ms linear;
+  will-change: transform, box-shadow;
+}
+
+/* Theming for action buttons to mirror toolbar behavior */
+/* Light: default blue + white icon; hover/active gold + dark icon */
+[data-theme="light"] .code-panel-action-pod button {
+  background-color: var(--primary-500);
+  color: var(--text-white);
+}
+[data-theme="light"] .code-panel-action-pod button:hover,
+[data-theme="light"] .code-panel-action-pod button:active {
+  transform: translateY(-2px) scale(1.04);
+  background-color: var(--accent-500);
+  color: var(--text);
+  box-shadow: var(--shadow-1);
+}
+
+/* Dark: default gold + dark icon; hover/active blue + white icon */
+[data-theme="dark"] .code-panel-action-pod button {
+  background-color: var(--accent-500);
+  color: var(--text-dark);
+}
+[data-theme="dark"] .code-panel-action-pod button:hover,
+[data-theme="dark"] .code-panel-action-pod button:active {
+  transform: translateY(-2px) scale(1.04);
+  background-color: var(--primary-600);
+  color: var(--text-white);
+  box-shadow: var(--shadow-1);
+}
+
+.code-panel-action-pod button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.code-panel-action-pod button:disabled:hover {
+  transform: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Active / pressed state: subtle inward press */
+.code-panel-action-pod button:active {
+  transform: translateY(0) scale(0.98);
+  background-color: var(--primary-a16);
+  box-shadow: inset 0 0 0 1px var(--action-pod-border);
+}
+
+/* Keyboard focus accessibility */
+.code-panel-action-pod button:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .code-panel-action-pod button,
+  .code-panel-action-pod button:hover,
+  .code-panel-action-pod button:active {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Code Area & Custom PrismJS Theme */
+.code-content-wrapper {
+  flex-grow: 1;
+  overflow: auto;
+  position: relative;
+  z-index: 1;
+  background: var(--panel-body-bg);
+  border-top: 1px solid var(--panel-border-color);
+}
+
+.code-editor {
+  background: transparent !important; /* Let the panel background show */
+  color: var(--panel-text-light);
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  font-family: var(--font-mono) !important;
+  font-size: 14px !important;
+}
+
+.code-editor textarea:focus {
+  outline: none;
+}
+
+/* Custom PrismJS Syntax Highlighting Theme */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata { color: var(--syntax-comment); }
+.token.punctuation { color: var(--syntax-punctuation); }
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted { color: var(--syntax-tag); }
+.token.boolean,
+.token.number { color: var(--syntax-number); }
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted { color: var(--syntax-string); }
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string { color: var(--syntax-operator); }
+.token.atrule,
+.token.attr-value,
+.token.keyword { color: var(--syntax-keyword); }
+.token.function,
+.token.class-name { color: var(--syntax-function); }
+.token.regex,
+.token.important,
+.token.variable { color: var(--syntax-variable); }
+
+/* Custom Scrollbar */
+.code-content-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+.code-content-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.code-content-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--action-pod-border);
+  border-radius: 10px;
+}
+.code-content-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-500);
+}
+
+/* Toast Notification */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--success-color);
+  color: #0d1117;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: var(--shadow-1);
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInOutToast 2s ease-in-out forwards;
+}
+
+@keyframes fadeInOutToast {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  20% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 20px); }
+}
+
+/* Empty state when no code */
+.code-empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-weight: 500;
+}

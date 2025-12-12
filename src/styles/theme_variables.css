@@ -1,0 +1,149 @@
+/* src/styles/theme_variables.css */
+
+/* Python Pop - Core Color Tokens */
+/* Light Mode (default) */
+:root, [data-theme="light"] {
+  --primary-500: #306998;   /* Python Blue */
+  --primary-600: #255580;
+  --accent-500: #FFD43B;    /* Sunglow */
+  --accent-600: #F4C531;
+
+  --bg-0: #FFFFFF;          /* Main background */
+  --surface-1: #F4F7FB;     /* Cards, panels */
+  --muted-1: #E6EEF9;       /* Toolbox, sub-panels */
+  --text: #0B1B2B;          /* Body text */
+  --muted-text: #546A7A;    /* Secondary text */
+
+  --success: #2ECC71;
+  --danger: #FF5C5C;
+  --info: #4584B6;
+
+  --focus-ring: rgba(69,132,182,0.28);
+  --shadow-1: 0 6px 18px rgba(6,20,32,0.08);
+
+  /* Editor + code-specific */
+  --editor-bg: #F8FAFD;
+  --editor-gutter: #E1E8F2;
+  --editor-cursor: #306998;
+  --editor-selection: rgba(48,105,152,0.2);
+
+  /* App-level derived aliases for smooth migration */
+  --workspace-bg: var(--bg-0);
+  --text-primary: var(--text);
+  --text-secondary: var(--muted-text);
+  --toolbox-bg: var(--muted-1);
+  --toolbox-fg: var(--text);
+  --toolbox-border: var(--editor-gutter);
+  --toolbox-hover-bg: color-mix(in srgb, var(--primary-500) 8%, transparent);
+  --toolbox-selected-bg: color-mix(in srgb, var(--primary-500) 12%, var(--muted-1));
+
+  /* Toolbar and panel aliases (light): airy blue glass gradient (more visible, still light) */
+  --toolbar-bg: linear-gradient(135deg,
+    color-mix(in srgb, var(--primary-600) 24%, #ffffff) 0%,
+    color-mix(in srgb, var(--primary-500) 14%, #ffffff) 52%,
+    color-mix(in srgb, #6EC5FF 20%, #ffffff) 100%
+  );
+  --toolbar-text: var(--text);
+  --toolbar-border: var(--primary-500);
+  --panel-bg: var(--surface-1);
+  --panel-border: var(--editor-gutter);
+
+  /* Legacy aliases mapped to Python Pop */
+  --accent-aqua: var(--primary-500);
+  --accent-coral: var(--accent-500);
+  --text-white: #FFFFFF;
+  --text-light: var(--muted-text);
+  --text-mid: var(--muted-text);
+  --text-dark: var(--text);
+
+  /* Alpha helpers */
+  --primary-a04: rgba(48,105,152,0.04);
+  --primary-a08: rgba(48,105,152,0.08);
+  --primary-a12: rgba(48,105,152,0.12);
+  --primary-a16: rgba(48,105,152,0.16);
+  --primary-a30: rgba(48,105,152,0.30);
+  --accent-a15: rgba(255,212,59,0.15);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --primary-500: #306998;
+  --primary-600: #3B7EB0;
+  --accent-500: #FFD43B;
+  --accent-600: #EBC834;
+
+  --bg-0: #0B1220;
+  --surface-1: #0F1724;
+  --muted-1: #13202E;
+  --text: #E6EEF8;
+  --muted-text: #9FB4C6;
+  /* Explicit dark ink for icons on light/accent surfaces in dark mode */
+  --text-dark: #0B1B2B;
+
+  --success: #33D17A;
+  --danger: #FF7676;
+  --info: #57A0DC;
+
+  --focus-ring: rgba(69,132,182,0.45);
+  --shadow-1: 0 6px 18px rgba(0,0,0,0.35);
+
+  --editor-bg: #0D1628;
+  --editor-gutter: #162337;
+  --editor-cursor: #FFD43B;
+  --editor-selection: rgba(255,212,59,0.15);
+
+  /* App-level derived aliases for smooth migration */
+  --workspace-bg: var(--bg-0);
+  --text-primary: var(--text);
+  --text-secondary: var(--muted-text);
+  --toolbox-bg: var(--muted-1);
+  --toolbox-fg: var(--text);
+  --toolbox-border: var(--editor-gutter);
+  --toolbox-hover-bg: color-mix(in srgb, var(--primary-500) 14%, transparent);
+  --toolbox-selected-bg: color-mix(in srgb, var(--primary-500) 18%, var(--muted-1));
+
+  /* Dark: blue toolbar, light text */
+  --toolbar-bg: var(--primary-500);
+  --toolbar-text: var(--text-white);
+  --toolbar-border: var(--accent-500);
+  --panel-bg: var(--surface-1);
+  --panel-border: var(--editor-gutter);
+
+  --accent-aqua: var(--primary-500);
+  --accent-coral: var(--accent-500);
+  --text-white: #FFFFFF;
+  --text-light: var(--muted-text);
+  --text-mid: var(--muted-text);
+
+  --primary-a04: color-mix(in srgb, var(--primary-500) 4%, transparent);
+  --primary-a08: color-mix(in srgb, var(--primary-500) 8%, transparent);
+  --primary-a12: color-mix(in srgb, var(--primary-500) 12%, transparent);
+  --primary-a16: color-mix(in srgb, var(--primary-500) 16%, transparent);
+  --primary-a30: color-mix(in srgb, var(--primary-500) 30%, transparent);
+  --accent-a15: rgba(255,212,59,0.15);
+}
+
+/* Optional: Prism syntax colors as variables (separate from UI theme) */
+:root, [data-theme="light"] {
+  --syntax-comment: #8ca5c3;
+  --syntax-punctuation: #89ddff;
+  --syntax-tag: #ff8da1;
+  --syntax-number: #ffcb8b;
+  --syntax-string: #c3e88d;
+  --syntax-operator: #82aaff;
+  --syntax-keyword: #c792ea;
+  --syntax-function: #ffb86c;
+  --syntax-variable: #f07178;
+}
+
+[data-theme="dark"] {
+  --syntax-comment: #8ca5c3;
+  --syntax-punctuation: #89ddff;
+  --syntax-tag: #ff8da1;
+  --syntax-number: #ffcb8b;
+  --syntax-string: #c3e88d;
+  --syntax-operator: #82aaff;
+  --syntax-keyword: #c792ea;
+  --syntax-function: #ffb86c;
+  --syntax-variable: #f07178;
+}

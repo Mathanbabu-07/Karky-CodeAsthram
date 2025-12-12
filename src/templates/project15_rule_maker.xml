@@ -1,0 +1,163 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="rules">rules</variable>
+    <variable id="i">i</variable>
+    <variable id="rule">rule</variable>
+    <variable id="rule_to_check">rule_to_check</variable>
+  </variables>
+  <block type="text_print" x="10" y="10">
+    <value name="TEXT">
+      <block type="text_literal">
+        <field name="TEXT">Welcome to the Constitutional Assembly!</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print">
+        <value name="TEXT">
+          <block type="text_literal">
+            <field name="TEXT">Please define the 5 foundational rules for your new nation.</field>
+          </block>
+        </value>
+        <next>
+          <block type="essentials_var_set">
+            <field name="VAR" id="rules">rules</field>
+            <value name="VALUE">
+              <block type="essentials_list_create">
+                <mutation items="0"></mutation>
+              </block>
+            </value>
+            <next>
+              <block type="controls_for">
+                <field name="VAR" id="i">i</field>
+                <value name="FROM">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="essentials_var_set">
+                    <field name="VAR" id="rule">rule</field>
+                    <value name="VALUE">
+                      <block type="essentials_safe_input">
+                        <value name="PROMPT">
+                          <block type="text_format">
+                            <mutation items="1"></mutation>
+                            <value name="TEXT">
+                              <block type="text_literal">
+                                <field name="TEXT">Enter rule {}: </field>
+                              </block>
+                            </value>
+                            <value name="ARG0">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="i">i</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="essentials_list_set">
+                        <field name="WHERE">LAST</field>
+                        <value name="LIST">
+                          <block type="essentials_var_get">
+                            <field name="VAR" id="rules">rules</field>
+                          </block>
+                        </value>
+                        <value name="VALUE">
+                          <block type="text_transform">
+                            <field name="OPERATION">LOWERCASE</field>
+                            <value name="TEXT">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="rule">rule</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print">
+                    <value name="TEXT">
+                      <block type="text_literal">
+                        <field name="TEXT">--- The Constitution has been established! ---</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="essentials_var_set">
+                        <field name="VAR" id="rule_to_check">rule_to_check</field>
+                        <value name="VALUE">
+                          <block type="text_transform">
+                            <field name="OPERATION">LOWERCASE</field>
+                            <value name="TEXT">
+                              <block type="essentials_safe_input">
+                                <value name="PROMPT">
+                                  <block type="text_literal">
+                                    <field name="TEXT">Enter a new rule to propose or check: </field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="essentials_in_operator">
+                                <value name="A">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="rule_to_check">rule_to_check</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="rules">rules</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="text_print">
+                                <value name="TEXT">
+                                  <block type="text_literal">
+                                    <field name="TEXT">✅ This rule already exists in your constitution.</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="text_print">
+                                <value name="TEXT">
+                                  <block type="text_literal">
+                                    <field name="TEXT">❌ This rule is not found. It must be proposed and passed democratically.</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

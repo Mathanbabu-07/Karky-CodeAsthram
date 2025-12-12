@@ -1,0 +1,18 @@
+{
+  "name": "Transformers",
+  "modules": {
+    "transformers": {
+      "name": "transformers",
+      "blocks": [
+        {
+          "id": "transformers_pipeline",
+          "title": "create transformers pipeline for %1",
+          "description": "Creates a Hugging Face pipeline for a given task.",
+          "suiteId": "transformers",
+          "moduleId": "transformers",
+          "categoryId": "cat_pipelines"
+        }
+      ]
+    }
+  }
+}

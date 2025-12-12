@@ -1,0 +1,12 @@
+Pillow
+BeautifulSoup4
+requests
+pandas
+numpy
+matplotlib
+scikit-learn
+joblib
+playwright
+fastapi
+uvicorn
+SQLAlchemy

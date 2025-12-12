@@ -1,0 +1,243 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="votes">votes</variable>
+    <variable id="i">i</variable>
+    <variable id="vote">vote</variable>
+    <variable id="candidate">candidate</variable>
+    <variable id="count">count</variable>
+  </variables>
+  <block type="essentials_var_set" x="10" y="10">
+    <field name="VAR" id="votes">votes</field>
+    <value name="VALUE">
+      <block type="essentials_dict_create">
+        <mutation items="3"></mutation>
+        <value name="KEY0">
+          <block type="text_literal">
+            <field name="TEXT">Asha</field>
+          </block>
+        </value>
+        <value name="VALUE0">
+          <block type="essentials_num_literal">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="KEY1">
+          <block type="text_literal">
+            <field name="TEXT">Ravi</field>
+          </block>
+        </value>
+        <value name="VALUE1">
+          <block type="essentials_num_literal">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="KEY2">
+          <block type="text_literal">
+            <field name="TEXT">Tina</field>
+          </block>
+        </value>
+        <value name="VALUE2">
+          <block type="essentials_num_literal">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print">
+        <value name="TEXT">
+          <block type="text_literal">
+            <field name="TEXT">--- School Election ---</field>
+          </block>
+        </value>
+        <next>
+          <block type="text_print">
+            <value name="TEXT">
+              <block type="text_literal">
+                <field name="TEXT">Please cast your 10 votes for Asha, Ravi, or Tina.</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_for">
+                <field name="VAR" id="i">i</field>
+                <value name="FROM">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">10</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="essentials_var_set">
+                    <field name="VAR" id="vote">vote</field>
+                    <value name="VALUE">
+                      <block type="essentials_safe_input">
+                        <value name="PROMPT">
+                          <block type="text_format">
+                            <mutation items="1"></mutation>
+                            <value name="TEXT">
+                              <block type="text_literal">
+                                <field name="TEXT">Vote {}: </field>
+                              </block>
+                            </value>
+                            <value name="ARG0">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="i">i</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="essentials_in_operator">
+                            <value name="A">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="vote">vote</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="votes">votes</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="essentials_dict_statements">
+                            <value name="DICT">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="votes">votes</field>
+                              </block>
+                            </value>
+                            <value name="KEY">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="vote">vote</field>
+                              </block>
+                            </value>
+                            <value name="VALUE">
+                              <block type="essentials_num_arithmetic">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="essentials_dict_expressions">
+                                    <field name="OP">GET</field>
+                                    <value name="DICT">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="votes">votes</field>
+                                      </block>
+                                    </value>
+                                    <value name="KEY">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="vote">vote</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="essentials_num_literal">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="text_print">
+                            <value name="TEXT">
+                              <block type="text_literal">
+                                <field name="TEXT">Invalid vote. Please vote for Asha, Ravi, or Tina.</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print">
+                    <value name="TEXT">
+                      <block type="text_literal">
+                        <field name="TEXT">--- Final Vote Tally ---</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_forEach">
+                        <field name="VAR" id="candidate">candidate</field>
+                        <value name="LIST">
+                          <block type="data_structures_map_keys_to_list">
+                            <value name="DICT">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="votes">votes</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="essentials_var_set">
+                            <field name="VAR" id="count">count</field>
+                            <value name="VALUE">
+                              <block type="essentials_dict_expressions">
+                                <field name="OP">GET</field>
+                                <value name="DICT">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="votes">votes</field>
+                                  </block>
+                                </value>
+                                <value name="KEY">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="candidate">candidate</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_print">
+                                <value name="TEXT">
+                                  <block type="text_format">
+                                    <mutation items="2"></mutation>
+                                    <value name="TEXT">
+                                      <block type="text_literal">
+                                        <field name="TEXT">{} received {} vote(s).</field>
+                                      </block>
+                                    </value>
+                                    <value name="ARG0">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="candidate">candidate</field>
+                                      </block>
+                                    </value>
+                                    <value name="ARG1">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="count">count</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,138 @@
+{
+  "name": "NumPy",
+  "modules": {
+    "numpy": {
+      "name": "numpy",
+      "blocks": [
+        {
+          "id": "numpy_array",
+          "title": "create numpy array from %1 with data type %2",
+          "description": "Create a new numpy array from a list, with an optional data type.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_arange",
+          "title": "numpy array from range start %1 stop %2 step %3",
+          "description": "Return evenly spaced values within a given interval.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_reshape",
+          "title": "reshape numpy array %1 to shape %2",
+          "description": "Gives a new shape to an array without changing its data.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_zeros",
+          "title": "create numpy array of zeros with shape %1",
+          "description": "Return a new array of given shape and type, filled with zeros.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_ones",
+          "title": "create numpy array of ones with shape %1",
+          "description": "Return a new array of given shape and type, filled with ones.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_concatenate",
+          "title": "concatenate numpy arrays %1 on axis %2",
+          "description": "Join a sequence of arrays along an existing axis.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_vstack",
+          "title": "stack arrays vertically %1",
+          "description": "Stack arrays in sequence vertically (row wise).",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_hstack",
+          "title": "stack arrays horizontally %1",
+          "description": "Stack arrays in sequence horizontally (column wise).",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_split",
+          "title": "split array %1 into %2 sections on axis %3",
+          "description": "Split an array into multiple sub-arrays.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_sum",
+          "title": "sum of numpy array %1",
+          "description": "Sum of array elements over a given axis.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_mean",
+          "title": "mean of numpy array %1",
+          "description": "Compute the arithmetic mean along the specified axis.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_std",
+          "title": "standard deviation of numpy array %1",
+          "description": "Compute the standard deviation along the specified axis.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_dot",
+          "title": "dot product of %1 and %2",
+          "description": "Dot product of two arrays.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_elementwise_op",
+          "title": "%1 %2 %3",
+          "description": "Perform an element-wise operation on two arrays.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_indexing",
+          "title": "from array %1 get element at index %2",
+          "description": "Access a single element from an array using its index.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        },
+        {
+          "id": "numpy_slicing",
+          "title": "from array %1 get slice %2",
+          "description": "Access a subarray using slicing.",
+          "suiteId": "numpy",
+          "moduleId": "numpy",
+          "categoryId": "cat_array"
+        }
+      ]
+    }
+  }
+}

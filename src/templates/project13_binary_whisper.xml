@@ -1,0 +1,116 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="word">word</variable>
+    <variable id="letter">letter</variable>
+    <variable id="ascii_value">ascii_value</variable>
+    <variable id="binary_value">binary_value</variable>
+  </variables>
+  <block type="essentials_var_set" x="10" y="10">
+    <field name="VAR" id="word">word</field>
+    <value name="VALUE">
+      <block type="text_literal">
+        <field name="TEXT">HELLO</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print">
+        <value name="TEXT">
+          <block type="text_format">
+            <mutation items="1"></mutation>
+            <value name="TEXT">
+              <block type="text_literal">
+                <field name="TEXT">--- Converting '{}' to Binary ---</field>
+              </block>
+            </value>
+            <value name="ARG0">
+              <block type="essentials_var_get">
+                <field name="VAR" id="word">word</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_forEach">
+            <field name="VAR" id="letter">letter</field>
+            <value name="LIST">
+              <block type="essentials_var_get">
+                <field name="VAR" id="word">word</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="essentials_var_set">
+                <field name="VAR" id="ascii_value">ascii_value</field>
+                <value name="VALUE">
+                  <block type="text_ord">
+                    <value name="VALUE">
+                      <block type="essentials_var_get">
+                        <field name="VAR" id="letter">letter</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="essentials_var_set">
+                    <field name="VAR" id="binary_value">binary_value</field>
+                    <value name="VALUE">
+                      <block type="text_format_spec">
+                        <value name="VALUE">
+                          <block type="essentials_var_get">
+                            <field name="VAR" id="ascii_value">ascii_value</field>
+                          </block>
+                        </value>
+                        <value name="SPEC">
+                          <block type="text_literal">
+                            <field name="TEXT">08b</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_print">
+                        <value name="TEXT">
+                          <block type="text_format">
+                            <mutation items="3"></mutation>
+                            <value name="TEXT">
+                              <block type="text_literal">
+                                <field name="TEXT">Character: '{}' -> ASCII: {} -> Binary: {}</field>
+                              </block>
+                            </value>
+                            <value name="ARG0">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="letter">letter</field>
+                              </block>
+                            </value>
+                            <value name="ARG1">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="ascii_value">ascii_value</field>
+                              </block>
+                            </value>
+                            <value name="ARG2">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="binary_value">binary_value</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print">
+                <value name="TEXT">
+                  <block type="text_literal">
+                    <field name="TEXT">--- Conversion Complete ---</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

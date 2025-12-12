@@ -1,0 +1,277 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="amount">amount</variable>
+    <variable id="is_member_input">is_member_input</variable>
+    <variable id="discount_percent">discount_percent</variable>
+    <variable id="net_amount">net_amount</variable>
+  </variables>
+  <block type="essentials_function_def" x="10" y="10">
+    <field name="NAME">calculate_final_amount</field>
+    <field name="PARAMS"></field>
+    <statement name="DO">
+      <block type="control_try_except">
+        <mutation>
+          <except name="Exception"/>
+        </mutation>
+        <statement name="TRY">
+          <block type="essentials_var_set">
+            <field name="VAR" id="amount">amount</field>
+            <value name="VALUE">
+              <block type="essentials_cast">
+                <field name="TYPE">float</field>
+                <value name="VALUE">
+                  <block type="essentials_safe_input">
+                    <value name="PROMPT">
+                      <block type="text_literal">
+                        <field name="TEXT">Enter the total shopping amount: ₹</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="essentials_var_set">
+                <field name="VAR" id="is_member_input">is_member_input</field>
+                <value name="VALUE">
+                  <block type="essentials_safe_input">
+                    <value name="PROMPT">
+                      <block type="text_literal">
+                        <field name="TEXT">Is the customer a member? (yes/no): </field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="essentials_var_set">
+                    <field name="VAR" id="discount_percent">discount_percent</field>
+                    <value name="VALUE">
+                      <block type="essentials_num_literal">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if">
+                        <mutation elseif="2"></mutation>
+                        <value name="IF0">
+                          <block type="essentials_compare">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="amount">amount</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="essentials_num_literal">
+                                <field name="NUM">2000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="essentials_var_set">
+                            <field name="VAR" id="discount_percent">discount_percent</field>
+                            <value name="VALUE">
+                              <block type="essentials_num_literal">
+                                <field name="NUM">10</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <value name="IF1">
+                          <block type="essentials_compare">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="amount">amount</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="essentials_num_literal">
+                                <field name="NUM">1000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO1">
+                          <block type="essentials_var_set">
+                            <field name="VAR" id="discount_percent">discount_percent</field>
+                            <value name="VALUE">
+                              <block type="essentials_num_literal">
+                                <field name="NUM">8</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <value name="IF2">
+                          <block type="essentials_compare">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="amount">amount</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="essentials_num_literal">
+                                <field name="NUM">500</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO2">
+                          <block type="essentials_var_set">
+                            <field name="VAR" id="discount_percent">discount_percent</field>
+                            <value name="VALUE">
+                              <block type="essentials_num_literal">
+                                <field name="NUM">5</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="controls_if">
+                            <value name="IF0">
+                              <block type="essentials_compare">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="text_transform">
+                                    <field name="OPERATION">LOWERCASE</field>
+                                    <value name="TEXT">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="is_member_input">is_member_input</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="text_literal">
+                                    <field name="TEXT">yes</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="essentials_var_set">
+                                <field name="VAR" id="discount_percent">discount_percent</field>
+                                <value name="VALUE">
+                                  <block type="essentials_num_arithmetic">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="discount_percent">discount_percent</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="essentials_num_literal">
+                                        <field name="NUM">5</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="essentials_var_set">
+                                <field name="VAR" id="net_amount">net_amount</field>
+                                <value name="VALUE">
+                                  <block type="essentials_num_arithmetic">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="amount">amount</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="essentials_num_arithmetic">
+                                        <field name="OP">DIVIDE</field>
+                                        <value name="A">
+                                          <block type="essentials_num_arithmetic">
+                                            <field name="OP">MULTIPLY</field>
+                                            <value name="A">
+                                              <block type="essentials_var_get">
+                                                <field name="VAR" id="amount">amount</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="essentials_var_get">
+                                                <field name="VAR" id="discount_percent">discount_percent</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="essentials_num_literal">
+                                            <field name="NUM">100</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="text_print">
+                                    <value name="TEXT">
+                                      <block type="text_format">
+                                        <mutation items="1"></mutation>
+                                        <value name="TEXT">
+                                          <block type="text_literal">
+                                            <field name="TEXT">
+Total Discount: {}%</field>
+                                          </block>
+                                        </value>
+                                        <value name="ARG0">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="discount_percent">discount_percent</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="text_print">
+                                        <value name="TEXT">
+                                          <block type="text_format">
+                                            <mutation items="1"></mutation>
+                                            <value name="TEXT">
+                                              <block type="text_literal">
+                                                <field name="TEXT">Net Payable Amount: ₹{:.2f}</field>
+                                              </block>
+                                            </value>
+                                            <value name="ARG0">
+                                              <block type="essentials_var_get">
+                                                <field name="VAR" id="net_amount">net_amount</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="EXCEPT0">
+          <block type="text_print">
+            <value name="TEXT">
+              <block type="text_literal">
+                <field name="TEXT">Invalid input. Please enter a valid number for the amount.</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_callnoreturn" x="10" y="750">
+    <mutation name="calculate_final_amount"></mutation>
+  </block>
+</xml>

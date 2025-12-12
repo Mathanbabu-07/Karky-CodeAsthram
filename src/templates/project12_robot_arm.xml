@@ -1,0 +1,175 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="x">x</variable>
+    <variable id="angle_rad">angle_rad</variable>
+    <variable id="angle_deg">angle_deg</variable>
+  </variables>
+  <block type="control_try_except" x="10" y="10">
+    <mutation>
+      <except name="Exception"/>
+    </mutation>
+    <statement name="TRY">
+      <block type="essentials_var_set">
+        <field name="VAR" id="x">x</field>
+        <value name="VALUE">
+          <block type="essentials_cast">
+            <field name="TYPE">float</field>
+            <value name="VALUE">
+              <block type="essentials_safe_input">
+                <value name="PROMPT">
+                  <block type="text_literal">
+                    <field name="TEXT">Enter a value for x to calculate the angle: </field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="essentials_logic_and">
+                <value name="A">
+                  <block type="essentials_compare">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="essentials_var_get">
+                        <field name="VAR" id="x">x</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="essentials_num_literal">
+                        <field name="NUM">-1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="essentials_compare">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="essentials_var_get">
+                        <field name="VAR" id="x">x</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="essentials_num_literal">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="essentials_var_set">
+                <field name="VAR" id="angle_rad">angle_rad</field>
+                <value name="VALUE">
+                  <block type="math_single">
+                    <field name="OP">ASIN</field>
+                    <value name="NUM">
+                      <block type="essentials_var_get">
+                        <field name="VAR" id="x">x</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="essentials_var_set">
+                    <field name="VAR" id="angle_deg">angle_deg</field>
+                    <value name="VALUE">
+                      <block type="math_single">
+                        <field name="OP">DEGREES</field>
+                        <value name="NUM">
+                          <block type="essentials_var_get">
+                            <field name="VAR" id="angle_rad">angle_rad</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_print">
+                        <value name="TEXT">
+                          <block type="text_literal">
+                            <field name="TEXT">✅ Input is valid.</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="text_print">
+                            <value name="TEXT">
+                              <block type="text_format">
+                                <mutation items="1"></mutation>
+                                <value name="TEXT">
+                                  <block type="text_literal">
+                                    <field name="TEXT">Calculated Angle (Radians): {:.4f}</field>
+                                  </block>
+                                </value>
+                                <value name="ARG0">
+                                  <block type="essentials_var_get">
+                                    <field name="VAR" id="angle_rad">angle_rad</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_print">
+                                <value name="TEXT">
+                                  <block type="text_format">
+                                    <mutation items="1"></mutation>
+                                    <value name="TEXT">
+                                      <block type="text_literal">
+                                        <field name="TEXT">Calculated Angle (Degrees): {:.2f}°</field>
+                                      </block>
+                                    </value>
+                                    <value name="ARG0">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="angle_deg">angle_deg</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="text_print">
+                <value name="TEXT">
+                  <block type="text_format">
+                    <mutation items="1"></mutation>
+                    <value name="TEXT">
+                      <block type="text_literal">
+                        <field name="TEXT">❌ ERROR: Input {} is outside the valid domain [-1, 1].</field>
+                      </block>
+                    </value>
+                    <value name="ARG0">
+                      <block type="essentials_var_get">
+                        <field name="VAR" id="x">x</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="EXCEPT0">
+      <block type="text_print">
+        <value name="TEXT">
+          <block type="text_literal">
+            <field name="TEXT">❌ ERROR: Please enter a valid number.</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

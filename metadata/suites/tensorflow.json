@@ -1,0 +1,146 @@
+{
+  "name": "TensorFlow",
+  "modules": {
+    "tensorflow": {
+      "name": "tensorflow",
+      "blocks": [
+        {
+          "id": "tensorflow_keras_sequential_model",
+          "title": "create sequential Keras model %1",
+          "description": "Creates a Keras Sequential model.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_keras_core"
+        },
+        {
+          "id": "tensorflow_keras_add_dense_layer",
+          "title": "add dense layer with %1 units and %2 activation",
+          "description": "Adds a Dense layer to the Keras model.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_layers"
+        },
+        {
+          "id": "tensorflow_keras_compile_model",
+          "title": "compile Keras model %1",
+          "description": "Configures the model for training.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_keras_core"
+        },
+        {
+          "id": "tensorflow_keras_fit_model",
+          "title": "fit Keras model %1 to data %2 labels %3",
+          "description": "Trains the model for a fixed number of epochs (iterations on a dataset).",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_keras_core"
+        },
+        {
+          "id": "keras_model_to_json",
+          "title": "convert keras model %1 to JSON",
+          "description": "Serializes the model architecture to a JSON string.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_model_management"
+        },
+        {
+          "id": "keras_model_from_json",
+          "title": "create keras model from JSON %1",
+          "description": "Parses a JSON model configuration file and returns a model instance.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_model_management"
+        },
+        {
+          "id": "keras_save_model",
+          "title": "save keras model %1 to file %2",
+          "description": "Saves a model as a TensorFlow SavedModel or a single HDF5 file.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_model_management"
+        },
+        {
+          "id": "keras_load_model",
+          "title": "load keras model from file %1",
+          "description": "Loads a model saved via model.save().",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_model_management"
+        },
+        {
+          "id": "keras_layer_conv2d",
+          "title": "add Conv2D layer with %1 filters, kernel size %2, activation %3",
+          "description": "Adds a 2D convolution layer.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_layers"
+        },
+        {
+          "id": "keras_layer_maxpooling2d",
+          "title": "add MaxPooling2D layer with pool size %1",
+          "description": "Max pooling operation for 2D spatial data.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_layers"
+        },
+        {
+          "id": "keras_layer_flatten",
+          "title": "add flatten layer",
+          "description": "Flattens the input. Does not affect the batch size.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_layers"
+        },
+        {
+          "id": "keras_layer_dropout",
+          "title": "add dropout layer with rate %1",
+          "description": "Applies Dropout to the input.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_layers"
+        },
+        {
+          "id": "keras_layer_embedding",
+          "title": "add embedding layer with input dim %1 and output dim %2",
+          "description": "Turns positive integers (indexes) into dense vectors of fixed size.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_layers"
+        },
+        {
+          "id": "keras_layer_lstm",
+          "title": "add LSTM layer with %1 units",
+          "description": "Long Short-Term Memory layer.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_layers"
+        },
+        {
+          "id": "keras_callback_earlystopping",
+          "title": "early stopping callback, monitor %1, patience %2",
+          "description": "Stop training when a monitored metric has stopped improving.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_callbacks"
+        },
+        {
+          "id": "keras_callback_modelcheckpoint",
+          "title": "model checkpoint callback, filepath %1, monitor %2",
+          "description": "Callback to save the Keras model or model weights at some frequency.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_callbacks"
+        },
+        {
+          "id": "keras_image_dataset_from_directory",
+          "title": "image dataset from directory %1",
+          "description": "Generates a tf.data.Dataset from image files in a directory.",
+          "suiteId": "tensorflow",
+          "moduleId": "tensorflow",
+          "categoryId": "cat_data_loading"
+        }
+      ]
+    }
+  }
+}

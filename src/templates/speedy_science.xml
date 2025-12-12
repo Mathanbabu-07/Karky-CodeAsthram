@@ -1,0 +1,118 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="jE_5!S-g5s1)9x@%S-?V">distance_km</variable>
+    <variable id="s_fN]6`1X.8_6R!B~*S?">time_hr</variable>
+    <variable id="v)4L1aT(2/^1s1iA1JZb">speed_kmh</variable>
+  </variables>
+  <block type="control_try_except" id="=~g~p,q%l;T@2422k-?*">
+    <mutation>
+      <except name="ValueError"></except>
+      <except name="ZeroDivisionError"></except>
+    </mutation>
+    <statement name="TRY">
+      <block type="variables_set" id="!0[6@:;K;z8-v_42m-1}">
+        <field name="VAR" id="jE_5!S-g5s1)9x@%S-?V">distance_km</field>
+        <value name="VALUE">
+          <block type="essentials_cast" id="1?9*9k!@+~]l)J#%_zL`">
+            <field name="TYPE">float</field>
+            <value name="VALUE">
+              <block type="essentials_safe_input" id="%e(r;wYq+v!Y-A@m,`9h">
+                <value name="PROMPT">
+                  <block type="text" id="5F@B_~5R~+T@B/10T@zt">
+                    <field name="TEXT">Enter the distance you traveled (in km): </field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="z$H~t:u*s}H)kC?*V-?A">
+            <field name="VAR" id="s_fN]6`1X.8_6R!B~*S?">time_hr</field>
+            <value name="VALUE">
+              <block type="essentials_cast" id="4F#y!pA7PHugj3@7i+jA">
+                <field name="TYPE">float</field>
+                <value name="VALUE">
+                  <block type="essentials_safe_input" id="rW_m_M-?E:kP[P)A|5$C">
+                    <value name="PROMPT">
+                      <block type="text" id="^7zO.x#;eY#g+F%3i9}y">
+                        <field name="TEXT">Enter the time it took (in hours): </field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="3s`L#1B=j@q$dI}#b`d]">
+                <field name="VAR" id="v)4L1aT(2/^1s1iA1JZb">speed_kmh</field>
+                <value name="VALUE">
+                  <block type="essentials_num_arithmetic" id="=~g~p,q%l;T@2422k-?*">
+                    <field name="OP">DIVIDE</field>
+                    <value name="A">
+                      <block type="variables_get" id="}pZ@z$H;!@G;!d~@z$H">
+                        <field name="VAR" id="jE_5!S-g5s1)9x@%S-?V">distance_km</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id=";Y;z$H;!@G;!d~@z$H">
+                        <field name="VAR" id="s_fN]6`1X.8_6R!B~*S?">time_hr</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="~@z$H;!@G;!d~@z$H">
+                    <value name="TEXT">
+                      <block type="text_concat">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                            <block type="text_concat">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                    <block type="text">
+                                        <field name="TEXT">\nYour average speed was:</field>
+                                    </block>
+                                </value>
+                                <value name="ADD1">
+                                    <block type="variables_get">
+                                        <field name="VAR" id="v)4L1aT(2/^1s1iA1JZb">speed_kmh</field>
+                                    </block>
+                                </value>
+                            </block>
+                        </value>
+                        <value name="ADD1">
+                            <block type="text">
+                                <field name="TEXT"> km/h</field>
+                            </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="EXCEPT0">
+      <block type="text_print" id="@G;!d~@z$H;!@G;!d~@z$">
+        <value name="TEXT">
+          <block type="text" id=";!d~@z$H;!@G;!d~@z$H;">
+            <field name="TEXT">Invalid input. Please enter numbers only.</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <statement name="EXCEPT1">
+      <block type="text_print" id="@G;!d~@z$H;!@G;!d~@z$H;">
+        <value name="TEXT">
+          <block type="text" id=";!d~@z$H;!@G;!d~@z$H;!@">
+            <field name="TEXT">Error: Time cannot be zero.</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

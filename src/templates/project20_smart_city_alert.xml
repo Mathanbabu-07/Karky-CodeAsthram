@@ -1,0 +1,432 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="zones">zones</variable>
+    <variable id="traffic_statuses">traffic_statuses</variable>
+    <variable id="i">i</variable>
+    <variable id="avg_speed">avg_speed</variable>
+    <variable id="num_cars">num_cars</variable>
+    <variable id="status">status</variable>
+  </variables>
+  <block type="procedures_defreturn" x="10" y="10">
+    <mutation>
+      <arg name="speed"></arg>
+      <arg name="car_count"></arg>
+    </mutation>
+    <field name="NAME">classify_traffic</field>
+    <comment pinned="false" h="80" w="160">Classifies traffic based on speed and car count.</comment>
+    <statement name="STACK">
+      <block type="controls_if">
+        <mutation elseif="1" else="1"></mutation>
+        <value name="IF0">
+          <block type="essentials_logic_or">
+            <value name="A">
+              <block type="essentials_compare">
+                <field name="OP">LT</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR" id="speed">speed</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">20</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="essentials_compare">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR" id="car_count">car_count</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="procedures_ifreturn">
+            <value name="CONDITION">
+              <block type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+              </block>
+            </value>
+            <value name="VALUE">
+              <block type="text_literal">
+                <field name="TEXT">Congested</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="essentials_logic_or">
+            <value name="A">
+              <block type="essentials_compare">
+                <field name="OP">LT</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR" id="speed">speed</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">40</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="essentials_compare">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR" id="car_count">car_count</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">60</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="procedures_ifreturn">
+            <value name="CONDITION">
+              <block type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+              </block>
+            </value>
+            <value name="VALUE">
+              <block type="text_literal">
+                <field name="TEXT">Moderate</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="procedures_ifreturn">
+            <value name="CONDITION">
+              <block type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+              </block>
+            </value>
+            <value name="VALUE">
+              <block type="text_literal">
+                <field name="TEXT">Free Flow</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="essentials_var_set" x="10" y="250">
+    <field name="VAR" id="zones">zones</field>
+    <value name="VALUE">
+      <block type="essentials_list_create">
+        <mutation items="0"></mutation>
+      </block>
+    </value>
+    <next>
+      <block type="essentials_var_set">
+        <field name="VAR" id="traffic_statuses">traffic_statuses</field>
+        <value name="VALUE">
+          <block type="essentials_list_create">
+            <mutation items="0"></mutation>
+          </block>
+        </value>
+        <next>
+          <block type="text_print">
+            <value name="TEXT">
+              <block type="text_literal">
+                <field name="TEXT">--- Smart City Traffic Data Input ---</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_for">
+                <field name="VAR" id="i">i</field>
+                <value name="FROM">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="essentials_num_literal">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="text_print">
+                    <value name="TEXT">
+                      <block type="text_format">
+                        <mutation items="1"></mutation>
+                        <value name="TEXT">
+                          <block type="text_literal">
+                            <field name="TEXT">
+Enter data for Zone {}:</field>
+                          </block>
+                        </value>
+                        <value name="ARG0">
+                          <block type="essentials_var_get">
+                            <field name="VAR" id="i">i</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="essentials_var_set">
+                        <field name="VAR" id="avg_speed">avg_speed</field>
+                        <value name="VALUE">
+                          <block type="essentials_cast">
+                            <field name="TYPE">int</field>
+                            <value name="VALUE">
+                              <block type="essentials_safe_input">
+                                <value name="PROMPT">
+                                  <block type="text_format">
+                                    <mutation items="1"></mutation>
+                                    <value name="TEXT">
+                                      <block type="text_literal">
+                                        <field name="TEXT">  Zone {} - Enter average speed (km/h): </field>
+                                      </block>
+                                    </value>
+                                    <value name="ARG0">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="i">i</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="essentials_var_set">
+                            <field name="VAR" id="num_cars">num_cars</field>
+                            <value name="VALUE">
+                              <block type="essentials_cast">
+                                <field name="TYPE">int</field>
+                                <value name="VALUE">
+                                  <block type="essentials_safe_input">
+                                    <value name="PROMPT">
+                                      <block type="text_format">
+                                        <mutation items="1"></mutation>
+                                        <value name="TEXT">
+                                          <block type="text_literal">
+                                            <field name="TEXT">  Zone {} - Enter number of cars: </field>
+                                          </block>
+                                        </value>
+                                        <value name="ARG0">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="i">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="essentials_var_set">
+                                <field name="VAR" id="status">status</field>
+                                <value name="VALUE">
+                                  <block type="procedures_callreturn">
+                                    <mutation name="classify_traffic">
+                                      <arg name="speed"></arg>
+                                      <arg name="car_count"></arg>
+                                    </mutation>
+                                    <value name="ARG0">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="avg_speed">avg_speed</field>
+                                      </block>
+                                    </value>
+                                    <value name="ARG1">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="num_cars">num_cars</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="essentials_list_set">
+                                    <field name="WHERE">LAST</field>
+                                    <value name="LIST">
+                                      <block type="essentials_var_get">
+                                        <field name="VAR" id="zones">zones</field>
+                                      </block>
+                                    </value>
+                                    <value name="VALUE">
+                                      <block type="text_format">
+                                        <mutation items="1"></mutation>
+                                        <value name="TEXT">
+                                          <block type="text_literal">
+                                            <field name="TEXT">Zone {}</field>
+                                          </block>
+                                        </value>
+                                        <value name="ARG0">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="i">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="essentials_list_set">
+                                        <field name="WHERE">LAST</field>
+                                        <value name="LIST">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="traffic_statuses">traffic_statuses</field>
+                                          </block>
+                                        </value>
+                                        <value name="VALUE">
+                                          <block type="essentials_var_get">
+                                            <field name="VAR" id="status">status</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="text_print">
+                                            <value name="TEXT">
+                                              <block type="text_format">
+                                                <mutation items="2"></mutation>
+                                                <value name="TEXT">
+                                                  <block type="text_literal">
+                                                    <field name="TEXT">  -> Zone {} status: {}</field>
+                                                  </block>
+                                                </value>
+                                                <value name="ARG0">
+                                                  <block type="essentials_var_get">
+                                                    <field name="VAR" id="i">i</field>
+                                                  </block>
+                                                </value>
+                                                <value name="ARG1">
+                                                  <block type="essentials_var_get">
+                                                    <field name="VAR" id="status">status</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print">
+                    <value name="TEXT">
+                      <block type="text_literal">
+                        <field name="TEXT">
+Saving traffic status chart...</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="matplotlib_figure">
+                        <value name="WIDTH">
+                          <block type="essentials_num_literal">
+                            <field name="NUM">10</field>
+                          </block>
+                        </value>
+                        <value name="HEIGHT">
+                          <block type="essentials_num_literal">
+                            <field name="NUM">5</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="matplotlib_plot">
+                            <field name="LABEL"></field>
+                            <field name="STYLE">'-'</field>
+                            <field name="MARKER">'o'</field>
+                            <value name="X">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="zones">zones</field>
+                              </block>
+                            </value>
+                            <value name="Y">
+                              <block type="essentials_var_get">
+                                <field name="VAR" id="traffic_statuses">traffic_statuses</field>
+                              </block>
+                            </value>
+                            <value name="COLOR">
+                              <block type="text_literal">
+                                <field name="TEXT">b</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="matplotlib_title">
+                                <value name="TITLE">
+                                  <block type="text_literal">
+                                    <field name="TEXT">City-Wide Traffic Congestion Status</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="matplotlib_xlabel">
+                                    <value name="LABEL">
+                                      <block type="text_literal">
+                                        <field name="TEXT">City Zones</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="matplotlib_ylabel">
+                                        <value name="LABEL">
+                                          <block type="text_literal">
+                                            <field name="TEXT">Traffic Status</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="matplotlib_grid">
+                                            <field name="VISIBLE">TRUE</field>
+                                            <next>
+                                              <block type="matplotlib_savefig">
+                                                <value name="PATH">
+                                                  <block type="text_literal">
+                                                    <field name="TEXT">traffic_status_chart.png</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

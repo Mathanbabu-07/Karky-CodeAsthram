@@ -1,0 +1,176 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="v)4L1aT(2/^1s1iA1JZb">x</variable>
+    <variable id="*7-~G-e?!yH,`[T;T;?*">angle_rad</variable>
+    <variable id="s_fN]6`1X.8_6R!B~*S?">angle_deg</variable>
+  </variables>
+  <block type="variables_set" id="!0[6@:;K;z8-v_42m-1}" x="112" y="88">
+    <field name="VAR" id="v)4L1aT(2/^1s1iA1JZb">x</field>
+    <value name="VALUE">
+      <block type="essentials_num_arithmetic" id="1?9*9k!@+~]l)J#%_zL`">
+        <field name="OP">DIVIDE</field>
+        <value name="A">
+          <block type="essentials_num_literal" id="%e(r;wYq+v!Y-A@m,`9h">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+        <value name="B">
+          <block type="math_single" id="B6;V(1^$y5(B5~]bVzH`">
+            <field name="OP">ROOT</field>
+            <value name="NUM">
+              <block type="essentials_num_literal" id="5F@B_~5R~+T@B/10T@zt">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="controls_if" id="z$H~t:u*s}H)kC?*V-?A">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="essentials_compare" id="4F#y!pA7PHugj3@7i+jA">
+            <field name="OP">GTE</field>
+            <value name="A">
+              <block type="math_single" id="rW_m_M-?E:kP[P)A|5$C">
+                <field name="OP">ABS</field>
+                <value name="NUM">
+                  <block type="variables_get" id="^7zO.x#;eY#g+F%3i9}y">
+                    <field name="VAR" id="v)4L1aT(2/^1s1iA1JZb">x</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="essentials_num_literal" id="3s`L#1B=j@q$dI}#b`d]">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="=~g~p,q%l;T@2422k-?*">
+            <field name="VAR" id="*7-~G-e?!yH,`[T;T;?*">angle_rad</field>
+            <value name="VALUE">
+              <block type="math_trig" id="acos_block">
+                <field name="OP">ACOS</field>
+                <value name="NUM">
+                  <block type="essentials_num_arithmetic" id=";Y;z$H;!@G;!d~@z$H">
+                    <field name="OP">DIVIDE</field>
+                    <value name="A">
+                      <block type="essentials_num_literal" id="~@z$H;!@G;!d~@z$H">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="z$H;!@G;!d~@z$H;!@G">
+                        <field name="VAR" id="v)4L1aT(2/^1s1iA1JZb">x</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="@z$H;!@G;!d~@z$H;!@G">
+                <field name="VAR" id="s_fN]6`1X.8_6R!B~*S?">angle_deg</field>
+                <value name="VALUE">
+                  <block type="essentials_num_arithmetic">
+                    <field name="OP">DIVIDE</field>
+                    <value name="A">
+                      <block type="essentials_num_arithmetic">
+                        <field name="OP">MULTIPLY</field>
+                        <value name="A">
+                          <block type="variables_get">
+                            <field name="VAR" id="*7-~G-e?!yH,`[T;T;?*">angle_rad</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="essentials_num_literal">
+                            <field name="NUM">180</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_constant">
+                        <field name="CONSTANT">PI</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="~@z$H;!@G;!d~@z$H;!@G">
+                    <value name="TEXT">
+                      <block type="text" id="d~@z$H;!@G;!d~@z$H;!@G">
+                        <field name="TEXT">The principal value of sec⁻¹(2/√3) is:</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_print" id="@z$H;!@G;!d~@z$H;!@G;">
+                        <value name="TEXT">
+                          <block type="text_concat" id="H;!@G;!d~@z$H;!@G;!">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="!@G;!d~@z$H;!@G;!d~">
+                                <field name="TEXT">→ In Radians:</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="G;!d~@z$H;!@G;!d~@z$H">
+                                <field name="VAR" id="*7-~G-e?!yH,`[T;T;?*">angle_rad</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="text_print" id="d~@z$H;!@G;!d~@z$H;!@G;">
+                            <value name="TEXT">
+                              <block type="text_concat">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="text_concat">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text">
+                                        <field name="TEXT">→ In Degrees:</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="s_fN]6`1X.8_6R!B~*S?">angle_deg</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="text">
+                                    <field name="TEXT"> °</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="text_print" id="@G;!d~@z$H;!@G;!d~@z$">
+            <value name="TEXT">
+              <block type="text" id=";!d~@z$H;!@G;!d~@z$H;">
+                <field name="TEXT">Error: The input value is not in the domain of sec⁻¹.</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

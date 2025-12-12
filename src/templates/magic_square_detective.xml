@@ -1,0 +1,179 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="grid_var">grid</variable>
+    <variable id="row1_var">row1</variable>
+    <variable id="row2_var">row2</variable>
+    <variable id="row3_var">row3</variable>
+    <variable id="col1_var">col1</variable>
+    <variable id="col2_var">col2</variable>
+    <variable id="col3_var">col3</variable>
+    <variable id="diag1_var">diag1</variable>
+    <variable id="diag2_var">diag2</variable>
+    <variable id="i_var">i</variable>
+  </variables>
+  <block type="text_print" id="print_intro" x="112" y="88">
+    <value name="TEXT">
+      <block type="text" id="intro_text">
+        <field name="TEXT">Enter the 9 numbers for the grid, one by one.</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="set_grid">
+        <field name="VAR" id="grid_var">grid</field>
+        <value name="VALUE">
+          <block type="control_list_comp" id="list_comp">
+            <value name="ITER">
+              <block type="essentials_list_from_range" id="range_9">
+                <value name="START"><block type="essentials_num_literal"><field name="NUM">0</field></block></value>
+                <value name="END"><block type="essentials_num_literal"><field name="NUM">9</field></block></value>
+                <value name="STEP"><block type="essentials_num_literal"><field name="NUM">1</field></block></value>
+              </block>
+            </value>
+            <value name="EXPR">
+              <block type="essentials_cast" id="cast_to_int">
+                <field name="TYPE">int</field>
+                <value name="VALUE">
+                  <block type="essentials_safe_input" id="user_input">
+                    <value name="PROMPT">
+                      <block type="text_concat">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                            <block type="text_concat">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                    <block type="text">
+                                        <field name="TEXT">Enter number for position </field>
+                                    </block>
+                                </value>
+                                <value name="ADD1">
+                                    <block type="essentials_num_arithmetic">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                            <block type="variables_get">
+                                                <field name="VAR" id="i_var">i</field>
+                                            </block>
+                                        </value>
+                                        <value name="B">
+                                            <block type="essentials_num_literal">
+                                                <field name="NUM">1</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                            </block>
+                        </value>
+                        <value name="ADD1">
+                            <block type="text">
+                                <field name="TEXT">: </field>
+                            </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="set_row1">
+            <field name="VAR" id="row1_var">row1</field>
+            <value name="VALUE">
+              <block type="control_math_stats" id="sum_row1"><field name="OP">SUM</field><value name="LIST"><block type="essentials_list_slice" id="slice_row1"><value name="LIST"><block type="variables_get" id="get_grid_row1"><field name="VAR" id="grid_var">grid</field></block></value><value name="START"><block type="essentials_num_literal" id="num_0"><field name="NUM">0</field></block></value><value name="END"><block type="essentials_num_literal" id="num_3"><field name="NUM">3</field></block></value></block></value></block>
+            </value>
+            <next>
+              <block type="variables_set" id="set_row2">
+                <field name="VAR" id="row2_var">row2</field>
+                <value name="VALUE">
+                  <block type="control_math_stats" id="sum_row2"><field name="OP">SUM</field><value name="LIST"><block type="essentials_list_slice" id="slice_row2"><value name="LIST"><block type="variables_get" id="get_grid_row2"><field name="VAR" id="grid_var">grid</field></block></value><value name="START"><block type="essentials_num_literal" id="num_3_2"><field name="NUM">3</field></block></value><value name="END"><block type="essentials_num_literal" id="num_6"><field name="NUM">6</field></block></value></block></value></block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_row3">
+                    <field name="VAR" id="row3_var">row3</field>
+                    <value name="VALUE">
+                      <block type="control_math_stats" id="sum_row3"><field name="OP">SUM</field><value name="LIST"><block type="essentials_list_slice" id="slice_row3"><value name="LIST"><block type="variables_get" id="get_grid_row3"><field name="VAR" id="grid_var">grid</field></block></value><value name="START"><block type="essentials_num_literal" id="num_6_2"><field name="NUM">6</field></block></value><value name="END"><block type="essentials_num_literal" id="num_9"><field name="NUM">9</field></block></value></block></value></block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="set_col1">
+                        <field name="VAR" id="col1_var">col1</field>
+                        <value name="VALUE">
+                          <block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">0</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">3</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">6</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value></block></value></block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="set_col2">
+                            <field name="VAR" id="col2_var">col2</field>
+                            <value name="VALUE">
+                              <block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">1</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">4</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">7</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value></block></value></block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="set_col3">
+                                <field name="VAR" id="col3_var">col3</field>
+                                <value name="VALUE">
+                                  <block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">2</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">5</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">8</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value></block></value></block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="set_diag1">
+                                    <field name="VAR" id="diag1_var">diag1</field>
+                                    <value name="VALUE">
+                                      <block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">0</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">4</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">8</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value></block></value></block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="set_diag2">
+                                        <field name="VAR" id="diag2_var">diag2</field>
+                                        <value name="VALUE">
+                                          <block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">2</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_num_arithmetic"><field name="OP">ADD</field><value name="A"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">4</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value><value name="B"><block type="essentials_list_get"><value name="INDEX"><block type="essentials_num_literal"><field name="NUM">6</field></block></value><value name="LIST"><block type="variables_get"><field name="VAR" id="grid_var">grid</field></block></value></block></value></block></value></block>
+                                        </value>
+                                        <next>
+                                          <block type="controls_if" id="check_magic">
+                                                <mutation else="1"></mutation>
+                                                <value name="IF0">
+                                                  <block type="essentials_compare" id="compare_len"><field name="OP">EQ</field><value name="A"><block type="essentials_set_length" id="len_set"><value name="SET"><block type="essentials_set_create" id="create_set"><mutation items="8"></mutation><value name="ADD0"><block type="variables_get"><field name="VAR" id="row1_var">row1</field></block></value><value name="ADD1"><block type="variables_get"><field name="VAR" id="row2_var">row2</field></block></value><value name="ADD2"><block type="variables_get"><field name="VAR" id="row3_var">row3</field></block></value><value name="ADD3"><block type="variables_get"><field name="VAR" id="col1_var">col1</field></block></value><value name="ADD4"><block type="variables_get"><field name="VAR" id="col2_var">col2</field></block></value><value name="ADD5"><block type="variables_get"><field name="VAR" id="col3_var">col3</field></block></value><value name="ADD6"><block type="variables_get"><field name="VAR" id="diag1_var">diag1</field></block></value><value name="ADD7"><block type="variables_get"><field name="VAR" id="diag2_var">diag2</field></block></value></block></value></block></value><value name="B"><block type="essentials_num_literal" id="num_1_check"><field name="NUM">1</field></block></value></block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="text_print" id="print_magic"><value name="TEXT">
+                                                    <block type="text_concat">
+                                                        <mutation items="2"></mutation>
+                                                        <value name="ADD0">
+                                                          <block type="text_concat">
+                                                            <mutation items="2"></mutation>
+                                                            <value name="ADD0">
+                                                              <block type="text" id="text_magic_1"><field name="TEXT">✨ You've found a Magic Square! The magic sum is </field></block>
+                                                            </value>
+                                                            <value name="ADD1">
+                                                              <block type="variables_get" id="get_row1_magic"><field name="VAR" id="row1_var">row1</field></block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="ADD1">
+                                                            <block type="text" id="text_magic_2"><field name="TEXT"> ✨</field></block>
+                                                        </value>
+                                                    </block>
+                                                  </value></block>
+                                                </statement>
+                                                <statement name="ELSE">
+                                                  <block type="text_print" id="print_not_magic"><value name="TEXT"><block type="text" id="text_not_magic"><field name="TEXT">❌ The magic is broken! This is not a magic square.</field></block></value></block>
+                                                </statement>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,638 @@
+id,title,description,suiteId,moduleId,categoryId
+variables_cast,cast %1 to %2,Casts a value to the specified type.,unassigned,variables_basic_types,unassigned
+variables_get_with_default,value %1 or default %2,"Returns the value if it is not None, otherwise returns the default.",unassigned,variables_basic_types,unassigned
+unittest_main,run unit tests,Runs the unit tests.,tools_testing,unittest,cat_unittest
+unittest_testcase,test case %1,Defines a test case.,tools_testing,unittest,cat_unittest
+unittest_testfunction,test function %1,Defines a test function within a test case.,tools_testing,unittest,cat_unittest
+unittest_assert_equal,assert equal %1 %2,Asserts that two values are equal.,tools_testing,unittest,cat_unittest
+unittest_assert_true,assert true %1,Asserts that a value is true.,tools_testing,unittest,cat_unittest
+unittest_assert_false,assert false %1,Asserts that a value is false.,tools_testing,unittest,cat_unittest
+unittest_assert_raises,assert raises %1 with %2,Asserts that a specific exception is raised.,tools_testing,unittest,cat_unittest
+tuples_create_with,create tuple,Creates a tuple with any number of items.,unassigned,tuples_structs,unassigned
+tuples_unpack,unpack %1 into variables %2,Unpacks a tuple into a comma-separated list of variables.,unassigned,tuples_structs,unassigned
+tuples_create_simplenamespace,create namespace from dictionary %1,Creates a SimpleNamespace object from a dictionary.,unassigned,tuples_structs,unassigned
+tuples_count,in tuple %1 count occurrences of item %2,Counts the number of occurrences of an item in a tuple.,essentials,tuples_structs,cat_tuples
+tuples_index,in tuple %1 find first occurrence of item %2,Returns the index of the first occurrence of an item in a tuple.,essentials,tuples_structs,cat_tuples
+tuples_create_with_container,items %1 %2,"Add, remove, or reorder items to reconfigure this tuple block.",unassigned,tuples_structs,unassigned
+tuples_create_with_item,item,Add an item to the tuple.,unassigned,tuples_structs,unassigned
+transformers_pipeline,create transformers pipeline for %1,Creates a Hugging Face pipeline for a given task.,transformers,transformers,cat_pipelines
+torch_tensor,create torch tensor from %1,Creates a PyTorch tensor from a list or NumPy array.,pytorch,torch,cat_tensors
+torch_tensor_shape,shape of tensor %1,Returns the shape of a PyTorch tensor.,pytorch,torch,cat_tensors
+torch_tensor_reshape,reshape tensor %1 to shape %2,"Returns a tensor with the same data and number of elements as input, but with the specified shape.",pytorch,torch,cat_tensors
+torch_zeros,create tensor of zeros with shape %1,Creates a tensor filled with zeros.,pytorch,torch,cat_tensors
+torch_ones,create tensor of ones with shape %1,Creates a tensor filled with ones.,pytorch,torch,cat_tensors
+torch_randn,create random tensor with shape %1,Creates a tensor with random numbers from a normal distribution.,pytorch,torch,cat_tensors
+torch_nn_module,define torch neural network %1,Defines a neural network as a class that inherits from torch.nn.Module.,pytorch,torch,cat_nn_layers
+torch_nn_linear,linear layer: in %1 out %2,Applies a linear transformation to the incoming data.,pytorch,torch,cat_nn_layers
+torch_nn_conv2d,Conv2D layer: in_channels %1 out_channels %2 kernel_size %3,Applies a 2D convolution over an input signal composed of several input planes.,pytorch,torch,cat_nn_layers
+torch_nn_maxpool2d,MaxPool2D layer: kernel_size %1,Applies a 2D max pooling over an input signal.,pytorch,torch,cat_nn_layers
+torch_nn_relu,ReLU activation,Applies the rectified linear unit function element-wise.,pytorch,torch,cat_nn_layers
+torch_nn_dropout,dropout layer: p %1,"During training, randomly zeroes some of the elements of the input tensor with probability p.",pytorch,torch,cat_nn_layers
+torch_nn_embedding,embedding layer: num_embeddings %1 embedding_dim %2,A simple lookup table that stores embeddings of a fixed dictionary and size.,pytorch,torch,cat_nn_layers
+torch_nn_lstm,LSTM layer: input_size %1 hidden_size %2,Applies a multi-layer long short-term memory (LSTM) RNN to an input sequence.,pytorch,torch,cat_nn_layers
+torch_custom_dataset,define custom torch dataset %1,Defines a custom PyTorch dataset.,pytorch,torch,cat_data
+torch_dataloader,create DataLoader for dataset %1,Creates a DataLoader for iterating over a dataset.,pytorch,torch,cat_data
+torch_loss_function,loss function %1,Creates a loss function instance.,pytorch,torch,cat_training
+torch_optimizer,optimizer %1 for parameters %2 with learning rate %3,Creates an optimizer instance.,pytorch,torch,cat_training
+torch_train_loop,train for %1 epochs:,A flexible training loop for a PyTorch model.,pytorch,torch,cat_training
+torch_save,save model state %1 to file %2,Saves a model's state dictionary.,pytorch,torch,cat_model_management
+torch_load,load model state for %1 from file %2,Loads a model's state dictionary from a file.,pytorch,torch,cat_model_management
+tools_test_define_case,define test case %1 %2,Defines a test case.,unassigned,tools_testing,unassigned
+tools_assert_equal,assert equal a %1 b %2,Asserts that two values are equal.,unassigned,tools_testing,unassigned
+tools_assert_true,assert true %1,Asserts that a condition is true.,unassigned,tools_testing,unassigned
+tools_run_tests,run all tests,Runs all defined test cases.,unassigned,tools_testing,unassigned
+tools_test_fixture,test fixture setup %1 teardown %2,Defines a test fixture with setup and teardown.,unassigned,tools_testing,unassigned
+tools_timeit_block,time execution of %1,Times the execution of a block of code.,unassigned,tools_testing,unassigned
+tools_profile_start_stop,%1 profiling,Starts or stops the profiler.,unassigned,tools_testing,unassigned
+tools_memory_snapshot,take memory snapshot,Takes a snapshot of memory usage.,unassigned,tools_testing,unassigned
+tools_trace_function,trace function %1,Traces the execution of a function.,unassigned,tools_testing,unassigned
+tools_log_debug,log debug message %1 with data %2,Logs a debug message.,unassigned,tools_testing,unassigned
+tools_log_to_file,log message %1 to file %2,Logs a message to a file. (Gated),unassigned,tools_testing,unassigned
+tools_capture_stacktrace,capture stacktrace,Captures the current stacktrace.,unassigned,tools_testing,unassigned
+tools_argparse_define,define CLI argument %1,Defines a command-line argument.,unassigned,tools_testing,unassigned
+tools_argparse_parse,parse CLI arguments,Parses command-line arguments.,unassigned,tools_testing,unassigned
+tools_print_help,print CLI help,Prints the command-line help message.,unassigned,tools_testing,unassigned
+text_to_lines,get lines from text %1,Splits a multi-line text into a list of lines.,text_localization,text_localization,cat_text_utilities
+text_indent,indent text %1 with %2,Indents each line of a text with a prefix.,text_localization,text_localization,cat_text_utilities
+text_unindent,unindent text %1,Unindents a block of text.,text_localization,text_localization,cat_text_utilities
+text_preview,preview of text %1 with limit %2,"Creates a preview of a text, truncated to a certain length.",text_localization,text_localization,cat_text_utilities
+text_template_render_jinja,render jinja template %1 with context %2,Renders a Jinja2 template.,text_localization,text_localization,cat_templating
+text_template_safe_render,safely render template %1 with context %2,Safely renders a template in a sandboxed environment.,text_localization,text_localization,cat_templating
+text_re_search,search regex %1 in text %2 with flags %3,Searches for a regex pattern in a string.,text_localization,text_localization,cat_regex_parsing
+text_re_match,match regex %1 at start of text %2 with flags %3,Matches a regex pattern at the beginning of a string.,text_localization,text_localization,cat_regex_parsing
+text_re_findall,find all regex %1 in text %2 with flags %3,Finds all occurrences of a regex pattern in a string.,text_localization,text_localization,cat_regex_parsing
+text_re_replace,in text %1 replace regex %2 with %3 flags %4,Replaces occurrences of a regex pattern in a string.,text_localization,text_localization,cat_regex_parsing
+text_re_split,split text %1 by regex %2 with flags %3,Splits a string by a regex pattern.,text_localization,text_localization,cat_regex_parsing
+text_regex_flags,regex flags %1,Regex flags.,text_localization,text_localization,cat_regex_parsing
+text_i18n_register,register translations for lang %1 with mapping %2,Registers a dictionary of translations for a language.,text_localization,text_localization,cat_i18n_localization
+text_i18n_translate,translate key %1 lang %2,Translates a key using the registered translations.,text_localization,text_localization,cat_i18n_localization
+text_i18n_plural,pluralize for key %1 count %2 lang %3,Handles pluralization based on a count.,text_localization,text_localization,cat_i18n_localization
+text_i18n_set_locale,set current locale to %1,Sets the current language for translation.,text_localization,text_localization,cat_i18n_localization
+text_i18n_get_locale,get current locale,Gets the current language for translation.,text_localization,text_localization,cat_i18n_localization
+text_alt_text_generate,generate alt text from metadata %1 lang %2,Generates alternative text for an image from its metadata.,text_localization,text_localization,cat_i18n_localization
+text_normalize_unicode,normalize unicode %1 to form %2,Normalizes Unicode text to a standard form.,text_localization,text_localization,cat_core_text
+text_remove_accents,remove accents from %1,Removes accents from a string.,text_localization,text_localization,cat_core_text
+text_slugify,slugify %1,Converts a string into a URL-friendly slug.,text_localization,text_localization,cat_core_text
+text_fix_encoding,fix encoding of %1,Fixes mojibake and other encoding issues in text.,text_localization,text_localization,cat_core_text
+testing_test_case,define test case %1,Defines a test case. Use assert blocks inside. Name must start with 'test_'.,unassigned,testing_quality,unassigned
+testing_run_tests,run all tests,Runs all defined test cases and returns a summary report.,unassigned,testing_quality,unassigned
+tensorflow_keras_sequential_model,create sequential Keras model %1,Creates a Keras Sequential model.,tensorflow,tensorflow,cat_keras_core
+tensorflow_keras_add_dense_layer,add dense layer with %1 units and %2 activation,Adds a Dense layer to the Keras model.,tensorflow,tensorflow,cat_layers
+tensorflow_keras_compile_model,compile Keras model %1,Configures the model for training.,tensorflow,tensorflow,cat_keras_core
+tensorflow_keras_fit_model,fit Keras model %1 to data %2 labels %3,Trains the model for a fixed number of epochs (iterations on a dataset).,tensorflow,tensorflow,cat_keras_core
+keras_model_to_json,convert keras model %1 to JSON,Serializes the model architecture to a JSON string.,tensorflow,tensorflow,cat_model_management
+keras_model_from_json,create keras model from JSON %1,Parses a JSON model configuration file and returns a model instance.,tensorflow,tensorflow,cat_model_management
+keras_save_model,save keras model %1 to file %2,Saves a model as a TensorFlow SavedModel or a single HDF5 file.,tensorflow,tensorflow,cat_model_management
+keras_load_model,load keras model from file %1,Loads a model saved via model.save().,tensorflow,tensorflow,cat_model_management
+keras_layer_conv2d,"add Conv2D layer with %1 filters, kernel size %2, activation %3",Adds a 2D convolution layer.,tensorflow,tensorflow,cat_layers
+keras_layer_maxpooling2d,add MaxPooling2D layer with pool size %1,Max pooling operation for 2D spatial data.,tensorflow,tensorflow,cat_layers
+keras_layer_flatten,add flatten layer,Flattens the input. Does not affect the batch size.,tensorflow,tensorflow,cat_layers
+keras_layer_dropout,add dropout layer with rate %1,Applies Dropout to the input.,tensorflow,tensorflow,cat_layers
+keras_layer_embedding,add embedding layer with input dim %1 and output dim %2,Turns positive integers (indexes) into dense vectors of fixed size.,tensorflow,tensorflow,cat_layers
+keras_layer_lstm,add LSTM layer with %1 units,Long Short-Term Memory layer.,tensorflow,tensorflow,cat_layers
+keras_callback_earlystopping,"early stopping callback, monitor %1, patience %2",Stop training when a monitored metric has stopped improving.,tensorflow,tensorflow,cat_callbacks
+keras_callback_modelcheckpoint,"model checkpoint callback, filepath %1, monitor %2",Callback to save the Keras model or model weights at some frequency.,tensorflow,tensorflow,cat_callbacks
+keras_image_dataset_from_directory,image dataset from directory %1,Generates a tf.data.Dataset from image files in a directory.,tensorflow,tensorflow,cat_data_loading
+sys_argv,command-line arguments,Returns the list of command-line arguments passed to a Python script.,standard_library,system,cat_system
+sys_platform,platform identifier,"Returns a string identifying the platform (e.g., 'linux', 'win32').",standard_library,system,cat_system
+system_os_getenv,get environment variable %1,Gets the value of an environment variable.,unassigned,system,unassigned
+system_os_system,run shell command %1,Executes a shell command.,unassigned,system,unassigned
+os_path_join,join path components %1,Joins one or more path components intelligently.,standard_library,system,cat_system
+os_path_exists,path exists %1,Return True if path refers to an existing path or an open file descriptor.,standard_library,system,cat_system
+os_path_basename,base name of path %1,Return the base name of pathname path.,standard_library,system,cat_system
+os_path_dirname,directory name of path %1,Return the directory name of pathname path.,standard_library,system,cat_system
+os_path_splitext,split extension of path %1,"Split the pathname path into a pair (root, ext).",standard_library,system,cat_system
+os_mkdir,create directory at path %1,Create a directory.,standard_library,system,cat_system
+os_makedirs,create directory (and parents) at path %1,Recursive directory creation function.,standard_library,system,cat_system
+os_rename,rename from %1 to %2,Rename the file or directory src to dst.,standard_library,system,cat_system
+os_path_isfile,is path %1 a file?,Return True if path is an existing regular file.,standard_library,system,cat_system
+os_path_isdir,is path %1 a directory?,Return True if path is an existing directory.,standard_library,system,cat_system
+system_io_open,open file %1 in mode %2,Opens a file and returns a file object.,unassigned,system,unassigned
+system_io_read,read from file %1,Reads the entire content of a file.,unassigned,system,unassigned
+system_io_write,write %1 to file %2,Writes a string to a file.,unassigned,system,unassigned
+system_io_close,close file %1,Closes a file.,unassigned,system,unassigned
+system_io_remove,delete file at path %1,Deletes a file.,unassigned,system,unassigned
+system_io_listdir,list files in directory %1,Returns a list of files in a directory.,unassigned,system,unassigned
+text_regex_search,in text %1 find pattern %2,Searches for a regex pattern in a string. Returns the match object or None.,unassigned,strings_text_processing,unassigned
+text_regex_replace,in text %1 replace pattern %2 with %3,Replaces all occurrences of a regex pattern in a string.,unassigned,strings_text_processing,unassigned
+text_normalize,normalize %1 using form %2,Normalizes a Unicode string.,unassigned,strings_text_processing,unassigned
+i18n_register_translation,register translation for language %1 with dictionary %2,Registers a dictionary of translations for a language.,unassigned,strings_text_processing,unassigned
+i18n_translate,translate key %1 to language %2 || with fallback %3,Translates a key to the specified language.,unassigned,strings_text_processing,unassigned
+text_is_numeric,is numeric %1,Checks if the string consists of only numeric characters.,unassigned,strings_text_processing,unassigned
+text_find_all,in text %1 find all occurrences of %2,Finds all occurrences of a substring and returns a list of their starting indices.,unassigned,strings_text_processing,unassigned
+text_compare_case_insensitive,is %1 equal to %2 (ignore case),Compares two strings ignoring case.,unassigned,strings_text_processing,unassigned
+text_partition,partition %1 at first occurrence of %2,Partitions the string into a 3-tuple at the first occurrence of the separator.,unassigned,strings_text_processing,unassigned
+text_swapcase,swap case of %1,Swaps the case of all characters in the string.,unassigned,strings_text_processing,unassigned
+storage_migrate_schema,migrate schema with adapter %1,Migrates the database schema.,unassigned,storage_persistence,unassigned
+storage_backup_db,backup database to path %1,Backs up the database to a file.,unassigned,storage_persistence,unassigned
+storage_restore_db,restore database from path %1,Restores the database from a file.,unassigned,storage_persistence,unassigned
+storage_orm_model_define,define ORM model %1 with fields %2,Defines an ORM model. (Gated),unassigned,storage_persistence,unassigned
+storage_orm_create,in session %1 create %2 with data %3,Creates a new record using an ORM. (Gated),unassigned,storage_persistence,unassigned
+storage_orm_query,in session %1 query %2 with filters %3,Queries for records using an ORM. (Gated),unassigned,storage_persistence,unassigned
+storage_db_connect_sqlite,connect to sqlite db at path %1,Connects to a SQLite database.,unassigned,storage_persistence,unassigned
+storage_db_query,on connection %1 execute query %2 with params %3,Executes a SQL query and returns the results.,unassigned,storage_persistence,unassigned
+storage_db_select,on connection %1 select from %2 where %3,Selects rows from a table.,unassigned,storage_persistence,unassigned
+storage_db_insert,on connection %1 insert into %2 data %3,Inserts a new row into a table.,unassigned,storage_persistence,unassigned
+storage_db_update,on connection %1 update %2 set %3 where %4,Updates rows in a table.,unassigned,storage_persistence,unassigned
+storage_db_transaction,on connection %1 do in transaction %2,Executes a block of code in a database transaction.,unassigned,storage_persistence,unassigned
+storage_cache_set,in cache set key %1 to value %2 with TTL (s) %3,Sets a value in the cache with an optional time-to-live.,unassigned,storage_persistence,unassigned
+storage_cache_get,in cache get key %1,Gets a value from the cache.,unassigned,storage_persistence,unassigned
+storage_cache_delete,in cache delete key %1,Deletes a value from the cache.,unassigned,storage_persistence,unassigned
+storage_cache_incr,in cache increment key %1 by %2,Increments a value in the cache.,unassigned,storage_persistence,unassigned
+sklearn_train_test_split,split arrays %1 and labels %2 into train and test sets,"Split arrays or matrices into random train and test subsets. Returns a list containing [X_train, X_test, y_train, y_test].",scikit_learn,sklearn,cat_model_selection
+sklearn_pipeline,create pipeline %1,Construct a pipeline from a list of transformers and a final estimator.,scikit_learn,sklearn,cat_pipelines
+sklearn_standard_scaler,create standard scaler,Standardize features by removing the mean and scaling to unit variance.,scikit_learn,sklearn,cat_preprocessing
+sklearn_min_max_scaler,create min-max scaler,Transform features by scaling each feature to a given range.,scikit_learn,sklearn,cat_preprocessing
+sklearn_one_hot_encoder,create one-hot encoder,Encode categorical features as a one-hot numeric array.,scikit_learn,sklearn,cat_preprocessing
+sklearn_label_encoder,create label encoder,Encode target labels with value between 0 and n_classes-1.,scikit_learn,sklearn,cat_preprocessing
+sklearn_logistic_regression,logistic regression classifier,"Logistic Regression (aka logit, MaxEnt) classifier.",scikit_learn,sklearn,cat_models
+sklearn_k_neighbors_classifier,k-neighbors classifier with %1 neighbors,Classifier implementing the k-nearest neighbors vote.,scikit_learn,sklearn,cat_models
+sklearn_svc,support vector classifier (SVC),C-Support Vector Classification.,scikit_learn,sklearn,cat_models
+sklearn_random_forest_classifier,random forest classifier with %1 estimators,A random forest classifier.,scikit_learn,sklearn,cat_models
+sklearn_linear_regression,linear regression model,Ordinary least squares Linear Regression.,scikit_learn,sklearn,cat_models
+sklearn_ridge_regression,ridge regression model with alpha %1,Linear least squares with l2 regularization.,scikit_learn,sklearn,cat_models
+sklearn_svr,support vector regression (SVR),Epsilon-Support Vector Regression.,scikit_learn,sklearn,cat_models
+sklearn_kmeans,k-means clustering with %1 clusters,K-Means clustering.,scikit_learn,sklearn,cat_models
+sklearn_grid_search_cv,grid search cross-validation for estimator %1,Exhaustive search over specified parameter values for an estimator.,scikit_learn,sklearn,cat_model_selection
+sklearn_accuracy_score,accuracy score for y_true %1 y_pred %2,Accuracy classification score.,scikit_learn,sklearn,cat_metrics
+sklearn_precision_score,precision score for y_true %1 y_pred %2,Compute the precision.,scikit_learn,sklearn,cat_metrics
+sklearn_recall_score,recall score for y_true %1 y_pred %2,Compute the recall.,scikit_learn,sklearn,cat_metrics
+sklearn_f1_score,f1 score for y_true %1 y_pred %2,"Compute the F1 score, also known as balanced F-score or F-measure.",scikit_learn,sklearn,cat_metrics
+sklearn_confusion_matrix,confusion matrix for y_true %1 y_pred %2,Compute confusion matrix to evaluate the accuracy of a classification.,scikit_learn,sklearn,cat_metrics
+sklearn_mean_squared_error,mean squared error for y_true %1 y_pred %2,Mean squared error regression loss.,scikit_learn,sklearn,cat_metrics
+sklearn_r2_score,r2 score for y_true %1 y_pred %2,R^2 (coefficient of determination) regression score function.,scikit_learn,sklearn,cat_metrics
+serialization_to_json,convert to JSON string %1,Serializes a dictionary or list into a JSON string.,unassigned,serialization_data,unassigned
+serialization_from_json,parse JSON from string %1,Deserializes a JSON string into a dictionary or list.,unassigned,serialization_data,unassigned
+serialization_write_csv,write to CSV file at path %1 data (list of dicts) %2,Writes a list of dictionaries to a CSV file in the virtual filesystem.,unassigned,serialization_data,unassigned
+serialization_read_csv,read CSV file from path %1,Reads a CSV file from the virtual filesystem into a list of dictionaries.,unassigned,serialization_data,unassigned
+security_jwt_encode,JWT encode payload %1 with key %2 algorithm %3,Encodes a JWT token.,unassigned,security_keys,unassigned
+security_jwt_decode,JWT decode token %1 with key %2,Decodes a JWT token.,unassigned,security_keys,unassigned
+security_hash_sha256,hash sha256 of %1,Hashes data using SHA256.,unassigned,security_keys,unassigned
+security_hmac_sha256,hmac sha256 with key %1 data %2,Creates an HMAC-SHA256 signature.,unassigned,security_keys,unassigned
+security_generate_random_bytes,generate %1 random bytes,Generates a number of random bytes.,unassigned,security_keys,unassigned
+security_secrets_store_save,in secrets store save key %1 with secret %2,Saves a secret to the secret store.,unassigned,security_keys,unassigned
+security_secrets_get_ref,get secret reference for key %1,"Gets a reference to a secret, not the secret itself.",unassigned,security_keys,unassigned
+security_encrypt_sym,symmetrically encrypt %1 with key %2,Symmetrically encrypts data.,unassigned,security_keys,unassigned
+security_decrypt_sym,symmetrically decrypt %1 with key %2,Symmetrically decrypts data.,unassigned,security_keys,unassigned
+requests_get,send GET request to url %1,Sends a GET request.,networking,requests,cat_http_requests
+re_compile,compile regex pattern %1,Compiles a regular expression pattern into a regex object.,standard_library,re,cat_regex
+re_search,search for pattern %1 in string %2,Scans through a string looking for the first location where the regular expression pattern produces a match.,standard_library,re,cat_regex
+re_match,match pattern %1 at start of string %2,"If zero or more characters at the beginning of string match the regular expression pattern, return a corresponding match object.",standard_library,re,cat_regex
+re_findall,find all matches for pattern %1 in string %2,"Return all non-overlapping matches of pattern in string, as a list of strings.",standard_library,re,cat_regex
+re_sub,replace matches of pattern %1 with %2 in string %3,Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl.,standard_library,re,cat_regex
+re_split,split string %1 by pattern %2,Split string by the occurrences of pattern.,standard_library,re,cat_regex
+re_escape,escape special characters in %1,Escape special characters in a pattern.,standard_library,re,cat_regex
+re_match_group,from match %1 get group %2,Returns a specific subgroup of the match.,standard_library,re,cat_regex
+re_match_groups,get all groups from match %1,Returns a tuple containing all the subgroups of the match.,standard_library,re,cat_regex
+pydantic_create_model,create Pydantic model %1 with fields %2,Creates a Pydantic model.,unassigned,pydantic,unassigned
+pydantic_field,field %1: %2,Adds a field to a Pydantic model.,unassigned,pydantic,unassigned
+pillow_image_create,create new image mode %1 size %2 color %3,"Creates a new image with the given mode, size, and color.",image_manipulation,pillow,cat_pillow
+pillow_draw_line,on image %1 draw line from %2 to %3 fill %4 width %5,Draws a line on the given image.,image_manipulation,pillow,cat_pillow
+pillow_draw_rectangle,on image %1 draw rectangle at %2 fill %3 outline %4 width %5,Draws a rectangle on the given image.,image_manipulation,pillow,cat_pillow
+pillow_draw_ellipse,on image %1 draw ellipse in bounding box %2 fill %3 outline %4 width %5,Draws an ellipse on the given image.,image_manipulation,pillow,cat_pillow
+pillow_draw_text,on image %1 draw text %2 at position %3 fill %4,Draws text on the given image.,image_manipulation,pillow,cat_pillow
+pillow_image_filter,apply filter %1 to image %2,Applies a predefined filter to the image.,image_manipulation,pillow,cat_pillow
+pandas_create_dataframe_from_dict,create pandas dataframe from dictionary %1,Create a pandas DataFrame from a dictionary of lists or arrays.,pandas,pandas,cat_dataframe
+pandas_read_csv,read csv from %1,Read a comma-separated values (csv) file into a pandas DataFrame.,pandas,pandas,cat_dataframe
+pandas_groupby_agg,in dataframe %1 group by %2,Group DataFrame using a mapper or by a Series of columns and apply aggregation.,pandas,pandas,cat_dataframe
+pandas_to_csv,save dataframe %1 to csv at %2,Write object to a comma-separated values (csv) file.,pandas,pandas,cat_dataframe
+pandas_head,get first %1 rows of dataframe %2,Return the first n rows.,pandas,pandas,cat_dataframe
+pandas_info,print summary of dataframe %1,Print a concise summary of a DataFrame.,pandas,pandas,cat_dataframe
+pandas_describe,get descriptive statistics of dataframe %1,Generate descriptive statistics.,pandas,pandas,cat_dataframe
+pandas_filter,filter dataframe %1 where %2,Filter rows of a DataFrame based on a boolean condition.,pandas,pandas,cat_dataframe
+pandas_sort_values,sort dataframe %1 by %2 ascending %3,Sort by the values along either axis.,pandas,pandas,cat_dataframe
+pandas_dropna,in dataframe %1 drop missing values,Remove missing values.,pandas,pandas,cat_dataframe
+pandas_fillna,in dataframe %1 fill missing values with %2,Fill NA/NaN values using the specified method.,pandas,pandas,cat_dataframe
+pandas_select_column,from dataframe %1 select column %2,"Select a single column from a DataFrame, which returns a Series.",pandas,pandas,cat_dataframe
+pandas_loc,from dataframe %1 select rows by label %2 and columns %3,Access a group of rows and columns by label(s) or a boolean array.,pandas,pandas,cat_dataframe
+pandas_iloc,from dataframe %1 select rows by position %2 and columns %3,Purely integer-location based indexing for selection by position.,pandas,pandas,cat_dataframe
+pandas_shape,shape of dataframe %1,Return a tuple representing the dimensionality of the DataFrame.,pandas,pandas,cat_dataframe
+pandas_dtypes,data types of dataframe %1,Return the dtypes in the DataFrame.,pandas,pandas,cat_dataframe
+pandas_value_counts,count unique values in column %1 of dataframe %2,Return a Series containing counts of unique values.,pandas,pandas,cat_dataframe
+pandas_corr,compute pairwise correlation of columns in dataframe %1,"Compute pairwise correlation of columns, excluding NA/null values.",pandas,pandas,cat_dataframe
+pandas_merge,merge left dataframe %1 with right dataframe %2,Merge DataFrame or named Series objects with a database-style join.,pandas,pandas,cat_dataframe
+pandas_concat,concatenate dataframes %1,Concatenate pandas objects along a particular axis.,pandas,pandas,cat_dataframe
+pandas_drop,from dataframe %1 drop labels %2 from axis %3,Drop specified labels from rows or columns.,pandas,pandas,cat_dataframe
+pandas_rename,in dataframe %1 rename with mapper %2,Alter axes labels.,pandas,pandas,cat_dataframe
+pandas_get_columns,get columns from dataframe %1,Get the column labels of the DataFrame.,pandas,pandas,cat_dataframe
+pandas_get_index,get index from dataframe %1,Get the index (row labels) of the DataFrame.,pandas,pandas,cat_dataframe
+pandas_get_values,get numpy values from dataframe %1,Get the numpy representation of the DataFrame.,pandas,pandas,cat_dataframe
+pandas_drop_duplicates,from dataframe %1 drop duplicates,Return DataFrame with duplicate rows removed.,pandas,pandas,cat_dataframe
+pandas_apply,in dataframe %1 apply function %2 on axis %3,Apply a function along an axis of the DataFrame.,pandas,pandas,cat_dataframe
+pandas_pivot_table,create pivot table from dataframe %1 with values %2 index %3 columns %4,Create a spreadsheet-style pivot table as a DataFrame.,pandas,pandas,cat_dataframe
+pandas_to_datetime,convert %1 to datetime,Convert argument to datetime.,pandas,pandas,cat_dataframe
+pandas_to_dict,convert dataframe %1 to dictionary,Convert the DataFrame to a dictionary.,pandas,pandas,cat_dataframe
+numpy_array,create numpy array from %1 with data type %2,"Create a new numpy array from a list, with an optional data type.",numpy,numpy,cat_array
+numpy_arange,numpy array from range start %1 stop %2 step %3,Return evenly spaced values within a given interval.,numpy,numpy,cat_array
+numpy_reshape,reshape numpy array %1 to shape %2,Gives a new shape to an array without changing its data.,numpy,numpy,cat_array
+numpy_zeros,create numpy array of zeros with shape %1,"Return a new array of given shape and type, filled with zeros.",numpy,numpy,cat_array
+numpy_ones,create numpy array of ones with shape %1,"Return a new array of given shape and type, filled with ones.",numpy,numpy,cat_array
+numpy_concatenate,concatenate numpy arrays %1 on axis %2,Join a sequence of arrays along an existing axis.,numpy,numpy,cat_array
+numpy_vstack,stack arrays vertically %1,Stack arrays in sequence vertically (row wise).,numpy,numpy,cat_array
+numpy_hstack,stack arrays horizontally %1,Stack arrays in sequence horizontally (column wise).,numpy,numpy,cat_array
+numpy_split,split array %1 into %2 sections on axis %3,Split an array into multiple sub-arrays.,numpy,numpy,cat_array
+numpy_sum,sum of numpy array %1,Sum of array elements over a given axis.,numpy,numpy,cat_array
+numpy_mean,mean of numpy array %1,Compute the arithmetic mean along the specified axis.,numpy,numpy,cat_array
+numpy_std,standard deviation of numpy array %1,Compute the standard deviation along the specified axis.,numpy,numpy,cat_array
+numpy_dot,dot product of %1 and %2,Dot product of two arrays.,numpy,numpy,cat_array
+numpy_elementwise_op,%1 %2 %3,Perform an element-wise operation on two arrays.,numpy,numpy,cat_array
+numpy_indexing,from array %1 get element at index %2,Access a single element from an array using its index.,numpy,numpy,cat_array
+numpy_slicing,from array %1 get slice %2,Access a subarray using slicing.,numpy,numpy,cat_array
+media_nlp_tokenize,tokenize text %1,Tokenizes a text into words.,unassigned,media_perception,unassigned
+media_nlp_sentences,get sentences from text %1,Splits a text into sentences.,unassigned,media_perception,unassigned
+media_nlp_pos_tag,part-of-speech tag tokens %1,Performs part-of-speech tagging on a list of tokens.,unassigned,media_perception,unassigned
+media_nlp_lemmatize,lemmatize token %1,Lemmatizes a word token.,unassigned,media_perception,unassigned
+media_nlp_nltk_download,download nltk resource %1,Downloads an NLTK resource.,unassigned,media_perception,unassigned
+media_nlp_nltk_word_tokenize,tokenize text into words with nltk %1,Tokenizes a text into words using NLTK.,unassigned,media_perception,unassigned
+media_nlp_nltk_sent_tokenize,tokenize text into sentences with nltk %1,Tokenizes a text into sentences using NLTK.,unassigned,media_perception,unassigned
+media_nlp_nltk_stopwords,get nltk stopwords for language %1,Gets a list of stopwords for a given language from NLTK.,unassigned,media_perception,unassigned
+media_nlp_spacy_load,load spacy model %1,Loads a spaCy model.,unassigned,media_perception,unassigned
+media_nlp_spacy_doc,process text with spacy model %1 %2,Processes a text with a spaCy model to create a Doc object.,unassigned,media_perception,unassigned
+media_nlp_spacy_token_lemma,get lemma of spacy token %1,Gets the lemma of a spaCy token.,unassigned,media_perception,unassigned
+media_nlp_spacy_token_pos,get part-of-speech of spacy token %1,Gets the part-of-speech of a spaCy token.,unassigned,media_perception,unassigned
+media_nlp_transformers_pipeline,create transformers pipeline for task %1,Creates a Hugging Face Transformers pipeline for a given task.,unassigned,media_perception,unassigned
+media_nlp_transformers_run_pipeline,run transformers pipeline %1 with input %2,Runs a Transformers pipeline with a given input.,unassigned,media_perception,unassigned
+media_img_load,load image from path %1,Loads an image from a file path.,unassigned,media_perception,unassigned
+media_img_resize,resize image %1 to width %2 height %3,Resizes an image.,unassigned,media_perception,unassigned
+media_img_crop,"crop image %1 with box (left, upper, right, lower) %2",Crops an image.,unassigned,media_perception,unassigned
+media_img_save,save image %1 to path %2,Saves an image to a file path.,unassigned,media_perception,unassigned
+media_img_to_bytes,get bytes of image %1,Converts an image to bytes.,unassigned,media_perception,unassigned
+media_img_thumbnail,create thumbnail for image %1 with size %2,Creates a thumbnail for an image.,unassigned,media_perception,unassigned
+media_img_convert_format,convert image %1 to format %2,Converts an image to a different format.,unassigned,media_perception,unassigned
+media_img_detect_edges,detect edges in image %1,Detects edges in an image using the Canny algorithm.,unassigned,media_perception,unassigned
+media_img_to_gray,convert image to grayscale %1,Converts an image to grayscale.,unassigned,media_perception,unassigned
+media_ocr_extract_text,extract text from image %1,Extracts text from an image using OCR.,unassigned,media_perception,unassigned
+media_face_detect,detect faces in image %1,Detects faces in an image. (Gated),unassigned,media_perception,unassigned
+media_audio_load,load audio from path %1,Loads an audio file.,unassigned,media_perception,unassigned
+media_audio_trim,trim audio %1 from %2 to %3,Trims an audio file.,unassigned,media_perception,unassigned
+media_audio_save,save audio %1 to path %2,Saves an audio file.,unassigned,media_perception,unassigned
+media_video_load,load video from path %1,Loads a video file.,unassigned,media_perception,unassigned
+media_video_extract_frames,extract frames from video %1,Extracts frames from a video.,unassigned,media_perception,unassigned
+matplotlib_plot,plot x %1 y %2,Plot y versus x as lines and/or markers.,matplotlib,matplotlib,cat_plotting
+matplotlib_show,show plot,Display all open figures.,matplotlib,matplotlib,cat_plotting
+matplotlib_title,set plot title to %1,Set a title for the axes.,matplotlib,matplotlib,cat_plotting
+matplotlib_xlabel,set x-axis label to %1,Set the label for the x-axis.,matplotlib,matplotlib,cat_plotting
+matplotlib_ylabel,set y-axis label to %1,Set the label for the y-axis.,matplotlib,matplotlib,cat_plotting
+matplotlib_legend,show plot legend,Place a legend on the axes.,matplotlib,matplotlib,cat_plotting
+matplotlib_scatter,scatter plot x %1 y %2,A scatter plot of y vs. x with varying marker size and/or color.,matplotlib,matplotlib,cat_plotting
+matplotlib_bar,bar chart categories %1 values %2,Make a bar plot.,matplotlib,matplotlib,cat_plotting
+matplotlib_hist,histogram of %1 bins %2,Plot a histogram.,matplotlib,matplotlib,cat_plotting
+matplotlib_figure,create figure with size width %1 height %2,"Create a new figure, or activate an existing figure.",matplotlib,matplotlib,cat_plotting
+matplotlib_subplot,create subplot at row %1 col %2 index %3,Add a subplot to the current figure.,matplotlib,matplotlib,cat_plotting
+matplotlib_grid,show grid %1,Configure the grid lines.,matplotlib,matplotlib,cat_plotting
+matplotlib_xlim,set x-axis limits from %1 to %2,Get or set the x-limits of the current axes.,matplotlib,matplotlib,cat_plotting
+matplotlib_ylim,set y-axis limits from %1 to %2,Get or set the y-limits of the current axes.,matplotlib,matplotlib,cat_plotting
+matplotlib_savefig,save figure to %1,Save the current figure.,matplotlib,matplotlib,cat_plotting
+matplotlib_subplots,create subplots nrows %1 ncols %2,Create a figure and a set of subplots.,matplotlib,matplotlib,cat_plotting
+matplotlib_pie,pie chart with values %1 labels %2,Plot a pie chart.,matplotlib,matplotlib,cat_plotting
+matplotlib_imshow,show image %1,Display data as an image.,matplotlib,matplotlib,cat_plotting
+matplotlib_tight_layout,apply tight layout,Adjust the padding between and around subplots.,matplotlib,matplotlib,cat_plotting
+math_decimal,high-precision number %1,Creates a high-precision Decimal number from a string.,unassigned,math_numeric,unassigned
+math_random_item,random item from list %1,Picks a random item from a list.,unassigned,math_numeric,unassigned
+math_pi,pi,The constant value of pi (3.141...),unassigned,math_numeric,unassigned
+math_sqrt,square root of %1,Calculates the square root of a number.,unassigned,math_numeric,unassigned
+loops_for_each_safe,for each item %1 in list %2 with limit %3,A 'for each' loop with a safety limit on iterations. Default limit is 1000.,unassigned,loops_iteration,unassigned
+loops_while_safe,while %1 with limit %2,A 'while' loop with a safety limit on iterations. Default limit is 1000.,unassigned,loops_iteration,unassigned
+loops_enumerate,"for index %1 , item %2 in enumerate %3",Iterates over a list with both index and item.,unassigned,loops_iteration,unassigned
+loops_zip,for %1 in zip of lists %2,Iterates over multiple lists at once. The input should be a list of lists.,unassigned,loops_iteration,unassigned
+logging_log,log %1 with level %2,Logs a message with the specified level.,unassigned,logging_monitoring,unassigned
+monitoring_metric_increment,increment metric %1 by %2,Increments a monitoring metric.,unassigned,logging_monitoring,unassigned
+monitoring_trace_span,trace span named %1 do %2,Creates a monitoring trace span around a block of code.,unassigned,logging_monitoring,unassigned
+lists_comprehension,list comprehension: %1 for %2 in %3 if %4,Creates a new list based on an existing list.,unassigned,lists_sequences,unassigned
+json_loads,parse JSON string %1,Deserialize a JSON string to a Python object.,standard_library,json,cat_json
+itertools_chain,chain iterables %1,Chains multiple iterables together into a single iterator.,standard_library,itertools,cat_itertools
+itertools_permutations,permutations of %1 of length %2,Return successive r length permutations of elements in the iterable.,standard_library,itertools,cat_itertools
+itertools_combinations,combinations of %1 of length %2,Return r length subsequences of elements from the input iterable.,standard_library,itertools,cat_itertools
+itertools_product,cartesian product of iterables %1,Cartesian product of input iterables.,standard_library,itertools,cat_itertools
+itertools_count,count from %1 with step %2,Creates an iterator that returns evenly spaced values starting with number start.,standard_library,itertools,cat_itertools
+itertools_cycle,cycle through %1,"Creates an iterator returning elements from the iterable and saving a copy of each. When the iterable is exhausted, return elements from the saved copy. Repeats indefinitely.",standard_library,itertools,cat_itertools
+itertools_repeat,repeat %1 %2 times,"Creates an iterator that returns object over and over again. If the times argument is specified, it will repeat that many times.",standard_library,itertools,cat_itertools
+itertools_takewhile,take from %1 while %2 is true,Creates an iterator that returns elements from the iterable as long as the predicate is true.,standard_library,itertools,cat_itertools
+itertools_dropwhile,drop from %1 while %2 is true,Creates an iterator that drops elements from the iterable as long as the predicate is true.,standard_library,itertools,cat_itertools
+itertools_filterfalse,filter from %1 where %2 is false,Creates an iterator that filters elements from iterable returning only those for which the predicate is false.,standard_library,itertools,cat_itertools
+iterators_yield,yield %1,Yields a value from a generator function.,control_computation,iterators_generators,cat_iterators_generators
+iterators_yield_from,yield from %1,"Delegates to a sub-generator, yielding all of its values.",control_computation,iterators_generators,cat_iterators_generators
+iterators_generator_function,define generator function %1 ( %2 ),Defines a generator function. Use the 'yield' block inside.,control_computation,iterators_generators,cat_iterators_generators
+iterators_safe_next,next item from iterator %1 or default %2,"Gets the next item from an iterator, returning a default value if it is exhausted.",control_computation,iterators_generators,cat_iterators_generators
+iterators_generator_expression,generator expression: %1 for %2 in %3 if %4,"Creates a generator expression, which can be iterated over.",control_computation,iterators_generators,cat_iterators_generators
+io_bytes_from_text,bytes from text %1 encoding %2,Encodes a string into bytes.,io_formats,io_formats,cat_streams_bytes
+io_text_from_bytes,text from bytes %1 encoding %2,Decodes bytes into a string.,io_formats,io_formats,cat_streams_bytes
+io_stream_read_chunk,read chunk of size %1 from stream %2,Reads a chunk of bytes from a stream.,io_formats,io_formats,cat_streams_bytes
+io_stream_write_chunk,write chunk %1 to stream %2,Writes a chunk of bytes to a stream.,io_formats,io_formats,cat_streams_bytes
+io_serialize_json_safe,serialize to safe JSON %1,Serializes an object to a JSON string safely.,io_formats,io_formats,cat_serialization_safe
+io_deserialize_json_safe,deserialize from safe JSON %1,Deserializes a JSON string safely.,io_formats,io_formats,cat_serialization_safe
+io_serialize_msgpack,serialize to MessagePack %1,Serializes an object using MessagePack.,io_formats,io_formats,cat_serialization_safe
+io_fs_read,read file at path %1,Reads the content of a file from the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_write,write to file at path %1 content %2,Writes content to a file in the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_append,append to file at path %1 content %2,Appends content to a file in the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_delete,delete file at path %1,Deletes a file from the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_exists,file exists at path %1,Checks if a file exists in the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_listdir,list directory at path %1,Lists the contents of a directory in the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_mkdir,create directory at path %1,Creates a directory in the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_tempfile,create temporary file,Creates a temporary file and returns its path.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_copy,copy file from %1 to %2,Copies a file in the virtual file system.,io_formats,io_formats,cat_file_virtual_fs_safe
+io_fs_open,with open file at path %1 in mode %2 as %3,Opens a file with a given mode and provides a file object to work with.,io_formats,io_formats,cat_file_io
+io_fs_file_mode,%1,Selects a file mode for opening a file.,io_formats,io_formats,cat_file_io
+io_fs_read_lines,read lines from %1,Reads all lines from a file object and returns them as a list of strings.,io_formats,io_formats,cat_file_io
+io_fs_write_lines,write lines %1 to %2,Writes a list of strings to a file object.,io_formats,io_formats,cat_file_io
+io_json_load,load JSON from %1,Loads a JSON string or from a file path.,io_formats,io_formats,cat_json__csv__yaml
+io_json_dump,dump object %1 to JSON string or file path %2 with indent %3 and sort keys %4,"Dumps an object to a JSON string or a file, with optional formatting.",io_formats,io_formats,cat_json__csv__yaml
+io_csv_read,read CSV from path %1 with delimiter %2,Reads a CSV file into a list of dictionaries.,io_formats,io_formats,cat_json__csv__yaml
+io_csv_write,write list of dictionaries %1 to CSV path %2 with delimiter %3,Writes a list of dictionaries to a CSV file.,io_formats,io_formats,cat_json__csv__yaml
+io_yaml_load,load YAML from %1,Loads a YAML string or from a file path. (Gated),io_formats,io_formats,cat_json__csv__yaml
+io_yaml_dump,dump object %1 to YAML string or file path %2,Dumps an object to a YAML string or a file. (Gated),io_formats,io_formats,cat_json__csv__yaml
+net_ws_connect,connect to websocket at url %1 and store in %2,Connects to a websocket server and stores the connection.,unassigned,integration_networking,unassigned
+net_ws_send,send to websocket %1 message %2,Sends a message to a websocket.,unassigned,integration_networking,unassigned
+net_ws_receive,from websocket %1 receive message into %2,Receives a message from a websocket and stores it in a variable.,unassigned,integration_networking,unassigned
+net_ws_close,close websocket connection %1,Closes a websocket connection.,unassigned,integration_networking,unassigned
+net_http_auth_basic,HTTP basic auth with user %1 pass %2,Creates a basic HTTP authentication header.,unassigned,integration_networking,unassigned
+net_http_auth_bearer,HTTP bearer auth with token %1,Creates a bearer token HTTP authentication header.,unassigned,integration_networking,unassigned
+net_request_sign,sign request with key %1 data %2,"Signs a request (e.g., for an API).",unassigned,integration_networking,unassigned
+net_multipart_upload,multipart upload with files %1 data %2,Constructs data for a multipart/form-data upload.,unassigned,integration_networking,unassigned
+net_socket_connect,connect socket to host %1 port %2,Connects to a socket. (Admin gated),unassigned,integration_networking,unassigned
+net_socket_send,send to socket %1 data %2,Sends data to a socket.,unassigned,integration_networking,unassigned
+net_socket_receive,receive from socket %1 max bytes %2,Receives data from a socket.,unassigned,integration_networking,unassigned
+net_socket_close,close socket connection %1,Closes a socket connection.,unassigned,integration_networking,unassigned
+net_pubsub_publish,publish to channel %1 message %2,Publishes a message to a channel.,unassigned,integration_networking,unassigned
+net_pubsub_subscribe,subscribe to channel %1 with callback %2,Subscribes to a channel with a callback function.,unassigned,integration_networking,unassigned
+net_pubsub_unsubscribe,unsubscribe from channel %1,Unsubscribes from a channel.,unassigned,integration_networking,unassigned
+net_http_get,HTTP GET url %1 params %2 headers %3,Performs an HTTP GET request.,unassigned,integration_networking,unassigned
+net_http_post,HTTP POST url %1 headers %2 body %3,Performs an HTTP POST request.,unassigned,integration_networking,unassigned
+net_http_json_get,HTTP GET JSON from url %1,Performs an HTTP GET request and parses the response as JSON.,unassigned,integration_networking,unassigned
+net_http_json_post,HTTP POST JSON to url %1 with data %2,Performs an HTTP POST request with JSON data.,unassigned,integration_networking,unassigned
+net_http_download_file,download file from url %1 to path %2,Downloads a file to the virtual file system.,unassigned,integration_networking,unassigned
+net_http_with_retry,HTTP request %1 with retries %2 backoff factor %3,Wraps an HTTP request with a retry mechanism.,unassigned,integration_networking,unassigned
+net_http_rate_limit,rate-limit HTTP requests to %1 per second,Rate-limits HTTP requests.,unassigned,integration_networking,unassigned
+graphics_turtle_create,create turtle,Creates a new turtle object.,unassigned,graphics,unassigned
+graphics_turtle_forward,move turtle %1 forward by %2 pixels,Moves the turtle forward by a given distance.,unassigned,graphics,unassigned
+graphics_turtle_backward,move turtle %1 backward by %2 pixels,Moves the turtle backward by a given distance.,unassigned,graphics,unassigned
+graphics_turtle_right,turn turtle %1 right by %2 degrees,Turns the turtle right by a given angle.,unassigned,graphics,unassigned
+graphics_turtle_left,turn turtle %1 left by %2 degrees,Turns the turtle left by a given angle.,unassigned,graphics,unassigned
+graphics_turtle_penup,lift pen of turtle %1,"Lifts the turtle's pen, so it doesn't draw.",unassigned,graphics,unassigned
+graphics_turtle_pendown,lower pen of turtle %1,"Lowers the turtle's pen, so it draws.",unassigned,graphics,unassigned
+graphics_turtle_done,finish turtle drawing,Finishes the turtle drawing and displays the result.,unassigned,graphics,unassigned
+functions_lambda,lambda %1 : %2,Creates an anonymous lambda function.,unassigned,functions_callables,unassigned
+functions_decorator,@ %1,Applies a decorator to a function definition.,unassigned,functions_callables,unassigned
+functions_call_with_kwargs,call function %1 with args %2 and kwargs %3,Calls a function with positional and keyword arguments.,unassigned,functions_callables,unassigned
+functions_callable,is %1 callable?,"Checks if an object is callable (e.g., a function).",control_computation,functions_callables,cat_functions_calls
+filesystem_read_file,read file from path %1,Reads a file from the virtual filesystem.,unassigned,filesystem_io,unassigned
+filesystem_write_file,write to file at path %1 content %2,Writes content to a file in the virtual filesystem.,unassigned,filesystem_io,unassigned
+filesystem_list_dir,list directory at path %1,Lists the contents of a directory in the virtual filesystem.,unassigned,filesystem_io,unassigned
+fastapi_create_app,create FastAPI app,Creates a FastAPI application instance.,web_server,fastapi,cat_fastapi
+fastapi_post_endpoint,create FastAPI POST endpoint at %1,Creates a FastAPI POST endpoint with a Pydantic model for the request body.,web,fastapi,cat_fastapi
+essentials_var_set,set %1 to %2,Sets a variable.,essentials,essentials,cat_variables_types
+essentials_var_get,%1,Gets a variable.,essentials,essentials,cat_variables_types
+essentials_var_undefined,undefined,The undefined value (None in Python).,essentials,essentials,cat_variables_types
+essentials_is_instance,is %1 instance of %2,Checks if an object is an instance of a type.,essentials,essentials,cat_variables_types
+essentials_type_of,type of %1,Returns the type of an object.,essentials,essentials,cat_variables_types
+essentials_cast,cast %1 to %2,Casts a value to a different type.,essentials,essentials,cat_variables_types
+essentials_default_if_none,%1 if not None else %2,Returns a default value if the first value is None.,essentials,essentials,cat_variables_types
+essentials_type_as_string,type of %1 as string,Returns the type of an object as a string.,unassigned,essentials,unassigned
+essentials_is_none,%1 is None,Checks if a value is None.,unassigned,essentials,unassigned
+essentials_is_not_none,%1 is not None,Checks if a value is not None.,unassigned,essentials,unassigned
+essentials_tuple_create,create tuple with %1,Creates a tuple with any number of items.,essentials,essentials,cat_tuples
+essentials_tuple_from_list,tuple from list %1,Creates a tuple from a list.,essentials,essentials,cat_tuples
+essentials_tuple_to_list,list from tuple %1,Creates a list from a tuple.,essentials,essentials,cat_tuples
+essentials_tuple_unpack,unpack %1 into variables %2,Unpacks a tuple into variables.,essentials,essentials,cat_tuples
+essentials_namedtuple_define,define named tuple %1 with fields %2,Defines a named tuple.,essentials,essentials,cat_tuples
+essentials_dataclass_stub,define dataclass %1 with fields %2,Defines a dataclass.,essentials,essentials,cat_tuples
+essentials_tuple_length,length of %1,Returns the number of items in a tuple.,unassigned,essentials,unassigned
+essentials_tuple_get,get item at index %1 in %2,Gets an item from a tuple.,unassigned,essentials,unassigned
+essentials_text_literal,%1,A string of text.,essentials,essentials,cat_text
+essentials_text_empty,empty text,An empty string.,essentials,essentials,cat_text
+essentials_text_concat,create text with %1,,essentials,essentials,cat_text
+essentials_text_format_fstring,format f-string with template %1 and variables %2,Formats a string using an f-string-like template.,essentials,essentials,cat_text
+essentials_text_len,length of %1,Returns the number of characters in a string.,essentials,essentials,cat_text
+essentials_text_slice,slice of %1 from %2 to %3,Returns a slice of a string.,essentials,essentials,cat_text
+essentials_text_substr,substring of %1 from %2 with length %3,Returns a substring of a string.,essentials,essentials,cat_text
+essentials_text_index_of,index of %1 in %2,Returns the index of the first occurrence of a substring.,essentials,essentials,cat_text
+essentials_text_contains,%1 contains %2,Returns true if the substring is found in the text.,essentials,essentials,cat_text
+essentials_text_startswith,%1 starts with %2,Returns true if the text starts with the substring.,essentials,essentials,cat_text
+essentials_text_endswith,%1 ends with %2,Returns true if the text ends with the substring.,essentials,essentials,cat_text
+essentials_text_change_case,change case of %1 to %2,Changes the case of a string.,essentials,essentials,cat_text
+essentials_text_strip,strip whitespace from %1,Removes leading and trailing whitespace.,essentials,essentials,cat_text
+essentials_text_split,split %1 by %2,Splits a string into a list of strings.,essentials,essentials,cat_text
+essentials_text_join,join %1 with %2,Joins a list of strings into a single string.,essentials,essentials,cat_text
+essentials_text_replace,in %1 replace %2 with %3,Replaces all occurrences of a substring with another substring.,essentials,essentials,cat_text
+essentials_text_escape_html,escape html %1,Escapes HTML special characters.,essentials,essentials,cat_text
+essentials_text_unescape_html,unescape html %1,Unescapes HTML special characters.,essentials,essentials,cat_text
+essentials_text_multiline,multi-line text %1,A multi-line string of text.,unassigned,essentials,unassigned
+essentials_text_is_empty,is %1 empty,Checks if a string is empty.,unassigned,essentials,unassigned
+essentials_set_create,create set with %1,Creates a set with any number of items.,essentials,essentials,cat_sets
+essentials_set_add,add %1 to set %2,Adds an item to a set.,essentials,essentials,cat_sets
+essentials_set_remove,remove %1 from set %2,Removes an item from a set.,essentials,essentials,cat_sets
+essentials_set_union,union of %1 and %2,Returns the union of two sets.,essentials,essentials,cat_sets
+essentials_set_intersection,intersection of %1 and %2,Returns the intersection of two sets.,essentials,essentials,cat_sets
+essentials_set_difference,difference of %1 and %2,Returns the difference of two sets.,essentials,essentials,cat_sets
+essentials_set_symmetric_difference,symmetric difference of %1 and %2,Returns the symmetric difference of two sets.,essentials,essentials,cat_sets
+essentials_set_contains,%1 contains %2,Returns true if the item is in the set.,essentials,essentials,cat_sets
+essentials_set_is_subset,%1 is subset of %2,Returns true if the first set is a subset of the second.,essentials,essentials,cat_sets
+essentials_set_is_superset,%1 is superset of %2,Returns true if the first set is a superset of the second.,essentials,essentials,cat_sets
+essentials_set_length,length of %1,Returns the number of items in a set.,unassigned,essentials,unassigned
+essentials_num_literal,%1,A number.,essentials,essentials,cat_numbers
+essentials_num_neg,- %1,Negates a number.,essentials,essentials,cat_numbers
+essentials_num_abs,absolute of %1,Returns the absolute value of a number.,essentials,essentials,cat_numbers
+essentials_num_round,round %1,Rounds a number to the nearest integer.,essentials,essentials,cat_numbers
+essentials_num_clamp,clamp %1 between %2 and %3,Clamps a number between a minimum and maximum value.,essentials,essentials,cat_numbers
+essentials_num_compare,%1 %2 %3,Compares two numbers.,essentials,essentials,cat_numbers
+essentials_num_min,minimum of %1 and %2,Returns the smaller of two numbers.,essentials,essentials,cat_numbers
+essentials_num_max,maximum of %1 and %2,Returns the larger of two numbers.,essentials,essentials,cat_numbers
+essentials_num_rand_int,random integer from %1 to %2,Returns a random integer between two numbers.,essentials,essentials,cat_numbers
+essentials_num_rand_float,random float,Returns a random float between 0 and 1.,essentials,essentials,cat_numbers
+essentials_num_property,%1 is %2,Checks if a number has a certain property.,unassigned,essentials,unassigned
+essentials_num_is_divisible_by,%1 is divisible by %2,Checks if a number is divisible by another.,unassigned,essentials,unassigned
+essentials_function_def_container,parameters %1 %2,A container for function parameters.,unassigned,essentials,unassigned
+essentials_function_def_param,parameter %1,A function parameter.,unassigned,essentials,unassigned
+essentials_bool_true,True,The boolean value True.,essentials,essentials,cat_logic_booleans
+essentials_bool_false,False,The boolean value False.,essentials,essentials,cat_logic_booleans
+essentials_logic_and,%1 and %2,Returns true if both inputs are true.,essentials,essentials,cat_logic_booleans
+essentials_logic_or,%1 or %2,Returns true if either input is true.,essentials,essentials,cat_logic_booleans
+essentials_logic_not,not %1,Returns true if the input is false.,essentials,essentials,cat_logic_booleans
+essentials_compare,%1 %2 %3,Compares two values.,essentials,essentials,cat_logic_booleans
+essentials_in_operator,%1 in %2,Returns true if the first value is in the second.,essentials,essentials,cat_logic_booleans
+essentials_not_in_operator,%1 not in %2,Returns true if the first value is not in the second.,essentials,essentials,cat_logic_booleans
+essentials_ternary,%1 if %2 else %3,A ternary operator.,essentials,essentials,cat_logic_booleans
+essentials_assert,assert %1 message %2,Asserts that a condition is true.,essentials,essentials,cat_logic_booleans
+essentials_logic_is_truthy,%1 is truthy,Checks if a value is truthy (evaluates to True in a boolean context).,unassigned,essentials,unassigned
+essentials_log_info,log info %1,Logs an informational message.,essentials,essentials,cat_logging_io_safe
+essentials_log_warn,log warning %1,Logs a warning message.,essentials,essentials,cat_logging_io_safe
+essentials_log_error,log error %1,Logs an error message.,essentials,essentials,cat_logging_io_safe
+essentials_print_to_console,print to console %1,Prints a message to the console.,essentials,essentials,cat_logging_io_safe
+essentials_safe_input,safe input with prompt %1,Safely gets input from the user.,essentials,essentials,cat_logging_io_safe
+essentials_log_custom,log with level %1 message %2,Logs a message with a custom level.,unassigned,essentials,unassigned
+essentials_list_create,create list with %1,Creates a list with any number of items.,essentials,essentials,cat_lists
+essentials_list_from_range,list from range start %1 stop %2 step %3,Creates a list from a range of numbers.,essentials,essentials,cat_lists
+essentials_list_length,length of %1,Returns the number of items in a list.,essentials,essentials,cat_lists
+essentials_list_get,get item at index %1 in %2,Gets an item from a list.,essentials,essentials,cat_lists
+essentials_list_set,set item at index %1 in %2 to %3,Sets an item in a list.,essentials,essentials,cat_lists
+essentials_list_index_of,index of first %1 in %2,Returns the index of the first occurrence of an item in a list.,essentials,essentials,cat_lists
+essentials_list_slice,slice of %1 from %2 to %3,Returns a slice of a list.,essentials,essentials,cat_lists
+essentials_list_sort,sort %1 with key %2 reverse %3,Sorts a list.,essentials,essentials,cat_lists
+essentials_list_reverse,reverse %1,Reverses a list.,essentials,essentials,cat_lists
+essentials_list_map,map %1 over %2,Applies a function to each item in a list.,essentials,essentials,cat_lists
+essentials_list_filter,filter %1 with %2,Filters a list using a function.,essentials,essentials,cat_lists
+essentials_list_reduce,reduce %1 with %2 initial value %3,Reduces a list to a single value using a function.,essentials,essentials,cat_lists
+essentials_list_flatten,flatten %1,Flattens a list of lists into a single list.,essentials,essentials,cat_lists
+essentials_list_unique,unique items in %1,Returns a list with unique items.,essentials,essentials,cat_lists
+essentials_list_chunk,chunk %1 into lists of size %2,Chunks a list into smaller lists of a given size.,essentials,essentials,cat_lists
+essentials_list_enumerate,enumerate %1,"Returns a list of (index, item) tuples.",essentials,essentials,cat_lists
+essentials_list_is_empty,is %1 empty,Checks if a list is empty.,unassigned,essentials,unassigned
+essentials_list_statements,in list %1 %2 item %3 at index %4,"Append, insert, or remove an item from a list.",essentials,essentials,cat_lists
+essentials_list_expressions,in list %1 pop item at index %2,Pops an item from a list at the specified index.,essentials,essentials,cat_lists
+essentials_dict_create,create dictionary with %1,Creates a dictionary with any number of key-value pairs.,essentials,essentials,cat_dictionaries
+essentials_dict_update,update %1 with %2,Updates a dictionary with another dictionary.,essentials,essentials,cat_dictionaries
+essentials_dict_merge_shallow,merge shallow %1 and %2,Merges two dictionaries shallowly.,essentials,essentials,cat_dictionaries
+essentials_dict_deep_merge,merge deep %1 and %2,Merges two dictionaries deeply.,essentials,essentials,cat_dictionaries
+essentials_dict_get_nested,in dictionary %1 get nested path %2 with default %3,Gets a nested value from a dictionary using a path.,essentials,essentials,cat_dictionaries
+essentials_registry_register,in registry %1 register key %2 with value %3,Registers a value in a registry.,essentials,essentials,cat_dictionaries
+essentials_registry_call,in registry %1 call key %2 with args %3 kwargs %4,Calls a function from a registry.,essentials,essentials,cat_dictionaries
+essentials_dict_has_key,dictionary %1 has key %2,Checks if a dictionary has a key.,unassigned,essentials,unassigned
+essentials_dict_statements,in dictionary %1 set key %2 to value %3,Set a key-value pair in a dictionary.,essentials,essentials,cat_dictionaries
+essentials_dict_expressions,in dictionary %1 %2 key %3,"Get, pop, or retrieve keys/values/items from a dictionary.",essentials,essentials,cat_dictionaries
+essentials_num_arithmetic,%1 %2 %3,,essentials,essentials,cat_numbers
+essentials_function_def,define function %1 ( %2 ),Defines a function with parameters.,control_computation,essentials,cat_functions_calls
+enterprise_ros_init_node,init ROS node %1,Initializes a ROS node. (Admin gated),unassigned,enterprise_specialty,unassigned
+enterprise_ros_publish,ROS publish to topic %1 message %2,Publishes a message to a ROS topic.,unassigned,enterprise_specialty,unassigned
+enterprise_quant_backtest_strategy,backtest strategy %1 with data %2,Backtests a quantitative trading strategy. (Admin gated),unassigned,enterprise_specialty,unassigned
+enterprise_quant_get_price_series,get price series for %1,Gets a price series for a financial instrument.,unassigned,enterprise_specialty,unassigned
+enterprise_odoo_connect,connect to Odoo,Connects to an Odoo instance. (Admin gated),unassigned,enterprise_specialty,unassigned
+enterprise_odoo_search_create,in Odoo connection %1 search/create %2 with data %3,Searches for or creates a record in Odoo.,unassigned,enterprise_specialty,unassigned
+dicts_create_with_item,key %1 value %2,A key-value pair for a dictionary.,unassigned,dicts_maps,unassigned
+dicts_register_handler,in registry %1 register handler %2 for key %3,A pattern for registering a function (handler) in a dictionary.,unassigned,dicts_maps,unassigned
+dicts_copy,copy dictionary %1,Returns a shallow copy of a dictionary.,unassigned,dicts_maps,unassigned
+dicts_fromkeys,create dictionary from keys %1 with value %2,Creates a new dictionary with keys from a sequence and a specified value.,unassigned,dicts_maps,unassigned
+dicts_popitem,pop item from dictionary %1,"Removes and returns an arbitrary (key, value) pair from the dictionary.",unassigned,dicts_maps,unassigned
+datetime_now,current date and time,Gets the current date and time.,standard_library,datetime,cat_datetime
+datetime_date,date year %1 month %2 day %3,Creates a date object.,standard_library,datetime,cat_datetime
+datetime_time,time hour %1 minute %2 second %3,Creates a time object.,standard_library,datetime,cat_datetime
+datetime_datetime,datetime year %1 month %2 day %3 hour %4 minute %5 second %6,Creates a datetime object.,standard_library,datetime,cat_datetime
+datetime_timedelta,timedelta days %1 seconds %2 microseconds %3 milliseconds %4 minutes %5 hours %6 weeks %7,Creates a timedelta object.,standard_library,datetime,cat_datetime
+datetime_strftime,format %1 with %2,Formats a datetime object to a string.,standard_library,datetime,cat_datetime
+datetime_strptime,parse %1 with %2,Parses a string into a datetime object.,standard_library,datetime,cat_datetime
+datetime_fromtimestamp,datetime from timestamp %1,Creates a datetime object from a Unix timestamp.,standard_library,datetime,cat_datetime
+datetime_timestamp,timestamp from %1,Converts a datetime object to a Unix timestamp.,standard_library,datetime,cat_datetime
+datetime_getattr,get %1 from %2,Gets a specific attribute from a datetime object.,standard_library,datetime,cat_datetime
+datetime_timezone,timezone UTC offset %1,Creates a timezone object with a UTC offset in hours.,standard_library,datetime,cat_datetime
+datetime_astimezone,convert %1 to timezone %2,Converts a datetime object to a specific timezone.,standard_library,datetime,cat_datetime
+db_execute,DB execute %1 with params %2,"Executes a query (e.g., CREATE, INSERT, UPDATE, DELETE) against the sandboxed database.",unassigned,databases_persistence,unassigned
+db_query_all,DB query all %1 with params %2,Executes a SELECT query and returns all rows as a list of dictionaries.,unassigned,databases_persistence,unassigned
+data_structures_seq_concat,concatenate sequences %1 and %2,Concatenates two sequences (lists or tuples).,data_structures,data_structures,cat_sequences
+data_structures_seq_repeat,repeat sequence %1 %2 times,Repeats a sequence a number of times.,data_structures,data_structures,cat_sequences
+data_structures_seq_slice_step,slice of %1 from %2 to %3 with step %4,Creates a slice with a custom step.,data_structures,data_structures,cat_sequences
+data_structures_seq_sorted_by,sort %1 by key %2,Sorts a sequence using a key function.,data_structures,data_structures,cat_sequences
+data_structures_seq_zip,zip sequences %1,Zips multiple sequences together.,data_structures,data_structures,cat_sequences
+data_structures_seq_transpose,transpose %1,Transposes a list of lists (matrix).,data_structures,data_structures,cat_sequences
+data_structures_seq_chunk,chunk %1 into size %2,Splits a sequence into chunks of a given size.,data_structures,data_structures,cat_sequences
+data_structures_seq_window,sliding window over %1 size %2 step %3,Creates a sliding window over a sequence.,data_structures,data_structures,cat_sequences
+data_structures_registry_create,create registry named %1,"Creates a new, empty registry (a dictionary).",data_structures,data_structures,cat_registry_plugin_patterns
+data_structures_registry_register,in registry %1 register key %2 with function %3,Registers a function in a registry.,data_structures,data_structures,cat_registry_plugin_patterns
+data_structures_registry_unregister,in registry %1 unregister key %2,Unregisters a function from a registry.,data_structures,data_structures,cat_registry_plugin_patterns
+data_structures_registry_list,list registered keys in %1,Lists all registered keys in a registry.,data_structures,data_structures,cat_registry_plugin_patterns
+data_structures_record_define_namedtuple,define named tuple %1 with fields %2,Defines a new named tuple class.,data_structures,data_structures,cat_records
+data_structures_record_define_dataclass,define dataclass %1 with fields %2 and defaults %3,Defines a new dataclass.,data_structures,data_structures,cat_records
+data_structures_record_instantiate,create instance of %1 with values %2,Creates an instance of a record (named tuple or dataclass).,data_structures,data_structures,cat_records
+data_structures_record_to_dict,convert record %1 to dictionary,Converts a record instance to a dictionary.,data_structures,data_structures,cat_records
+data_structures_record_from_dict,create instance of %1 from dictionary %2,Creates a record instance from a dictionary.,data_structures,data_structures,cat_records
+data_structures_map_get_path,in dictionary %1 get path %2 default %3,Gets a value from a nested dictionary using a list of keys.,data_structures,data_structures,cat_mappings
+data_structures_map_set_path,in dictionary %1 set path %2 to value %3,Sets a value in a nested dictionary using a list of keys.,data_structures,data_structures,cat_mappings
+data_structures_map_flatten,flatten dictionary %1,Flattens a nested dictionary into a single level.,data_structures,data_structures,cat_mappings
+data_structures_map_unflatten,unflatten dictionary %1,Unflattens a dictionary with dot-separated keys into a nested dictionary.,data_structures,data_structures,cat_mappings
+data_structures_map_filter_by_value,filter dictionary %1 by value where %2,Filters a dictionary by its values using a lambda function.,data_structures,data_structures,cat_mappings
+data_structures_map_keys_to_list,keys of %1 as list,Returns a list of the dictionary's keys.,data_structures,data_structures,cat_mappings
+data_structures_map_items_to_list,items of %1 as list of tuples,"Returns a list of the dictionary's (key, value) pairs.",data_structures,data_structures,cat_mappings
+data_structures_map_invert,invert dictionary %1,"Inverts a dictionary, swapping keys and values.",data_structures,data_structures,cat_mappings
+data_structures_frozen_map,frozen map from dictionary %1,Creates an immutable map (frozenset of items).,data_structures,data_structures,cat_immutable_persistent_helpers
+data_structures_frozen_list,frozen list from list %1,Creates an immutable list (tuple).,data_structures,data_structures,cat_immutable_persistent_helpers
+cv2_imread,read image from path %1,Reads an image from a file.,opencv,cv2,cat_image
+core_none,None,The None object.,unassigned,core_fundamentals,unassigned
+core_type,type of %1,Returns the type of a variable.,unassigned,core_fundamentals,unassigned
+core_isinstance,is %1 an instance of %2,Checks if an object is an instance of a class.,unassigned,core_fundamentals,unassigned
+core_enum,create enum %1 with members %2,Creates a new enumeration type. Provide a list of strings for members.,unassigned,core_fundamentals,unassigned
+core_dataclass,create dataclass %1 with fields %2,Creates a new dataclass. Provide a list of strings for field names.,unassigned,core_fundamentals,unassigned
+core_namedtuple,create namedtuple %1 with fields %2,Creates a new namedtuple. Provide a list of strings for field names.,unassigned,core_fundamentals,unassigned
+python_text,%1,A string of text.,unassigned,core_fundamentals,unassigned
+python_number,%1,A number.,unassigned,core_fundamentals,unassigned
+python_boolean,%1,A boolean value (True or False).,unassigned,core_fundamentals,unassigned
+python_list,create list with %1,Create a list with any number of items.,unassigned,core_fundamentals,unassigned
+python_dict,create dictionary with %1,Create a dictionary with key-value pairs.,unassigned,core_fundamentals,unassigned
+python_key_value,key %1 value %2,A key-value pair for a dictionary.,unassigned,core_fundamentals,unassigned
+logic_match,match %1,A match-case statement. Only case blocks can be placed inside.,unassigned,control_flow_logic,unassigned
+logic_case,case %1 : %2,A case clause for a match statement.,unassigned,control_flow_logic,unassigned
+logic_case_default,default case : %1,The default case (case _) for a match statement. Must be the last case.,unassigned,control_flow_logic,unassigned
+control_for_indexed,"for index %1, value %2 in %3",Loops through a list with an index and value.,control_computation,control_computation,cat_loops
+control_for_zip,for %1 in zip %2,Loops through multiple lists at once.,control_computation,control_computation,cat_loops
+control_loop_limit,limit loop iterations to %1,Adds a safety limit to a loop to prevent infinite loops.,unassigned,control_computation,unassigned
+control_lambda_expr,lambda %1 : %2,Creates a lambda function.,control_computation,control_computation,cat_functions_calls
+control_partial_apply,partially apply function %1 with pre-filled args %2,Creates a new function with some arguments pre-filled.,control_computation,control_computation,cat_functions_calls
+control_function_decorator,@ %1,Applies a decorator to a function definition.,control_computation,control_computation,cat_functions_calls
+control_function_docstring,docstring %1,Adds a docstring to a function. Must be the first statement in a function.,control_computation,control_computation,cat_functions_calls
+control_function_def,define %1 with parameters %2,Defines a function with parameters.,unassigned,control_computation,unassigned
+control_try_except,try %1,"Tries to execute code, and catches an exception.",control_computation,control_computation,cat_error_handling
+control_try_except_finally,try %1,"Tries to execute code, catches an exception, and runs a final block of code.",control_computation,control_computation,cat_error_handling
+control_raise_exception,raise exception %1 with message %2,Raises an exception.,control_computation,control_computation,cat_error_handling
+control_assert_block,assert %1 with message %2,Asserts that a condition is true.,control_computation,control_computation,cat_error_handling
+control_match,match %1,A match-case block (requires Python 3.10+).,control_computation,control_computation,cat_conditionals
+control_case,case %1,A case for a match-case block.,unassigned,control_computation,unassigned
+control_list_comp,list comprehension [ %1 for %2 in %3 if %4 ],Creates a list using a list comprehension.,control_computation,control_computation,cat_comprehensions
+control_dict_comp,dictionary comprehension { %1 : %2 for %3 in %4 if %5 },Creates a dictionary using a dictionary comprehension.,control_computation,control_computation,cat_comprehensions
+control_set_comp,set comprehension { %1 for %2 in %3 if %4 },Creates a set using a set comprehension.,control_computation,control_computation,cat_comprehensions
+control_gen_expr,generator expression ( %1 for %2 in %3 if %4 ),Creates a generator expression.,control_computation,control_computation,cat_comprehensions
+control_math_stats,calculate %1 of list %2,Calculates a statistical value of a list of numbers.,control_computation,control_computation,cat_operators_advanced_math
+control_decimal_create,decimal from %1,Creates a decimal number for high-precision calculations.,control_computation,control_computation,cat_operators_advanced_math
+control_fraction_create,fraction with numerator %1 and denominator %2,Creates a fraction.,control_computation,control_computation,cat_operators_advanced_math
+control_complex_create,complex number with real part %1 and imaginary part %2,Creates a complex number.,control_computation,control_computation,cat_operators_advanced_math
+control_accumulate,accumulate %1 with function %2,Returns a list of accumulated results.,control_computation,control_computation,cat_operators_advanced_math
+concurrency_submit_task,run in background %1 with args %2,Runs a function in the background using a managed thread pool. Returns a future object.,unassigned,concurrency_parallelism,unassigned
+concurrency_get_future_result,get result from future %1 with timeout (secs) %2,Waits for a background task to finish and gets its result. Provide a timeout in seconds.,unassigned,concurrency_parallelism,unassigned
+concurrency_is_future_done,is future %1 done?,"Checks if a background task has completed, failed, or been cancelled.",unassigned,concurrency_parallelism,unassigned
+concurrency_thread_start,start new thread with function %1 and args %2,Starts a new thread.,concurrency_async,concurrency_async,cat_threading__executor
+concurrency_thread_join,join thread %1,Waits for a thread to complete.,concurrency_async,concurrency_async,cat_threading__executor
+concurrency_thread_pool_submit,submit to thread pool function %1 with args %2,Submits a task to the thread pool.,concurrency_async,concurrency_async,cat_threading__executor
+concurrency_future_result,get result from future %1 with timeout %2,Gets the result from a future.,concurrency_async,concurrency_async,cat_threading__executor
+concurrency_thread_lock_acquire,acquire lock %1,Acquires a thread lock.,concurrency_async,concurrency_async,cat_threading__executor
+concurrency_thread_lock_release,release lock %1,Releases a thread lock.,concurrency_async,concurrency_async,cat_threading__executor
+concurrency_schedule_every,schedule to run %1 every %2 seconds,Schedules a function to run at a regular interval.,concurrency_async,concurrency_async,cat_scheduling
+concurrency_schedule_once,schedule to run %1 once after %2 seconds,Schedules a function to run once after a delay.,concurrency_async,concurrency_async,cat_scheduling
+concurrency_queue_put,put item %1 into queue %2,Puts an item into a queue.,concurrency_async,concurrency_async,cat_queues__synchronization
+concurrency_queue_get,get item from queue %1 with timeout %2,Gets an item from a queue.,concurrency_async,concurrency_async,cat_queues__synchronization
+concurrency_event_wait_set_clear,%1 event %2,Interacts with a threading event.,concurrency_async,concurrency_async,cat_queues__synchronization
+concurrency_semaphore_acquire_release,%1 semaphore %2,Acquires or releases a semaphore.,concurrency_async,concurrency_async,cat_queues__synchronization
+concurrency_async_def,async define %1 with parameters %2,Defines an asynchronous function.,concurrency_async,concurrency_async,cat_async_asyncio_safe_wrappers
+concurrency_await_block,await %1,Awaits an awaitable object.,concurrency_async,concurrency_async,cat_async_asyncio_safe_wrappers
+concurrency_async_sleep,async sleep for %1 seconds,Asynchronously sleeps for a number of seconds.,concurrency_async,concurrency_async,cat_async_asyncio_safe_wrappers
+concurrency_async_gather,async gather %1,Gathers results from multiple awaitable objects.,concurrency_async,concurrency_async,cat_async_asyncio_safe_wrappers
+concurrency_async_http_get,async HTTP GET url %1,Performs an asynchronous HTTP GET request.,concurrency_async,concurrency_async,cat_async_asyncio_safe_wrappers
+collections_counter_create,create Counter from %1,Creates a collections.Counter object from an iterable.,standard_library,collections,cat_collections
+collections_deque_create,create deque from %1,Creates a collections.deque object from an iterable.,standard_library,collections,cat_collections
+collections_deque_append,append %1 to deque %2,Appends an item to the right end of the deque.,standard_library,collections,cat_collections
+collections_deque_appendleft,append left %1 to deque %2,Appends an item to the left end of the deque.,standard_library,collections,cat_collections
+collections_deque_pop,pop from deque %1,Removes and returns an item from the right end of the deque.,standard_library,collections,cat_collections
+collections_deque_popleft,pop left from deque %1,Removes and returns an item from the left end of the deque.,standard_library,collections,cat_collections
+collections_defaultdict_create,create defaultdict with default factory %1,"Creates a collections.defaultdict with a specified default factory (e.g., int, list, str).",standard_library,collections,cat_collections
+beautifulsoup_parse_html,parse HTML text %1 with parser %2,Parse HTML content into a BeautifulSoup object.,web_scraping,beautifulsoup,cat_beautifulsoup
+beautifulsoup_find,in soup %1 find first tag %2 with attributes %3,Find the first tag that matches the given criteria.,web_scraping,beautifulsoup,cat_beautifulsoup
+beautifulsoup_find_all,in soup %1 find all tags %2 with attributes %3 limit %4,Find all tags that match the given criteria.,web_scraping,beautifulsoup,cat_beautifulsoup
+beautifulsoup_get_text,get text from element %1,Get all the text from a tag or a soup object.,web_scraping,beautifulsoup,cat_beautifulsoup
+beautifulsoup_get_attribute,from element %1 get attribute %2,Get the value of an attribute from a tag.,web_scraping,beautifulsoup,cat_beautifulsoup
+automation_ssh_connect,connect SSH to host %1,Connects to a host via SSH. (Admin gated),automation_devops,automation_devops,cat_ssh_remote_ops
+automation_ssh_run,on SSH connection %1 run command %2,Runs a command on a remote host via SSH.,automation_devops,automation_devops,cat_ssh_remote_ops
+automation_scp_upload,on SSH connection %1 upload from %2 to %3,Uploads a file to a remote host via SCP.,automation_devops,automation_devops,cat_ssh_remote_ops
+automation_scp_download,on SSH connection %1 download from %2 to %3,Downloads a file from a remote host via SCP.,automation_devops,automation_devops,cat_ssh_remote_ops
+automation_cmd_run_safe,run safe command %1 with args %2,Runs a pre-approved command from a safe list.,automation_devops,automation_devops,cat_safe_shell_commands
+automation_cmd_user_confirm,confirm with user: %1,Asks the user for confirmation before proceeding.,automation_devops,automation_devops,cat_safe_shell_commands
+automation_cmd_capture_output,run safe command %1 and capture output,Runs a pre-approved command and captures its output.,automation_devops,automation_devops,cat_safe_shell_commands
+automation_ci_trigger,trigger CI job %1 with params %2,Triggers a CI/CD job.,automation_devops,automation_devops,cat_automation_helpers
+automation_artifact_upload,upload artifact at path %1,Uploads a build artifact.,automation_devops,automation_devops,cat_automation_helpers
+automation_artifact_download,download artifact with id %1,Downloads a build artifact and returns its path.,automation_devops,automation_devops,cat_automation_helpers
+automation_docker_run,docker run image %1 with args %2,Runs a Docker container. (Admin gated),automation_devops,automation_devops,cat_containers_infra
+automation_terraform_apply,terraform apply plan %1,Applies a Terraform plan. (Admin gated),automation_devops,automation_devops,cat_containers_infra
+automation_ansible_run,ansible run playbook %1,Runs an Ansible playbook. (Admin gated),automation_devops,automation_devops,cat_containers_infra
+async_function,async function %1 ( %2 ),Defines an asynchronous function.,unassigned,async_networking,unassigned
+async_await,await %1,Waits for an awaitable object (like an async function call) to complete.,unassigned,async_networking,unassigned
+async_http_get,async GET from url %1 with headers %2,Makes an asynchronous GET request to a whitelisted URL.,unassigned,async_networking,unassigned
+async_http_post,async POST to url %1 with data %2 json %3 headers %4,Makes an asynchronous POST request to a whitelisted URL.,unassigned,async_networking,unassigned
+argparse_import,import argparse,Imports the argparse module.,tools_testing,argparse,cat_argparse
+argparse_create_parser,create argument parser with description %1,Creates an ArgumentParser object.,tools_testing,argparse,cat_argparse
+argparse_add_argument,parser %1 add argument %2,Adds an argument to the parser.,tools_testing,argparse,cat_argparse
+argparse_parse_args,parser %1 parse args,Parses the command-line arguments.,tools_testing,argparse,cat_argparse
+argparse_get_arg,get arg %1 from parsed args %2,Gets the value of a specific argument.,tools_testing,argparse,cat_argparse

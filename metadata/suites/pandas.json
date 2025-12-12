@@ -1,0 +1,250 @@
+{
+  "name": "Pandas",
+  "modules": {
+    "pandas": {
+      "name": "pandas",
+      "blocks": [
+        {
+          "id": "pandas_create_dataframe_from_dict",
+          "title": "create pandas dataframe from dictionary %1",
+          "description": "Create a pandas DataFrame from a dictionary of lists or arrays.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_read_csv",
+          "title": "read csv from %1",
+          "description": "Read a comma-separated values (csv) file into a pandas DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_groupby_agg",
+          "title": "in dataframe %1 group by %2",
+          "description": "Group DataFrame using a mapper or by a Series of columns and apply aggregation.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_to_csv",
+          "title": "save dataframe %1 to csv at %2",
+          "description": "Write object to a comma-separated values (csv) file.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_head",
+          "title": "get first %1 rows of dataframe %2",
+          "description": "Return the first n rows.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_info",
+          "title": "print summary of dataframe %1",
+          "description": "Print a concise summary of a DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_describe",
+          "title": "get descriptive statistics of dataframe %1",
+          "description": "Generate descriptive statistics.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_filter",
+          "title": "filter dataframe %1 where %2",
+          "description": "Filter rows of a DataFrame based on a boolean condition.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_sort_values",
+          "title": "sort dataframe %1 by %2 ascending %3",
+          "description": "Sort by the values along either axis.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_dropna",
+          "title": "in dataframe %1 drop missing values",
+          "description": "Remove missing values.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_fillna",
+          "title": "in dataframe %1 fill missing values with %2",
+          "description": "Fill NA/NaN values using the specified method.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_select_column",
+          "title": "from dataframe %1 select column %2",
+          "description": "Select a single column from a DataFrame, which returns a Series.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_loc",
+          "title": "from dataframe %1 select rows by label %2 and columns %3",
+          "description": "Access a group of rows and columns by label(s) or a boolean array.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_iloc",
+          "title": "from dataframe %1 select rows by position %2 and columns %3",
+          "description": "Purely integer-location based indexing for selection by position.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_shape",
+          "title": "shape of dataframe %1",
+          "description": "Return a tuple representing the dimensionality of the DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_dtypes",
+          "title": "data types of dataframe %1",
+          "description": "Return the dtypes in the DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_value_counts",
+          "title": "count unique values in column %1 of dataframe %2",
+          "description": "Return a Series containing counts of unique values.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_corr",
+          "title": "compute pairwise correlation of columns in dataframe %1",
+          "description": "Compute pairwise correlation of columns, excluding NA/null values.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_merge",
+          "title": "merge left dataframe %1 with right dataframe %2",
+          "description": "Merge DataFrame or named Series objects with a database-style join.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_concat",
+          "title": "concatenate dataframes %1",
+          "description": "Concatenate pandas objects along a particular axis.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_drop",
+          "title": "from dataframe %1 drop labels %2 from axis %3",
+          "description": "Drop specified labels from rows or columns.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_rename",
+          "title": "in dataframe %1 rename with mapper %2",
+          "description": "Alter axes labels.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_get_columns",
+          "title": "get columns from dataframe %1",
+          "description": "Get the column labels of the DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_get_index",
+          "title": "get index from dataframe %1",
+          "description": "Get the index (row labels) of the DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_get_values",
+          "title": "get numpy values from dataframe %1",
+          "description": "Get the numpy representation of the DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_drop_duplicates",
+          "title": "from dataframe %1 drop duplicates",
+          "description": "Return DataFrame with duplicate rows removed.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_apply",
+          "title": "in dataframe %1 apply function %2 on axis %3",
+          "description": "Apply a function along an axis of the DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_pivot_table",
+          "title": "create pivot table from dataframe %1 with values %2 index %3 columns %4",
+          "description": "Create a spreadsheet-style pivot table as a DataFrame.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_to_datetime",
+          "title": "convert %1 to datetime",
+          "description": "Convert argument to datetime.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        },
+        {
+          "id": "pandas_to_dict",
+          "title": "convert dataframe %1 to dictionary",
+          "description": "Convert the DataFrame to a dictionary.",
+          "suiteId": "pandas",
+          "moduleId": "pandas",
+          "categoryId": "cat_dataframe"
+        }
+      ]
+    }
+  }
+}

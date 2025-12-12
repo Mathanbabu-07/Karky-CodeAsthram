@@ -1,0 +1,5098 @@
+[
+  {
+    "id": "variables_cast",
+    "title": "cast %1 to %2",
+    "description": "Casts a value to the specified type.",
+    "suiteId": "unassigned",
+    "moduleId": "variables_basic_types",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "variables_get_with_default",
+    "title": "value %1 or default %2",
+    "description": "Returns the value if it is not None, otherwise returns the default.",
+    "suiteId": "unassigned",
+    "moduleId": "variables_basic_types",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "unittest_main",
+    "title": "run unit tests",
+    "description": "Runs the unit tests.",
+    "suiteId": "tools_testing",
+    "moduleId": "unittest",
+    "categoryId": "cat_unittest"
+  },
+  {
+    "id": "unittest_testcase",
+    "title": "test case %1",
+    "description": "Defines a test case.",
+    "suiteId": "tools_testing",
+    "moduleId": "unittest",
+    "categoryId": "cat_unittest"
+  },
+  {
+    "id": "unittest_testfunction",
+    "title": "test function %1",
+    "description": "Defines a test function within a test case.",
+    "suiteId": "tools_testing",
+    "moduleId": "unittest",
+    "categoryId": "cat_unittest"
+  },
+  {
+    "id": "unittest_assert_equal",
+    "title": "assert equal %1 %2",
+    "description": "Asserts that two values are equal.",
+    "suiteId": "tools_testing",
+    "moduleId": "unittest",
+    "categoryId": "cat_unittest"
+  },
+  {
+    "id": "unittest_assert_true",
+    "title": "assert true %1",
+    "description": "Asserts that a value is true.",
+    "suiteId": "tools_testing",
+    "moduleId": "unittest",
+    "categoryId": "cat_unittest"
+  },
+  {
+    "id": "unittest_assert_false",
+    "title": "assert false %1",
+    "description": "Asserts that a value is false.",
+    "suiteId": "tools_testing",
+    "moduleId": "unittest",
+    "categoryId": "cat_unittest"
+  },
+  {
+    "id": "unittest_assert_raises",
+    "title": "assert raises %1 with %2",
+    "description": "Asserts that a specific exception is raised.",
+    "suiteId": "tools_testing",
+    "moduleId": "unittest",
+    "categoryId": "cat_unittest"
+  },
+  {
+    "id": "tuples_create_with",
+    "title": "create tuple",
+    "description": "Creates a tuple with any number of items.",
+    "suiteId": "unassigned",
+    "moduleId": "tuples_structs",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tuples_unpack",
+    "title": "unpack %1 into variables %2",
+    "description": "Unpacks a tuple into a comma-separated list of variables.",
+    "suiteId": "unassigned",
+    "moduleId": "tuples_structs",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tuples_create_simplenamespace",
+    "title": "create namespace from dictionary %1",
+    "description": "Creates a SimpleNamespace object from a dictionary.",
+    "suiteId": "unassigned",
+    "moduleId": "tuples_structs",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tuples_count",
+    "title": "in tuple %1 count occurrences of item %2",
+    "description": "Counts the number of occurrences of an item in a tuple.",
+    "suiteId": "essentials",
+    "moduleId": "tuples_structs",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "tuples_index",
+    "title": "in tuple %1 find first occurrence of item %2",
+    "description": "Returns the index of the first occurrence of an item in a tuple.",
+    "suiteId": "essentials",
+    "moduleId": "tuples_structs",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "tuples_create_with_container",
+    "title": "items %1 %2",
+    "description": "Add, remove, or reorder items to reconfigure this tuple block.",
+    "suiteId": "unassigned",
+    "moduleId": "tuples_structs",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tuples_create_with_item",
+    "title": "item",
+    "description": "Add an item to the tuple.",
+    "suiteId": "unassigned",
+    "moduleId": "tuples_structs",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "transformers_pipeline",
+    "title": "create transformers pipeline for %1",
+    "description": "Creates a Hugging Face pipeline for a given task.",
+    "suiteId": "transformers",
+    "moduleId": "transformers",
+    "categoryId": "cat_pipelines"
+  },
+  {
+    "id": "torch_tensor",
+    "title": "create torch tensor from %1",
+    "description": "Creates a PyTorch tensor from a list or NumPy array.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_tensors"
+  },
+  {
+    "id": "torch_tensor_shape",
+    "title": "shape of tensor %1",
+    "description": "Returns the shape of a PyTorch tensor.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_tensors"
+  },
+  {
+    "id": "torch_tensor_reshape",
+    "title": "reshape tensor %1 to shape %2",
+    "description": "Returns a tensor with the same data and number of elements as input, but with the specified shape.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_tensors"
+  },
+  {
+    "id": "torch_zeros",
+    "title": "create tensor of zeros with shape %1",
+    "description": "Creates a tensor filled with zeros.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_tensors"
+  },
+  {
+    "id": "torch_ones",
+    "title": "create tensor of ones with shape %1",
+    "description": "Creates a tensor filled with ones.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_tensors"
+  },
+  {
+    "id": "torch_randn",
+    "title": "create random tensor with shape %1",
+    "description": "Creates a tensor with random numbers from a normal distribution.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_tensors"
+  },
+  {
+    "id": "torch_nn_module",
+    "title": "define torch neural network %1",
+    "description": "Defines a neural network as a class that inherits from torch.nn.Module.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_nn_linear",
+    "title": "linear layer: in %1 out %2",
+    "description": "Applies a linear transformation to the incoming data.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_nn_conv2d",
+    "title": "Conv2D layer: in_channels %1 out_channels %2 kernel_size %3",
+    "description": "Applies a 2D convolution over an input signal composed of several input planes.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_nn_maxpool2d",
+    "title": "MaxPool2D layer: kernel_size %1",
+    "description": "Applies a 2D max pooling over an input signal.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_nn_relu",
+    "title": "ReLU activation",
+    "description": "Applies the rectified linear unit function element-wise.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_nn_dropout",
+    "title": "dropout layer: p %1",
+    "description": "During training, randomly zeroes some of the elements of the input tensor with probability p.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_nn_embedding",
+    "title": "embedding layer: num_embeddings %1 embedding_dim %2",
+    "description": "A simple lookup table that stores embeddings of a fixed dictionary and size.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_nn_lstm",
+    "title": "LSTM layer: input_size %1 hidden_size %2",
+    "description": "Applies a multi-layer long short-term memory (LSTM) RNN to an input sequence.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_nn_layers"
+  },
+  {
+    "id": "torch_custom_dataset",
+    "title": "define custom torch dataset %1",
+    "description": "Defines a custom PyTorch dataset.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_data"
+  },
+  {
+    "id": "torch_dataloader",
+    "title": "create DataLoader for dataset %1",
+    "description": "Creates a DataLoader for iterating over a dataset.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_data"
+  },
+  {
+    "id": "torch_loss_function",
+    "title": "loss function %1",
+    "description": "Creates a loss function instance.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_training"
+  },
+  {
+    "id": "torch_optimizer",
+    "title": "optimizer %1 for parameters %2 with learning rate %3",
+    "description": "Creates an optimizer instance.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_training"
+  },
+  {
+    "id": "torch_train_loop",
+    "title": "train for %1 epochs:",
+    "description": "A flexible training loop for a PyTorch model.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_training"
+  },
+  {
+    "id": "torch_save",
+    "title": "save model state %1 to file %2",
+    "description": "Saves a model's state dictionary.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_model_management"
+  },
+  {
+    "id": "torch_load",
+    "title": "load model state for %1 from file %2",
+    "description": "Loads a model's state dictionary from a file.",
+    "suiteId": "pytorch",
+    "moduleId": "torch",
+    "categoryId": "cat_model_management"
+  },
+  {
+    "id": "tools_test_define_case",
+    "title": "define test case %1 %2",
+    "description": "Defines a test case.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_assert_equal",
+    "title": "assert equal a %1 b %2",
+    "description": "Asserts that two values are equal.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_assert_true",
+    "title": "assert true %1",
+    "description": "Asserts that a condition is true.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_run_tests",
+    "title": "run all tests",
+    "description": "Runs all defined test cases.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_test_fixture",
+    "title": "test fixture setup %1 teardown %2",
+    "description": "Defines a test fixture with setup and teardown.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_timeit_block",
+    "title": "time execution of %1",
+    "description": "Times the execution of a block of code.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_profile_start_stop",
+    "title": "%1 profiling",
+    "description": "Starts or stops the profiler.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_memory_snapshot",
+    "title": "take memory snapshot",
+    "description": "Takes a snapshot of memory usage.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_trace_function",
+    "title": "trace function %1",
+    "description": "Traces the execution of a function.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_log_debug",
+    "title": "log debug message %1 with data %2",
+    "description": "Logs a debug message.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_log_to_file",
+    "title": "log message %1 to file %2",
+    "description": "Logs a message to a file. (Gated)",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_capture_stacktrace",
+    "title": "capture stacktrace",
+    "description": "Captures the current stacktrace.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_argparse_define",
+    "title": "define CLI argument %1",
+    "description": "Defines a command-line argument.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_argparse_parse",
+    "title": "parse CLI arguments",
+    "description": "Parses command-line arguments.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tools_print_help",
+    "title": "print CLI help",
+    "description": "Prints the command-line help message.",
+    "suiteId": "unassigned",
+    "moduleId": "tools_testing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_to_lines",
+    "title": "get lines from text %1",
+    "description": "Splits a multi-line text into a list of lines.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_text_utilities"
+  },
+  {
+    "id": "text_indent",
+    "title": "indent text %1 with %2",
+    "description": "Indents each line of a text with a prefix.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_text_utilities"
+  },
+  {
+    "id": "text_unindent",
+    "title": "unindent text %1",
+    "description": "Unindents a block of text.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_text_utilities"
+  },
+  {
+    "id": "text_preview",
+    "title": "preview of text %1 with limit %2",
+    "description": "Creates a preview of a text, truncated to a certain length.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_text_utilities"
+  },
+  {
+    "id": "text_template_render_jinja",
+    "title": "render jinja template %1 with context %2",
+    "description": "Renders a Jinja2 template.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_templating"
+  },
+  {
+    "id": "text_template_safe_render",
+    "title": "safely render template %1 with context %2",
+    "description": "Safely renders a template in a sandboxed environment.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_templating"
+  },
+  {
+    "id": "text_re_search",
+    "title": "search regex %1 in text %2 with flags %3",
+    "description": "Searches for a regex pattern in a string.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_regex_parsing"
+  },
+  {
+    "id": "text_re_match",
+    "title": "match regex %1 at start of text %2 with flags %3",
+    "description": "Matches a regex pattern at the beginning of a string.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_regex_parsing"
+  },
+  {
+    "id": "text_re_findall",
+    "title": "find all regex %1 in text %2 with flags %3",
+    "description": "Finds all occurrences of a regex pattern in a string.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_regex_parsing"
+  },
+  {
+    "id": "text_re_replace",
+    "title": "in text %1 replace regex %2 with %3 flags %4",
+    "description": "Replaces occurrences of a regex pattern in a string.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_regex_parsing"
+  },
+  {
+    "id": "text_re_split",
+    "title": "split text %1 by regex %2 with flags %3",
+    "description": "Splits a string by a regex pattern.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_regex_parsing"
+  },
+  {
+    "id": "text_regex_flags",
+    "title": "regex flags %1",
+    "description": "Regex flags.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_regex_parsing"
+  },
+  {
+    "id": "text_i18n_register",
+    "title": "register translations for lang %1 with mapping %2",
+    "description": "Registers a dictionary of translations for a language.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_i18n_localization"
+  },
+  {
+    "id": "text_i18n_translate",
+    "title": "translate key %1 lang %2",
+    "description": "Translates a key using the registered translations.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_i18n_localization"
+  },
+  {
+    "id": "text_i18n_plural",
+    "title": "pluralize for key %1 count %2 lang %3",
+    "description": "Handles pluralization based on a count.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_i18n_localization"
+  },
+  {
+    "id": "text_i18n_set_locale",
+    "title": "set current locale to %1",
+    "description": "Sets the current language for translation.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_i18n_localization"
+  },
+  {
+    "id": "text_i18n_get_locale",
+    "title": "get current locale",
+    "description": "Gets the current language for translation.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_i18n_localization"
+  },
+  {
+    "id": "text_alt_text_generate",
+    "title": "generate alt text from metadata %1 lang %2",
+    "description": "Generates alternative text for an image from its metadata.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_i18n_localization"
+  },
+  {
+    "id": "text_normalize_unicode",
+    "title": "normalize unicode %1 to form %2",
+    "description": "Normalizes Unicode text to a standard form.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_core_text"
+  },
+  {
+    "id": "text_remove_accents",
+    "title": "remove accents from %1",
+    "description": "Removes accents from a string.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_core_text"
+  },
+  {
+    "id": "text_slugify",
+    "title": "slugify %1",
+    "description": "Converts a string into a URL-friendly slug.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_core_text"
+  },
+  {
+    "id": "text_fix_encoding",
+    "title": "fix encoding of %1",
+    "description": "Fixes mojibake and other encoding issues in text.",
+    "suiteId": "text_localization",
+    "moduleId": "text_localization",
+    "categoryId": "cat_core_text"
+  },
+  {
+    "id": "testing_test_case",
+    "title": "define test case %1",
+    "description": "Defines a test case. Use assert blocks inside. Name must start with 'test_'.",
+    "suiteId": "unassigned",
+    "moduleId": "testing_quality",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "testing_run_tests",
+    "title": "run all tests",
+    "description": "Runs all defined test cases and returns a summary report.",
+    "suiteId": "unassigned",
+    "moduleId": "testing_quality",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "tensorflow_keras_sequential_model",
+    "title": "create sequential Keras model %1",
+    "description": "Creates a Keras Sequential model.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_keras_core"
+  },
+  {
+    "id": "tensorflow_keras_add_dense_layer",
+    "title": "add dense layer with %1 units and %2 activation",
+    "description": "Adds a Dense layer to the Keras model.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_layers"
+  },
+  {
+    "id": "tensorflow_keras_compile_model",
+    "title": "compile Keras model %1",
+    "description": "Configures the model for training.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_keras_core"
+  },
+  {
+    "id": "tensorflow_keras_fit_model",
+    "title": "fit Keras model %1 to data %2 labels %3",
+    "description": "Trains the model for a fixed number of epochs (iterations on a dataset).",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_keras_core"
+  },
+  {
+    "id": "keras_model_to_json",
+    "title": "convert keras model %1 to JSON",
+    "description": "Serializes the model architecture to a JSON string.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_model_management"
+  },
+  {
+    "id": "keras_model_from_json",
+    "title": "create keras model from JSON %1",
+    "description": "Parses a JSON model configuration file and returns a model instance.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_model_management"
+  },
+  {
+    "id": "keras_save_model",
+    "title": "save keras model %1 to file %2",
+    "description": "Saves a model as a TensorFlow SavedModel or a single HDF5 file.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_model_management"
+  },
+  {
+    "id": "keras_load_model",
+    "title": "load keras model from file %1",
+    "description": "Loads a model saved via model.save().",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_model_management"
+  },
+  {
+    "id": "keras_layer_conv2d",
+    "title": "add Conv2D layer with %1 filters, kernel size %2, activation %3",
+    "description": "Adds a 2D convolution layer.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_layers"
+  },
+  {
+    "id": "keras_layer_maxpooling2d",
+    "title": "add MaxPooling2D layer with pool size %1",
+    "description": "Max pooling operation for 2D spatial data.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_layers"
+  },
+  {
+    "id": "keras_layer_flatten",
+    "title": "add flatten layer",
+    "description": "Flattens the input. Does not affect the batch size.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_layers"
+  },
+  {
+    "id": "keras_layer_dropout",
+    "title": "add dropout layer with rate %1",
+    "description": "Applies Dropout to the input.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_layers"
+  },
+  {
+    "id": "keras_layer_embedding",
+    "title": "add embedding layer with input dim %1 and output dim %2",
+    "description": "Turns positive integers (indexes) into dense vectors of fixed size.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_layers"
+  },
+  {
+    "id": "keras_layer_lstm",
+    "title": "add LSTM layer with %1 units",
+    "description": "Long Short-Term Memory layer.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_layers"
+  },
+  {
+    "id": "keras_callback_earlystopping",
+    "title": "early stopping callback, monitor %1, patience %2",
+    "description": "Stop training when a monitored metric has stopped improving.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_callbacks"
+  },
+  {
+    "id": "keras_callback_modelcheckpoint",
+    "title": "model checkpoint callback, filepath %1, monitor %2",
+    "description": "Callback to save the Keras model or model weights at some frequency.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_callbacks"
+  },
+  {
+    "id": "keras_image_dataset_from_directory",
+    "title": "image dataset from directory %1",
+    "description": "Generates a tf.data.Dataset from image files in a directory.",
+    "suiteId": "tensorflow",
+    "moduleId": "tensorflow",
+    "categoryId": "cat_data_loading"
+  },
+  {
+    "id": "sys_argv",
+    "title": "command-line arguments",
+    "description": "Returns the list of command-line arguments passed to a Python script.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "sys_platform",
+    "title": "platform identifier",
+    "description": "Returns a string identifying the platform (e.g., 'linux', 'win32').",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "system_os_getenv",
+    "title": "get environment variable %1",
+    "description": "Gets the value of an environment variable.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "system_os_system",
+    "title": "run shell command %1",
+    "description": "Executes a shell command.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "os_path_join",
+    "title": "join path components %1",
+    "description": "Joins one or more path components intelligently.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_path_exists",
+    "title": "path exists %1",
+    "description": "Return True if path refers to an existing path or an open file descriptor.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_path_basename",
+    "title": "base name of path %1",
+    "description": "Return the base name of pathname path.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_path_dirname",
+    "title": "directory name of path %1",
+    "description": "Return the directory name of pathname path.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_path_splitext",
+    "title": "split extension of path %1",
+    "description": "Split the pathname path into a pair (root, ext).",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_mkdir",
+    "title": "create directory at path %1",
+    "description": "Create a directory.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_makedirs",
+    "title": "create directory (and parents) at path %1",
+    "description": "Recursive directory creation function.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_rename",
+    "title": "rename from %1 to %2",
+    "description": "Rename the file or directory src to dst.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_path_isfile",
+    "title": "is path %1 a file?",
+    "description": "Return True if path is an existing regular file.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "os_path_isdir",
+    "title": "is path %1 a directory?",
+    "description": "Return True if path is an existing directory.",
+    "suiteId": "standard_library",
+    "moduleId": "system",
+    "categoryId": "cat_system"
+  },
+  {
+    "id": "system_io_open",
+    "title": "open file %1 in mode %2",
+    "description": "Opens a file and returns a file object.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "system_io_read",
+    "title": "read from file %1",
+    "description": "Reads the entire content of a file.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "system_io_write",
+    "title": "write %1 to file %2",
+    "description": "Writes a string to a file.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "system_io_close",
+    "title": "close file %1",
+    "description": "Closes a file.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "system_io_remove",
+    "title": "delete file at path %1",
+    "description": "Deletes a file.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "system_io_listdir",
+    "title": "list files in directory %1",
+    "description": "Returns a list of files in a directory.",
+    "suiteId": "unassigned",
+    "moduleId": "system",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_regex_search",
+    "title": "in text %1 find pattern %2",
+    "description": "Searches for a regex pattern in a string. Returns the match object or None.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_regex_replace",
+    "title": "in text %1 replace pattern %2 with %3",
+    "description": "Replaces all occurrences of a regex pattern in a string.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_normalize",
+    "title": "normalize %1 using form %2",
+    "description": "Normalizes a Unicode string.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "i18n_register_translation",
+    "title": "register translation for language %1 with dictionary %2",
+    "description": "Registers a dictionary of translations for a language.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "i18n_translate",
+    "title": "translate key %1 to language %2 || with fallback %3",
+    "description": "Translates a key to the specified language.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_is_numeric",
+    "title": "is numeric %1",
+    "description": "Checks if the string consists of only numeric characters.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_find_all",
+    "title": "in text %1 find all occurrences of %2",
+    "description": "Finds all occurrences of a substring and returns a list of their starting indices.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_compare_case_insensitive",
+    "title": "is %1 equal to %2 (ignore case)",
+    "description": "Compares two strings ignoring case.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_partition",
+    "title": "partition %1 at first occurrence of %2",
+    "description": "Partitions the string into a 3-tuple at the first occurrence of the separator.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "text_swapcase",
+    "title": "swap case of %1",
+    "description": "Swaps the case of all characters in the string.",
+    "suiteId": "unassigned",
+    "moduleId": "strings_text_processing",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_migrate_schema",
+    "title": "migrate schema with adapter %1",
+    "description": "Migrates the database schema.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_backup_db",
+    "title": "backup database to path %1",
+    "description": "Backs up the database to a file.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_restore_db",
+    "title": "restore database from path %1",
+    "description": "Restores the database from a file.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_orm_model_define",
+    "title": "define ORM model %1 with fields %2",
+    "description": "Defines an ORM model. (Gated)",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_orm_create",
+    "title": "in session %1 create %2 with data %3",
+    "description": "Creates a new record using an ORM. (Gated)",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_orm_query",
+    "title": "in session %1 query %2 with filters %3",
+    "description": "Queries for records using an ORM. (Gated)",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_db_connect_sqlite",
+    "title": "connect to sqlite db at path %1",
+    "description": "Connects to a SQLite database.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_db_query",
+    "title": "on connection %1 execute query %2 with params %3",
+    "description": "Executes a SQL query and returns the results.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_db_select",
+    "title": "on connection %1 select from %2 where %3",
+    "description": "Selects rows from a table.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_db_insert",
+    "title": "on connection %1 insert into %2 data %3",
+    "description": "Inserts a new row into a table.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_db_update",
+    "title": "on connection %1 update %2 set %3 where %4",
+    "description": "Updates rows in a table.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_db_transaction",
+    "title": "on connection %1 do in transaction %2",
+    "description": "Executes a block of code in a database transaction.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_cache_set",
+    "title": "in cache set key %1 to value %2 with TTL (s) %3",
+    "description": "Sets a value in the cache with an optional time-to-live.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_cache_get",
+    "title": "in cache get key %1",
+    "description": "Gets a value from the cache.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_cache_delete",
+    "title": "in cache delete key %1",
+    "description": "Deletes a value from the cache.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "storage_cache_incr",
+    "title": "in cache increment key %1 by %2",
+    "description": "Increments a value in the cache.",
+    "suiteId": "unassigned",
+    "moduleId": "storage_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "sklearn_train_test_split",
+    "title": "split arrays %1 and labels %2 into train and test sets",
+    "description": "Split arrays or matrices into random train and test subsets. Returns a list containing [X_train, X_test, y_train, y_test].",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_model_selection"
+  },
+  {
+    "id": "sklearn_pipeline",
+    "title": "create pipeline %1",
+    "description": "Construct a pipeline from a list of transformers and a final estimator.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_pipelines"
+  },
+  {
+    "id": "sklearn_standard_scaler",
+    "title": "create standard scaler",
+    "description": "Standardize features by removing the mean and scaling to unit variance.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_preprocessing"
+  },
+  {
+    "id": "sklearn_min_max_scaler",
+    "title": "create min-max scaler",
+    "description": "Transform features by scaling each feature to a given range.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_preprocessing"
+  },
+  {
+    "id": "sklearn_one_hot_encoder",
+    "title": "create one-hot encoder",
+    "description": "Encode categorical features as a one-hot numeric array.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_preprocessing"
+  },
+  {
+    "id": "sklearn_label_encoder",
+    "title": "create label encoder",
+    "description": "Encode target labels with value between 0 and n_classes-1.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_preprocessing"
+  },
+  {
+    "id": "sklearn_logistic_regression",
+    "title": "logistic regression classifier",
+    "description": "Logistic Regression (aka logit, MaxEnt) classifier.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_k_neighbors_classifier",
+    "title": "k-neighbors classifier with %1 neighbors",
+    "description": "Classifier implementing the k-nearest neighbors vote.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_svc",
+    "title": "support vector classifier (SVC)",
+    "description": "C-Support Vector Classification.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_random_forest_classifier",
+    "title": "random forest classifier with %1 estimators",
+    "description": "A random forest classifier.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_linear_regression",
+    "title": "linear regression model",
+    "description": "Ordinary least squares Linear Regression.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_ridge_regression",
+    "title": "ridge regression model with alpha %1",
+    "description": "Linear least squares with l2 regularization.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_svr",
+    "title": "support vector regression (SVR)",
+    "description": "Epsilon-Support Vector Regression.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_kmeans",
+    "title": "k-means clustering with %1 clusters",
+    "description": "K-Means clustering.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_models"
+  },
+  {
+    "id": "sklearn_grid_search_cv",
+    "title": "grid search cross-validation for estimator %1",
+    "description": "Exhaustive search over specified parameter values for an estimator.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_model_selection"
+  },
+  {
+    "id": "sklearn_accuracy_score",
+    "title": "accuracy score for y_true %1 y_pred %2",
+    "description": "Accuracy classification score.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_metrics"
+  },
+  {
+    "id": "sklearn_precision_score",
+    "title": "precision score for y_true %1 y_pred %2",
+    "description": "Compute the precision.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_metrics"
+  },
+  {
+    "id": "sklearn_recall_score",
+    "title": "recall score for y_true %1 y_pred %2",
+    "description": "Compute the recall.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_metrics"
+  },
+  {
+    "id": "sklearn_f1_score",
+    "title": "f1 score for y_true %1 y_pred %2",
+    "description": "Compute the F1 score, also known as balanced F-score or F-measure.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_metrics"
+  },
+  {
+    "id": "sklearn_confusion_matrix",
+    "title": "confusion matrix for y_true %1 y_pred %2",
+    "description": "Compute confusion matrix to evaluate the accuracy of a classification.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_metrics"
+  },
+  {
+    "id": "sklearn_mean_squared_error",
+    "title": "mean squared error for y_true %1 y_pred %2",
+    "description": "Mean squared error regression loss.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_metrics"
+  },
+  {
+    "id": "sklearn_r2_score",
+    "title": "r2 score for y_true %1 y_pred %2",
+    "description": "R^2 (coefficient of determination) regression score function.",
+    "suiteId": "scikit_learn",
+    "moduleId": "sklearn",
+    "categoryId": "cat_metrics"
+  },
+  {
+    "id": "serialization_to_json",
+    "title": "convert to JSON string %1",
+    "description": "Serializes a dictionary or list into a JSON string.",
+    "suiteId": "unassigned",
+    "moduleId": "serialization_data",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "serialization_from_json",
+    "title": "parse JSON from string %1",
+    "description": "Deserializes a JSON string into a dictionary or list.",
+    "suiteId": "unassigned",
+    "moduleId": "serialization_data",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "serialization_write_csv",
+    "title": "write to CSV file at path %1 data (list of dicts) %2",
+    "description": "Writes a list of dictionaries to a CSV file in the virtual filesystem.",
+    "suiteId": "unassigned",
+    "moduleId": "serialization_data",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "serialization_read_csv",
+    "title": "read CSV file from path %1",
+    "description": "Reads a CSV file from the virtual filesystem into a list of dictionaries.",
+    "suiteId": "unassigned",
+    "moduleId": "serialization_data",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_jwt_encode",
+    "title": "JWT encode payload %1 with key %2 algorithm %3",
+    "description": "Encodes a JWT token.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_jwt_decode",
+    "title": "JWT decode token %1 with key %2",
+    "description": "Decodes a JWT token.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_hash_sha256",
+    "title": "hash sha256 of %1",
+    "description": "Hashes data using SHA256.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_hmac_sha256",
+    "title": "hmac sha256 with key %1 data %2",
+    "description": "Creates an HMAC-SHA256 signature.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_generate_random_bytes",
+    "title": "generate %1 random bytes",
+    "description": "Generates a number of random bytes.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_secrets_store_save",
+    "title": "in secrets store save key %1 with secret %2",
+    "description": "Saves a secret to the secret store.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_secrets_get_ref",
+    "title": "get secret reference for key %1",
+    "description": "Gets a reference to a secret, not the secret itself.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_encrypt_sym",
+    "title": "symmetrically encrypt %1 with key %2",
+    "description": "Symmetrically encrypts data.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "security_decrypt_sym",
+    "title": "symmetrically decrypt %1 with key %2",
+    "description": "Symmetrically decrypts data.",
+    "suiteId": "unassigned",
+    "moduleId": "security_keys",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "requests_get",
+    "title": "send GET request to url %1",
+    "description": "Sends a GET request.",
+    "suiteId": "networking",
+    "moduleId": "requests",
+    "categoryId": "cat_http_requests"
+  },
+  {
+    "id": "re_compile",
+    "title": "compile regex pattern %1",
+    "description": "Compiles a regular expression pattern into a regex object.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_search",
+    "title": "search for pattern %1 in string %2",
+    "description": "Scans through a string looking for the first location where the regular expression pattern produces a match.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_match",
+    "title": "match pattern %1 at start of string %2",
+    "description": "If zero or more characters at the beginning of string match the regular expression pattern, return a corresponding match object.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_findall",
+    "title": "find all matches for pattern %1 in string %2",
+    "description": "Return all non-overlapping matches of pattern in string, as a list of strings.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_sub",
+    "title": "replace matches of pattern %1 with %2 in string %3",
+    "description": "Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_split",
+    "title": "split string %1 by pattern %2",
+    "description": "Split string by the occurrences of pattern.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_escape",
+    "title": "escape special characters in %1",
+    "description": "Escape special characters in a pattern.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_match_group",
+    "title": "from match %1 get group %2",
+    "description": "Returns a specific subgroup of the match.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "re_match_groups",
+    "title": "get all groups from match %1",
+    "description": "Returns a tuple containing all the subgroups of the match.",
+    "suiteId": "standard_library",
+    "moduleId": "re",
+    "categoryId": "cat_regex"
+  },
+  {
+    "id": "pydantic_create_model",
+    "title": "create Pydantic model %1 with fields %2",
+    "description": "Creates a Pydantic model.",
+    "suiteId": "unassigned",
+    "moduleId": "pydantic",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "pydantic_field",
+    "title": "field %1: %2",
+    "description": "Adds a field to a Pydantic model.",
+    "suiteId": "unassigned",
+    "moduleId": "pydantic",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "pillow_image_create",
+    "title": "create new image mode %1 size %2 color %3",
+    "description": "Creates a new image with the given mode, size, and color.",
+    "suiteId": "image_manipulation",
+    "moduleId": "pillow",
+    "categoryId": "cat_pillow"
+  },
+  {
+    "id": "pillow_draw_line",
+    "title": "on image %1 draw line from %2 to %3 fill %4 width %5",
+    "description": "Draws a line on the given image.",
+    "suiteId": "image_manipulation",
+    "moduleId": "pillow",
+    "categoryId": "cat_pillow"
+  },
+  {
+    "id": "pillow_draw_rectangle",
+    "title": "on image %1 draw rectangle at %2 fill %3 outline %4 width %5",
+    "description": "Draws a rectangle on the given image.",
+    "suiteId": "image_manipulation",
+    "moduleId": "pillow",
+    "categoryId": "cat_pillow"
+  },
+  {
+    "id": "pillow_draw_ellipse",
+    "title": "on image %1 draw ellipse in bounding box %2 fill %3 outline %4 width %5",
+    "description": "Draws an ellipse on the given image.",
+    "suiteId": "image_manipulation",
+    "moduleId": "pillow",
+    "categoryId": "cat_pillow"
+  },
+  {
+    "id": "pillow_draw_text",
+    "title": "on image %1 draw text %2 at position %3 fill %4",
+    "description": "Draws text on the given image.",
+    "suiteId": "image_manipulation",
+    "moduleId": "pillow",
+    "categoryId": "cat_pillow"
+  },
+  {
+    "id": "pillow_image_filter",
+    "title": "apply filter %1 to image %2",
+    "description": "Applies a predefined filter to the image.",
+    "suiteId": "image_manipulation",
+    "moduleId": "pillow",
+    "categoryId": "cat_pillow"
+  },
+  {
+    "id": "pandas_create_dataframe_from_dict",
+    "title": "create pandas dataframe from dictionary %1",
+    "description": "Create a pandas DataFrame from a dictionary of lists or arrays.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_read_csv",
+    "title": "read csv from %1",
+    "description": "Read a comma-separated values (csv) file into a pandas DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_groupby_agg",
+    "title": "in dataframe %1 group by %2",
+    "description": "Group DataFrame using a mapper or by a Series of columns and apply aggregation.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_to_csv",
+    "title": "save dataframe %1 to csv at %2",
+    "description": "Write object to a comma-separated values (csv) file.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_head",
+    "title": "get first %1 rows of dataframe %2",
+    "description": "Return the first n rows.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_info",
+    "title": "print summary of dataframe %1",
+    "description": "Print a concise summary of a DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_describe",
+    "title": "get descriptive statistics of dataframe %1",
+    "description": "Generate descriptive statistics.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_filter",
+    "title": "filter dataframe %1 where %2",
+    "description": "Filter rows of a DataFrame based on a boolean condition.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_sort_values",
+    "title": "sort dataframe %1 by %2 ascending %3",
+    "description": "Sort by the values along either axis.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_dropna",
+    "title": "in dataframe %1 drop missing values",
+    "description": "Remove missing values.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_fillna",
+    "title": "in dataframe %1 fill missing values with %2",
+    "description": "Fill NA/NaN values using the specified method.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_select_column",
+    "title": "from dataframe %1 select column %2",
+    "description": "Select a single column from a DataFrame, which returns a Series.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_loc",
+    "title": "from dataframe %1 select rows by label %2 and columns %3",
+    "description": "Access a group of rows and columns by label(s) or a boolean array.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_iloc",
+    "title": "from dataframe %1 select rows by position %2 and columns %3",
+    "description": "Purely integer-location based indexing for selection by position.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_shape",
+    "title": "shape of dataframe %1",
+    "description": "Return a tuple representing the dimensionality of the DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_dtypes",
+    "title": "data types of dataframe %1",
+    "description": "Return the dtypes in the DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_value_counts",
+    "title": "count unique values in column %1 of dataframe %2",
+    "description": "Return a Series containing counts of unique values.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_corr",
+    "title": "compute pairwise correlation of columns in dataframe %1",
+    "description": "Compute pairwise correlation of columns, excluding NA/null values.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_merge",
+    "title": "merge left dataframe %1 with right dataframe %2",
+    "description": "Merge DataFrame or named Series objects with a database-style join.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_concat",
+    "title": "concatenate dataframes %1",
+    "description": "Concatenate pandas objects along a particular axis.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_drop",
+    "title": "from dataframe %1 drop labels %2 from axis %3",
+    "description": "Drop specified labels from rows or columns.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_rename",
+    "title": "in dataframe %1 rename with mapper %2",
+    "description": "Alter axes labels.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_get_columns",
+    "title": "get columns from dataframe %1",
+    "description": "Get the column labels of the DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_get_index",
+    "title": "get index from dataframe %1",
+    "description": "Get the index (row labels) of the DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_get_values",
+    "title": "get numpy values from dataframe %1",
+    "description": "Get the numpy representation of the DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_drop_duplicates",
+    "title": "from dataframe %1 drop duplicates",
+    "description": "Return DataFrame with duplicate rows removed.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_apply",
+    "title": "in dataframe %1 apply function %2 on axis %3",
+    "description": "Apply a function along an axis of the DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_pivot_table",
+    "title": "create pivot table from dataframe %1 with values %2 index %3 columns %4",
+    "description": "Create a spreadsheet-style pivot table as a DataFrame.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_to_datetime",
+    "title": "convert %1 to datetime",
+    "description": "Convert argument to datetime.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "pandas_to_dict",
+    "title": "convert dataframe %1 to dictionary",
+    "description": "Convert the DataFrame to a dictionary.",
+    "suiteId": "pandas",
+    "moduleId": "pandas",
+    "categoryId": "cat_dataframe"
+  },
+  {
+    "id": "numpy_array",
+    "title": "create numpy array from %1 with data type %2",
+    "description": "Create a new numpy array from a list, with an optional data type.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_arange",
+    "title": "numpy array from range start %1 stop %2 step %3",
+    "description": "Return evenly spaced values within a given interval.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_reshape",
+    "title": "reshape numpy array %1 to shape %2",
+    "description": "Gives a new shape to an array without changing its data.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_zeros",
+    "title": "create numpy array of zeros with shape %1",
+    "description": "Return a new array of given shape and type, filled with zeros.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_ones",
+    "title": "create numpy array of ones with shape %1",
+    "description": "Return a new array of given shape and type, filled with ones.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_concatenate",
+    "title": "concatenate numpy arrays %1 on axis %2",
+    "description": "Join a sequence of arrays along an existing axis.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_vstack",
+    "title": "stack arrays vertically %1",
+    "description": "Stack arrays in sequence vertically (row wise).",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_hstack",
+    "title": "stack arrays horizontally %1",
+    "description": "Stack arrays in sequence horizontally (column wise).",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_split",
+    "title": "split array %1 into %2 sections on axis %3",
+    "description": "Split an array into multiple sub-arrays.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_sum",
+    "title": "sum of numpy array %1",
+    "description": "Sum of array elements over a given axis.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_mean",
+    "title": "mean of numpy array %1",
+    "description": "Compute the arithmetic mean along the specified axis.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_std",
+    "title": "standard deviation of numpy array %1",
+    "description": "Compute the standard deviation along the specified axis.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_dot",
+    "title": "dot product of %1 and %2",
+    "description": "Dot product of two arrays.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_elementwise_op",
+    "title": "%1 %2 %3",
+    "description": "Perform an element-wise operation on two arrays.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_indexing",
+    "title": "from array %1 get element at index %2",
+    "description": "Access a single element from an array using its index.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "numpy_slicing",
+    "title": "from array %1 get slice %2",
+    "description": "Access a subarray using slicing.",
+    "suiteId": "numpy",
+    "moduleId": "numpy",
+    "categoryId": "cat_array"
+  },
+  {
+    "id": "media_nlp_tokenize",
+    "title": "tokenize text %1",
+    "description": "Tokenizes a text into words.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_sentences",
+    "title": "get sentences from text %1",
+    "description": "Splits a text into sentences.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_pos_tag",
+    "title": "part-of-speech tag tokens %1",
+    "description": "Performs part-of-speech tagging on a list of tokens.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_lemmatize",
+    "title": "lemmatize token %1",
+    "description": "Lemmatizes a word token.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_nltk_download",
+    "title": "download nltk resource %1",
+    "description": "Downloads an NLTK resource.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_nltk_word_tokenize",
+    "title": "tokenize text into words with nltk %1",
+    "description": "Tokenizes a text into words using NLTK.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_nltk_sent_tokenize",
+    "title": "tokenize text into sentences with nltk %1",
+    "description": "Tokenizes a text into sentences using NLTK.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_nltk_stopwords",
+    "title": "get nltk stopwords for language %1",
+    "description": "Gets a list of stopwords for a given language from NLTK.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_spacy_load",
+    "title": "load spacy model %1",
+    "description": "Loads a spaCy model.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_spacy_doc",
+    "title": "process text with spacy model %1 %2",
+    "description": "Processes a text with a spaCy model to create a Doc object.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_spacy_token_lemma",
+    "title": "get lemma of spacy token %1",
+    "description": "Gets the lemma of a spaCy token.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_spacy_token_pos",
+    "title": "get part-of-speech of spacy token %1",
+    "description": "Gets the part-of-speech of a spaCy token.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_transformers_pipeline",
+    "title": "create transformers pipeline for task %1",
+    "description": "Creates a Hugging Face Transformers pipeline for a given task.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_nlp_transformers_run_pipeline",
+    "title": "run transformers pipeline %1 with input %2",
+    "description": "Runs a Transformers pipeline with a given input.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_load",
+    "title": "load image from path %1",
+    "description": "Loads an image from a file path.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_resize",
+    "title": "resize image %1 to width %2 height %3",
+    "description": "Resizes an image.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_crop",
+    "title": "crop image %1 with box (left, upper, right, lower) %2",
+    "description": "Crops an image.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_save",
+    "title": "save image %1 to path %2",
+    "description": "Saves an image to a file path.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_to_bytes",
+    "title": "get bytes of image %1",
+    "description": "Converts an image to bytes.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_thumbnail",
+    "title": "create thumbnail for image %1 with size %2",
+    "description": "Creates a thumbnail for an image.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_convert_format",
+    "title": "convert image %1 to format %2",
+    "description": "Converts an image to a different format.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_detect_edges",
+    "title": "detect edges in image %1",
+    "description": "Detects edges in an image using the Canny algorithm.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_img_to_gray",
+    "title": "convert image to grayscale %1",
+    "description": "Converts an image to grayscale.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_ocr_extract_text",
+    "title": "extract text from image %1",
+    "description": "Extracts text from an image using OCR.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_face_detect",
+    "title": "detect faces in image %1",
+    "description": "Detects faces in an image. (Gated)",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_audio_load",
+    "title": "load audio from path %1",
+    "description": "Loads an audio file.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_audio_trim",
+    "title": "trim audio %1 from %2 to %3",
+    "description": "Trims an audio file.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_audio_save",
+    "title": "save audio %1 to path %2",
+    "description": "Saves an audio file.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_video_load",
+    "title": "load video from path %1",
+    "description": "Loads a video file.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "media_video_extract_frames",
+    "title": "extract frames from video %1",
+    "description": "Extracts frames from a video.",
+    "suiteId": "unassigned",
+    "moduleId": "media_perception",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "matplotlib_plot",
+    "title": "plot x %1 y %2",
+    "description": "Plot y versus x as lines and/or markers.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_show",
+    "title": "show plot",
+    "description": "Display all open figures.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_title",
+    "title": "set plot title to %1",
+    "description": "Set a title for the axes.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_xlabel",
+    "title": "set x-axis label to %1",
+    "description": "Set the label for the x-axis.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_ylabel",
+    "title": "set y-axis label to %1",
+    "description": "Set the label for the y-axis.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_legend",
+    "title": "show plot legend",
+    "description": "Place a legend on the axes.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_scatter",
+    "title": "scatter plot x %1 y %2",
+    "description": "A scatter plot of y vs. x with varying marker size and/or color.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_bar",
+    "title": "bar chart categories %1 values %2",
+    "description": "Make a bar plot.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_hist",
+    "title": "histogram of %1 bins %2",
+    "description": "Plot a histogram.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_figure",
+    "title": "create figure with size width %1 height %2",
+    "description": "Create a new figure, or activate an existing figure.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_subplot",
+    "title": "create subplot at row %1 col %2 index %3",
+    "description": "Add a subplot to the current figure.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_grid",
+    "title": "show grid %1",
+    "description": "Configure the grid lines.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_xlim",
+    "title": "set x-axis limits from %1 to %2",
+    "description": "Get or set the x-limits of the current axes.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_ylim",
+    "title": "set y-axis limits from %1 to %2",
+    "description": "Get or set the y-limits of the current axes.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_savefig",
+    "title": "save figure to %1",
+    "description": "Save the current figure.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_subplots",
+    "title": "create subplots nrows %1 ncols %2",
+    "description": "Create a figure and a set of subplots.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_pie",
+    "title": "pie chart with values %1 labels %2",
+    "description": "Plot a pie chart.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_imshow",
+    "title": "show image %1",
+    "description": "Display data as an image.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "matplotlib_tight_layout",
+    "title": "apply tight layout",
+    "description": "Adjust the padding between and around subplots.",
+    "suiteId": "matplotlib",
+    "moduleId": "matplotlib",
+    "categoryId": "cat_plotting"
+  },
+  {
+    "id": "math_decimal",
+    "title": "high-precision number %1",
+    "description": "Creates a high-precision Decimal number from a string.",
+    "suiteId": "unassigned",
+    "moduleId": "math_numeric",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "math_random_item",
+    "title": "random item from list %1",
+    "description": "Picks a random item from a list.",
+    "suiteId": "unassigned",
+    "moduleId": "math_numeric",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "math_pi",
+    "title": "pi",
+    "description": "The constant value of pi (3.141...)",
+    "suiteId": "unassigned",
+    "moduleId": "math_numeric",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "math_sqrt",
+    "title": "square root of %1",
+    "description": "Calculates the square root of a number.",
+    "suiteId": "unassigned",
+    "moduleId": "math_numeric",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "loops_for_each_safe",
+    "title": "for each item %1 in list %2 with limit %3",
+    "description": "A 'for each' loop with a safety limit on iterations. Default limit is 1000.",
+    "suiteId": "unassigned",
+    "moduleId": "loops_iteration",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "loops_while_safe",
+    "title": "while %1 with limit %2",
+    "description": "A 'while' loop with a safety limit on iterations. Default limit is 1000.",
+    "suiteId": "unassigned",
+    "moduleId": "loops_iteration",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "loops_enumerate",
+    "title": "for index %1 , item %2 in enumerate %3",
+    "description": "Iterates over a list with both index and item.",
+    "suiteId": "unassigned",
+    "moduleId": "loops_iteration",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "loops_zip",
+    "title": "for %1 in zip of lists %2",
+    "description": "Iterates over multiple lists at once. The input should be a list of lists.",
+    "suiteId": "unassigned",
+    "moduleId": "loops_iteration",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "logging_log",
+    "title": "log %1 with level %2",
+    "description": "Logs a message with the specified level.",
+    "suiteId": "unassigned",
+    "moduleId": "logging_monitoring",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "monitoring_metric_increment",
+    "title": "increment metric %1 by %2",
+    "description": "Increments a monitoring metric.",
+    "suiteId": "unassigned",
+    "moduleId": "logging_monitoring",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "monitoring_trace_span",
+    "title": "trace span named %1 do %2",
+    "description": "Creates a monitoring trace span around a block of code.",
+    "suiteId": "unassigned",
+    "moduleId": "logging_monitoring",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "lists_comprehension",
+    "title": "list comprehension: %1 for %2 in %3 if %4",
+    "description": "Creates a new list based on an existing list.",
+    "suiteId": "unassigned",
+    "moduleId": "lists_sequences",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "json_loads",
+    "title": "parse JSON string %1",
+    "description": "Deserialize a JSON string to a Python object.",
+    "suiteId": "standard_library",
+    "moduleId": "json",
+    "categoryId": "cat_json"
+  },
+  {
+    "id": "itertools_chain",
+    "title": "chain iterables %1",
+    "description": "Chains multiple iterables together into a single iterator.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_permutations",
+    "title": "permutations of %1 of length %2",
+    "description": "Return successive r length permutations of elements in the iterable.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_combinations",
+    "title": "combinations of %1 of length %2",
+    "description": "Return r length subsequences of elements from the input iterable.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_product",
+    "title": "cartesian product of iterables %1",
+    "description": "Cartesian product of input iterables.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_count",
+    "title": "count from %1 with step %2",
+    "description": "Creates an iterator that returns evenly spaced values starting with number start.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_cycle",
+    "title": "cycle through %1",
+    "description": "Creates an iterator returning elements from the iterable and saving a copy of each. When the iterable is exhausted, return elements from the saved copy. Repeats indefinitely.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_repeat",
+    "title": "repeat %1 %2 times",
+    "description": "Creates an iterator that returns object over and over again. If the times argument is specified, it will repeat that many times.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_takewhile",
+    "title": "take from %1 while %2 is true",
+    "description": "Creates an iterator that returns elements from the iterable as long as the predicate is true.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_dropwhile",
+    "title": "drop from %1 while %2 is true",
+    "description": "Creates an iterator that drops elements from the iterable as long as the predicate is true.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "itertools_filterfalse",
+    "title": "filter from %1 where %2 is false",
+    "description": "Creates an iterator that filters elements from iterable returning only those for which the predicate is false.",
+    "suiteId": "standard_library",
+    "moduleId": "itertools",
+    "categoryId": "cat_itertools"
+  },
+  {
+    "id": "iterators_yield",
+    "title": "yield %1",
+    "description": "Yields a value from a generator function.",
+    "suiteId": "control_computation",
+    "moduleId": "iterators_generators",
+    "categoryId": "cat_iterators_generators"
+  },
+  {
+    "id": "iterators_yield_from",
+    "title": "yield from %1",
+    "description": "Delegates to a sub-generator, yielding all of its values.",
+    "suiteId": "control_computation",
+    "moduleId": "iterators_generators",
+    "categoryId": "cat_iterators_generators"
+  },
+  {
+    "id": "iterators_generator_function",
+    "title": "define generator function %1 ( %2 )",
+    "description": "Defines a generator function. Use the 'yield' block inside.",
+    "suiteId": "control_computation",
+    "moduleId": "iterators_generators",
+    "categoryId": "cat_iterators_generators"
+  },
+  {
+    "id": "iterators_safe_next",
+    "title": "next item from iterator %1 or default %2",
+    "description": "Gets the next item from an iterator, returning a default value if it is exhausted.",
+    "suiteId": "control_computation",
+    "moduleId": "iterators_generators",
+    "categoryId": "cat_iterators_generators"
+  },
+  {
+    "id": "iterators_generator_expression",
+    "title": "generator expression: %1 for %2 in %3 if %4",
+    "description": "Creates a generator expression, which can be iterated over.",
+    "suiteId": "control_computation",
+    "moduleId": "iterators_generators",
+    "categoryId": "cat_iterators_generators"
+  },
+  {
+    "id": "io_bytes_from_text",
+    "title": "bytes from text %1 encoding %2",
+    "description": "Encodes a string into bytes.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_streams_bytes"
+  },
+  {
+    "id": "io_text_from_bytes",
+    "title": "text from bytes %1 encoding %2",
+    "description": "Decodes bytes into a string.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_streams_bytes"
+  },
+  {
+    "id": "io_stream_read_chunk",
+    "title": "read chunk of size %1 from stream %2",
+    "description": "Reads a chunk of bytes from a stream.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_streams_bytes"
+  },
+  {
+    "id": "io_stream_write_chunk",
+    "title": "write chunk %1 to stream %2",
+    "description": "Writes a chunk of bytes to a stream.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_streams_bytes"
+  },
+  {
+    "id": "io_serialize_json_safe",
+    "title": "serialize to safe JSON %1",
+    "description": "Serializes an object to a JSON string safely.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_serialization_safe"
+  },
+  {
+    "id": "io_deserialize_json_safe",
+    "title": "deserialize from safe JSON %1",
+    "description": "Deserializes a JSON string safely.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_serialization_safe"
+  },
+  {
+    "id": "io_serialize_msgpack",
+    "title": "serialize to MessagePack %1",
+    "description": "Serializes an object using MessagePack.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_serialization_safe"
+  },
+  {
+    "id": "io_fs_read",
+    "title": "read file at path %1",
+    "description": "Reads the content of a file from the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_write",
+    "title": "write to file at path %1 content %2",
+    "description": "Writes content to a file in the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_append",
+    "title": "append to file at path %1 content %2",
+    "description": "Appends content to a file in the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_delete",
+    "title": "delete file at path %1",
+    "description": "Deletes a file from the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_exists",
+    "title": "file exists at path %1",
+    "description": "Checks if a file exists in the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_listdir",
+    "title": "list directory at path %1",
+    "description": "Lists the contents of a directory in the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_mkdir",
+    "title": "create directory at path %1",
+    "description": "Creates a directory in the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_tempfile",
+    "title": "create temporary file",
+    "description": "Creates a temporary file and returns its path.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_copy",
+    "title": "copy file from %1 to %2",
+    "description": "Copies a file in the virtual file system.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_virtual_fs_safe"
+  },
+  {
+    "id": "io_fs_open",
+    "title": "with open file at path %1 in mode %2 as %3",
+    "description": "Opens a file with a given mode and provides a file object to work with.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_io"
+  },
+  {
+    "id": "io_fs_file_mode",
+    "title": "%1",
+    "description": "Selects a file mode for opening a file.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_io"
+  },
+  {
+    "id": "io_fs_read_lines",
+    "title": "read lines from %1",
+    "description": "Reads all lines from a file object and returns them as a list of strings.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_io"
+  },
+  {
+    "id": "io_fs_write_lines",
+    "title": "write lines %1 to %2",
+    "description": "Writes a list of strings to a file object.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_file_io"
+  },
+  {
+    "id": "io_json_load",
+    "title": "load JSON from %1",
+    "description": "Loads a JSON string or from a file path.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_json__csv__yaml"
+  },
+  {
+    "id": "io_json_dump",
+    "title": "dump object %1 to JSON string or file path %2 with indent %3 and sort keys %4",
+    "description": "Dumps an object to a JSON string or a file, with optional formatting.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_json__csv__yaml"
+  },
+  {
+    "id": "io_csv_read",
+    "title": "read CSV from path %1 with delimiter %2",
+    "description": "Reads a CSV file into a list of dictionaries.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_json__csv__yaml"
+  },
+  {
+    "id": "io_csv_write",
+    "title": "write list of dictionaries %1 to CSV path %2 with delimiter %3",
+    "description": "Writes a list of dictionaries to a CSV file.",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_json__csv__yaml"
+  },
+  {
+    "id": "io_yaml_load",
+    "title": "load YAML from %1",
+    "description": "Loads a YAML string or from a file path. (Gated)",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_json__csv__yaml"
+  },
+  {
+    "id": "io_yaml_dump",
+    "title": "dump object %1 to YAML string or file path %2",
+    "description": "Dumps an object to a YAML string or a file. (Gated)",
+    "suiteId": "io_formats",
+    "moduleId": "io_formats",
+    "categoryId": "cat_json__csv__yaml"
+  },
+  {
+    "id": "net_ws_connect",
+    "title": "connect to websocket at url %1 and store in %2",
+    "description": "Connects to a websocket server and stores the connection.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_ws_send",
+    "title": "send to websocket %1 message %2",
+    "description": "Sends a message to a websocket.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_ws_receive",
+    "title": "from websocket %1 receive message into %2",
+    "description": "Receives a message from a websocket and stores it in a variable.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_ws_close",
+    "title": "close websocket connection %1",
+    "description": "Closes a websocket connection.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_auth_basic",
+    "title": "HTTP basic auth with user %1 pass %2",
+    "description": "Creates a basic HTTP authentication header.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_auth_bearer",
+    "title": "HTTP bearer auth with token %1",
+    "description": "Creates a bearer token HTTP authentication header.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_request_sign",
+    "title": "sign request with key %1 data %2",
+    "description": "Signs a request (e.g., for an API).",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_multipart_upload",
+    "title": "multipart upload with files %1 data %2",
+    "description": "Constructs data for a multipart/form-data upload.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_socket_connect",
+    "title": "connect socket to host %1 port %2",
+    "description": "Connects to a socket. (Admin gated)",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_socket_send",
+    "title": "send to socket %1 data %2",
+    "description": "Sends data to a socket.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_socket_receive",
+    "title": "receive from socket %1 max bytes %2",
+    "description": "Receives data from a socket.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_socket_close",
+    "title": "close socket connection %1",
+    "description": "Closes a socket connection.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_pubsub_publish",
+    "title": "publish to channel %1 message %2",
+    "description": "Publishes a message to a channel.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_pubsub_subscribe",
+    "title": "subscribe to channel %1 with callback %2",
+    "description": "Subscribes to a channel with a callback function.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_pubsub_unsubscribe",
+    "title": "unsubscribe from channel %1",
+    "description": "Unsubscribes from a channel.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_get",
+    "title": "HTTP GET url %1 params %2 headers %3",
+    "description": "Performs an HTTP GET request.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_post",
+    "title": "HTTP POST url %1 headers %2 body %3",
+    "description": "Performs an HTTP POST request.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_json_get",
+    "title": "HTTP GET JSON from url %1",
+    "description": "Performs an HTTP GET request and parses the response as JSON.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_json_post",
+    "title": "HTTP POST JSON to url %1 with data %2",
+    "description": "Performs an HTTP POST request with JSON data.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_download_file",
+    "title": "download file from url %1 to path %2",
+    "description": "Downloads a file to the virtual file system.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_with_retry",
+    "title": "HTTP request %1 with retries %2 backoff factor %3",
+    "description": "Wraps an HTTP request with a retry mechanism.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "net_http_rate_limit",
+    "title": "rate-limit HTTP requests to %1 per second",
+    "description": "Rate-limits HTTP requests.",
+    "suiteId": "unassigned",
+    "moduleId": "integration_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_create",
+    "title": "create turtle",
+    "description": "Creates a new turtle object.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_forward",
+    "title": "move turtle %1 forward by %2 pixels",
+    "description": "Moves the turtle forward by a given distance.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_backward",
+    "title": "move turtle %1 backward by %2 pixels",
+    "description": "Moves the turtle backward by a given distance.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_right",
+    "title": "turn turtle %1 right by %2 degrees",
+    "description": "Turns the turtle right by a given angle.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_left",
+    "title": "turn turtle %1 left by %2 degrees",
+    "description": "Turns the turtle left by a given angle.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_penup",
+    "title": "lift pen of turtle %1",
+    "description": "Lifts the turtle's pen, so it doesn't draw.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_pendown",
+    "title": "lower pen of turtle %1",
+    "description": "Lowers the turtle's pen, so it draws.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "graphics_turtle_done",
+    "title": "finish turtle drawing",
+    "description": "Finishes the turtle drawing and displays the result.",
+    "suiteId": "unassigned",
+    "moduleId": "graphics",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "functions_lambda",
+    "title": "lambda %1 : %2",
+    "description": "Creates an anonymous lambda function.",
+    "suiteId": "unassigned",
+    "moduleId": "functions_callables",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "functions_decorator",
+    "title": "@ %1",
+    "description": "Applies a decorator to a function definition.",
+    "suiteId": "unassigned",
+    "moduleId": "functions_callables",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "functions_call_with_kwargs",
+    "title": "call function %1 with args %2 and kwargs %3",
+    "description": "Calls a function with positional and keyword arguments.",
+    "suiteId": "unassigned",
+    "moduleId": "functions_callables",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "functions_callable",
+    "title": "is %1 callable?",
+    "description": "Checks if an object is callable (e.g., a function).",
+    "suiteId": "control_computation",
+    "moduleId": "functions_callables",
+    "categoryId": "cat_functions_calls"
+  },
+  {
+    "id": "filesystem_read_file",
+    "title": "read file from path %1",
+    "description": "Reads a file from the virtual filesystem.",
+    "suiteId": "unassigned",
+    "moduleId": "filesystem_io",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "filesystem_write_file",
+    "title": "write to file at path %1 content %2",
+    "description": "Writes content to a file in the virtual filesystem.",
+    "suiteId": "unassigned",
+    "moduleId": "filesystem_io",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "filesystem_list_dir",
+    "title": "list directory at path %1",
+    "description": "Lists the contents of a directory in the virtual filesystem.",
+    "suiteId": "unassigned",
+    "moduleId": "filesystem_io",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "fastapi_create_app",
+    "title": "create FastAPI app",
+    "description": "Creates a FastAPI application instance.",
+    "suiteId": "web_server",
+    "moduleId": "fastapi",
+    "categoryId": "cat_fastapi"
+  },
+  {
+    "id": "fastapi_post_endpoint",
+    "title": "create FastAPI POST endpoint at %1",
+    "description": "Creates a FastAPI POST endpoint with a Pydantic model for the request body.",
+    "suiteId": "web",
+    "moduleId": "fastapi",
+    "categoryId": "cat_fastapi"
+  },
+  {
+    "id": "essentials_var_set",
+    "title": "set %1 to %2",
+    "description": "Sets a variable.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_variables_types"
+  },
+  {
+    "id": "essentials_var_get",
+    "title": "%1",
+    "description": "Gets a variable.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_variables_types"
+  },
+  {
+    "id": "essentials_var_undefined",
+    "title": "undefined",
+    "description": "The undefined value (None in Python).",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_variables_types"
+  },
+  {
+    "id": "essentials_is_instance",
+    "title": "is %1 instance of %2",
+    "description": "Checks if an object is an instance of a type.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_variables_types"
+  },
+  {
+    "id": "essentials_type_of",
+    "title": "type of %1",
+    "description": "Returns the type of an object.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_variables_types"
+  },
+  {
+    "id": "essentials_cast",
+    "title": "cast %1 to %2",
+    "description": "Casts a value to a different type.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_variables_types"
+  },
+  {
+    "id": "essentials_default_if_none",
+    "title": "%1 if not None else %2",
+    "description": "Returns a default value if the first value is None.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_variables_types"
+  },
+  {
+    "id": "essentials_type_as_string",
+    "title": "type of %1 as string",
+    "description": "Returns the type of an object as a string.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_is_none",
+    "title": "%1 is None",
+    "description": "Checks if a value is None.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_is_not_none",
+    "title": "%1 is not None",
+    "description": "Checks if a value is not None.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_tuple_create",
+    "title": "create tuple with %1",
+    "description": "Creates a tuple with any number of items.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "essentials_tuple_from_list",
+    "title": "tuple from list %1",
+    "description": "Creates a tuple from a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "essentials_tuple_to_list",
+    "title": "list from tuple %1",
+    "description": "Creates a list from a tuple.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "essentials_tuple_unpack",
+    "title": "unpack %1 into variables %2",
+    "description": "Unpacks a tuple into variables.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "essentials_namedtuple_define",
+    "title": "define named tuple %1 with fields %2",
+    "description": "Defines a named tuple.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "essentials_dataclass_stub",
+    "title": "define dataclass %1 with fields %2",
+    "description": "Defines a dataclass.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_tuples"
+  },
+  {
+    "id": "essentials_tuple_length",
+    "title": "length of %1",
+    "description": "Returns the number of items in a tuple.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_tuple_get",
+    "title": "get item at index %1 in %2",
+    "description": "Gets an item from a tuple.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_text_literal",
+    "title": "%1",
+    "description": "A string of text.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_empty",
+    "title": "empty text",
+    "description": "An empty string.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_concat",
+    "title": "create text with %1",
+    "description": "",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_format_fstring",
+    "title": "format f-string with template %1 and variables %2",
+    "description": "Formats a string using an f-string-like template.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_len",
+    "title": "length of %1",
+    "description": "Returns the number of characters in a string.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_slice",
+    "title": "slice of %1 from %2 to %3",
+    "description": "Returns a slice of a string.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_substr",
+    "title": "substring of %1 from %2 with length %3",
+    "description": "Returns a substring of a string.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_index_of",
+    "title": "index of %1 in %2",
+    "description": "Returns the index of the first occurrence of a substring.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_contains",
+    "title": "%1 contains %2",
+    "description": "Returns true if the substring is found in the text.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_startswith",
+    "title": "%1 starts with %2",
+    "description": "Returns true if the text starts with the substring.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_endswith",
+    "title": "%1 ends with %2",
+    "description": "Returns true if the text ends with the substring.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_change_case",
+    "title": "change case of %1 to %2",
+    "description": "Changes the case of a string.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_strip",
+    "title": "strip whitespace from %1",
+    "description": "Removes leading and trailing whitespace.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_split",
+    "title": "split %1 by %2",
+    "description": "Splits a string into a list of strings.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_join",
+    "title": "join %1 with %2",
+    "description": "Joins a list of strings into a single string.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_replace",
+    "title": "in %1 replace %2 with %3",
+    "description": "Replaces all occurrences of a substring with another substring.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_escape_html",
+    "title": "escape html %1",
+    "description": "Escapes HTML special characters.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_unescape_html",
+    "title": "unescape html %1",
+    "description": "Unescapes HTML special characters.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_text"
+  },
+  {
+    "id": "essentials_text_multiline",
+    "title": "multi-line text %1",
+    "description": "A multi-line string of text.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_text_is_empty",
+    "title": "is %1 empty",
+    "description": "Checks if a string is empty.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_set_create",
+    "title": "create set with %1",
+    "description": "Creates a set with any number of items.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_add",
+    "title": "add %1 to set %2",
+    "description": "Adds an item to a set.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_remove",
+    "title": "remove %1 from set %2",
+    "description": "Removes an item from a set.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_union",
+    "title": "union of %1 and %2",
+    "description": "Returns the union of two sets.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_intersection",
+    "title": "intersection of %1 and %2",
+    "description": "Returns the intersection of two sets.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_difference",
+    "title": "difference of %1 and %2",
+    "description": "Returns the difference of two sets.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_symmetric_difference",
+    "title": "symmetric difference of %1 and %2",
+    "description": "Returns the symmetric difference of two sets.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_contains",
+    "title": "%1 contains %2",
+    "description": "Returns true if the item is in the set.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_is_subset",
+    "title": "%1 is subset of %2",
+    "description": "Returns true if the first set is a subset of the second.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_is_superset",
+    "title": "%1 is superset of %2",
+    "description": "Returns true if the first set is a superset of the second.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_sets"
+  },
+  {
+    "id": "essentials_set_length",
+    "title": "length of %1",
+    "description": "Returns the number of items in a set.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_num_literal",
+    "title": "%1",
+    "description": "A number.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_neg",
+    "title": "- %1",
+    "description": "Negates a number.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_abs",
+    "title": "absolute of %1",
+    "description": "Returns the absolute value of a number.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_round",
+    "title": "round %1",
+    "description": "Rounds a number to the nearest integer.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_clamp",
+    "title": "clamp %1 between %2 and %3",
+    "description": "Clamps a number between a minimum and maximum value.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_compare",
+    "title": "%1 %2 %3",
+    "description": "Compares two numbers.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_min",
+    "title": "minimum of %1 and %2",
+    "description": "Returns the smaller of two numbers.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_max",
+    "title": "maximum of %1 and %2",
+    "description": "Returns the larger of two numbers.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_rand_int",
+    "title": "random integer from %1 to %2",
+    "description": "Returns a random integer between two numbers.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_rand_float",
+    "title": "random float",
+    "description": "Returns a random float between 0 and 1.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_num_property",
+    "title": "%1 is %2",
+    "description": "Checks if a number has a certain property.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_num_is_divisible_by",
+    "title": "%1 is divisible by %2",
+    "description": "Checks if a number is divisible by another.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_function_def_container",
+    "title": "parameters %1 %2",
+    "description": "A container for function parameters.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_function_def_param",
+    "title": "parameter %1",
+    "description": "A function parameter.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_bool_true",
+    "title": "True",
+    "description": "The boolean value True.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_bool_false",
+    "title": "False",
+    "description": "The boolean value False.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_logic_and",
+    "title": "%1 and %2",
+    "description": "Returns true if both inputs are true.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_logic_or",
+    "title": "%1 or %2",
+    "description": "Returns true if either input is true.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_logic_not",
+    "title": "not %1",
+    "description": "Returns true if the input is false.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_compare",
+    "title": "%1 %2 %3",
+    "description": "Compares two values.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_in_operator",
+    "title": "%1 in %2",
+    "description": "Returns true if the first value is in the second.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_not_in_operator",
+    "title": "%1 not in %2",
+    "description": "Returns true if the first value is not in the second.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_ternary",
+    "title": "%1 if %2 else %3",
+    "description": "A ternary operator.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_assert",
+    "title": "assert %1 message %2",
+    "description": "Asserts that a condition is true.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logic_booleans"
+  },
+  {
+    "id": "essentials_logic_is_truthy",
+    "title": "%1 is truthy",
+    "description": "Checks if a value is truthy (evaluates to True in a boolean context).",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_log_info",
+    "title": "log info %1",
+    "description": "Logs an informational message.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logging_io_safe"
+  },
+  {
+    "id": "essentials_log_warn",
+    "title": "log warning %1",
+    "description": "Logs a warning message.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logging_io_safe"
+  },
+  {
+    "id": "essentials_log_error",
+    "title": "log error %1",
+    "description": "Logs an error message.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logging_io_safe"
+  },
+  {
+    "id": "essentials_print_to_console",
+    "title": "print to console %1",
+    "description": "Prints a message to the console.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logging_io_safe"
+  },
+  {
+    "id": "essentials_safe_input",
+    "title": "safe input with prompt %1",
+    "description": "Safely gets input from the user.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_logging_io_safe"
+  },
+  {
+    "id": "essentials_log_custom",
+    "title": "log with level %1 message %2",
+    "description": "Logs a message with a custom level.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_list_create",
+    "title": "create list with %1",
+    "description": "Creates a list with any number of items.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_from_range",
+    "title": "list from range start %1 stop %2 step %3",
+    "description": "Creates a list from a range of numbers.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_length",
+    "title": "length of %1",
+    "description": "Returns the number of items in a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_get",
+    "title": "get item at index %1 in %2",
+    "description": "Gets an item from a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_set",
+    "title": "set item at index %1 in %2 to %3",
+    "description": "Sets an item in a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_index_of",
+    "title": "index of first %1 in %2",
+    "description": "Returns the index of the first occurrence of an item in a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_slice",
+    "title": "slice of %1 from %2 to %3",
+    "description": "Returns a slice of a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_sort",
+    "title": "sort %1 with key %2 reverse %3",
+    "description": "Sorts a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_reverse",
+    "title": "reverse %1",
+    "description": "Reverses a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_map",
+    "title": "map %1 over %2",
+    "description": "Applies a function to each item in a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_filter",
+    "title": "filter %1 with %2",
+    "description": "Filters a list using a function.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_reduce",
+    "title": "reduce %1 with %2 initial value %3",
+    "description": "Reduces a list to a single value using a function.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_flatten",
+    "title": "flatten %1",
+    "description": "Flattens a list of lists into a single list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_unique",
+    "title": "unique items in %1",
+    "description": "Returns a list with unique items.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_chunk",
+    "title": "chunk %1 into lists of size %2",
+    "description": "Chunks a list into smaller lists of a given size.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_enumerate",
+    "title": "enumerate %1",
+    "description": "Returns a list of (index, item) tuples.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_is_empty",
+    "title": "is %1 empty",
+    "description": "Checks if a list is empty.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_list_statements",
+    "title": "in list %1 %2 item %3 at index %4",
+    "description": "Append, insert, or remove an item from a list.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_list_expressions",
+    "title": "in list %1 pop item at index %2",
+    "description": "Pops an item from a list at the specified index.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_lists"
+  },
+  {
+    "id": "essentials_dict_create",
+    "title": "create dictionary with %1",
+    "description": "Creates a dictionary with any number of key-value pairs.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_dict_update",
+    "title": "update %1 with %2",
+    "description": "Updates a dictionary with another dictionary.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_dict_merge_shallow",
+    "title": "merge shallow %1 and %2",
+    "description": "Merges two dictionaries shallowly.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_dict_deep_merge",
+    "title": "merge deep %1 and %2",
+    "description": "Merges two dictionaries deeply.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_dict_get_nested",
+    "title": "in dictionary %1 get nested path %2 with default %3",
+    "description": "Gets a nested value from a dictionary using a path.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_registry_register",
+    "title": "in registry %1 register key %2 with value %3",
+    "description": "Registers a value in a registry.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_registry_call",
+    "title": "in registry %1 call key %2 with args %3 kwargs %4",
+    "description": "Calls a function from a registry.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_dict_has_key",
+    "title": "dictionary %1 has key %2",
+    "description": "Checks if a dictionary has a key.",
+    "suiteId": "unassigned",
+    "moduleId": "essentials",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "essentials_dict_statements",
+    "title": "in dictionary %1 set key %2 to value %3",
+    "description": "Set a key-value pair in a dictionary.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_dict_expressions",
+    "title": "in dictionary %1 %2 key %3",
+    "description": "Get, pop, or retrieve keys/values/items from a dictionary.",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_dictionaries"
+  },
+  {
+    "id": "essentials_num_arithmetic",
+    "title": "%1 %2 %3",
+    "description": "",
+    "suiteId": "essentials",
+    "moduleId": "essentials",
+    "categoryId": "cat_numbers"
+  },
+  {
+    "id": "essentials_function_def",
+    "title": "define function %1 ( %2 )",
+    "description": "Defines a function with parameters.",
+    "suiteId": "control_computation",
+    "moduleId": "essentials",
+    "categoryId": "cat_functions_calls"
+  },
+  {
+    "id": "enterprise_ros_init_node",
+    "title": "init ROS node %1",
+    "description": "Initializes a ROS node. (Admin gated)",
+    "suiteId": "unassigned",
+    "moduleId": "enterprise_specialty",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "enterprise_ros_publish",
+    "title": "ROS publish to topic %1 message %2",
+    "description": "Publishes a message to a ROS topic.",
+    "suiteId": "unassigned",
+    "moduleId": "enterprise_specialty",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "enterprise_quant_backtest_strategy",
+    "title": "backtest strategy %1 with data %2",
+    "description": "Backtests a quantitative trading strategy. (Admin gated)",
+    "suiteId": "unassigned",
+    "moduleId": "enterprise_specialty",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "enterprise_quant_get_price_series",
+    "title": "get price series for %1",
+    "description": "Gets a price series for a financial instrument.",
+    "suiteId": "unassigned",
+    "moduleId": "enterprise_specialty",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "enterprise_odoo_connect",
+    "title": "connect to Odoo",
+    "description": "Connects to an Odoo instance. (Admin gated)",
+    "suiteId": "unassigned",
+    "moduleId": "enterprise_specialty",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "enterprise_odoo_search_create",
+    "title": "in Odoo connection %1 search/create %2 with data %3",
+    "description": "Searches for or creates a record in Odoo.",
+    "suiteId": "unassigned",
+    "moduleId": "enterprise_specialty",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "dicts_create_with_item",
+    "title": "key %1 value %2",
+    "description": "A key-value pair for a dictionary.",
+    "suiteId": "unassigned",
+    "moduleId": "dicts_maps",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "dicts_register_handler",
+    "title": "in registry %1 register handler %2 for key %3",
+    "description": "A pattern for registering a function (handler) in a dictionary.",
+    "suiteId": "unassigned",
+    "moduleId": "dicts_maps",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "dicts_copy",
+    "title": "copy dictionary %1",
+    "description": "Returns a shallow copy of a dictionary.",
+    "suiteId": "unassigned",
+    "moduleId": "dicts_maps",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "dicts_fromkeys",
+    "title": "create dictionary from keys %1 with value %2",
+    "description": "Creates a new dictionary with keys from a sequence and a specified value.",
+    "suiteId": "unassigned",
+    "moduleId": "dicts_maps",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "dicts_popitem",
+    "title": "pop item from dictionary %1",
+    "description": "Removes and returns an arbitrary (key, value) pair from the dictionary.",
+    "suiteId": "unassigned",
+    "moduleId": "dicts_maps",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "datetime_now",
+    "title": "current date and time",
+    "description": "Gets the current date and time.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_date",
+    "title": "date year %1 month %2 day %3",
+    "description": "Creates a date object.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_time",
+    "title": "time hour %1 minute %2 second %3",
+    "description": "Creates a time object.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_datetime",
+    "title": "datetime year %1 month %2 day %3 hour %4 minute %5 second %6",
+    "description": "Creates a datetime object.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_timedelta",
+    "title": "timedelta days %1 seconds %2 microseconds %3 milliseconds %4 minutes %5 hours %6 weeks %7",
+    "description": "Creates a timedelta object.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_strftime",
+    "title": "format %1 with %2",
+    "description": "Formats a datetime object to a string.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_strptime",
+    "title": "parse %1 with %2",
+    "description": "Parses a string into a datetime object.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_fromtimestamp",
+    "title": "datetime from timestamp %1",
+    "description": "Creates a datetime object from a Unix timestamp.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_timestamp",
+    "title": "timestamp from %1",
+    "description": "Converts a datetime object to a Unix timestamp.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_getattr",
+    "title": "get %1 from %2",
+    "description": "Gets a specific attribute from a datetime object.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_timezone",
+    "title": "timezone UTC offset %1",
+    "description": "Creates a timezone object with a UTC offset in hours.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "datetime_astimezone",
+    "title": "convert %1 to timezone %2",
+    "description": "Converts a datetime object to a specific timezone.",
+    "suiteId": "standard_library",
+    "moduleId": "datetime",
+    "categoryId": "cat_datetime"
+  },
+  {
+    "id": "db_execute",
+    "title": "DB execute %1 with params %2",
+    "description": "Executes a query (e.g., CREATE, INSERT, UPDATE, DELETE) against the sandboxed database.",
+    "suiteId": "unassigned",
+    "moduleId": "databases_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "db_query_all",
+    "title": "DB query all %1 with params %2",
+    "description": "Executes a SELECT query and returns all rows as a list of dictionaries.",
+    "suiteId": "unassigned",
+    "moduleId": "databases_persistence",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "data_structures_seq_concat",
+    "title": "concatenate sequences %1 and %2",
+    "description": "Concatenates two sequences (lists or tuples).",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_seq_repeat",
+    "title": "repeat sequence %1 %2 times",
+    "description": "Repeats a sequence a number of times.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_seq_slice_step",
+    "title": "slice of %1 from %2 to %3 with step %4",
+    "description": "Creates a slice with a custom step.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_seq_sorted_by",
+    "title": "sort %1 by key %2",
+    "description": "Sorts a sequence using a key function.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_seq_zip",
+    "title": "zip sequences %1",
+    "description": "Zips multiple sequences together.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_seq_transpose",
+    "title": "transpose %1",
+    "description": "Transposes a list of lists (matrix).",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_seq_chunk",
+    "title": "chunk %1 into size %2",
+    "description": "Splits a sequence into chunks of a given size.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_seq_window",
+    "title": "sliding window over %1 size %2 step %3",
+    "description": "Creates a sliding window over a sequence.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_sequences"
+  },
+  {
+    "id": "data_structures_registry_create",
+    "title": "create registry named %1",
+    "description": "Creates a new, empty registry (a dictionary).",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_registry_plugin_patterns"
+  },
+  {
+    "id": "data_structures_registry_register",
+    "title": "in registry %1 register key %2 with function %3",
+    "description": "Registers a function in a registry.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_registry_plugin_patterns"
+  },
+  {
+    "id": "data_structures_registry_unregister",
+    "title": "in registry %1 unregister key %2",
+    "description": "Unregisters a function from a registry.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_registry_plugin_patterns"
+  },
+  {
+    "id": "data_structures_registry_list",
+    "title": "list registered keys in %1",
+    "description": "Lists all registered keys in a registry.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_registry_plugin_patterns"
+  },
+  {
+    "id": "data_structures_record_define_namedtuple",
+    "title": "define named tuple %1 with fields %2",
+    "description": "Defines a new named tuple class.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_records"
+  },
+  {
+    "id": "data_structures_record_define_dataclass",
+    "title": "define dataclass %1 with fields %2 and defaults %3",
+    "description": "Defines a new dataclass.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_records"
+  },
+  {
+    "id": "data_structures_record_instantiate",
+    "title": "create instance of %1 with values %2",
+    "description": "Creates an instance of a record (named tuple or dataclass).",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_records"
+  },
+  {
+    "id": "data_structures_record_to_dict",
+    "title": "convert record %1 to dictionary",
+    "description": "Converts a record instance to a dictionary.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_records"
+  },
+  {
+    "id": "data_structures_record_from_dict",
+    "title": "create instance of %1 from dictionary %2",
+    "description": "Creates a record instance from a dictionary.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_records"
+  },
+  {
+    "id": "data_structures_map_get_path",
+    "title": "in dictionary %1 get path %2 default %3",
+    "description": "Gets a value from a nested dictionary using a list of keys.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_map_set_path",
+    "title": "in dictionary %1 set path %2 to value %3",
+    "description": "Sets a value in a nested dictionary using a list of keys.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_map_flatten",
+    "title": "flatten dictionary %1",
+    "description": "Flattens a nested dictionary into a single level.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_map_unflatten",
+    "title": "unflatten dictionary %1",
+    "description": "Unflattens a dictionary with dot-separated keys into a nested dictionary.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_map_filter_by_value",
+    "title": "filter dictionary %1 by value where %2",
+    "description": "Filters a dictionary by its values using a lambda function.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_map_keys_to_list",
+    "title": "keys of %1 as list",
+    "description": "Returns a list of the dictionary's keys.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_map_items_to_list",
+    "title": "items of %1 as list of tuples",
+    "description": "Returns a list of the dictionary's (key, value) pairs.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_map_invert",
+    "title": "invert dictionary %1",
+    "description": "Inverts a dictionary, swapping keys and values.",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_mappings"
+  },
+  {
+    "id": "data_structures_frozen_map",
+    "title": "frozen map from dictionary %1",
+    "description": "Creates an immutable map (frozenset of items).",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_immutable_persistent_helpers"
+  },
+  {
+    "id": "data_structures_frozen_list",
+    "title": "frozen list from list %1",
+    "description": "Creates an immutable list (tuple).",
+    "suiteId": "data_structures",
+    "moduleId": "data_structures",
+    "categoryId": "cat_immutable_persistent_helpers"
+  },
+  {
+    "id": "cv2_imread",
+    "title": "read image from path %1",
+    "description": "Reads an image from a file.",
+    "suiteId": "opencv",
+    "moduleId": "cv2",
+    "categoryId": "cat_image"
+  },
+  {
+    "id": "core_none",
+    "title": "None",
+    "description": "The None object.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "core_type",
+    "title": "type of %1",
+    "description": "Returns the type of a variable.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "core_isinstance",
+    "title": "is %1 an instance of %2",
+    "description": "Checks if an object is an instance of a class.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "core_enum",
+    "title": "create enum %1 with members %2",
+    "description": "Creates a new enumeration type. Provide a list of strings for members.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "core_dataclass",
+    "title": "create dataclass %1 with fields %2",
+    "description": "Creates a new dataclass. Provide a list of strings for field names.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "core_namedtuple",
+    "title": "create namedtuple %1 with fields %2",
+    "description": "Creates a new namedtuple. Provide a list of strings for field names.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "python_text",
+    "title": "%1",
+    "description": "A string of text.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "python_number",
+    "title": "%1",
+    "description": "A number.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "python_boolean",
+    "title": "%1",
+    "description": "A boolean value (True or False).",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "python_list",
+    "title": "create list with %1",
+    "description": "Create a list with any number of items.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "python_dict",
+    "title": "create dictionary with %1",
+    "description": "Create a dictionary with key-value pairs.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "python_key_value",
+    "title": "key %1 value %2",
+    "description": "A key-value pair for a dictionary.",
+    "suiteId": "unassigned",
+    "moduleId": "core_fundamentals",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "logic_match",
+    "title": "match %1",
+    "description": "A match-case statement. Only case blocks can be placed inside.",
+    "suiteId": "unassigned",
+    "moduleId": "control_flow_logic",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "logic_case",
+    "title": "case %1 : %2",
+    "description": "A case clause for a match statement.",
+    "suiteId": "unassigned",
+    "moduleId": "control_flow_logic",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "logic_case_default",
+    "title": "default case : %1",
+    "description": "The default case (case _) for a match statement. Must be the last case.",
+    "suiteId": "unassigned",
+    "moduleId": "control_flow_logic",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "control_for_indexed",
+    "title": "for index %1, value %2 in %3",
+    "description": "Loops through a list with an index and value.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_loops"
+  },
+  {
+    "id": "control_for_zip",
+    "title": "for %1 in zip %2",
+    "description": "Loops through multiple lists at once.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_loops"
+  },
+  {
+    "id": "control_loop_limit",
+    "title": "limit loop iterations to %1",
+    "description": "Adds a safety limit to a loop to prevent infinite loops.",
+    "suiteId": "unassigned",
+    "moduleId": "control_computation",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "control_lambda_expr",
+    "title": "lambda %1 : %2",
+    "description": "Creates a lambda function.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_functions_calls"
+  },
+  {
+    "id": "control_partial_apply",
+    "title": "partially apply function %1 with pre-filled args %2",
+    "description": "Creates a new function with some arguments pre-filled.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_functions_calls"
+  },
+  {
+    "id": "control_function_decorator",
+    "title": "@ %1",
+    "description": "Applies a decorator to a function definition.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_functions_calls"
+  },
+  {
+    "id": "control_function_docstring",
+    "title": "docstring %1",
+    "description": "Adds a docstring to a function. Must be the first statement in a function.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_functions_calls"
+  },
+  {
+    "id": "control_function_def",
+    "title": "define %1 with parameters %2",
+    "description": "Defines a function with parameters.",
+    "suiteId": "unassigned",
+    "moduleId": "control_computation",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "control_try_except",
+    "title": "try %1",
+    "description": "Tries to execute code, and catches an exception.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_error_handling"
+  },
+  {
+    "id": "control_try_except_finally",
+    "title": "try %1",
+    "description": "Tries to execute code, catches an exception, and runs a final block of code.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_error_handling"
+  },
+  {
+    "id": "control_raise_exception",
+    "title": "raise exception %1 with message %2",
+    "description": "Raises an exception.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_error_handling"
+  },
+  {
+    "id": "control_assert_block",
+    "title": "assert %1 with message %2",
+    "description": "Asserts that a condition is true.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_error_handling"
+  },
+  {
+    "id": "control_match",
+    "title": "match %1",
+    "description": "A match-case block (requires Python 3.10+).",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_conditionals"
+  },
+  {
+    "id": "control_case",
+    "title": "case %1",
+    "description": "A case for a match-case block.",
+    "suiteId": "unassigned",
+    "moduleId": "control_computation",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "control_list_comp",
+    "title": "list comprehension [ %1 for %2 in %3 if %4 ]",
+    "description": "Creates a list using a list comprehension.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_comprehensions"
+  },
+  {
+    "id": "control_dict_comp",
+    "title": "dictionary comprehension { %1 : %2 for %3 in %4 if %5 }",
+    "description": "Creates a dictionary using a dictionary comprehension.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_comprehensions"
+  },
+  {
+    "id": "control_set_comp",
+    "title": "set comprehension { %1 for %2 in %3 if %4 }",
+    "description": "Creates a set using a set comprehension.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_comprehensions"
+  },
+  {
+    "id": "control_gen_expr",
+    "title": "generator expression ( %1 for %2 in %3 if %4 )",
+    "description": "Creates a generator expression.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_comprehensions"
+  },
+  {
+    "id": "control_math_stats",
+    "title": "calculate %1 of list %2",
+    "description": "Calculates a statistical value of a list of numbers.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_operators_advanced_math"
+  },
+  {
+    "id": "control_decimal_create",
+    "title": "decimal from %1",
+    "description": "Creates a decimal number for high-precision calculations.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_operators_advanced_math"
+  },
+  {
+    "id": "control_fraction_create",
+    "title": "fraction with numerator %1 and denominator %2",
+    "description": "Creates a fraction.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_operators_advanced_math"
+  },
+  {
+    "id": "control_complex_create",
+    "title": "complex number with real part %1 and imaginary part %2",
+    "description": "Creates a complex number.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_operators_advanced_math"
+  },
+  {
+    "id": "control_accumulate",
+    "title": "accumulate %1 with function %2",
+    "description": "Returns a list of accumulated results.",
+    "suiteId": "control_computation",
+    "moduleId": "control_computation",
+    "categoryId": "cat_operators_advanced_math"
+  },
+  {
+    "id": "concurrency_submit_task",
+    "title": "run in background %1 with args %2",
+    "description": "Runs a function in the background using a managed thread pool. Returns a future object.",
+    "suiteId": "unassigned",
+    "moduleId": "concurrency_parallelism",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "concurrency_get_future_result",
+    "title": "get result from future %1 with timeout (secs) %2",
+    "description": "Waits for a background task to finish and gets its result. Provide a timeout in seconds.",
+    "suiteId": "unassigned",
+    "moduleId": "concurrency_parallelism",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "concurrency_is_future_done",
+    "title": "is future %1 done?",
+    "description": "Checks if a background task has completed, failed, or been cancelled.",
+    "suiteId": "unassigned",
+    "moduleId": "concurrency_parallelism",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "concurrency_thread_start",
+    "title": "start new thread with function %1 and args %2",
+    "description": "Starts a new thread.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_threading__executor"
+  },
+  {
+    "id": "concurrency_thread_join",
+    "title": "join thread %1",
+    "description": "Waits for a thread to complete.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_threading__executor"
+  },
+  {
+    "id": "concurrency_thread_pool_submit",
+    "title": "submit to thread pool function %1 with args %2",
+    "description": "Submits a task to the thread pool.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_threading__executor"
+  },
+  {
+    "id": "concurrency_future_result",
+    "title": "get result from future %1 with timeout %2",
+    "description": "Gets the result from a future.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_threading__executor"
+  },
+  {
+    "id": "concurrency_thread_lock_acquire",
+    "title": "acquire lock %1",
+    "description": "Acquires a thread lock.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_threading__executor"
+  },
+  {
+    "id": "concurrency_thread_lock_release",
+    "title": "release lock %1",
+    "description": "Releases a thread lock.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_threading__executor"
+  },
+  {
+    "id": "concurrency_schedule_every",
+    "title": "schedule to run %1 every %2 seconds",
+    "description": "Schedules a function to run at a regular interval.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_scheduling"
+  },
+  {
+    "id": "concurrency_schedule_once",
+    "title": "schedule to run %1 once after %2 seconds",
+    "description": "Schedules a function to run once after a delay.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_scheduling"
+  },
+  {
+    "id": "concurrency_queue_put",
+    "title": "put item %1 into queue %2",
+    "description": "Puts an item into a queue.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_queues__synchronization"
+  },
+  {
+    "id": "concurrency_queue_get",
+    "title": "get item from queue %1 with timeout %2",
+    "description": "Gets an item from a queue.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_queues__synchronization"
+  },
+  {
+    "id": "concurrency_event_wait_set_clear",
+    "title": "%1 event %2",
+    "description": "Interacts with a threading event.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_queues__synchronization"
+  },
+  {
+    "id": "concurrency_semaphore_acquire_release",
+    "title": "%1 semaphore %2",
+    "description": "Acquires or releases a semaphore.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_queues__synchronization"
+  },
+  {
+    "id": "concurrency_async_def",
+    "title": "async define %1 with parameters %2",
+    "description": "Defines an asynchronous function.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_async_asyncio_safe_wrappers"
+  },
+  {
+    "id": "concurrency_await_block",
+    "title": "await %1",
+    "description": "Awaits an awaitable object.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_async_asyncio_safe_wrappers"
+  },
+  {
+    "id": "concurrency_async_sleep",
+    "title": "async sleep for %1 seconds",
+    "description": "Asynchronously sleeps for a number of seconds.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_async_asyncio_safe_wrappers"
+  },
+  {
+    "id": "concurrency_async_gather",
+    "title": "async gather %1",
+    "description": "Gathers results from multiple awaitable objects.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_async_asyncio_safe_wrappers"
+  },
+  {
+    "id": "concurrency_async_http_get",
+    "title": "async HTTP GET url %1",
+    "description": "Performs an asynchronous HTTP GET request.",
+    "suiteId": "concurrency_async",
+    "moduleId": "concurrency_async",
+    "categoryId": "cat_async_asyncio_safe_wrappers"
+  },
+  {
+    "id": "collections_counter_create",
+    "title": "create Counter from %1",
+    "description": "Creates a collections.Counter object from an iterable.",
+    "suiteId": "standard_library",
+    "moduleId": "collections",
+    "categoryId": "cat_collections"
+  },
+  {
+    "id": "collections_deque_create",
+    "title": "create deque from %1",
+    "description": "Creates a collections.deque object from an iterable.",
+    "suiteId": "standard_library",
+    "moduleId": "collections",
+    "categoryId": "cat_collections"
+  },
+  {
+    "id": "collections_deque_append",
+    "title": "append %1 to deque %2",
+    "description": "Appends an item to the right end of the deque.",
+    "suiteId": "standard_library",
+    "moduleId": "collections",
+    "categoryId": "cat_collections"
+  },
+  {
+    "id": "collections_deque_appendleft",
+    "title": "append left %1 to deque %2",
+    "description": "Appends an item to the left end of the deque.",
+    "suiteId": "standard_library",
+    "moduleId": "collections",
+    "categoryId": "cat_collections"
+  },
+  {
+    "id": "collections_deque_pop",
+    "title": "pop from deque %1",
+    "description": "Removes and returns an item from the right end of the deque.",
+    "suiteId": "standard_library",
+    "moduleId": "collections",
+    "categoryId": "cat_collections"
+  },
+  {
+    "id": "collections_deque_popleft",
+    "title": "pop left from deque %1",
+    "description": "Removes and returns an item from the left end of the deque.",
+    "suiteId": "standard_library",
+    "moduleId": "collections",
+    "categoryId": "cat_collections"
+  },
+  {
+    "id": "collections_defaultdict_create",
+    "title": "create defaultdict with default factory %1",
+    "description": "Creates a collections.defaultdict with a specified default factory (e.g., int, list, str).",
+    "suiteId": "standard_library",
+    "moduleId": "collections",
+    "categoryId": "cat_collections"
+  },
+  {
+    "id": "beautifulsoup_parse_html",
+    "title": "parse HTML text %1 with parser %2",
+    "description": "Parse HTML content into a BeautifulSoup object.",
+    "suiteId": "web_scraping",
+    "moduleId": "beautifulsoup",
+    "categoryId": "cat_beautifulsoup"
+  },
+  {
+    "id": "beautifulsoup_find",
+    "title": "in soup %1 find first tag %2 with attributes %3",
+    "description": "Find the first tag that matches the given criteria.",
+    "suiteId": "web_scraping",
+    "moduleId": "beautifulsoup",
+    "categoryId": "cat_beautifulsoup"
+  },
+  {
+    "id": "beautifulsoup_find_all",
+    "title": "in soup %1 find all tags %2 with attributes %3 limit %4",
+    "description": "Find all tags that match the given criteria.",
+    "suiteId": "web_scraping",
+    "moduleId": "beautifulsoup",
+    "categoryId": "cat_beautifulsoup"
+  },
+  {
+    "id": "beautifulsoup_get_text",
+    "title": "get text from element %1",
+    "description": "Get all the text from a tag or a soup object.",
+    "suiteId": "web_scraping",
+    "moduleId": "beautifulsoup",
+    "categoryId": "cat_beautifulsoup"
+  },
+  {
+    "id": "beautifulsoup_get_attribute",
+    "title": "from element %1 get attribute %2",
+    "description": "Get the value of an attribute from a tag.",
+    "suiteId": "web_scraping",
+    "moduleId": "beautifulsoup",
+    "categoryId": "cat_beautifulsoup"
+  },
+  {
+    "id": "automation_ssh_connect",
+    "title": "connect SSH to host %1",
+    "description": "Connects to a host via SSH. (Admin gated)",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_ssh_remote_ops"
+  },
+  {
+    "id": "automation_ssh_run",
+    "title": "on SSH connection %1 run command %2",
+    "description": "Runs a command on a remote host via SSH.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_ssh_remote_ops"
+  },
+  {
+    "id": "automation_scp_upload",
+    "title": "on SSH connection %1 upload from %2 to %3",
+    "description": "Uploads a file to a remote host via SCP.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_ssh_remote_ops"
+  },
+  {
+    "id": "automation_scp_download",
+    "title": "on SSH connection %1 download from %2 to %3",
+    "description": "Downloads a file from a remote host via SCP.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_ssh_remote_ops"
+  },
+  {
+    "id": "automation_cmd_run_safe",
+    "title": "run safe command %1 with args %2",
+    "description": "Runs a pre-approved command from a safe list.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_safe_shell_commands"
+  },
+  {
+    "id": "automation_cmd_user_confirm",
+    "title": "confirm with user: %1",
+    "description": "Asks the user for confirmation before proceeding.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_safe_shell_commands"
+  },
+  {
+    "id": "automation_cmd_capture_output",
+    "title": "run safe command %1 and capture output",
+    "description": "Runs a pre-approved command and captures its output.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_safe_shell_commands"
+  },
+  {
+    "id": "automation_ci_trigger",
+    "title": "trigger CI job %1 with params %2",
+    "description": "Triggers a CI/CD job.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_automation_helpers"
+  },
+  {
+    "id": "automation_artifact_upload",
+    "title": "upload artifact at path %1",
+    "description": "Uploads a build artifact.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_automation_helpers"
+  },
+  {
+    "id": "automation_artifact_download",
+    "title": "download artifact with id %1",
+    "description": "Downloads a build artifact and returns its path.",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_automation_helpers"
+  },
+  {
+    "id": "automation_docker_run",
+    "title": "docker run image %1 with args %2",
+    "description": "Runs a Docker container. (Admin gated)",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_containers_infra"
+  },
+  {
+    "id": "automation_terraform_apply",
+    "title": "terraform apply plan %1",
+    "description": "Applies a Terraform plan. (Admin gated)",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_containers_infra"
+  },
+  {
+    "id": "automation_ansible_run",
+    "title": "ansible run playbook %1",
+    "description": "Runs an Ansible playbook. (Admin gated)",
+    "suiteId": "automation_devops",
+    "moduleId": "automation_devops",
+    "categoryId": "cat_containers_infra"
+  },
+  {
+    "id": "async_function",
+    "title": "async function %1 ( %2 )",
+    "description": "Defines an asynchronous function.",
+    "suiteId": "unassigned",
+    "moduleId": "async_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "async_await",
+    "title": "await %1",
+    "description": "Waits for an awaitable object (like an async function call) to complete.",
+    "suiteId": "unassigned",
+    "moduleId": "async_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "async_http_get",
+    "title": "async GET from url %1 with headers %2",
+    "description": "Makes an asynchronous GET request to a whitelisted URL.",
+    "suiteId": "unassigned",
+    "moduleId": "async_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "async_http_post",
+    "title": "async POST to url %1 with data %2 json %3 headers %4",
+    "description": "Makes an asynchronous POST request to a whitelisted URL.",
+    "suiteId": "unassigned",
+    "moduleId": "async_networking",
+    "categoryId": "unassigned"
+  },
+  {
+    "id": "argparse_import",
+    "title": "import argparse",
+    "description": "Imports the argparse module.",
+    "suiteId": "tools_testing",
+    "moduleId": "argparse",
+    "categoryId": "cat_argparse"
+  },
+  {
+    "id": "argparse_create_parser",
+    "title": "create argument parser with description %1",
+    "description": "Creates an ArgumentParser object.",
+    "suiteId": "tools_testing",
+    "moduleId": "argparse",
+    "categoryId": "cat_argparse"
+  },
+  {
+    "id": "argparse_add_argument",
+    "title": "parser %1 add argument %2",
+    "description": "Adds an argument to the parser.",
+    "suiteId": "tools_testing",
+    "moduleId": "argparse",
+    "categoryId": "cat_argparse"
+  },
+  {
+    "id": "argparse_parse_args",
+    "title": "parser %1 parse args",
+    "description": "Parses the command-line arguments.",
+    "suiteId": "tools_testing",
+    "moduleId": "argparse",
+    "categoryId": "cat_argparse"
+  },
+  {
+    "id": "argparse_get_arg",
+    "title": "get arg %1 from parsed args %2",
+    "description": "Gets the value of a specific argument.",
+    "suiteId": "tools_testing",
+    "moduleId": "argparse",
+    "categoryId": "cat_argparse"
+  }
+]

@@ -1,0 +1,138 @@
+/* src/styles/toolbox.css */
+
+/* --- Root Toolbox Container --- */
+.blocklyToolboxDiv {
+  position: relative;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 8px !important;
+  perspective: none !important; /* Remove perspective to prevent 3D conflicts */
+  border-right: 1px solid var(--editor-gutter) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  z-index: 1;
+}
+
+/* "Alive" shimmer effect */
+.blocklyToolboxDiv::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 250%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    var(--primary-a08) 45%,
+    var(--primary-a08) 55%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  animation: shimmer-toolbox 7s infinite linear;
+  animation-delay: 1.5s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shimmer-toolbox {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* --- Main Category Rows --- */
+.blocklyTreeRow {
+  border-radius: 8px !important;
+  margin: 4px 0 !important;
+  padding: 8px 12px !important;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid transparent !important;
+  font-weight: 500 !important;
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 8px) !important; /* Full width minus some margin */
+  box-sizing: border-box !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 32px !important;
+}
+
+/* --- Main Category Hover State --- */
+.blocklyTreeRow:not(.blocklyTreeSelected):hover {
+  background-color: var(--primary-a12) !important;
+  transform: scale(1.02) translateZ(0);
+  border-color: var(--primary-a30) !important;
+  box-shadow: var(--shadow-1);
+}
+
+/* --- Main Category Selected State --- */
+.blocklyTreeRow.blocklyTreeSelected {
+  background-color: var(--primary-500) !important;
+  font-weight: 700 !important;
+  border-left: 4px solid var(--accent-500) !important;
+  color: var(--text-white) !important;
+}
+
+/* --- Submodule Container --- */
+.blocklyTreeChildDiv {
+  padding-left: 12px;
+  width: calc(100% - 12px) !important;
+  box-sizing: border-box !important;
+  position: relative;
+  transform: translateZ(0);
+  will-change: transform;
+  pointer-events: auto !important;
+  z-index: 1;
+  margin: 4px 0 !important;
+}
+
+/* Prevent hover effects on child elements */
+.blocklyTreeChildDiv * {
+  pointer-events: auto !important;
+}
+
+/* --- Icon Styling --- */
+.category-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+.blocklyTreeRow.blocklyTreeSelected .category-icon {
+  opacity: 1;
+  filter: drop-shadow(0 0 5px var(--primary-a30));
+}
+
+/* --- Search Input (from plugin) --- */
+.toolbox-search-label .blocklyTreeLabel {
+  padding: 0 !important;
+  width: 100%;
+}
+
+.toolbox-search-label input[type="search"] {
+  width: calc(100% - 16px);
+  padding: 10px;
+  margin: 8px;
+  border: 1px solid var(--editor-gutter);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+  background-color: var(--surface-1);
+  color: var(--text);
+}
+
+.toolbox-search-label input[type="search"]:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}

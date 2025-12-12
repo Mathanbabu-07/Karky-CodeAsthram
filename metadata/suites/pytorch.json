@@ -1,0 +1,178 @@
+{
+  "name": "PyTorch",
+  "modules": {
+    "torch": {
+      "name": "torch",
+      "blocks": [
+        {
+          "id": "torch_tensor",
+          "title": "create torch tensor from %1",
+          "description": "Creates a PyTorch tensor from a list or NumPy array.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_tensors"
+        },
+        {
+          "id": "torch_tensor_shape",
+          "title": "shape of tensor %1",
+          "description": "Returns the shape of a PyTorch tensor.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_tensors"
+        },
+        {
+          "id": "torch_tensor_reshape",
+          "title": "reshape tensor %1 to shape %2",
+          "description": "Returns a tensor with the same data and number of elements as input, but with the specified shape.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_tensors"
+        },
+        {
+          "id": "torch_zeros",
+          "title": "create tensor of zeros with shape %1",
+          "description": "Creates a tensor filled with zeros.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_tensors"
+        },
+        {
+          "id": "torch_ones",
+          "title": "create tensor of ones with shape %1",
+          "description": "Creates a tensor filled with ones.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_tensors"
+        },
+        {
+          "id": "torch_randn",
+          "title": "create random tensor with shape %1",
+          "description": "Creates a tensor with random numbers from a normal distribution.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_tensors"
+        },
+        {
+          "id": "torch_nn_module",
+          "title": "define torch neural network %1",
+          "description": "Defines a neural network as a class that inherits from torch.nn.Module.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_nn_linear",
+          "title": "linear layer: in %1 out %2",
+          "description": "Applies a linear transformation to the incoming data.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_nn_conv2d",
+          "title": "Conv2D layer: in_channels %1 out_channels %2 kernel_size %3",
+          "description": "Applies a 2D convolution over an input signal composed of several input planes.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_nn_maxpool2d",
+          "title": "MaxPool2D layer: kernel_size %1",
+          "description": "Applies a 2D max pooling over an input signal.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_nn_relu",
+          "title": "ReLU activation",
+          "description": "Applies the rectified linear unit function element-wise.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_nn_dropout",
+          "title": "dropout layer: p %1",
+          "description": "During training, randomly zeroes some of the elements of the input tensor with probability p.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_nn_embedding",
+          "title": "embedding layer: num_embeddings %1 embedding_dim %2",
+          "description": "A simple lookup table that stores embeddings of a fixed dictionary and size.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_nn_lstm",
+          "title": "LSTM layer: input_size %1 hidden_size %2",
+          "description": "Applies a multi-layer long short-term memory (LSTM) RNN to an input sequence.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_nn_layers"
+        },
+        {
+          "id": "torch_custom_dataset",
+          "title": "define custom torch dataset %1",
+          "description": "Defines a custom PyTorch dataset.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_data"
+        },
+        {
+          "id": "torch_dataloader",
+          "title": "create DataLoader for dataset %1",
+          "description": "Creates a DataLoader for iterating over a dataset.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_data"
+        },
+        {
+          "id": "torch_loss_function",
+          "title": "loss function %1",
+          "description": "Creates a loss function instance.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_training"
+        },
+        {
+          "id": "torch_optimizer",
+          "title": "optimizer %1 for parameters %2 with learning rate %3",
+          "description": "Creates an optimizer instance.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_training"
+        },
+        {
+          "id": "torch_train_loop",
+          "title": "train for %1 epochs:",
+          "description": "A flexible training loop for a PyTorch model.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_training"
+        },
+        {
+          "id": "torch_save",
+          "title": "save model state %1 to file %2",
+          "description": "Saves a model's state dictionary.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_model_management"
+        },
+        {
+          "id": "torch_load",
+          "title": "load model state for %1 from file %2",
+          "description": "Loads a model's state dictionary from a file.",
+          "suiteId": "pytorch",
+          "moduleId": "torch",
+          "categoryId": "cat_model_management"
+        }
+      ]
+    }
+  }
+}

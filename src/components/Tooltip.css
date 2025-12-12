@@ -1,0 +1,23 @@
+.custom-tooltip {
+  position: fixed; /* Use fixed positioning to escape the parent's bounds */
+  background-color: #2d3748; /* A dark, modern background */
+  color: #f7fafc; /* Light text */
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 1000; /* Ensure it's on top of everything */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) translateX(-50%); /* Start slightly below and centered */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none; /* Don't let the tooltip interfere with mouse events */
+  white-space: nowrap; /* Prevent text wrapping */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.custom-tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) translateX(-50%); /* Move to final position */
+}

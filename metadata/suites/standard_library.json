@@ -1,0 +1,443 @@
+{
+  "name": "Standard Library",
+  "modules": {
+    "system": {
+      "name": "system",
+      "blocks": [
+        {
+          "id": "sys_argv",
+          "title": "command-line arguments",
+          "description": "Returns the list of command-line arguments passed to a Python script.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "sys_platform",
+          "title": "platform identifier",
+          "description": "Returns a string identifying the platform (e.g., 'linux', 'win32').",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_path_join",
+          "title": "join path components %1",
+          "description": "Joins one or more path components intelligently.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_path_exists",
+          "title": "path exists %1",
+          "description": "Return True if path refers to an existing path or an open file descriptor.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_path_basename",
+          "title": "base name of path %1",
+          "description": "Return the base name of pathname path.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_path_dirname",
+          "title": "directory name of path %1",
+          "description": "Return the directory name of pathname path.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_path_splitext",
+          "title": "split extension of path %1",
+          "description": "Split the pathname path into a pair (root, ext).",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_mkdir",
+          "title": "create directory at path %1",
+          "description": "Create a directory.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_makedirs",
+          "title": "create directory (and parents) at path %1",
+          "description": "Recursive directory creation function.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_rename",
+          "title": "rename from %1 to %2",
+          "description": "Rename the file or directory src to dst.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_path_isfile",
+          "title": "is path %1 a file?",
+          "description": "Return True if path is an existing regular file.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        },
+        {
+          "id": "os_path_isdir",
+          "title": "is path %1 a directory?",
+          "description": "Return True if path is an existing directory.",
+          "suiteId": "standard_library",
+          "moduleId": "system",
+          "categoryId": "cat_system"
+        }
+      ]
+    },
+    "re": {
+      "name": "re",
+      "blocks": [
+        {
+          "id": "re_compile",
+          "title": "compile regex pattern %1",
+          "description": "Compiles a regular expression pattern into a regex object.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_search",
+          "title": "search for pattern %1 in string %2",
+          "description": "Scans through a string looking for the first location where the regular expression pattern produces a match.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_match",
+          "title": "match pattern %1 at start of string %2",
+          "description": "If zero or more characters at the beginning of string match the regular expression pattern, return a corresponding match object.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_findall",
+          "title": "find all matches for pattern %1 in string %2",
+          "description": "Return all non-overlapping matches of pattern in string, as a list of strings.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_sub",
+          "title": "replace matches of pattern %1 with %2 in string %3",
+          "description": "Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_split",
+          "title": "split string %1 by pattern %2",
+          "description": "Split string by the occurrences of pattern.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_escape",
+          "title": "escape special characters in %1",
+          "description": "Escape special characters in a pattern.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_match_group",
+          "title": "from match %1 get group %2",
+          "description": "Returns a specific subgroup of the match.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        },
+        {
+          "id": "re_match_groups",
+          "title": "get all groups from match %1",
+          "description": "Returns a tuple containing all the subgroups of the match.",
+          "suiteId": "standard_library",
+          "moduleId": "re",
+          "categoryId": "cat_regex"
+        }
+      ]
+    },
+    "json": {
+      "name": "json",
+      "blocks": [
+        {
+          "id": "json_loads",
+          "title": "parse JSON string %1",
+          "description": "Deserialize a JSON string to a Python object.",
+          "suiteId": "standard_library",
+          "moduleId": "json",
+          "categoryId": "cat_json"
+        }
+      ]
+    },
+    "itertools": {
+      "name": "itertools",
+      "blocks": [
+        {
+          "id": "itertools_chain",
+          "title": "chain iterables %1",
+          "description": "Chains multiple iterables together into a single iterator.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_permutations",
+          "title": "permutations of %1 of length %2",
+          "description": "Return successive r length permutations of elements in the iterable.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_combinations",
+          "title": "combinations of %1 of length %2",
+          "description": "Return r length subsequences of elements from the input iterable.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_product",
+          "title": "cartesian product of iterables %1",
+          "description": "Cartesian product of input iterables.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_count",
+          "title": "count from %1 with step %2",
+          "description": "Creates an iterator that returns evenly spaced values starting with number start.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_cycle",
+          "title": "cycle through %1",
+          "description": "Creates an iterator returning elements from the iterable and saving a copy of each. When the iterable is exhausted, return elements from the saved copy. Repeats indefinitely.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_repeat",
+          "title": "repeat %1 %2 times",
+          "description": "Creates an iterator that returns object over and over again. If the times argument is specified, it will repeat that many times.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_takewhile",
+          "title": "take from %1 while %2 is true",
+          "description": "Creates an iterator that returns elements from the iterable as long as the predicate is true.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_dropwhile",
+          "title": "drop from %1 while %2 is true",
+          "description": "Creates an iterator that drops elements from the iterable as long as the predicate is true.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        },
+        {
+          "id": "itertools_filterfalse",
+          "title": "filter from %1 where %2 is false",
+          "description": "Creates an iterator that filters elements from iterable returning only those for which the predicate is false.",
+          "suiteId": "standard_library",
+          "moduleId": "itertools",
+          "categoryId": "cat_itertools"
+        }
+      ]
+    },
+    "datetime": {
+      "name": "datetime",
+      "blocks": [
+        {
+          "id": "datetime_now",
+          "title": "current date and time",
+          "description": "Gets the current date and time.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_date",
+          "title": "date year %1 month %2 day %3",
+          "description": "Creates a date object.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_time",
+          "title": "time hour %1 minute %2 second %3",
+          "description": "Creates a time object.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_datetime",
+          "title": "datetime year %1 month %2 day %3 hour %4 minute %5 second %6",
+          "description": "Creates a datetime object.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_timedelta",
+          "title": "timedelta days %1 seconds %2 microseconds %3 milliseconds %4 minutes %5 hours %6 weeks %7",
+          "description": "Creates a timedelta object.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_strftime",
+          "title": "format %1 with %2",
+          "description": "Formats a datetime object to a string.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_strptime",
+          "title": "parse %1 with %2",
+          "description": "Parses a string into a datetime object.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_fromtimestamp",
+          "title": "datetime from timestamp %1",
+          "description": "Creates a datetime object from a Unix timestamp.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_timestamp",
+          "title": "timestamp from %1",
+          "description": "Converts a datetime object to a Unix timestamp.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_getattr",
+          "title": "get %1 from %2",
+          "description": "Gets a specific attribute from a datetime object.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_timezone",
+          "title": "timezone UTC offset %1",
+          "description": "Creates a timezone object with a UTC offset in hours.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        },
+        {
+          "id": "datetime_astimezone",
+          "title": "convert %1 to timezone %2",
+          "description": "Converts a datetime object to a specific timezone.",
+          "suiteId": "standard_library",
+          "moduleId": "datetime",
+          "categoryId": "cat_datetime"
+        }
+      ]
+    },
+    "collections": {
+      "name": "collections",
+      "blocks": [
+        {
+          "id": "collections_counter_create",
+          "title": "create Counter from %1",
+          "description": "Creates a collections.Counter object from an iterable.",
+          "suiteId": "standard_library",
+          "moduleId": "collections",
+          "categoryId": "cat_collections"
+        },
+        {
+          "id": "collections_deque_create",
+          "title": "create deque from %1",
+          "description": "Creates a collections.deque object from an iterable.",
+          "suiteId": "standard_library",
+          "moduleId": "collections",
+          "categoryId": "cat_collections"
+        },
+        {
+          "id": "collections_deque_append",
+          "title": "append %1 to deque %2",
+          "description": "Appends an item to the right end of the deque.",
+          "suiteId": "standard_library",
+          "moduleId": "collections",
+          "categoryId": "cat_collections"
+        },
+        {
+          "id": "collections_deque_appendleft",
+          "title": "append left %1 to deque %2",
+          "description": "Appends an item to the left end of the deque.",
+          "suiteId": "standard_library",
+          "moduleId": "collections",
+          "categoryId": "cat_collections"
+        },
+        {
+          "id": "collections_deque_pop",
+          "title": "pop from deque %1",
+          "description": "Removes and returns an item from the right end of the deque.",
+          "suiteId": "standard_library",
+          "moduleId": "collections",
+          "categoryId": "cat_collections"
+        },
+        {
+          "id": "collections_deque_popleft",
+          "title": "pop left from deque %1",
+          "description": "Removes and returns an item from the left end of the deque.",
+          "suiteId": "standard_library",
+          "moduleId": "collections",
+          "categoryId": "cat_collections"
+        },
+        {
+          "id": "collections_defaultdict_create",
+          "title": "create defaultdict with default factory %1",
+          "description": "Creates a collections.defaultdict with a specified default factory (e.g., int, list, str).",
+          "suiteId": "standard_library",
+          "moduleId": "collections",
+          "categoryId": "cat_collections"
+        }
+      ]
+    }
+  }
+}

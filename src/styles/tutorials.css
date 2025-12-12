@@ -1,0 +1,395 @@
+/* src/styles/tutorials.css */
+@import url('./theme_variables.css');
+
+/*
+  Modern Tutorial Panel & List Stylesheet
+  Theme: Tech-Modern "Ericsson Blue" - Rev. 2 (Layout Corrected)
+*/
+
+/* --- Color Palette --- */
+:root {
+  --toolbar-height: 72px; /* sensible default when not provided by host */
+  --tutorial-bg: var(--surface-1);
+  --tutorial-header-footer-bg: var(--surface-1);
+  --tutorial-border: var(--editor-gutter);
+  --tutorial-text-primary: var(--text);
+  --tutorial-text-secondary: var(--muted-text);
+  --tutorial-accent: var(--primary-500);
+  --tutorial-button-hover-bg: var(--primary-a08);
+  --tutorial-footer-height: 72px; /* deterministic footer height */
+}
+
+/* --- Tutorial Selection Modal (No changes) --- */
+.tutorials-list {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--tutorial-bg);
+  color: var(--tutorial-text-primary);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-1);
+  z-index: 1000;
+  border: 1px solid var(--tutorial-border);
+  width: 90%;
+  max-width: 500px;
+}
+.tutorials-list .tutorials-list-grid {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.tutorials-tech-aside {
+  border-right: 1px dashed var(--tutorial-border);
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tech-badge { width: 100%; height: auto; filter: drop-shadow(0 0 10px color-mix(in srgb, var(--primary-500) 20%, transparent)); }
+.tech-aside-label { font-size: 0.75rem; color: var(--tutorial-text-secondary); text-align: center; letter-spacing: .5px; }
+.tutorials-list-main h2 { margin-top: 0; }
+.tutorials-list h2 { text-align: center; margin-bottom: 2rem; color: var(--tutorial-text-primary); font-weight: 500; }
+.tutorials-list ul { list-style: none; padding: 0; margin: 0; }
+.tutorials-list li { margin-bottom: 1rem; }
+.tutorials-list li button {
+  width: 100%; padding: 1rem; background-color: var(--tutorial-button-hover-bg);
+  color: var(--tutorial-text-primary); border: 1px solid var(--tutorial-border);
+  border-radius: 8px; cursor: pointer; transition: all 0.2s ease;
+  text-align: left; font-size: 1rem;
+}
+.tutorials-list li button:hover {
+  background-color: var(--tutorial-header-footer-bg); border-color: var(--tutorial-accent);
+  transform: translateY(-2px); box-shadow: var(--shadow-1);
+} 
+
+
+
+/* --- Main Panel Structure (clean flex layout) --- */
+.tutorial-side-panel {
+  position: fixed;
+  top: var(--toolbar-height);
+  right: 0;
+  width: 100%;
+  max-width: 420px;
+  height: calc(100vh - var(--toolbar-height));
+  background-color: var(--tutorial-bg);
+  color: var(--tutorial-text-primary);
+  border-left: 1px solid var(--tutorial-border);
+  box-shadow: var(--shadow-1);
+  z-index: 1001;
+  display: block; /* wrapper (.tutorial-panel-content-wrapper) becomes the grid */
+  box-sizing: border-box;
+}
+
+/* Container for the entire content */
+.tutorial-panel-content-wrapper {
+  /* Make the wrapper the grid container so header/body/footer are direct grid items */
+  display: grid;
+  grid-template-rows: auto 1fr var(--tutorial-footer-height);
+  height: 100%;
+  min-height: 0; /* critical so the middle row (1fr) can shrink/grow */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Panel Header --- */
+.tutorial-panel-header {
+  grid-row: 1;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--tutorial-header-footer-bg);
+  border-bottom: 1px solid var(--tutorial-border);
+  z-index: 2;
+}
+
+/* --- Panel Body (Scrollable Content) --- */
+.tutorial-panel-body {
+  grid-row: 2;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.5rem;
+  min-height: 0; /* ensures proper scrolling in nested grid/flex containers */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
+  scrollbar-width: thin;
+  scrollbar-color: var(--tutorial-border) var(--tutorial-bg);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Webkit scrollbar styling */
+.tutorial-panel-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tutorial-panel-body::-webkit-scrollbar-track {
+  background: var(--tutorial-bg);
+}
+
+.tutorial-panel-body::-webkit-scrollbar-thumb {
+  background-color: var(--tutorial-border);
+  border-radius: 4px;
+  border: 2px solid var(--tutorial-bg);
+}
+
+/* --- Content Styling (Restored and Refined) --- */
+.tutorial-header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.tutorial-title { margin: 0; font-size: 1.25rem; font-weight: 600; }
+.tutorial-progress { width: 100%; height: 4px; background-color: var(--primary-a08); border-radius: 2px; overflow: hidden; margin-bottom: 0.5rem; }
+.tutorial-progress-bar { height: 100%; background: var(--tutorial-accent); border-radius: 2px; transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+.tutorial-progress-text { font-size: 0.8rem; color: var(--tutorial-text-secondary); text-align: center; }
+.close-btn { background: none; border: none; font-size: 1.75rem; line-height: 1; color: var(--tutorial-text-secondary); cursor: pointer; padding: 0.5rem; margin: -0.5rem; transition: color 0.2s ease, transform 0.2s ease; }
+.close-btn:hover { color: var(--tutorial-text-primary); transform: scale(1.1); }
+
+/* --- Panel Body (Scrollable Content) --- */
+.tutorial-panel-body {
+  flex: 1 1 auto; /* Allow it to grow and shrink, but be based on its content */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  padding: 1.5rem;
+  min-height: 0; /* CRITICAL FIX for flexbox scrolling */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* --- Content Styling (Restored and Refined) --- */
+.tutorial-step-title { font-size: 1.1rem; font-weight: 600; color: var(--tutorial-text-primary); margin-bottom: 1.5rem; }
+.tutorial-section { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--tutorial-border); }
+.tutorial-section:last-child { border-bottom: none; margin-bottom: 0; }
+.tutorial-section-title { font-weight: 600; font-size: 1rem; color: var(--tutorial-text-primary); display: block; margin-bottom: 0.75rem; }
+.tutorial-section-content { color: var(--tutorial-text-secondary); line-height: 1.6; margin: 0; }
+/* This ensures code blocks are readable */
+.tutorial-section-content code { background-color: var(--tutorial-header-footer-bg); padding: 0.2em 0.4em; border-radius: 4px; font-family: 'Courier New', Courier, monospace;}
+
+/* --- Explanation Box (as seen in screenshot) --- */
+.explanation-box {
+  background-color: var(--tutorial-button-hover-bg);
+  border: 1px solid var(--tutorial-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.explanation-box:hover { background-color: var(--primary-a12); }
+.explanation-box span { font-weight: 500; }
+.explanation-box .plus-icon { font-size: 1.5rem; font-weight: 300; }
+
+/* --- Panel Footer --- */
+.tutorial-panel-footer {
+  grid-row: 3;
+  height: var(--tutorial-footer-height);
+  padding: 0.75rem 1.5rem;
+  background-color: var(--tutorial-header-footer-bg);
+  border-top: 1px solid var(--tutorial-border);
+  box-shadow: var(--shadow-1);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.tutorial-controls { display: flex; justify-content: space-between; gap: 1rem; }
+.tutorial-button { flex-grow: 1; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease-in-out; border: 1px solid var(--tutorial-border); }
+.tutorial-button.primary { background: var(--tutorial-accent); color: var(--text-white); border-color: var(--tutorial-accent); }
+.tutorial-button.primary:hover { filter: brightness(1.05); box-shadow: var(--shadow-1); transform: translateY(-2px); }
+.tutorial-button.secondary { background-color: transparent; color: var(--tutorial-text-primary); }
+.tutorial-button.secondary:hover { background-color: var(--tutorial-button-hover-bg); border-color: var(--tutorial-accent); }
+.tutorial-button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; transform: none; }
+
+/* --- Highlight animation for blocks --- */
+@keyframes highlight-fade {
+  from { filter: drop-shadow(0 0 10px var(--tutorial-accent)); }
+  to { filter: none; }
+}
+.tutorial-highlight { animation: highlight-fade 1.5s ease-out; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* ------------------------------------------------------------------
+   Compact / Viewport-fit mode (opt-in)
+   These rules are scoped under `.tutorial-side-panel.compact` so the
+   default behavior remains scrollable. Add the `compact` class to
+   `.tutorial-side-panel` when you want aggressive shrink-to-fit.
+   ------------------------------------------------------------------ */
+
+/* Ensure panel never grows beyond the viewport when compact */
+.tutorial-side-panel.compact {
+  max-height: calc(100vh - var(--toolbar-height));
+  box-sizing: border-box;
+}
+
+/* When compact mode is enabled, hide inner scrolling so content must fit */
+.tutorial-side-panel.compact .tutorial-panel-body {
+  overflow: hidden;
+}
+
+/* Make inner elements more compact and responsive (compact mode only) */
+.tutorial-side-panel.compact .tutorial-panel-header,
+.tutorial-side-panel.compact .tutorial-panel-footer,
+.tutorial-side-panel.compact .tutorial-panel-body {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.tutorial-side-panel.compact .tutorial-step-title { font-size: 1rem; margin-bottom: 0.75rem; }
+.tutorial-side-panel.compact .tutorial-section-title { font-size: 0.95rem; margin-bottom: 0.5rem; }
+.tutorial-side-panel.compact .tutorial-section-content { font-size: 0.85rem; line-height: 1.25; }
+.tutorial-side-panel.compact .tutorial-button { padding: 0.5rem 0.75rem; font-size: 0.9rem; }
+
+/* Make long text wrap and blocks shrink (compact mode) */
+.tutorial-side-panel.compact .tutorial-panel-body * { max-width: 100%; word-wrap: break-word; box-sizing: border-box; }
+
+/* Progressive reduction based on viewport height (compact mode) */
+@media (max-height: 900px) {
+  .tutorial-side-panel.compact .tutorial-panel-header, .tutorial-side-panel.compact .tutorial-panel-footer { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .tutorial-side-panel.compact .tutorial-panel-body { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .tutorial-side-panel.compact .tutorial-step-title { font-size: 0.98rem; }
+  .tutorial-side-panel.compact .tutorial-section-content { font-size: 0.84rem; }
+}
+
+@media (max-height: 750px) {
+  .tutorial-side-panel.compact .tutorial-panel-header, .tutorial-side-panel.compact .tutorial-panel-footer { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .tutorial-side-panel.compact .tutorial-panel-body { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .tutorial-side-panel.compact .tutorial-section-content { font-size: 0.8rem; line-height: 1.15; }
+  .tutorial-side-panel.compact .tutorial-button { padding: 0.45rem 0.6rem; font-size: 0.85rem; }
+}
+
+@media (max-height: 600px) {
+  /* Very compact for small laptop/phone landscape heights */
+  .tutorial-side-panel.compact .tutorial-panel-header, .tutorial-side-panel.compact .tutorial-panel-footer { padding-top: 0.4rem; padding-bottom: 0.4rem; }
+  .tutorial-side-panel.compact .tutorial-panel-body { padding-top: 0.4rem; padding-bottom: 0.4rem; }
+  .tutorial-side-panel.compact .tutorial-step-title { font-size: 0.9rem; }
+  .tutorial-side-panel.compact .tutorial-section-title { font-size: 0.85rem; }
+  .tutorial-side-panel.compact .tutorial-section-content { font-size: 0.76rem; }
+  .tutorial-side-panel.compact .tutorial-header-top { gap: 0.25rem; }
+}
+
+/* If absolutely necessary, hide less important text to preserve controls (compact) */
+@media (max-height: 520px) {
+  .tutorial-side-panel.compact .tutorial-step-title { font-size: 0.88rem; }
+}
+
+/* --- Explanation toggle styles (for TutorialStep) --- */
+.tutorial-section-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--tutorial-button-hover-bg);
+  border: 1px solid var(--tutorial-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.tutorial-section-collapsible { padding: 0.75rem 0.5rem; }
+
+/* --- Minimized (hide / expand) --- */
+.tutorial-side-panel.minimized {
+  width: 32px;
+  max-width: 32px;
+  overflow: hidden;
+  transition: all 0.28s ease;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.tutorial-side-panel.minimized .tutorial-panel-content-wrapper {
+  width: 32px;
+  background: transparent;
+}
+
+.tutorial-side-panel.minimized .tutorial-panel-header {
+  background: transparent;
+  border: none;
+  padding: 0;
+  height: auto;
+}
+
+.tutorial-side-panel.minimized .tutorial-panel-body,
+.tutorial-side-panel.minimized .tutorial-panel-footer,
+.tutorial-side-panel.minimized .tutorial-progress,
+.tutorial-side-panel.minimized .tutorial-progress-text,
+.tutorial-side-panel.minimized .tutorial-title,
+.tutorial-side-panel.minimized .close-btn {
+  display: none;
+}
+
+.tutorial-side-panel.minimized .tutorial-header-top {
+  justify-content: center;
+  margin: 0;
+  padding: 8px 4px;
+}
+
+/* Style the minimize button in minimized state */
+.tutorial-side-panel.minimized .minimize-btn {
+  width: 24px;
+  height: 24px;
+  background: var(--tutorial-accent);
+  border-radius: 4px;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-1);
+  margin: 0;
+}
+
+.tutorial-side-panel.minimized .minimize-btn:hover {
+  transform: scale(1.1);
+  background: var(--primary-600);
+}
+
+.minimize-btn { background: none; border: none; color: var(--tutorial-text-secondary); cursor: pointer; font-size: 1.05rem; padding: 0.25rem; margin-right: 0.25rem; }
+.minimize-btn:hover { color: var(--tutorial-text-primary); transform: scale(1.05); }
+
+/* Strong hide: ensure only the minimize button remains visible when minimized */
+.tutorial-side-panel.minimized {
+  width: 32px !important;
+  max-width: 32px !important;
+  right: 0 !important;
+  overflow: hidden !important;
+}
+
+.tutorial-side-panel.minimized .tutorial-panel-content-wrapper > * {
+  display: none !important;
+}
+
+/* Show header container but hide everything inside except the minimize button */
+.tutorial-side-panel.minimized .tutorial-panel-content-wrapper .tutorial-panel-header {
+  display: block !important;
+  padding: 6px 4px !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.tutorial-side-panel.minimized .tutorial-panel-content-wrapper .tutorial-panel-header .tutorial-header-top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+}
+
+/* hide title and close button, show only minimize button */
+.tutorial-side-panel.minimized .tutorial-title,
+.tutorial-side-panel.minimized .close-btn {
+  display: none !important;
+}
+
+.tutorial-side-panel.minimized .minimize-btn {
+  display: flex !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
+}
+
+/* Ensure the minimized panel has no visual chrome */
+.tutorial-side-panel.minimized {
+  background: transparent !important;
+  border-left: none !important;
+  box-shadow: none !important;
+}
+
+

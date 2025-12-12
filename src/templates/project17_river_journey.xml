@@ -1,0 +1,104 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="river_journey">river_journey</variable>
+    <variable id="place">place</variable>
+  </variables>
+  <block type="essentials_var_set" x="10" y="10">
+    <field name="VAR" id="river_journey">river_journey</field>
+    <value name="VALUE">
+      <block type="essentials_list_create">
+        <mutation items="5"></mutation>
+        <value name="ITEM0">
+          <block type="text_literal">
+            <field name="TEXT">Gaumukh</field>
+          </block>
+        </value>
+        <value name="ITEM1">
+          <block type="text_literal">
+            <field name="TEXT">Haridwar</field>
+          </block>
+        </value>
+        <value name="ITEM2">
+          <block type="text_literal">
+            <field name="TEXT">Kanpur</field>
+          </block>
+        </value>
+        <value name="ITEM3">
+          <block type="text_literal">
+            <field name="TEXT">Varanasi</field>
+          </block>
+        </value>
+        <value name="ITEM4">
+          <block type="text_literal">
+            <field name="TEXT">Bay of Bengal</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print">
+        <value name="TEXT">
+          <block type="text_literal">
+            <field name="TEXT">🌊 The River's Journey Begins:</field>
+          </block>
+        </value>
+        <next>
+          <block type="text_print">
+            <value name="TEXT">
+              <block type="text_literal">
+                <field name="TEXT">---------------------------</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_forEach">
+                <field name="VAR" id="place">place</field>
+                <value name="LIST">
+                  <block type="essentials_var_get">
+                    <field name="VAR" id="river_journey">river_journey</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="text_print">
+                    <value name="TEXT">
+                      <block type="text_format">
+                        <mutation items="1"></mutation>
+                        <value name="TEXT">
+                          <block type="text_literal">
+                            <field name="TEXT">→ Now flowing through {}...</field>
+                          </block>
+                        </value>
+                        <value name="ARG0">
+                          <block type="essentials_var_get">
+                            <field name="VAR" id="place">place</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print">
+                    <value name="TEXT">
+                      <block type="text_literal">
+                        <field name="TEXT">---------------------------</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_print">
+                        <value name="TEXT">
+                          <block type="text_literal">
+                            <field name="TEXT">🌊 The river has reached the sea!</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
