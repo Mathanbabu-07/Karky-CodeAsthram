@@ -1,5 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 // --- Tensors ---
 Python.forBlock['torch_tensor'] = function(block) {
     Python.addImport('import torch');

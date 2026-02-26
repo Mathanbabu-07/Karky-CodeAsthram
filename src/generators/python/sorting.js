@@ -1,5 +1,4 @@
-import { pythonGenerator, pythonGenerator as Python } from 'blockly/python';
-
+import { pythonGenerator as Python } from 'blockly/python';
 // Helper to extract key and reverse values if present on mutator-enabled blocks
 function getKeyAndReverse(block) {
   let key = null;
@@ -131,7 +130,7 @@ Python.forBlock['key_dict_item_block'] = function(block) {
 
 // Consolidated heapq select
 Python.forBlock['heapq_select_block'] = function(block) {
-  pythonGenerator.addImport('import heapq');
+  Python.addImport('import heapq');
   const mode = block.getFieldValue('MODE') || 'NSMALLEST';
   const n = Python.valueToCode(block, 'N', Python.ORDER_NONE) || '1';
   const iterable = Python.valueToCode(block, 'ITERABLE', Python.ORDER_NONE) || '[]';
@@ -153,7 +152,7 @@ Python.forBlock['key_builder_block'] = function(block) {
     case 'LEN': return ['len', Python.ORDER_ATOMIC];
     case 'ABS': return ['abs', Python.ORDER_ATOMIC];
     case 'CMP_TO_KEY': {
-      pythonGenerator.addImport('from functools import cmp_to_key');
+      Python.addImport('from functools import cmp_to_key');
       const comp = Python.valueToCode(block, 'COMPARATOR', Python.ORDER_NONE) || 'None';
       return [`cmp_to_key(${comp})`, Python.ORDER_FUNCTION_CALL];
     }
@@ -163,7 +162,7 @@ Python.forBlock['key_builder_block'] = function(block) {
       return [`(lambda ${v}: ${expr})`, Python.ORDER_LAMBDA];
     }
     case 'ITEMGETTER': {
-      pythonGenerator.addImport('from operator import itemgetter');
+      Python.addImport('from operator import itemgetter');
       const indices = [];
       if (block.getInput('INDEX')) {
         indices.push(Python.valueToCode(block, 'INDEX', Python.ORDER_NONE) || '0');
@@ -174,7 +173,7 @@ Python.forBlock['key_builder_block'] = function(block) {
       return [`itemgetter(${indices.join(', ')})`, Python.ORDER_FUNCTION_CALL];
     }
     case 'ATTRGETTER': {
-      pythonGenerator.addImport('from operator import attrgetter');
+      Python.addImport('from operator import attrgetter');
       const attrs = [];
       if (block.getInput('ATTRIBUTE')) {
         attrs.push(Python.valueToCode(block, 'ATTRIBUTE', Python.ORDER_NONE) || "'name'" );

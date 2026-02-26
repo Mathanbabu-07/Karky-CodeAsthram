@@ -166,9 +166,9 @@ const textBlocks = [
         "type": "field_dropdown",
         "name": "WHERE1",
         "options": [
-          [ "from start", "FROM_START" ],
-          [ "from end", "FROM_END" ],
-          [ "first", "FIRST" ]
+          ["from start", "FROM_START"],
+          ["from end", "FROM_END"],
+          ["first", "FIRST"]
         ]
       },
       {
@@ -179,9 +179,9 @@ const textBlocks = [
         "type": "field_dropdown",
         "name": "WHERE2",
         "options": [
-          [ "from start", "FROM_START" ],
-          [ "from end", "FROM_END" ],
-          [ "last", "LAST" ]
+          ["from start", "FROM_START"],
+          ["from end", "FROM_END"],
+          ["last", "LAST"]
         ]
       },
       {
@@ -208,11 +208,11 @@ const textBlocks = [
         "type": "field_dropdown",
         "name": "OPERATION",
         "options": [
-          [ "find first", "FIRST" ],
-          [ "find last", "LAST" ],
-          [ "contains", "CONTAINS" ],
-          [ "starts with", "STARTSWITH" ],
-          [ "ends with", "ENDSWITH" ]
+          ["find first", "FIRST"],
+          ["find last", "LAST"],
+          ["contains", "CONTAINS"],
+          ["starts with", "STARTSWITH"],
+          ["ends with", "ENDSWITH"]
         ]
       },
       {
@@ -238,12 +238,12 @@ const textBlocks = [
         "type": "field_dropdown",
         "name": "OPERATION",
         "options": [
-          [ "UPPERCASE", "UPPERCASE" ],
-          [ "lowercase", "LOWERCASE" ],
-          [ "Title Case", "TITLECASE" ],
-          [ "strip spaces", "STRIP" ],
-          [ "strip spaces from left", "LSTRIP" ],
-          [ "strip spaces from right", "RSTRIP" ]
+          ["UPPERCASE", "UPPERCASE"],
+          ["lowercase", "LOWERCASE"],
+          ["Title Case", "TITLECASE"],
+          ["strip spaces", "STRIP"],
+          ["strip spaces from left", "LSTRIP"],
+          ["strip spaces from right", "RSTRIP"]
         ]
       },
       {
@@ -265,8 +265,8 @@ const textBlocks = [
         "type": "field_dropdown",
         "name": "MODE",
         "options": [
-          [ "split", "SPLIT" ],
-          [ "join", "JOIN" ]
+          ["split", "SPLIT"],
+          ["join", "JOIN"]
         ]
       },
       {
@@ -330,8 +330,8 @@ const textBlocks = [
         "type": "field_dropdown",
         "name": "OPERATION",
         "options": [
-          [ "escape", "ESCAPE" ],
-          [ "unescape", "UNESCAPE" ]
+          ["escape", "ESCAPE"],
+          ["unescape", "UNESCAPE"]
         ]
       },
       {
@@ -390,14 +390,13 @@ const textBlocks = [
     "colour": "#4D6A94",
     "tooltip": "Prints the specified text, number, or other value to the console.",
     "helpUrl": "https://docs.python.org/3/library/functions.html#print"
-  }
-  ,
+  },
   {
     "type": "text_print_fstring",
     "message0": "print f-string base %1",
-    "args0": [ { "type": "input_value", "name": "BASE", "check": "String" } ],
+    "args0": [{ "type": "input_value", "name": "BASE", "check": "String" }],
     "message1": "placeholders %1",
-    "args1": [ { "type": "input_dummy", "name": "ITEMS" } ],
+    "args1": [{ "type": "input_dummy", "name": "ITEMS" }],
     "previousStatement": null,
     "nextStatement": null,
     "colour": "#4D6A94",
@@ -410,13 +409,91 @@ const textBlocks = [
     "message0": "print %1 with newline %2",
     "args0": [
       { "type": "input_value", "name": "TEXT" },
-      { "type": "field_dropdown", "name": "POSITION", "options": [["before","BEFORE"],["after","AFTER"],["both","BOTH"]] }
+      { "type": "field_dropdown", "name": "POSITION", "options": [["before", "BEFORE"], ["after", "AFTER"], ["both", "BOTH"]] }
     ],
     "previousStatement": null,
     "nextStatement": null,
     "colour": "#4D6A94",
     "tooltip": "Prints text with configurable newline placement (before, after, or both).",
-    "helpUrl": "https://docs.python.org/3/library/functions.html#print"
+  },
+  {
+    "type": "text_check_type",
+    "message0": "is %1 %2 ?",
+    "args0": [
+      { "type": "input_value", "name": "TEXT", "check": "String" },
+      {
+        "type": "field_dropdown",
+        "name": "CHECK_TYPE",
+        "options": [
+          ["alphabetic", "ALPHA"],
+          ["numeric", "DIGIT"],
+          ["alphanumeric", "ALNUM"],
+          ["whitespace only", "SPACE"],
+          ["lowercase", "LOWER"],
+          ["uppercase", "UPPER"],
+          ["title case", "TITLE"],
+          ["printable", "PRINTABLE"],
+          ["identifier", "IDENTIFIER"],
+          ["decimal", "DECIMAL"]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": "Boolean",
+    "colour": "#4D6A94",
+    "tooltip": "Check if a string satisfies a specific property (alphabetic, numeric, etc.). Combines all .is*() string methods.",
+    "helpUrl": "https://docs.python.org/3/library/stdtypes.html#string-methods"
+  },
+  {
+    "type": "text_alignment",
+    "message0": "%1 %2 to width %3",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "ALIGN",
+        "options": [
+          ["center", "CENTER"],
+          ["left justify", "LJUST"],
+          ["right justify", "RJUST"],
+          ["zero-pad", "ZFILL"]
+        ]
+      },
+      { "type": "input_value", "name": "TEXT", "check": "String" },
+      { "type": "input_value", "name": "WIDTH", "check": "Number" }
+    ],
+    "message1": "fill character %1",
+    "args1": [
+      { "type": "input_value", "name": "FILL", "check": "String" }
+    ],
+    "inputsInline": true,
+    "output": "String",
+    "colour": "#4D6A94",
+    "tooltip": "Align or pad a string to a specified width. center(), ljust(), rjust(), or zfill() methods.",
+    "helpUrl": "https://docs.python.org/3/library/stdtypes.html#string-methods"
+  },
+  {
+    "type": "text_partition",
+    "message0": "%1 %2",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "METHOD",
+        "options": [
+          ["partition", "PARTITION"],
+          ["rpartition", "RPARTITION"]
+        ]
+      },
+      { "type": "input_value", "name": "TEXT", "check": "String" }
+    ],
+    "message1": "separator %1",
+    "args1": [
+      { "type": "input_value", "name": "SEP", "check": "String" }
+    ],
+    "inputsInline": true,
+    "output": "Array",
+    "colour": "#4D6A94",
+    "tooltip": "Split a string into a 3-tuple (before, separator, after) using partition() or rpartition().",
+    "helpUrl": "https://docs.python.org/3/library/stdtypes.html#str.partition"
   }
 ];
 
@@ -440,18 +517,18 @@ const blocksToRegister = textBlocks.filter(b => {
 const textConcatMutator = {
   itemCount_: 2,
 
-  saveExtraState: function() {
+  saveExtraState: function () {
     return {
       'itemCount': this.itemCount_
     };
   },
 
-  loadExtraState: function(state) {
+  loadExtraState: function (state) {
     this.itemCount_ = state['itemCount'] || 2;
     this.updateShape_();
   },
 
-  decompose: function(workspace) {
+  decompose: function (workspace) {
     const containerBlock = workspace.newBlock('text_concat_item');
     containerBlock.initSvg();
     let connection = containerBlock.nextConnection;
@@ -464,7 +541,7 @@ const textConcatMutator = {
     return containerBlock;
   },
 
-  compose: function(containerBlock) {
+  compose: function (containerBlock) {
     let itemBlock = containerBlock.nextConnection.targetBlock();
     const connections = [];
     while (itemBlock) {
@@ -490,7 +567,7 @@ const textConcatMutator = {
     }
   },
 
-  saveConnections: function(containerBlock) {
+  saveConnections: function (containerBlock) {
     let itemBlock = containerBlock.nextConnection.targetBlock();
     let i = 0;
     while (itemBlock) {
@@ -501,7 +578,7 @@ const textConcatMutator = {
     }
   },
 
-  updateShape_: function() {
+  updateShape_: function () {
     // Remove any obsolete input 'A' from old projects
     if (this.getInput('A')) {
       const oldInput = this.getInput('A');
@@ -509,7 +586,7 @@ const textConcatMutator = {
       this.removeInput('A');
       // Migrate the old input to ADD0 if applicable
       if (!this.getInput('ADD0')) {
-        const newInput = this.appendValueInput('ADD0').setAlign(Blockly.ALIGN_RIGHT);
+        const newInput = this.appendValueInput('ADD0').setAlign('RIGHT');
         if (targetConnection) newInput.connection.connect(targetConnection);
       }
     }
@@ -530,7 +607,7 @@ const textConcatMutator = {
 
     for (let i = 0; i < this.itemCount_; i++) {
       if (!this.getInput('ADD' + i)) {
-        this.appendValueInput('ADD' + i).setAlign(Blockly.ALIGN_RIGHT);
+        this.appendValueInput('ADD' + i).setAlign('RIGHT');
       }
     }
     for (let i = this.itemCount_; this.getInput('ADD' + i); i++) {
@@ -545,7 +622,7 @@ if (Blockly.Extensions.isRegistered('text_concat_mutator')) {
   Blockly.Extensions.registerMutator(
     'text_concat_mutator',
     textConcatMutator,
-    function() {
+    function () {
       this.itemCount_ = 2;
       this.updateShape_();
     },
@@ -556,29 +633,29 @@ if (Blockly.Extensions.isRegistered('text_concat_mutator')) {
 const textFormatMutator = {
   itemCount_: 0,
 
-  mutationToDom: function() {
+  mutationToDom: function () {
     const container = Blockly.utils.xml.createElement('mutation');
     container.setAttribute('items', this.itemCount_);
     return container;
   },
 
-  domToMutation: function(xmlElement) {
+  domToMutation: function (xmlElement) {
     this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10) || 0;
     this.updateShape_();
   },
 
-  saveExtraState: function() {
+  saveExtraState: function () {
     return {
       'items': this.itemCount_
     };
   },
 
-  loadExtraState: function(state) {
+  loadExtraState: function (state) {
     this.itemCount_ = state['items'] || 0;
     this.updateShape_();
   },
 
-  decompose: function(workspace) {
+  decompose: function (workspace) {
     const containerBlock = workspace.newBlock('text_format_item');
     containerBlock.initSvg();
     let connection = containerBlock.nextConnection;
@@ -591,7 +668,7 @@ const textFormatMutator = {
     return containerBlock;
   },
 
-  compose: function(containerBlock) {
+  compose: function (containerBlock) {
     let itemBlock = containerBlock.nextConnection.targetBlock();
     const connections = [];
     while (itemBlock) {
@@ -617,7 +694,7 @@ const textFormatMutator = {
     }
   },
 
-  saveConnections: function(containerBlock) {
+  saveConnections: function (containerBlock) {
     let itemBlock = containerBlock.nextConnection.targetBlock();
     let i = 0;
     while (itemBlock) {
@@ -628,11 +705,11 @@ const textFormatMutator = {
     }
   },
 
-  updateShape_: function() {
+  updateShape_: function () {
     for (let i = 0; i < this.itemCount_; i++) {
       if (!this.getInput('ARG' + i)) {
         const input = this.appendValueInput('ARG' + i)
-                           .setAlign(Blockly.ALIGN_RIGHT);
+          .setAlign('RIGHT');
       }
     }
     for (let i = this.itemCount_; this.getInput('ARG' + i); i++) {
@@ -647,7 +724,7 @@ if (Blockly.Extensions.isRegistered('text_format_mutator')) {
   Blockly.Extensions.registerMutator(
     'text_format_mutator',
     textFormatMutator,
-    function() {
+    function () {
       this.itemCount_ = 0;
       this.updateShape_();
     },
@@ -658,20 +735,20 @@ if (Blockly.Extensions.isRegistered('text_format_mutator')) {
 // Mutator for text_print_fstring: dynamic ARG inputs replacing placeholders in f-string base
 const textPrintFstringMutator = {
   itemCount_: 0,
-  mutationToDom: function() {
+  mutationToDom: function () {
     const container = Blockly.utils.xml.createElement('mutation');
     container.setAttribute('items', this.itemCount_);
     return container;
   },
-  domToMutation: function(xmlElement) {
+  domToMutation: function (xmlElement) {
     this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10) || 0;
     this.updateShape_();
   },
-  saveExtraState: function() { return { itemCount: this.itemCount_ }; },
-  loadExtraState: function(state) { this.itemCount_ = state.itemCount || 0; this.updateShape_(); },
-  plus: function() { this.itemCount_++; this.updateShape_(); },
-  minus: function() { if (this.itemCount_ > 0) { this.itemCount_--; this.updateShape_(); } },
-  updateShape_: function() {
+  saveExtraState: function () { return { itemCount: this.itemCount_ }; },
+  loadExtraState: function (state) { this.itemCount_ = state.itemCount || 0; this.updateShape_(); },
+  plus: function () { this.itemCount_++; this.updateShape_(); },
+  minus: function () { if (this.itemCount_ > 0) { this.itemCount_--; this.updateShape_(); } },
+  updateShape_: function () {
     // Ensure UI controls exist
     const itemsInput = this.getInput('ITEMS');
     if (itemsInput) {
@@ -681,7 +758,7 @@ const textPrintFstringMutator = {
     // Add inputs ARG0..ARGn
     for (let i = 0; i < this.itemCount_; i++) {
       if (!this.getInput('ARG' + i)) {
-        this.appendValueInput('ARG' + i).setAlign(Blockly.ALIGN_RIGHT).appendField(i === 0 ? 'value' : '');
+        this.appendValueInput('ARG' + i).setAlign('RIGHT').appendField(i === 0 ? 'value' : '');
       }
     }
     // Remove extra inputs
@@ -695,7 +772,7 @@ if (!Blockly.Extensions.isRegistered('text_print_fstring_mutator')) {
   Blockly.Extensions.registerMutator(
     'text_print_fstring_mutator',
     textPrintFstringMutator,
-    function() {
+    function () {
       this.itemCount_ = 0;
       const itemsInput = this.getInput('ITEMS');
       if (itemsInput) {

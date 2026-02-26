@@ -4,10 +4,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_num_literal",
     "message0": "%1",
     "args0": [{
-        "type": "field_number",
-        "name": "NUM",
-        "value": 0
-      }],
+      "type": "field_number",
+      "name": "NUM",
+      "value": 0
+    }],
     "output": "Number",
     "colour": "#4D6A94",
     "tooltip": "A number.",
@@ -17,10 +17,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_num_neg",
     "message0": "- %1",
     "args0": [{
-        "type": "input_value",
-        "name": "NUM",
-        "check": "Number"
-      }],
+      "type": "input_value",
+      "name": "NUM",
+      "check": "Number"
+    }],
     "output": "Number",
     "colour": "#4D6A94",
     "tooltip": "Negates a number.",
@@ -30,10 +30,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_num_abs",
     "message0": "absolute of %1",
     "args0": [{
-        "type": "input_value",
-        "name": "NUM",
-        "check": "Number"
-      }],
+      "type": "input_value",
+      "name": "NUM",
+      "check": "Number"
+    }],
     "output": "Number",
     "colour": "#4D6A94",
     "tooltip": "Returns the absolute value of a number.",
@@ -43,10 +43,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_num_round",
     "message0": "round %1",
     "args0": [{
-        "type": "input_value",
-        "name": "NUM",
-        "check": "Number"
-      }],
+      "type": "input_value",
+      "name": "NUM",
+      "check": "Number"
+    }],
     "output": "Number",
     "colour": "#4D6A94",
     "tooltip": "Rounds a number to the nearest integer.",
@@ -266,5 +266,105 @@ Blockly.defineBlocksWithJsonArray([
     "colour": "#4D6A94",
     "tooltip": "Checks if a number is divisible by another.",
     "helpUrl": ""
+  }
+  ,
+  {
+    "type": "num_base_conversion",
+    "message0": "convert %1 to %2",
+    "args0": [
+      { "type": "input_value", "name": "NUMBER", "check": "Number" },
+      {
+        "type": "field_dropdown",
+        "name": "BASE",
+        "options": [
+          ["binary (0b...)", "BIN"],
+          ["octal (0o...)", "OCT"],
+          ["hexadecimal (0x...)", "HEX"]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": "String",
+    "colour": "#4D6A94",
+    "tooltip": "Convert a number to binary, octal, or hexadecimal string representation.",
+    "helpUrl": "https://docs.python.org/3/library/functions.html#bin"
+  },
+  {
+    "type": "essentials_num_format_decimal",
+    "message0": "format %1 with %2 decimal places",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "NUMBER",
+        "check": "Number"
+      },
+      {
+        "type": "field_number",
+        "name": "DECIMALS",
+        "value": 2,
+        "min": 0,
+        "max": 10
+      }
+    ],
+    "inputsInline": true,
+    "output": "String",
+    "colour": "#4D6A94",
+    "tooltip": "Format a number to a specific number of decimal places. Returns a string.",
+    "helpUrl": "https://docs.python.org/3/tutorial/inputoutput.html#fancier-output-formatting"
+  },
+  {
+    "type": "essentials_list_get_2d",
+    "message0": "in array %1 get row %2 column %3",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "ARRAY"
+      },
+      {
+        "type": "input_value",
+        "name": "ROW",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "COL",
+        "check": "Number"
+      }
+    ],
+    "inputsInline": true,
+    "output": null,
+    "colour": "#4D6A94",
+    "tooltip": "Get an element from a 2D array (matrix) at the specified row and column.",
+    "helpUrl": "https://docs.python.org/3/tutorial/datastructures.html#nested-list-comprehensions"
+  },
+  {
+    "type": "essentials_list_set_2d",
+    "message0": "in array %1 set row %2 column %3 to %4",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "ARRAY"
+      },
+      {
+        "type": "input_value",
+        "name": "ROW",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "COL",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#4D6A94",
+    "tooltip": "Set an element in a 2D array (matrix) at the specified row and column.",
+    "helpUrl": "https://docs.python.org/3/tutorial/datastructures.html#nested-list-comprehensions"
   }
 ]);

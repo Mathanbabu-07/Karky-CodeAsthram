@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Tooltip from './Tooltip';
+import LanguageSelector from './LanguageSelector';
 import {
   FiUpload,
   FiFolderPlus,
@@ -7,7 +8,7 @@ import {
   FiCamera,
   FiEyeOff,
   FiBookOpen,
-  FiLogOut,
+
   FiGrid,
   FiMoon,
   FiSun,
@@ -26,9 +27,10 @@ export default function Toolbar({
   onCapture,
   onToggleCollapse,
   isCollapsed,
-  onLogout,
   onToggleTutorials,
   onToggleTemplates,
+  currentLanguage,
+  onLanguageChange,
 }) {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
@@ -370,6 +372,15 @@ export default function Toolbar({
         <div className="toolbar-left">
           <img src={fullLogo} alt="CodeAsthram Full Logo" className="toolbar-logo-full" />
         </div>
+
+        {/* Language Selector */}
+        <div className="toolbar-center">
+          <LanguageSelector
+            currentLanguage={currentLanguage}
+            onLanguageChange={onLanguageChange}
+          />
+        </div>
+
         <div className="toolbar-control-capsule">
           <img src={shortLogo} alt="CodeAsthram Short Logo" className="toolbar-logo-short" />
           <div className="capsule-divider"></div>
@@ -442,16 +453,7 @@ export default function Toolbar({
                 <FiBookOpen />
               </button>
             )}
-            <button
-              id="logout-btn"
-              type="button"
-              onClick={onLogout}
-              onMouseEnter={(e) => handleMouseEnter(e, 'Logout')}
-              onMouseLeave={handleMouseLeave}
-              aria-label="Logout"
-            >
-              <FiLogOut />
-            </button>
+
             <button
               type="button"
               onClick={() => { toggleTheme(); }}

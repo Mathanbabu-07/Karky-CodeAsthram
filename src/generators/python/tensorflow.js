@@ -1,5 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 // --- Existing Generators (Enhanced) ---
 
 Python.forBlock['tensorflow_keras_sequential_model'] = function(block) {

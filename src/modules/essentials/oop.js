@@ -130,3 +130,103 @@ if (!Blockly.Extensions.isRegistered('oop_params_mutator')) {
     // Re-run helper when blocks are reconstructed.
   }
 }
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "oop_magic_method",
+    "message0": "define %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "MAGIC_METHOD",
+        "options": [
+          ["__str__(self)", "STR"],
+          ["__repr__(self)", "REPR"],
+          ["__eq__(self, other)", "EQ"],
+          ["__lt__(self, other)", "LT"],
+          ["__le__(self, other)", "LE"],
+          ["__gt__(self, other)", "GT"],
+          ["__ge__(self, other)", "GE"],
+          ["__ne__(self, other)", "NE"],
+          ["__add__(self, other)", "ADD"],
+          ["__sub__(self, other)", "SUB"],
+          ["__mul__(self, other)", "MUL"],
+          ["__truediv__(self, other)", "TRUEDIV"],
+          ["__len__(self)", "LEN"],
+          ["__getitem__(self, key)", "GETITEM"],
+          ["__setitem__(self, key, value)", "SETITEM"],
+          ["__delitem__(self, key)", "DELITEM"],
+          ["__contains__(self, item)", "CONTAINS"],
+          ["__iter__(self)", "ITER"],
+          ["__next__(self)", "NEXT"],
+          ["__call__(self, *args)", "CALL"],
+          ["__enter__(self)", "ENTER"],
+          ["__exit__(self, exc_type, exc_val, exc_tb)", "EXIT"]
+        ]
+      }
+    ],
+    "message1": "body %1",
+    "args1": [
+      { "type": "input_statement", "name": "BODY" }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 290,
+    "tooltip": "Define a magic (dunder) method for a class. These enable operator overloading, iteration, context managers, and more.",
+    "helpUrl": "https://docs.python.org/3/reference/datamodel.html#special-method-names"
+  },
+  {
+    "type": "oop_property_decorator",
+    "message0": "@property.%1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "DECORATOR_TYPE",
+        "options": [
+          ["getter", "GETTER"],
+          ["setter", "SETTER"],
+          ["deleter", "DELETER"]
+        ]
+      }
+    ],
+    "message1": "property name %1",
+    "args1": [
+      { "type": "field_input", "name": "PROP_NAME", "text": "property_name" }
+    ],
+    "message2": "body %1",
+    "args2": [
+      { "type": "input_statement", "name": "BODY" }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 290,
+    "tooltip": "Define a property with getter, setter, or deleter decorator.",
+    "helpUrl": "https://docs.python.org/3/library/functions.html#property"
+  },
+  {
+    "type": "oop_class_decorator",
+    "message0": "%1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "DECORATOR",
+        "options": [
+          ["@classmethod", "CLASSMETHOD"],
+          ["@staticmethod", "STATICMETHOD"]
+        ]
+      }
+    ],
+    "message1": "def %1",
+    "args1": [{ "type": "field_input", "name": "METHOD_NAME", "text": "method_name" }],
+    "message2": "parameters %1",
+    "args2": [{ "type": "input_dummy", "name": "PARAMS" }],
+    "message3": "body %1",
+    "args3": [{ "type": "input_statement", "name": "BODY" }],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 290,
+    "tooltip": "Define a class method or static method.",
+    "helpUrl": "https://docs.python.org/3/library/functions.html#classmethod",
+    "mutator": "oop_params_mutator"
+  }
+]);

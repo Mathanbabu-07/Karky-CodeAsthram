@@ -16,6 +16,9 @@ import './essentials/tooltips.js';
 import './essentials/list_operations.js';
 import './essentials/dict_operations.js';
 import './essentials/imports.js';
+import './essentials/oop_extended.js';
+import './essentials/builtin_methods.js';
+import './essentials/special_blocks.js';
 
 import './data_structures/sequences.js';
 import './data_structures/mappings.js';
@@ -136,7 +139,6 @@ import './argparse/definitions.js';
 
 import '../generators/python/text.js';
 import '../generators/python/variables.js';
-import '../generators/python/comprehensions.js';
 import '../generators/python/system.js';
 import '../generators/python/argparse.js';
 
@@ -153,7 +155,7 @@ import './turtle/blocks.js';
 import '../generators/python/turtle.js';
 import '../generators/python/automation_devops.js';
 
-import {FieldMultilineInput} from '@blockly/field-multilineinput';
+import { FieldMultilineInput } from '@blockly/field-multilineinput';
 
 Blockly.fieldRegistry.register('field_multilineinput', FieldMultilineInput);
 

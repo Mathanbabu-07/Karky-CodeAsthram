@@ -10,7 +10,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         // Proxy to production backend for prod testing from dev server
-        target: 'http://localhost:5000',
+        target: 'https://python.tarcin.in',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
@@ -18,7 +18,7 @@ export default defineConfig({
     },
     headers: {
       // Allow our API hosts and dev websockets under CSP
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws: wss: https://fonts.googleapis.com https://fonts.gstatic.com *.google.com http://localhost:5000 http://192.168.1.3:5000 http://127.0.0.1:5000 http://localhost:5000; img-src 'self' data: https:; media-src 'self';"
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws: wss: https://fonts.googleapis.com https://fonts.gstatic.com *.google.com https://python.tarcin.in http://192.168.1.3:5000 http://127.0.0.1:5000 https://python.tarcin.in; img-src 'self' data: https:; media-src 'self';"
     }
   },
   build: {

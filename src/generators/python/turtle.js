@@ -1,5 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 Python.forBlock['turtle_move_turn'] = function(block) {
   Python.addImport('import turtle');
   const direction = block.getFieldValue('DIRECTION');

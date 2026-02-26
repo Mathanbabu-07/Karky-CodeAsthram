@@ -6,7 +6,7 @@ import { BOARDS, DEFAULT_BOARD_ID } from './boards/profiles';
 import { getToolboxConfig } from './toolbox/toolbox';
 import { captureWorkspaceScreenshot } from "./modules/screenshot";
 import { FiDownload } from 'react-icons/fi';
-import SessionManager from './components/SessionManager';
+
 import CodePanel from './components/CodePanel';
 import TutorialsList from './components/tutorials/TutorialsList';
 import TutorialController from './components/tutorials/TutorialController';
@@ -23,8 +23,22 @@ import './components/Toolbar.css';
 import './CodePanel.css';
 import './plugins/block-plus-minus';
 import './generators/python.js';
+// Java Code Generators - Complete Set
+import './generators/java.js'; // Java base generator
+import './generators/java/builtins.js'; // Blockly built-in blocks
+import './generators/java/blockly_natives.js'; // Blockly native blocks (controls_if, lists_*, etc.)
+import './generators/java/text.js'; // Text operations
+import './generators/java/math.js'; // Math operations
+import './generators/java/logic.js'; // Logic operations
+import './generators/java/loops.js'; // Loops
+import './generators/java/control.js'; // If/else, switch
+import './generators/java/variables.js'; // Variables
+import './generators/java/functions.js'; // Functions & methods
+import './generators/java/lists.js'; // ArrayList operations
+import './generators/java/collections.js'; // HashMap & HashSet
+import './generators/java/oop.js'; // Classes, OOP, I/O, error handling
 import './modules/initializer.js';
-import './modules/session-api.js';
+
 import './styles/tutorials.css';
 import './styles/templates.css';
 
@@ -38,22 +52,118 @@ export default function App() {
   const [showTemplatesModal, setShowTemplatesModal] = useState(false);
   const [toast, setToast] = useState({ visible: false, message: '' });
 
+  // NEW: Multi-language support
+  const [currentLanguage, setCurrentLanguage] = useState('python');
 
-  // Get the static, unified toolbox configuration
-  const toolboxConfig = getToolboxConfig();
+  // Get the toolbox configuration dynamically based on language
+  const toolboxConfig = getToolboxConfig(currentLanguage);
+
+
+  // Helper: Generate code in selected language
+  const generateCode = (workspace, language) => {
+    if (!workspace) return '';
+    try {
+      switch (language) {
+        case 'python':
+          return globalThis.Python?.workspaceToCode(workspace) || '';
+        case 'java':
+          return globalThis.Java?.workspaceToCode(workspace) || '// Java generator not yet loaded';
+        case 'javascript':
+          return globalThis.JavaScript?.workspaceToCode(workspace) || '// JavaScript generator not yet loaded';
+        default:
+          return '';
+      }
+    } catch (error) {
+      console.error('Code generation error:', error);
+      return `// Error generating ${language} code: ${error.message}`;
+    }
+  };
+
+  // Helper: Get file extension for current language
+  const getFileExtension = (language) => {
+    const extensions = { python: 'py', java: 'java', javascript: 'js' };
+    return extensions[language] || 'txt';
+  };
+
+  // Helper: Get filename (Java requires Main.java)
+  const getFileName = (language) => {
+    return language === 'java' ? 'Main.java' : `script.${getFileExtension(language)}`;
+  };
 
   const downloadFile = () => {
     const blob = new Blob([code], { type: 'text/plain' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'script.py';
+    a.download = getFileName(currentLanguage);
     a.click();
+    showToast(`Downloaded ${getFileName(currentLanguage)}`, 'success');
   };
+
+  // CRITICAL: Regenerate code when language changes
+  useEffect(() => {
+    if (mainWorkspace) {
+      const newCode = generateCode(mainWorkspace, currentLanguage);
+      setCode(newCode);
+    }
+  }, [currentLanguage, mainWorkspace]);
+
+  // CRITICAL: Update toolbox when language changes (show/hide language-specific modules)
+  useEffect(() => {
+    if (mainWorkspace) {
+      const newToolboxConfig = getToolboxConfig(currentLanguage);
+      mainWorkspace.updateToolbox(newToolboxConfig);
+    }
+  }, [currentLanguage, mainWorkspace]);
+
 
   const saveWorkspaceXML = () => {
     if (!mainWorkspace) return;
+
+    // Step 1: Get the XML DOM from workspace
     const xmlDom = globalThis.Blockly.Xml.workspaceToDom(mainWorkspace);
-    const xmlText = globalThis.Blockly.Xml.domToPrettyText(xmlDom);
+
+    // Step 2: Create a cleaning function
+    const cleanXml = (element) => {
+      // Remove xmlns attributes (Blockly namespace)
+      if (element.getAttribute) {
+        element.removeAttribute('xmlns');           // Remove main namespace
+        element.removeAttribute('xmlns:blockly');   // Remove alternate namespace
+      }
+
+      // Remove block IDs and position coordinates
+      if (element.tagName === 'block') {
+        element.removeAttribute('id');   // Remove random IDs
+        element.removeAttribute('x');    // Remove X position
+        element.removeAttribute('y');    // Remove Y position
+      }
+
+      // Remove shadow block IDs
+      if (element.tagName === 'shadow') {
+        element.removeAttribute('id');   // Remove shadow block IDs
+      }
+
+      // Recursively clean all child elements
+      Array.from(element.children || []).forEach(child => cleanXml(child));
+
+      return element;
+    };
+
+    // Step 3: Clone the DOM (so we don't modify the workspace itself)
+    const clonedDom = xmlDom.cloneNode(true);
+
+    // Step 4: Clean the cloned DOM
+    const cleanedDom = cleanXml(clonedDom);
+
+    // Step 5: Convert to text
+    let xmlText = globalThis.Blockly.Xml.domToPrettyText(cleanedDom);
+
+    // Step 6: Additional string-level cleanup (safety net)
+    // This catches any edge cases where the namespace might be re-added
+    // Note: We use a simple regex to catch the standard xmlns attribute
+    xmlText = xmlText.replace(/\s*xmlns="[^"]*blockly[^"]*"/gi, '');
+    xmlText = xmlText.replace(/\s*xmlns="https:\/\/developers\.google\.com\/blockly\/xml"/gi, '');
+
+    // Step 7: Download the cleaned XML
     const blob = new Blob([xmlText], { type: 'text/xml' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -109,23 +219,6 @@ export default function App() {
     );
   };
 
-  const handleLogout = () => {
-    if (window.SessionAPI) {
-      window.SessionAPI.logout();
-    } else {
-      alert('Session API not loaded. Performing basic logout.');
-    }
-  };
-
-  useEffect(() => {
-    if (window.SessionAPI) {
-      window.SessionAPI.init({
-        logoutButtonIds: ["logout-btn"],
-        sessionCheckIntervalMs: 0, // Disable session checking
-        pingIntervalMs: 0, // Disable ping
-      });
-    }
-  }, []);
 
   const handleSelectTutorial = (tutorial) => {
     setActiveTutorial(tutorial);
@@ -164,14 +257,40 @@ export default function App() {
     }
   };
 
-  const showToast = (message) => {
-    setToast({ visible: true, message });
-    setTimeout(() => setToast({ visible: false, message: '' }), 3000);
+  // Handler: Language change
+  const handleLanguageChange = (newLanguage) => {
+    setCurrentLanguage(newLanguage);
+
+    // Regenerate code in new language
+    if (mainWorkspace) {
+      const newCode = generateCode(mainWorkspace, newLanguage);
+      setCode(newCode);
+    }
+
+    showToast(`Switched to ${newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1)}`, 'info');
+  };
+
+  // Handler: Fundamentals mode toggle
+  const handleToggleFundamentalsMode = () => {
+    const newMode = !isFundamentalsMode;
+    setIsFundamentalsMode(newMode);
+
+    showToast(
+      newMode
+        ? 'Fundamentals Mode ON - Showing basic blocks only'
+        : 'Fundamentals Mode OFF - All blocks available',
+      'info'
+    );
+  };
+
+  const showToast = (message, type = 'info') => {
+    setToast({ visible: true, message, type });
+    setTimeout(() => setToast({ visible: false, message: '', type: 'info' }), 3000);
   };
 
   return (
     <>
-      <SessionManager />
+
       <Toolbar
         onSave={saveWorkspaceXML}
         onLoad={loadWorkspaceXML}
@@ -179,9 +298,10 @@ export default function App() {
         onCapture={handleCapture}
         onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
         isCollapsed={isCollapsed}
-        onLogout={handleLogout}
         onToggleTutorials={() => setShowTutorials(!showTutorials)}
         onToggleTemplates={() => setShowTemplatesModal(true)}
+        currentLanguage={currentLanguage}
+        onLanguageChange={handleLanguageChange}
       />
       <div className="main-layout toolbox-visible">
         <div className="blockly-container">

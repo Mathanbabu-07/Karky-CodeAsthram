@@ -1,6 +1,5 @@
 // src/generators/python/datetime.js
 import { pythonGenerator as Python } from 'blockly/python';
-
 Python.forBlock['datetime_now'] = function(block) {
   Python.addImport('from datetime import datetime');
   return ['datetime.now()', Python.ORDER_FUNCTION_CALL];

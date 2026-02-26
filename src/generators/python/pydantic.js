@@ -1,5 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 Python.forBlock['pydantic_create_model'] = function(block) {
   Python.addImport('from pydantic import BaseModel');
   const name = block.getFieldValue('NAME');

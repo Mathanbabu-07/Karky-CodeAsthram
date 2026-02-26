@@ -1,5 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 Python.forBlock['cv2_imread'] = function(block) {
   Python.addImport('import cv2');
   const path = Python.valueToCode(block, 'PATH', Python.ORDER_ATOMIC);

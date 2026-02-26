@@ -1,7 +1,6 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 Python.forBlock['graphics_turtle_create'] = function(block) {
-  Python.addImport('turtle');
+  Python.addImport('import turtle');
   return [`turtle.Turtle()`, Python.ORDER_FUNCTION_CALL];
 };
 
@@ -40,6 +39,6 @@ Python.forBlock['graphics_turtle_pendown'] = function(block) {
 };
 
 Python.forBlock['graphics_turtle_done'] = function(block) {
-  Python.addImport('turtle');
+  Python.addImport('import turtle');
   return `turtle.done()\n`;
 };

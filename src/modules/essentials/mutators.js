@@ -4,18 +4,18 @@ import * as Blockly from 'blockly';
 const FUNCTION_DEF_MUTATOR = {
   params_: [],
 
-  saveExtraState: function() {
+  saveExtraState: function () {
     return {
-      params: this.params_,
+      params: this.params_ || [],
     };
   },
 
-  loadExtraState: function(state) {
-    this.params_ = state.params;
+  loadExtraState: function (state) {
+    this.params_ = state.params || [];
     this.updateShape_();
   },
 
-  decompose: function(workspace) {
+  decompose: function (workspace) {
     const containerBlock = workspace.newBlock('essentials_function_def_container');
     containerBlock.initSvg();
     let connection = containerBlock.getInput('STACK').connection;
@@ -29,7 +29,7 @@ const FUNCTION_DEF_MUTATOR = {
     return containerBlock;
   },
 
-  compose: function(containerBlock) {
+  compose: function (containerBlock) {
     this.params_ = [];
     let paramBlock = containerBlock.getInputTargetBlock('STACK');
     while (paramBlock) {
@@ -37,9 +37,11 @@ const FUNCTION_DEF_MUTATOR = {
       paramBlock = paramBlock.nextConnection && paramBlock.nextConnection.targetBlock();
     }
     this.updateShape_();
+    // Save the state after composing to ensure it persists
+    this.saveExtraState();
   },
 
-  updateShape_: function() {
+  updateShape_: function () {
     const params = this.params_.join(', ');
     this.setFieldValue(params, 'PARAMS');
   }

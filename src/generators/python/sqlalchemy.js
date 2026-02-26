@@ -1,5 +1,4 @@
-import { pythonGenerator } from 'blockly/python';
-
+import { pythonGenerator as Python } from 'blockly/python';
 // Helper to map block types to sqlalchemy types
 const sqlalchemyTypeMap = {
     'TEXT': 'String',
@@ -8,14 +7,14 @@ const sqlalchemyTypeMap = {
     'BOOLEAN': 'Boolean',
 };
 
-pythonGenerator.forBlock['db_create_engine'] = function(block, generator) {
+Python.forBlock['db_create_engine'] = function(block, generator) {
   generator.addImport('from sqlalchemy import create_engine');
   const connectionString = generator.valueToCode(block, 'CONNECTION_STRING', generator.ORDER_ATOMIC) || "'sqlite:///:memory:'";
   const code = `create_engine(${connectionString})`;
   return [code, generator.ORDER_FUNCTION_CALL];
 };
 
-pythonGenerator.forBlock['db_define_table'] = function(block, generator) {
+Python.forBlock['db_define_table'] = function(block, generator) {
   generator.addImport('from sqlalchemy import Table, MetaData');
   const tableName = block.getFieldValue('TABLE_NAME');
   const columnsCode = generator.statementToCode(block, 'COLUMNS');
@@ -25,7 +24,7 @@ pythonGenerator.forBlock['db_define_table'] = function(block, generator) {
   return [code, generator.ORDER_FUNCTION_CALL];
 };
 
-pythonGenerator.forBlock['db_column_def'] = function(block, generator) {
+Python.forBlock['db_column_def'] = function(block, generator) {
     generator.addImport('from sqlalchemy import Column, String, Integer, Float, Boolean');
     const columnName = block.getFieldValue('COLUMN_NAME');
     const columnType = block.getFieldValue('COLUMN_TYPE');
@@ -37,7 +36,7 @@ pythonGenerator.forBlock['db_column_def'] = function(block, generator) {
     return code;
 };
 
-pythonGenerator.forBlock['db_insert'] = function(block, generator) {
+Python.forBlock['db_insert'] = function(block, generator) {
   generator.addImport('from sqlalchemy import insert');
   const table = generator.valueToCode(block, 'TABLE', generator.ORDER_ATOMIC) || 'None';
   const values = generator.valueToCode(block, 'VALUES', generator.ORDER_ATOMIC) || '{}';
@@ -45,7 +44,7 @@ pythonGenerator.forBlock['db_insert'] = function(block, generator) {
   return [code, generator.ORDER_FUNCTION_CALL];
 };
 
-pythonGenerator.forBlock['db_select'] = function(block, generator) {
+Python.forBlock['db_select'] = function(block, generator) {
     generator.addImport('from sqlalchemy import select');
     const table = generator.valueToCode(block, 'TABLE', generator.ORDER_ATOMIC) || 'None';
     const where_clause = generator.valueToCode(block, 'WHERE', generator.ORDER_ATOMIC);
@@ -57,7 +56,7 @@ pythonGenerator.forBlock['db_select'] = function(block, generator) {
     return [code, generator.ORDER_FUNCTION_CALL];
 };
 
-pythonGenerator.forBlock['db_update'] = function(block, generator) {
+Python.forBlock['db_update'] = function(block, generator) {
     generator.addImport('from sqlalchemy import update');
     const table = generator.valueToCode(block, 'TABLE', generator.ORDER_ATOMIC) || 'None';
     const values = generator.valueToCode(block, 'VALUES', generator.ORDER_ATOMIC) || '{}';
@@ -70,7 +69,7 @@ pythonGenerator.forBlock['db_update'] = function(block, generator) {
     return [code, generator.ORDER_FUNCTION_CALL];
 };
 
-pythonGenerator.forBlock['db_delete'] = function(block, generator) {
+Python.forBlock['db_delete'] = function(block, generator) {
     generator.addImport('from sqlalchemy import delete');
     const table = generator.valueToCode(block, 'TABLE', generator.ORDER_ATOMIC) || 'None';
     const where_clause = generator.valueToCode(block, 'WHERE', generator.ORDER_ATOMIC);
@@ -82,14 +81,14 @@ pythonGenerator.forBlock['db_delete'] = function(block, generator) {
     return [code, generator.ORDER_FUNCTION_CALL];
 };
 
-pythonGenerator.forBlock['db_execute_statement'] = function(block, generator) {
+Python.forBlock['db_execute_statement'] = function(block, generator) {
   const engine = generator.valueToCode(block, 'ENGINE', generator.ORDER_ATOMIC) || 'None';
   const statement = generator.valueToCode(block, 'STATEMENT', generator.ORDER_ATOMIC) || 'None';
   const code = `with ${engine}.begin() as conn:\n    conn.execute(${statement})\n`;
   return code;
 };
 
-pythonGenerator.forBlock['db_fetch'] = function(block, generator) {
+Python.forBlock['db_fetch'] = function(block, generator) {
     const engine = generator.valueToCode(block, 'ENGINE', generator.ORDER_ATOMIC) || 'None';
     const statement = generator.valueToCode(block, 'STATEMENT', generator.ORDER_ATOMIC) || 'None';
     const fetchType = block.getFieldValue('FETCH_TYPE');

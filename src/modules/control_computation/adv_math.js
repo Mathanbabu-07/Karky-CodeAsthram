@@ -38,7 +38,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Number",
-    "colour": 230,
+    "colour": "#9B59B6",
     "tooltip": "Trigonometric functions and other mathematical operations.",
     "helpUrl": "https://www.w3schools.com/js/js_math.asp"
   },
@@ -75,7 +75,7 @@ Blockly.defineBlocksWithJsonArray([
             "SUM"
           ]
         ],
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -84,7 +84,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Number",
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Calculates a statistical value of a list of numbers."
   },
   {
@@ -93,10 +93,10 @@ Blockly.defineBlocksWithJsonArray([
     "args0": [{
         "type": "input_value",
         "name": "VALUE",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       }],
     "output": "Number",
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Creates a decimal number for high-precision calculations."
   },
   {
@@ -107,7 +107,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "input_value",
         "name": "NUMERATOR",
         "check": "Number",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -116,7 +116,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Number",
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Creates a fraction."
   },
   {
@@ -127,7 +127,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "input_value",
         "name": "REAL",
         "check": "Number",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -136,7 +136,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Number",
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Creates a complex number."
   },
   {
@@ -147,7 +147,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "input_value",
         "name": "ITERABLE",
         "check": "Array",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -155,7 +155,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "Array",
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Returns a list of accumulated results."
   }
 ]);

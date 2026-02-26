@@ -7,7 +7,7 @@ Blockly.defineBlocksWithJsonArray([
     "args0": [{
         "type": "input_statement",
         "name": "TRY",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       }],
     "message1": "except %1 as %2 %3",
     "args1": [
@@ -32,7 +32,7 @@ Blockly.defineBlocksWithJsonArray([
       }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Tries to execute code, catches an exception, and runs a final block of code."
   },
   {
@@ -51,7 +51,7 @@ Blockly.defineBlocksWithJsonArray([
     "args3": [{ "type": "input_statement", "name": "FINALLY" }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Try/except with optional else and finally clauses.",
     "helpUrl": "https://docs.python.org/3/tutorial/errors.html#handling-exceptions"
   },
@@ -62,7 +62,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "input_value",
         "name": "EXCEPTION",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -70,7 +70,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "previousStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Raises an exception."
   },
   {
@@ -81,7 +81,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "input_value",
         "name": "CONDITION",
         "check": "Boolean",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -90,7 +90,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Asserts that a condition is true."
   }
 ]);

@@ -9,8 +9,7 @@ Blockly.defineBlocksWithJsonArray([
       { "type": "input_value", "name": "KEY" },
       { "type": "input_value", "name": "VALUE" }
     ],
-    "previousStatement": "dict_pair",
-    "nextStatement": "dict_pair",
+    "output": "dict_pair",
     "colour": "#CF63CF",
     "tooltip": "A key-value pair for a dictionary.",
     "inputsInline": true,

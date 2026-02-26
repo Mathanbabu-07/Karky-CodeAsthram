@@ -1,5 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 Python.forBlock['numpy_array'] = function(block) {
   Python.addImport('import numpy as np');
   const list = Python.valueToCode(block, 'LIST', Python.ORDER_ATOMIC) || '[]';

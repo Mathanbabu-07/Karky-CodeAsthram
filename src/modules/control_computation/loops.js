@@ -1,24 +1,24 @@
-import * as Blockly from "blockly\/core";
+import * as Blockly from "blockly/core";
 // While loop block (infinite or expression-based)
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "control_while_true_inline",
     "message0": "while %1 %2 do %3",
     "args0": [
-      { "type": "field_dropdown", "name": "COND_MODE", "options": [["True","TRUE"],["expression","EXPR"]] },
+      { "type": "field_dropdown", "name": "COND_MODE", "options": [["True", "TRUE"], ["expression", "EXPR"]] },
       { "type": "input_value", "name": "COND", "check": "Boolean" },
       { "type": "input_statement", "name": "DO" }
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#5C6BC0",
+    "colour": "#9B59B6",
     "tooltip": "While loop. Defaults to an infinite loop.",
     "helpUrl": "https://docs.python.org/3/reference/compound_stmts.html#the-while-statement"
   }
 ]);
 
-Blockly.Extensions.register('control_while_true_inline_extension', function() {
-  this.setOnChange(function() {
+Blockly.Extensions.register('control_while_true_inline_extension', function () {
+  this.setOnChange(function () {
     const mode = this.getFieldValue('COND_MODE');
     const condInput = this.getInput('COND');
     if (!condInput) return;
@@ -35,7 +35,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "field_variable",
         "name": "INDEX_VAR",
         "variable": "i",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "field_variable",
@@ -50,12 +50,12 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "message1": "do %1",
     "args1": [{
-        "type": "input_statement",
-        "name": "DO"
-      }],
+      "type": "input_statement",
+      "name": "DO"
+    }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Loops through a list with an index and value."
   },
   {
@@ -66,7 +66,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "field_input",
         "name": "VARS",
         "text": "a, b",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_dummy",
@@ -75,12 +75,12 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "message1": "do %1",
     "args1": [{
-        "type": "input_statement",
-        "name": "DO"
-      }],
+      "type": "input_statement",
+      "name": "DO"
+    }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Loops through multiple lists at once.",
     "mutator": "control_for_zip_mutator"
   },
@@ -88,31 +88,31 @@ Blockly.defineBlocksWithJsonArray([
     "type": "control_loop_limit",
     "message0": "limit loop iterations to %1",
     "args0": [{
-        "type": "field_number",
-        "name": "LIMIT",
-        "value": 1000
-      }],
+      "type": "field_number",
+      "name": "LIMIT",
+      "value": 1000
+    }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 120,
+    "colour": "#9B59B6",
     "tooltip": "Adds a safety limit to a loop to prevent infinite loops."
   },
-    {
-      "type": "control_flow_break_continue",
-      "message0": "%1",
-      "args0": [
-        {
-          "type": "field_dropdown",
-          "name": "FLOW",
-          "options": [["break", "BREAK"], ["continue", "CONTINUE"]]
-        }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": "#7E57C2",
-      "tooltip": "Loop control: break or continue.",
-      "helpUrl": "https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements"
-    }
+  {
+    "type": "control_flow_break_continue",
+    "message0": "%1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "FLOW",
+        "options": [["break", "BREAK"], ["continue", "CONTINUE"]]
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#9B59B6",
+    "tooltip": "Loop control: break or continue.",
+    "helpUrl": "https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements"
+  }
 ]);
 import { createPlusField } from "..\/..\/plugins\/block-plus-minus\/field_plus";
 import { createMinusField } from "..\/..\/plugins\/block-plus-minus\/field_minus";

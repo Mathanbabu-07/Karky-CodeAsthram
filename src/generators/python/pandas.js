@@ -1,7 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
-
-
 Python.forBlock['pandas_sort_values'] = function(block) {
   const df = Python.valueToCode(block, 'DF', Python.ORDER_MEMBER) || 'pd.DataFrame()';
   const by = Python.valueToCode(block, 'BY', Python.ORDER_ATOMIC) || 'None';

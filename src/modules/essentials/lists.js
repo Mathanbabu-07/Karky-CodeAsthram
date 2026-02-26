@@ -79,9 +79,9 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_list_create",
     "message0": "create list with %1",
     "args0": [{
-        "type": "input_dummy",
-        "name": "EMPTY"
-      }],
+      "type": "input_dummy",
+      "name": "EMPTY"
+    }],
     "output": "Array",
     "colour": "#4D6A94",
     "tooltip": "Creates a list with any number of items.",
@@ -143,10 +143,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_list_length",
     "message0": "length of %1",
     "args0": [{
-        "type": "input_value",
-        "name": "LIST",
-        "check": "Array"
-      }],
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }],
     "output": "Number",
     "colour": "#4D6A94",
     "tooltip": "Returns the number of items in a list.",
@@ -185,11 +185,11 @@ Blockly.defineBlocksWithJsonArray([
         "type": "field_dropdown",
         "name": "WHERE",
         "options": [
-          [ "first", "FIRST" ],
-          [ "last", "LAST" ],
-          [ "from start", "FROM_START" ],
-          [ "from end", "FROM_END" ],
-          [ "random", "RANDOM" ]
+          ["first", "FIRST"],
+          ["last", "LAST"],
+          ["from start", "FROM_START"],
+          ["from end", "FROM_END"],
+          ["random", "RANDOM"]
         ]
       },
       {
@@ -282,10 +282,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_list_reverse",
     "message0": "reverse %1",
     "args0": [{
-        "type": "input_value",
-        "name": "LIST",
-        "check": "Array"
-      }],
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }],
     "previousStatement": null,
     "nextStatement": null,
     "colour": "#4D6A94",
@@ -357,10 +357,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_list_flatten",
     "message0": "flatten %1",
     "args0": [{
-        "type": "input_value",
-        "name": "LIST",
-        "check": "Array"
-      }],
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }],
     "output": "Array",
     "colour": "#4D6A94",
     "tooltip": "Flattens a list of lists into a single list.",
@@ -370,10 +370,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_list_unique",
     "message0": "unique items in %1",
     "args0": [{
-        "type": "input_value",
-        "name": "LIST",
-        "check": "Array"
-      }],
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }],
     "output": "Array",
     "colour": "#4D6A94",
     "tooltip": "Returns a list with unique items.",
@@ -403,10 +403,10 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_list_enumerate",
     "message0": "enumerate %1",
     "args0": [{
-        "type": "input_value",
-        "name": "LIST",
-        "check": "Array"
-      }],
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }],
     "output": "Array",
     "colour": "#4D6A94",
     "tooltip": "Returns a list of (index, item) tuples.",
@@ -415,7 +415,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     "type": "lists_shuffle_in_place",
     "message0": "shuffle list %1 in place",
-    "args0": [ { "type": "input_value", "name": "LIST", "check": "Array" } ],
+    "args0": [{ "type": "input_value", "name": "LIST", "check": "Array" }],
     "previousStatement": null,
     "nextStatement": null,
     "colour": "#4D6A94",
@@ -426,37 +426,59 @@ Blockly.defineBlocksWithJsonArray([
     "type": "essentials_list_is_empty",
     "message0": "is %1 empty",
     "args0": [{
-        "type": "input_value",
-        "name": "LIST",
-        "check": "Array"
-      }],
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }],
     "output": "Boolean",
     "colour": 260,
     "tooltip": "Checks if a list is empty.",
     "helpUrl": ""
   }
 ]);
+
 // Mutator to show/hide inputs based on dropdown MODE
-if (Blockly.Extensions.isRegistered('essentials_range_mutator')) {
-  Blockly.Extensions.unregister('essentials_range_mutator');
-}
-Blockly.Extensions.register('essentials_range_mutator', function() {
-  const updateShape = () => {
-    const mode = this.getFieldValue('MODE');
-    // Ensure inputs exist
+const essentialsRangeMutator = {
+  saveExtraState: function () {
+    return {
+      mode: this.getFieldValue('MODE')
+    };
+  },
+  loadExtraState: function (state) {
+    // State is loaded, update shape on next tick
+    setTimeout(() => {
+      this.updateRangeShape_();
+    }, 0);
+  },
+  updateRangeShape_: function () {
+    const mode = this.getFieldValue('MODE') || 'STOP';
+    // Ensure inputs exist (this part was in the original updateShape)
     if (!this.getInput('START')) this.appendValueInput('START').setCheck('Number');
     if (!this.getInput('STOP')) this.appendValueInput('STOP').setCheck('Number');
     if (!this.getInput('STEP')) this.appendValueInput('STEP').setCheck('Number');
-    // Set visibility
+    // Set visibility based on mode
     this.getInput('START').setVisible(mode !== 'STOP');
     this.getInput('STOP').setVisible(true);
     this.getInput('STEP').setVisible(mode === 'START_STOP_STEP');
-    this.render && this.render();
+    this.render && this.render(); // Re-render after changing visibility
+  }
+};
+
+const essentialsRangeMutatorHelper = function () {
+  const updateShape = () => {
+    this.updateRangeShape_();
   };
-  this.getField('MODE').setValidator(function(newVal) {
+
+  this.getField('MODE').setValidator(function (newVal) {
     updateShape.call(this.getSourceBlock());
     return newVal;
   });
+
   // Initial shape
   updateShape.call(this);
-});
+};
+
+if (Blockly.Extensions.isRegistered('essentials_range_mutator')) {
+  Blockly.Extensions.unregister('essentials_range_mutator');
+}
+Blockly.Extensions.registerMutator('essentials_range_mutator', essentialsRangeMutator, essentialsRangeMutatorHelper);

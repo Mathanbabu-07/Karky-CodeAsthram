@@ -1,0 +1,86 @@
+/* Fundamentals Mode Toggle Styles */
+.fundamentals-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: var(--text-color, #ffffff);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.fundamentals-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.fundamentals-toggle.active {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.5);
+}
+
+.toggle-text {
+    font-weight: 600;
+}
+
+.toggle-state {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.fundamentals-toggle.active .toggle-state {
+    background: rgba(76, 175, 80, 0.4);
+    color: #4CAF50;
+}
+
+/* Dark theme */
+[data-theme='dark'] .fundamentals-toggle {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme='dark'] .fundamentals-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme='dark'] .fundamentals-toggle.active {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: rgba(76, 175, 80, 0.4);
+}
+
+/* Light theme */
+[data-theme='light'] .fundamentals-toggle {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: var(--text-color, #1a1a2e);
+}
+
+[data-theme='light'] .fundamentals-toggle:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme='light'] .fundamentals-toggle.active {
+    background: rgba(76, 175, 80, 0.12);
+    border-color: rgba(76, 175, 80, 0.4);
+}
+
+[data-theme='light'] .toggle-state {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='light'] .fundamentals-toggle.active .toggle-state {
+    background: rgba(76, 175, 80, 0.3);
+    color: #2E7D32;
+}

@@ -8,7 +8,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "field_input",
         "name": "ARGS",
         "text": "x",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -16,7 +16,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Creates a lambda function."
   },
   {
@@ -26,7 +26,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "input_value",
         "name": "FUNC",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       },
       {
         "type": "input_value",
@@ -34,7 +34,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Creates a new function with some arguments pre-filled."
   },
   {
@@ -43,11 +43,11 @@ Blockly.defineBlocksWithJsonArray([
     "args0": [{
         "type": "input_value",
         "name": "DECORATOR",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Applies a decorator to a function definition."
   },
   {
@@ -57,10 +57,10 @@ Blockly.defineBlocksWithJsonArray([
         "type": "field_input",
         "name": "DOCSTRING",
         "text": "",
-        "colour": "#7E57C2"
+        "colour": "#9B59B6"
       }],
     "previousStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Adds a docstring to a function. Must be the first statement in a function."
   },
   {
@@ -87,7 +87,7 @@ Blockly.defineBlocksWithJsonArray([
         "type": "input_value",
         "name": "RETURN"
       }],
-    "colour": 290,
+    "colour": "#9B59B6",
     "tooltip": "Defines a function with parameters.",
     "mutator": "control_function_def_mutator"
   },
@@ -96,7 +96,7 @@ Blockly.defineBlocksWithJsonArray([
     "message0": "return %1",
     "args0": [ { "type": "input_value", "name": "VALUE" } ],
     "previousStatement": null,
-    "colour": 290,
+    "colour": "#9B59B6",
     "tooltip": "Return from the current function (use a tuple to return multiple values).",
     "helpUrl": "https://docs.python.org/3/reference/simple_stmts.html#the-return-statement"
   }

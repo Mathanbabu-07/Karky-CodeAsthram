@@ -1,39 +1,34 @@
 // src/generators/python/beautifulsoup.js
 import { pythonGenerator as Python } from 'blockly/python';
-
-Python.forBlock['beautifulsoup_parse_html'] = function(block) {
-  Python.addImport('from python import blocks_runtime');
+Python.forBlock['beautifulsoup_parse_html'] = function (block) {
+  Python.addImport('from bs4 import BeautifulSoup');
   const html_text = Python.valueToCode(block, 'HTML_TEXT', Python.ORDER_ATOMIC) || "''";
   const parser = block.getFieldValue('PARSER');
-  return [`blocks_runtime.beautifulsoup_parse_html(${html_text}, '${parser}')`, Python.ORDER_FUNCTION_CALL];
+  return [`BeautifulSoup(${html_text}, '${parser}')`, Python.ORDER_FUNCTION_CALL];
 };
 
-Python.forBlock['beautifulsoup_find'] = function(block) {
-  Python.addImport('from python import blocks_runtime');
-  const soup = Python.valueToCode(block, 'SOUP', Python.ORDER_ATOMIC) || 'None';
+Python.forBlock['beautifulsoup_find'] = function (block) {
+  const soup = Python.valueToCode(block, 'SOUP', Python.ORDER_MEMBER) || 'None';
   const tag = Python.valueToCode(block, 'TAG', Python.ORDER_ATOMIC) || "''";
   const attrs = Python.valueToCode(block, 'ATTRS', Python.ORDER_ATOMIC) || '{}';
-  return [`blocks_runtime.beautifulsoup_find(${soup}, ${tag}, ${attrs})`, Python.ORDER_FUNCTION_CALL];
+  return [`${soup}.find(${tag}, ${attrs})`, Python.ORDER_FUNCTION_CALL];
 };
 
-Python.forBlock['beautifulsoup_find_all'] = function(block) {
-  Python.addImport('from python import blocks_runtime');
-  const soup = Python.valueToCode(block, 'SOUP', Python.ORDER_ATOMIC) || 'None';
+Python.forBlock['beautifulsoup_find_all'] = function (block) {
+  const soup = Python.valueToCode(block, 'SOUP', Python.ORDER_MEMBER) || 'None';
   const tag = Python.valueToCode(block, 'TAG', Python.ORDER_ATOMIC) || "''";
   const attrs = Python.valueToCode(block, 'ATTRS', Python.ORDER_ATOMIC) || '{}';
-  const limit = Python.valueToCode(block, 'LIMIT', Python.ORDER_ATOMIC) || '0';
-  return [`blocks_runtime.beautifulsoup_find_all(${soup}, ${tag}, ${attrs}, ${limit})`, Python.ORDER_FUNCTION_CALL];
+  const limit = Python.valueToCode(block, 'LIMIT', Python.ORDER_ATOMIC) || 'None';
+  return [`${soup}.find_all(${tag}, ${attrs}, limit=${limit})`, Python.ORDER_FUNCTION_CALL];
 };
 
-Python.forBlock['beautifulsoup_get_text'] = function(block) {
-  Python.addImport('from python import blocks_runtime');
-  const element = Python.valueToCode(block, 'ELEMENT', Python.ORDER_ATOMIC) || 'None';
-  return [`blocks_runtime.beautifulsoup_get_text(${element})`, Python.ORDER_FUNCTION_CALL];
+Python.forBlock['beautifulsoup_get_text'] = function (block) {
+  const element = Python.valueToCode(block, 'ELEMENT', Python.ORDER_MEMBER) || 'None';
+  return [`${element}.get_text()`, Python.ORDER_FUNCTION_CALL];
 };
 
-Python.forBlock['beautifulsoup_get_attribute'] = function(block) {
-  Python.addImport('from python import blocks_runtime');
-  const element = Python.valueToCode(block, 'ELEMENT', Python.ORDER_ATOMIC) || 'None';
+Python.forBlock['beautifulsoup_get_attribute'] = function (block) {
+  const element = Python.valueToCode(block, 'ELEMENT', Python.ORDER_MEMBER) || 'None';
   const attribute = Python.valueToCode(block, 'ATTRIBUTE', Python.ORDER_ATOMIC) || "''";
-  return [`blocks_runtime.beautifulsoup_get_attribute(${element}, ${attribute})`, Python.ORDER_FUNCTION_CALL];
+  return [`${element}.get(${attribute})`, Python.ORDER_FUNCTION_CALL];
 };

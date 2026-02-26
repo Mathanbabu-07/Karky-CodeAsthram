@@ -183,42 +183,21 @@ Blockly.defineBlocksWithJsonArray([
     "tooltip": "Compares two strings ignoring case.",
     "helpUrl": ""
   },
-  // Block for str.partition()
-  {
-      "type": "text_partition",
-      "message0": "partition %1 at first occurrence of %2",
-      "args0": [
-          {
-              "type": "input_value",
-              "name": "TEXT",
-              "check": "String"
-          },
-          {
-              "type": "input_value",
-              "name": "SEP",
-              "check": "String"
-          }
-      ],
-      "output": "Tuple",
-      "colour": "#4C97FF",
-      "inputsInline": true,
-      "tooltip": "Partitions the string into a 3-tuple at the first occurrence of the separator.",
-      "helpUrl": "https://docs.python.org/3/library/stdtypes.html#str.partition"
-  },
   // Block for str.swapcase()
   {
-      "type": "text_swapcase",
-      "message0": "swap case of %1",
-      "args0": [
-          {
-              "type": "input_value",
-              "name": "TEXT",
-              "check": "String"
-          }
-      ],
-      "output": "String",
-      "colour": "#4C97FF",
-      "tooltip": "Swaps the case of all characters in the string.",
-      "helpUrl": "https://docs.python.org/3/library/stdtypes.html#str.swapcase"
+    "type": "text_swapcase",
+    "message0": "swap case of %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+      }
+    ],
+    "output": "String",
+    "colour": "#4C97FF",
+    "tooltip": "Swaps the case of all characters in the string.",
+    "helpUrl": "https://docs.python.org/3/library/stdtypes.html#str.swapcase"
   }
 ]);
+

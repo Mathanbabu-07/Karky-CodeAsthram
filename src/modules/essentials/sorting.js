@@ -7,38 +7,38 @@ function makeOptionalParamsMutator(kind) {
   return {
     hasKey_: false,
     hasReverse_: false,
-    mutationToDom: function() {
+    mutationToDom: function () {
       if (!this.hasKey_ && !this.hasReverse_) return null;
       const m = Blockly.utils.xml.createElement('mutation');
       if (this.hasKey_) m.setAttribute('key', 1);
       if (this.hasReverse_) m.setAttribute('reverse', 1);
       return m;
     },
-    domToMutation: function(xml) {
+    domToMutation: function (xml) {
       this.hasKey_ = !!parseInt(xml.getAttribute('key'), 10);
       this.hasReverse_ = !!parseInt(xml.getAttribute('reverse'), 10);
       this.updateShape_();
     },
-    saveExtraState: function() {
+    saveExtraState: function () {
       if (!this.hasKey_ && !this.hasReverse_) return null;
       return { hasKey: this.hasKey_, hasReverse: this.hasReverse_ };
     },
-    loadExtraState: function(state) {
+    loadExtraState: function (state) {
       this.hasKey_ = !!state.hasKey;
       this.hasReverse_ = !!state.hasReverse;
       this.updateShape_();
     },
-    updateShape_: function() {
+    updateShape_: function () {
       // KEY socket
       if (this.hasKey_) {
-        if (!this.getInput('KEY')) this.appendValueInput('KEY').setAlign(Blockly.ALIGN_RIGHT).appendField('key');
+        if (!this.getInput('KEY')) this.appendValueInput('KEY').setAlign('RIGHT').appendField('key');
       } else if (this.getInput('KEY')) {
         this.removeInput('KEY');
       }
       // REVERSE socket
       if (this.hasReverse_) {
         if (!this.getInput('REVERSE')) {
-          const inp = this.appendValueInput('REVERSE').setAlign(Blockly.ALIGN_RIGHT).appendField('reverse');
+          const inp = this.appendValueInput('REVERSE').setAlign('RIGHT').appendField('reverse');
           // Inject shadow reverse_toggle_block
           const shadow = Blockly.utils.xml.createElement('shadow');
           shadow.setAttribute('type', 'reverse_toggle_block');
@@ -52,12 +52,12 @@ function makeOptionalParamsMutator(kind) {
         this.removeInput('REVERSE');
       }
     },
-    plus: function(arg) {
+    plus: function (arg) {
       // Toggle add KEY first, then REVERSE
       if (!this.hasKey_) this.hasKey_ = true; else if (!this.hasReverse_) this.hasReverse_ = true;
       this.updateShape_();
     },
-    minus: function(arg) {
+    minus: function (arg) {
       // Remove REVERSE first, then KEY
       if (this.hasReverse_) this.hasReverse_ = false; else if (this.hasKey_) this.hasKey_ = false;
       this.updateShape_();
@@ -70,7 +70,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: 'sorted_block',
     message0: 'sorted %1',
-    args0: [ { type: 'input_value', name: 'ITERABLE' } ],
+    args0: [{ type: 'input_value', name: 'ITERABLE' }],
     output: 'Array',
     inputsInline: true,
     colour: 210,
@@ -81,7 +81,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: 'list_sort_block',
     message0: 'sort list %1',
-    args0: [ { type: 'input_value', name: 'LIST', check: 'Array' } ],
+    args0: [{ type: 'input_value', name: 'LIST', check: 'Array' }],
     previousStatement: null,
     nextStatement: null,
     inputsInline: true,
@@ -93,7 +93,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: 'multi_key_sort_block',
     message0: 'multi-key sorted data %1',
-    args0: [ { type: 'input_value', name: 'DATA' } ],
+    args0: [{ type: 'input_value', name: 'DATA' }],
     output: 'Array',
     colour: '#4D6A94',
     tooltip: 'Sort DATA by multiple key expressions (tuple key). Use + to add key expressions.',
@@ -104,7 +104,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: 'reverse_view_block',
     message0: 'reverse view of sorted %1',
-    args0: [ { type: 'input_value', name: 'ITERABLE' } ],
+    args0: [{ type: 'input_value', name: 'ITERABLE' }],
     output: 'Array',
     colour: '#4D6A94',
     tooltip: 'Return a reversed iterator over a newly sorted sequence.',
@@ -115,7 +115,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: 'argsort_helper_block',
     message0: 'argsort indices of %1',
-    args0: [ { type: 'input_value', name: 'ITERABLE' } ],
+    args0: [{ type: 'input_value', name: 'ITERABLE' }],
     output: 'Array',
     colour: '#4D6A94',
     tooltip: 'Return indices that would sort the iterable.',
@@ -137,7 +137,7 @@ Blockly.defineBlocksWithJsonArray([
     type: 'sorting_master_block',
     message0: 'sort mode %1 target %2',
     args0: [
-      { type: 'field_dropdown', name: 'MODE', options: [[ 'sorted()', 'SORTED' ], [ 'list.sort()', 'INPLACE' ]] },
+      { type: 'field_dropdown', name: 'MODE', options: [['sorted()', 'SORTED'], ['list.sort()', 'INPLACE']] },
       { type: 'input_value', name: 'TARGET' }
     ],
     colour: '#4D6A94',
@@ -152,7 +152,7 @@ Blockly.defineBlocksWithJsonArray([
 const sortedMutator = makeOptionalParamsMutator('sorted');
 const listSortMutator = makeOptionalParamsMutator('list_sort');
 
-const helper = function() {
+const helper = function () {
   const firstValueInput = this.inputList.find(inp => inp.type === Blockly.INPUT_VALUE);
   if (firstValueInput) {
     if (!this.getField('PLUS')) firstValueInput.insertFieldAt(0, createPlusField(), 'PLUS');
@@ -170,30 +170,30 @@ Blockly.Extensions.registerMutator('list_sort_mutator', listSortMutator, helper)
 const multiKeySortMutator = {
   keyCount_: 0,
   hasReverse_: false,
-  mutationToDom: function() {
+  mutationToDom: function () {
     if (!this.keyCount_ && !this.hasReverse_) return null;
     const m = Blockly.utils.xml.createElement('mutation');
     if (this.keyCount_) m.setAttribute('keys', this.keyCount_);
     if (this.hasReverse_) m.setAttribute('reverse', 1);
     return m;
   },
-  domToMutation: function(xml) {
+  domToMutation: function (xml) {
     this.keyCount_ = parseInt(xml.getAttribute('keys'), 10) || 0;
     this.hasReverse_ = !!parseInt(xml.getAttribute('reverse'), 10);
     this.updateShape_();
   },
-  saveExtraState: function() {
+  saveExtraState: function () {
     const s = {};
     if (this.keyCount_) s.keyCount = this.keyCount_;
     if (this.hasReverse_) s.hasReverse = true;
     return Object.keys(s).length ? s : null;
   },
-  loadExtraState: function(state) {
+  loadExtraState: function (state) {
     this.keyCount_ = state.keyCount || 0;
     this.hasReverse_ = !!state.hasReverse;
     this.updateShape_();
   },
-  updateShape_: function() {
+  updateShape_: function () {
     // Remove surplus key inputs
     for (let i = this.keyCount_; this.getInput('KEY' + i); i++) {
       this.removeInput('KEY' + i);
@@ -201,13 +201,13 @@ const multiKeySortMutator = {
     // Add required key inputs
     for (let i = 0; i < this.keyCount_; i++) {
       if (!this.getInput('KEY' + i)) {
-        this.appendValueInput('KEY' + i).appendField(i === 0 ? 'primary key' : 'key ' + (i+1));
+        this.appendValueInput('KEY' + i).appendField(i === 0 ? 'primary key' : 'key ' + (i + 1));
       }
     }
     // REVERSE socket (value input expecting boolean)
     if (this.hasReverse_) {
       if (!this.getInput('REVERSE')) {
-        const inp = this.appendValueInput('REVERSE').setAlign(Blockly.ALIGN_RIGHT).appendField('reverse');
+        const inp = this.appendValueInput('REVERSE').setAlign('RIGHT').appendField('reverse');
         const shadow = Blockly.utils.xml.createElement('shadow');
         shadow.setAttribute('type', 'reverse_toggle_block');
         const field = Blockly.utils.xml.createElement('field');
@@ -226,8 +226,8 @@ const multiKeySortMutator = {
       dataInput.insertFieldAt(1, createMinusField(), 'MINUS');
     }
   },
-  plus: function() { this.keyCount_++; this.updateShape_(); },
-  minus: function() {
+  plus: function () { this.keyCount_++; this.updateShape_(); },
+  minus: function () {
     if (this.keyCount_ > 0) {
       this.keyCount_--;
       this.updateShape_();
@@ -244,11 +244,11 @@ Blockly.Extensions.registerMutator('multi_key_sort_mutator', multiKeySortMutator
 function makeKeyOnlyMutator(inputName) {
   return {
     hasKey_: false,
-    mutationToDom: function() { if (!this.hasKey_) return null; const m = Blockly.utils.xml.createElement('mutation'); m.setAttribute('key', 1); return m; },
-    domToMutation: function(xml) { this.hasKey_ = !!parseInt(xml.getAttribute('key'), 10); this.updateShape_(); },
-    saveExtraState: function() { return this.hasKey_ ? { hasKey: true } : null; },
-    loadExtraState: function(state) { this.hasKey_ = !!state.hasKey; this.updateShape_(); },
-    updateShape_: function() {
+    mutationToDom: function () { if (!this.hasKey_) return null; const m = Blockly.utils.xml.createElement('mutation'); m.setAttribute('key', 1); return m; },
+    domToMutation: function (xml) { this.hasKey_ = !!parseInt(xml.getAttribute('key'), 10); this.updateShape_(); },
+    saveExtraState: function () { return this.hasKey_ ? { hasKey: true } : null; },
+    loadExtraState: function (state) { this.hasKey_ = !!state.hasKey; this.updateShape_(); },
+    updateShape_: function () {
       if (this.hasKey_) { if (!this.getInput('KEY')) this.appendValueInput('KEY').appendField('key'); }
       else if (this.getInput('KEY')) this.removeInput('KEY');
       const head = this.getInput(inputName);
@@ -257,8 +257,8 @@ function makeKeyOnlyMutator(inputName) {
         head.insertFieldAt(1, createMinusField(), 'MINUS');
       }
     },
-    plus: function() { if (!this.hasKey_) { this.hasKey_ = true; this.updateShape_(); } },
-    minus: function() { if (this.hasKey_) { this.hasKey_ = false; this.updateShape_(); } }
+    plus: function () { if (!this.hasKey_) { this.hasKey_ = true; this.updateShape_(); } },
+    minus: function () { if (this.hasKey_) { this.hasKey_ = false; this.updateShape_(); } }
   };
 }
 const reverseViewMutator = makeKeyOnlyMutator('ITERABLE');
@@ -277,7 +277,7 @@ Blockly.Extensions.registerMutator('sorting_master_mutator', sortingMasterMutato
 if (Blockly.Extensions.isRegistered('sorting_master_shape')) {
   Blockly.Extensions.unregister('sorting_master_shape');
 }
-Blockly.Extensions.register('sorting_master_shape', function() {
+Blockly.Extensions.register('sorting_master_shape', function () {
   const update = () => {
     const mode = this.getFieldValue('MODE');
     if (mode === 'SORTED') {
@@ -293,7 +293,7 @@ Blockly.Extensions.register('sorting_master_shape', function() {
     }
     this.render && this.render();
   };
-  this.setOnChange(function(e) {
+  this.setOnChange(function (e) {
     if (!e || e.type !== Blockly.Events.BLOCK_CHANGE) return;
     if (e.name === 'MODE' && e.blockId === this.id) update();
   });
@@ -305,7 +305,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: 'reverse_toggle_block',
     message0: 'reverse %1',
-    args0: [ { type: 'field_dropdown', name: 'VAL', options: [[ 'False', 'False' ], [ 'True', 'True' ]] } ],
+    args0: [{ type: 'field_dropdown', name: 'VAL', options: [['False', 'False'], ['True', 'True']] }],
     output: 'Boolean',
     colour: '#4D6A94',
     tooltip: 'Toggle ascending/descending order.',
@@ -320,7 +320,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: 'sorted dict %1 by %2',
     args0: [
       { type: 'input_value', name: 'DICT' },
-      { type: 'field_dropdown', name: 'MODE', options: [[ 'Key', 'KEY' ], [ 'Value', 'VALUE' ]] }
+      { type: 'field_dropdown', name: 'MODE', options: [['Key', 'KEY'], ['Value', 'VALUE']] }
     ],
     output: 'Array',
     colour: '#4D6A94',
@@ -340,15 +340,17 @@ Blockly.defineBlocksWithJsonArray([
     type: 'key_builder_block',
     message0: 'key %1',
     args0: [
-      { type: 'field_dropdown', name: 'KIND', options: [
-        [ 'identity (lambda x: x)', 'IDENTITY' ],
-        [ 'len', 'LEN' ],
-        [ 'abs', 'ABS' ],
-        [ 'itemgetter', 'ITEMGETTER' ],
-        [ 'attrgetter', 'ATTRGETTER' ],
-        [ 'cmp_to_key', 'CMP_TO_KEY' ],
-        [ 'lambda', 'LAMBDA' ]
-      ]}
+      {
+        type: 'field_dropdown', name: 'KIND', options: [
+          ['identity (lambda x: x)', 'IDENTITY'],
+          ['len', 'LEN'],
+          ['abs', 'ABS'],
+          ['itemgetter', 'ITEMGETTER'],
+          ['attrgetter', 'ATTRGETTER'],
+          ['cmp_to_key', 'CMP_TO_KEY'],
+          ['lambda', 'LAMBDA']
+        ]
+      }
     ],
     output: null,
     colour: '#4D6A94',
@@ -361,21 +363,21 @@ Blockly.defineBlocksWithJsonArray([
 // Mutator/extension for key_builder_block
 const keyBuilderMutator = {
   count_: 1, // for multi index/attribute when applicable
-  mutationToDom: function() {
+  mutationToDom: function () {
     const m = Blockly.utils.xml.createElement('mutation');
     m.setAttribute('count', this.count_);
     return m;
   },
-  domToMutation: function(xml) {
+  domToMutation: function (xml) {
     this.count_ = parseInt(xml.getAttribute('count'), 10) || 1;
     this.updateShape_();
   },
-  saveExtraState: function() { return { count: this.count_ }; },
-  loadExtraState: function(state) { this.count_ = state.count || 1; this.updateShape_(); },
-  updateShape_: function() {
+  saveExtraState: function () { return { count: this.count_ }; },
+  loadExtraState: function (state) { this.count_ = state.count || 1; this.updateShape_(); },
+  updateShape_: function () {
     const kind = this.getFieldValue('KIND');
     // Clear dynamic inputs
-    const inputNames = ['EXPR','COMPARATOR','INDEX','ATTRIBUTE'];
+    const inputNames = ['EXPR', 'COMPARATOR', 'INDEX', 'ATTRIBUTE'];
     for (const name of inputNames) {
       if (this.getInput(name)) this.removeInput(name);
       let i = 0; while (this.getInput(name + i)) { this.removeInput(name + i); i++; }
@@ -393,7 +395,7 @@ const keyBuilderMutator = {
         this.appendValueInput('INDEX').appendField('index');
       } else {
         for (let i = 0; i < this.count_; i++) {
-          this.appendValueInput('INDEX' + i).appendField(i === 0 ? 'index' : 'index ' + (i+1));
+          this.appendValueInput('INDEX' + i).appendField(i === 0 ? 'index' : 'index ' + (i + 1));
         }
       }
       const first = this.getInput('INDEX') || this.getInput('INDEX0');
@@ -406,7 +408,7 @@ const keyBuilderMutator = {
         this.appendValueInput('ATTRIBUTE').appendField('attribute');
       } else {
         for (let i = 0; i < this.count_; i++) {
-          this.appendValueInput('ATTRIBUTE' + i).appendField(i === 0 ? 'attribute' : 'attribute ' + (i+1));
+          this.appendValueInput('ATTRIBUTE' + i).appendField(i === 0 ? 'attribute' : 'attribute ' + (i + 1));
         }
       }
       const first = this.getInput('ATTRIBUTE') || this.getInput('ATTRIBUTE0');
@@ -417,7 +419,7 @@ const keyBuilderMutator = {
     }
     // LEN, ABS, IDENTITY require no extra inputs
   },
-  plus: function() {
+  plus: function () {
     // Only meaningful for ITEMGETTER/ATTRGETTER
     const kind = this.getFieldValue('KIND');
     if (kind === 'ITEMGETTER' || kind === 'ATTRGETTER') {
@@ -425,7 +427,7 @@ const keyBuilderMutator = {
       this.updateShape_();
     }
   },
-  minus: function() {
+  minus: function () {
     const kind = this.getFieldValue('KIND');
     if ((kind === 'ITEMGETTER' || kind === 'ATTRGETTER') && this.count_ > 1) {
       this.count_--;
@@ -434,7 +436,7 @@ const keyBuilderMutator = {
   }
 };
 if (Blockly.Extensions.isRegistered('key_builder_mutator')) Blockly.Extensions.unregister('key_builder_mutator');
-Blockly.Extensions.registerMutator('key_builder_mutator', keyBuilderMutator, function() {
+Blockly.Extensions.registerMutator('key_builder_mutator', keyBuilderMutator, function () {
   // Listen for mode changes to rebuild shape
   this.setOnChange((e) => {
     if (e && e.type === Blockly.Events.BLOCK_CHANGE && e.blockId === this.id && e.name === 'KIND') {
@@ -451,7 +453,7 @@ Blockly.defineBlocksWithJsonArray([
     type: 'heapq_select_block',
     message0: '%1 %2 from %3',
     args0: [
-      { type: 'field_dropdown', name: 'MODE', options: [[ 'n smallest', 'NSMALLEST' ], [ 'n largest', 'NLARGEST' ]] },
+      { type: 'field_dropdown', name: 'MODE', options: [['n smallest', 'NSMALLEST'], ['n largest', 'NLARGEST']] },
       { type: 'input_value', name: 'N' },
       { type: 'input_value', name: 'ITERABLE' }
     ],

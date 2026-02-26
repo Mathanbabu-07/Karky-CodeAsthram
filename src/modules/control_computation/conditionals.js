@@ -1,21 +1,21 @@
-import * as Blockly from "blockly\/core";
+import * as Blockly from "blockly/core";
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "control_pass_simple",
     "message0": "pass",
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 0,
+    "colour": "#9B59B6",
     "tooltip": "No operation placeholder.",
     "helpUrl": "https://docs.python.org/3/reference/simple_stmts.html#the-pass-statement"
   },
   {
     "type": "control_if_main",
     "message0": "if __name__ == '__main__' do %1",
-    "args0": [ { "type": "input_statement", "name": "DO" } ],
+    "args0": [{ "type": "input_statement", "name": "DO" }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#5C6BC0",
+    "colour": "#9B59B6",
     "tooltip": "Guard to run code only when executed as a script.",
     "helpUrl": "https://docs.python.org/3/library/__main__.html"
   },
@@ -23,36 +23,36 @@ Blockly.defineBlocksWithJsonArray([
     "type": "control_match",
     "message0": "match %1",
     "args0": [{
-        "type": "input_value",
-        "name": "SUBJECT",
-        "colour": "#7E57C2"
-      }],
+      "type": "input_value",
+      "name": "SUBJECT",
+      "colour": "#9B59B6"
+    }],
     "message1": "%1",
     "args1": [{
-        "type": "input_statement",
-        "name": "CASES",
-        "check": "control_case"
-      }],
+      "type": "input_statement",
+      "name": "CASES",
+      "check": "control_case"
+    }],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "A match-case block (requires Python 3.10+)."
   },
   {
     "type": "control_case",
     "message0": "case %1",
     "args0": [{
-        "type": "input_value",
-        "name": "PATTERN"
-      }],
+      "type": "input_value",
+      "name": "PATTERN"
+    }],
     "message1": "do %1",
     "args1": [{
-        "type": "input_statement",
-        "name": "DO"
-      }],
+      "type": "input_statement",
+      "name": "DO"
+    }],
     "previousStatement": "control_case",
     "nextStatement": "control_case",
-    "colour": 210,
+    "colour": "#9B59B6",
     "tooltip": "A case for a match-case block."
   }
 ]);
@@ -77,7 +77,7 @@ Blockly.defineBlocksWithJsonArray([
       { "type": "input_value", "name": "B" }
     ],
     "output": "Boolean",
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "Build a conditional expression: comparisons, membership, identity."
   }
 ]);
@@ -97,7 +97,7 @@ Blockly.defineBlocksWithJsonArray([
       { "type": "input_value", "name": "RIGHT", "check": "Boolean" }
     ],
     "output": "Boolean",
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "extensions": ["logic_combine_update_shape"],
     "tooltip": "Combine boolean expressions using and/or/not. Hides RIGHT when using 'not'."
   }
@@ -116,14 +116,14 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "mutator": "controls_if_mutator",
     "tooltip": "Flexible if / elif / else block with +/− mutator."
   }
 ]);
 
 // Extension to hide/show RIGHT input when operator changes
-Blockly.Extensions.register('logic_combine_update_shape', function() {
+Blockly.Extensions.register('logic_combine_update_shape', function () {
   const update = () => {
     const op = this.getFieldValue('LOGICAL_OP');
     const right = this.getInput('RIGHT');
@@ -131,7 +131,7 @@ Blockly.Extensions.register('logic_combine_update_shape', function() {
     // Force re-render
     this.render && this.render();
   };
-  this.setOnChange(function(e) {
+  this.setOnChange(function (e) {
     if (!e || e.type !== Blockly.Events.BLOCK_CHANGE) return;
     if (e.name === 'LOGICAL_OP' && e.blockId === this.id) update();
   });
@@ -150,7 +150,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": "#7E57C2",
+    "colour": "#9B59B6",
     "tooltip": "If the expression is truthy, run the body."
   }
 ]);

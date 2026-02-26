@@ -1,5 +1,4 @@
 import { pythonGenerator as Python } from 'blockly/python';
-
 Python.forBlock['sqlite_connect'] = function(block) {
   Python.addImport('sqlite3');
   const path = Python.valueToCode(block, 'PATH', Python.ORDER_ATOMIC) || "':memory:'";
