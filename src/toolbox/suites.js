@@ -1,8 +1,9 @@
-﻿import {
+import {
   PiBracketsCurly, PiTreeStructure, PiFlowArrow, PiTextT, PiFile, PiGlobe,
   PiDatabase, PiHourglass, PiRobot, PiCamera, PiKey,
   PiTestTube, PiBuildings, PiPaintBrush, PiWifiHigh, PiHardDrives,
-  PiChartBar, PiFunction, PiGraph, PiBrain, PiCircuitry, PiPersonSimpleWalk
+  PiChartBar, PiFunction, PiGraph, PiBrain, PiCircuitry, PiPersonSimpleWalk,
+  PiCode
 } from "react-icons/pi";
 import { SiPandas, SiNumpy, SiPytorch, SiTensorflow, SiScikitlearn } from "react-icons/si";
 
@@ -391,15 +392,306 @@ export const PYTHON_MODULES = [
   },
 ];
 
-// JAVA-SPECIFIC MODULES (To be implemented)
-export const JAVA_MODULES = [];
+// JAVA-SPECIFIC MODULES
+export const JAVA_MODULES = [
+  {
+    name: "Java Basics",
+    icon: PiCode,
+    themeKey: "java_basics",
+    blocks: [
+      { type: "java_var_declare" },
+      { type: "java_var_assign" },
+      { type: "java_primitive_type" },
+      { type: "java_type_cast" },
+      { type: "java_constant" },
+      { type: "essentials_import_simple" },
+      { type: "essentials_var_set" },
+      { type: "essentials_var_get" },
+      { type: "essentials_cast" },
+      { type: "essentials_type_of" },
+      { type: "essentials_is_instance" },
+    ],
+  },
+  {
+    name: "Java Control & Loops",
+    icon: PiHourglass,
+    themeKey: "java_control",
+    blocks: [
+      { type: "java_if_else" },
+      { type: "java_for_loop" },
+      { type: "java_foreach" },
+      { type: "java_do_while" },
+      { type: "java_break_continue" },
+      { type: "controls_if" },
+      { type: "controls_whileUntil" },
+      { type: "controls_for" },
+      { type: "controls_forEach" },
+      { type: "controls_flow_statements" },
+      { type: "control_switch" },
+      { type: "control_while_true_inline" },
+    ],
+  },
+  {
+    name: "Java Methods",
+    icon: PiFunction,
+    themeKey: "java_methods",
+    blocks: [
+      { type: "java_method_def" },
+      { type: "essentials_function_def" },
+      { type: "procedures_callnoreturn" },
+      { type: "procedures_callreturn" },
+      { type: "control_return" },
+    ],
+  },
+  {
+    name: "Java Arrays & Lists",
+    icon: PiTreeStructure,
+    themeKey: "java_collections",
+    blocks: [
+      { type: "java_array_create" },
+      { type: "java_array_get_set" },
+      { type: "java_array_length" },
+      { type: "java_arraylist_create" },
+      { type: "java_arraylist_add" },
+      { type: "java_arraylist_get" },
+      { type: "java_arraylist_size" },
+      { type: "essentials_list_create" },
+      { type: "essentials_list_length" },
+      { type: "essentials_list_get" },
+      { type: "essentials_list_set" },
+      { type: "essentials_list_statements" },
+      { type: "essentials_list_expressions" },
+    ],
+  },
+  {
+    name: "Java Maps & Sets",
+    icon: PiDatabase,
+    themeKey: "java_maps",
+    blocks: [
+      { type: "java_hashmap_create" },
+      { type: "java_hashmap_put" },
+      { type: "java_hashmap_get" },
+      { type: "java_hashset_create" },
+      { type: "java_hashset_add" },
+      { type: "essentials_dict_create" },
+      { type: "essentials_dict_statements" },
+      { type: "essentials_dict_expressions" },
+      { type: "essentials_dict_update" },
+      { type: "essentials_set_create" },
+      { type: "essentials_set_add" },
+    ],
+  },
+  {
+    name: "Java OOP & Classes",
+    icon: PiBuildings,
+    themeKey: "java_oop",
+    blocks: [
+      { type: "java_class_define" },
+      { type: "java_field_define" },
+      { type: "java_instantiate" },
+      { type: "oop_class" },
+      { type: "oop_constructor" },
+      { type: "oop_method" },
+      { type: "oop_super_init" },
+      { type: "oop_super_call" },
+    ],
+  },
+  {
+    name: "Java I/O & System",
+    icon: PiFile,
+    themeKey: "java_io",
+    blocks: [
+      { type: "java_print" },
+      { type: "java_printf" },
+      { type: "java_scanner_init" },
+      { type: "java_scanner_read" },
+      { type: "text_print" },
+      { type: "essentials_log_info" },
+      { type: "essentials_safe_input" },
+    ],
+  },
+  {
+    name: "Java Exceptions & Utilities",
+    icon: PiTestTube,
+    themeKey: "java_exceptions",
+    blocks: [
+      { type: "java_try_catch" },
+      { type: "java_throw" },
+      { type: "java_math_pow" },
+      { type: "java_math_sqrt" },
+      { type: "java_string_contains" },
+      { type: "java_string_split" },
+      { type: "control_try_except" },
+      { type: "control_try_except_finally" },
+      { type: "control_raise_exception" },
+      { type: "math_single" },
+      { type: "math_ops_multi" },
+      { type: "text_length" },
+      { type: "text_substring" },
+      { type: "text_replace" },
+    ],
+  },
+];
 
-// JAVASCRIPT-SPECIFIC MODULES (To be implemented)
-export const JAVASCRIPT_MODULES = [];
+// JAVASCRIPT-SPECIFIC MODULES
+export const JAVASCRIPT_MODULES = [
+  {
+    name: "JS Variables & Types",
+    icon: PiCode,
+    themeKey: "js_basics",
+    blocks: [
+      { type: "js_var_let" },
+      { type: "js_var_const" },
+      { type: "js_var_assign" },
+      { type: "js_typeof" },
+      { type: "js_type_convert" },
+      { type: "essentials_var_set" },
+      { type: "essentials_var_get" },
+      { type: "essentials_type_of" },
+    ],
+  },
+  {
+    name: "JS Operators & Logic",
+    icon: PiFunction,
+    themeKey: "js_operators",
+    blocks: [
+      { type: "js_math_arithmetic" },
+      { type: "js_logic_compare" },
+      { type: "js_logic_operation" },
+      { type: "js_nullish_coalescing" },
+      { type: "js_optional_chaining" },
+      { type: "essentials_num_arithmetic" },
+      { type: "essentials_num_compare" },
+      { type: "logic_compare" },
+      { type: "logic_operation" },
+      { type: "logic_negate" },
+      { type: "logic_ternary" },
+    ],
+  },
+  {
+    name: "JS Control & Loops",
+    icon: PiHourglass,
+    themeKey: "js_control",
+    blocks: [
+      { type: "js_if_else" },
+      { type: "js_switch" },
+      { type: "js_for_loop" },
+      { type: "js_for_of" },
+      { type: "js_for_in" },
+      { type: "js_while" },
+      { type: "js_break_continue" },
+      { type: "controls_if" },
+      { type: "controls_whileUntil" },
+      { type: "controls_for" },
+      { type: "controls_forEach" },
+      { type: "controls_flow_statements" },
+      { type: "control_switch" },
+    ],
+  },
+  {
+    name: "JS Functions & Scope",
+    icon: PiFunction,
+    themeKey: "js_functions",
+    blocks: [
+      { type: "js_function_decl" },
+      { type: "js_arrow_function" },
+      { type: "js_function_call" },
+      { type: "js_return" },
+      { type: "essentials_function_def" },
+      { type: "procedures_callnoreturn" },
+      { type: "procedures_callreturn" },
+      { type: "control_return" },
+    ],
+  },
+  {
+    name: "JS Arrays & Methods",
+    icon: PiTreeStructure,
+    themeKey: "js_arrays",
+    blocks: [
+      { type: "js_array_create" },
+      { type: "js_array_push_pop" },
+      { type: "js_array_get_set" },
+      { type: "js_array_length" },
+      { type: "js_array_map_filter" },
+      { type: "js_array_includes" },
+      { type: "essentials_list_create" },
+      { type: "essentials_list_length" },
+      { type: "essentials_list_get" },
+      { type: "essentials_list_set" },
+    ],
+  },
+  {
+    name: "JS Objects & JSON",
+    icon: PiBracketsCurly,
+    themeKey: "js_objects",
+    blocks: [
+      { type: "js_object_create" },
+      { type: "js_object_get_set" },
+      { type: "js_json_stringify" },
+      { type: "js_json_parse" },
+      { type: "essentials_dict_create" },
+      { type: "essentials_dict_statements" },
+      { type: "essentials_dict_expressions" },
+    ],
+  },
+  {
+    name: "JS Maps & Sets",
+    icon: PiDatabase,
+    themeKey: "js_maps",
+    blocks: [
+      { type: "js_map_create" },
+      { type: "js_map_set_get" },
+      { type: "js_set_create" },
+      { type: "js_set_add_has" },
+      { type: "essentials_set_create" },
+      { type: "essentials_set_add" },
+    ],
+  },
+  {
+    name: "JS OOP & Classes",
+    icon: PiBuildings,
+    themeKey: "js_classes",
+    blocks: [
+      { type: "js_class_define" },
+      { type: "js_constructor" },
+      { type: "js_class_method" },
+      { type: "js_instantiate" },
+      { type: "js_class_extends" },
+      { type: "oop_class" },
+      { type: "oop_constructor" },
+      { type: "oop_method" },
+    ],
+  },
+  {
+    name: "JS Console & I/O",
+    icon: PiFile,
+    themeKey: "js_io",
+    blocks: [
+      { type: "js_console_log" },
+      { type: "js_console_error" },
+      { type: "js_prompt_input" },
+      { type: "js_alert" },
+      { type: "text_print" },
+      { type: "essentials_safe_input" },
+    ],
+  },
+  {
+    name: "JS Async & Exceptions",
+    icon: PiTestTube,
+    themeKey: "js_async",
+    blocks: [
+      { type: "js_try_catch" },
+      { type: "js_throw_error" },
+      { type: "js_async_func" },
+      { type: "js_await" },
+      { type: "control_try_except" },
+      { type: "control_try_except_finally" },
+    ],
+  },
+];
 
 // Backwards compatibility: Combine all modules for theme
-// FUNDAMENTAL_MODULES = UNIVERSAL + PYTHON (for now, until we have dynamic theming)
-export const FUNDAMENTAL_MODULES = [...UNIVERSAL_MODULES, ...PYTHON_MODULES];
+export const FUNDAMENTAL_MODULES = [...UNIVERSAL_MODULES, ...PYTHON_MODULES, ...JAVA_MODULES, ...JAVASCRIPT_MODULES];
 
 // For the theme: wrap each module as a suite with one module inside
 export const SUITES = FUNDAMENTAL_MODULES.map(module => ({

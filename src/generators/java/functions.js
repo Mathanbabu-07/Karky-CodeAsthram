@@ -1,34 +1,40 @@
 import { javaGenerator } from '../java.js';
 import { Order } from 'blockly/javascript';
 
-// Function definition
+// Dedicated Java method definition
+javaGenerator.forBlock['java_method_def'] = function (block, generator) {
+    const access = block.getFieldValue('ACCESS') || 'public';
+    const staticField = block.getFieldValue('STATIC');
+    const isStatic = staticField === 'false' || staticField === false ? '' : 'static ';
+    const returnType = block.getFieldValue('RETURN_TYPE') || 'void';
+    const name = block.getFieldValue('NAME') || 'myMethod';
+    const params = block.getFieldValue('PARAMS') || '';
+    const body = generator.statementToCode(block, 'STACK') || generator.statementToCode(block, 'DO') || generator.statementToCode(block, 'BODY');
+    return `${access} ${isStatic}${returnType} ${name}(${params}) {\n${body}}\n`;
+};
+
+// Function definition (generic)
 javaGenerator.forBlock['essentials_function_def'] = function (block, generator) {
-    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), Blockly.Names.NameType.PROCEDURE);
+    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), 'PROCEDURE');
     const args = [];
 
     // Get arguments
-    for (let i = 0; i < block.arguments_.length; i++) {
-        args.push('var ' + generator.nameDB_.getName(block.arguments_[i], Blockly.Names.NameType.VARIABLE));
+    for (let i = 0; i < (block.arguments_ || []).length; i++) {
+        args.push('Object ' + generator.nameDB_.getName(block.arguments_[i], 'VARIABLE'));
     }
 
     const branch = generator.statementToCode(block, 'STACK');
     const returnType = block.hasReturn_ ? 'Object' : 'void';
 
-    let code = `public static ${returnType} ${funcName}(${args.join(', ')}) {\n${branch}`;
-    if (!block.hasReturn_) {
-        code += '}\n';
-    } else {
-        code += '    return null; // TODO: Add return statement\n}\n';
-    }
-    return code;
+    return `public static ${returnType} ${funcName}(${args.join(', ')}) {\n${branch}}\n`;
 };
 
 // Procedure call (no return)
 javaGenerator.forBlock['procedures_callnoreturn'] = function (block, generator) {
-    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), Blockly.Names.NameType.PROCEDURE);
+    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), 'PROCEDURE');
     const args = [];
 
-    for (let i = 0; i < block.arguments_.length; i++) {
+    for (let i = 0; i < (block.arguments_ || []).length; i++) {
         args.push(generator.valueToCode(block, 'ARG' + i, Order.NONE) || 'null');
     }
 
@@ -37,10 +43,10 @@ javaGenerator.forBlock['procedures_callnoreturn'] = function (block, generator) 
 
 // Procedure call (with return)
 javaGenerator.forBlock['procedures_callreturn'] = function (block, generator) {
-    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), Blockly.Names.NameType.PROCEDURE);
+    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), 'PROCEDURE');
     const args = [];
 
-    for (let i = 0; i < block.arguments_.length; i++) {
+    for (let i = 0; i < (block.arguments_ || []).length; i++) {
         args.push(generator.valueToCode(block, 'ARG' + i, Order.NONE) || 'null');
     }
 

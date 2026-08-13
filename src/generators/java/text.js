@@ -1,6 +1,58 @@
 import { javaGenerator } from '../java.js';
 import { Order } from 'blockly/javascript';
 
+// Dedicated String contains
+javaGenerator.forBlock['java_string_contains'] = function (block, generator) {
+    const text = generator.valueToCode(block, 'TEXT', Order.MEMBER) || '""';
+    const sub = generator.valueToCode(block, 'SUB', Order.NONE) || '""';
+    return [`${text}.contains(${sub})`, Order.MEMBER];
+};
+
+// Dedicated String split
+javaGenerator.forBlock['java_string_split'] = function (block, generator) {
+    const text = generator.valueToCode(block, 'TEXT', Order.MEMBER) || '""';
+    const delim = generator.valueToCode(block, 'DELIM', Order.NONE) || '" "';
+    return [`${text}.split(${delim})`, Order.MEMBER];
+};
+
+// Standard Blockly text block ("hello")
+javaGenerator.forBlock['text'] = function (block, generator) {
+    const textValue = block.getFieldValue('TEXT') || '';
+    const code = generator.quote_(textValue);
+    return [code, Order.ATOMIC];
+};
+
+// Standard Blockly text_join block
+javaGenerator.forBlock['text_join'] = function (block, generator) {
+    const itemCount = block.itemCount_ || 0;
+    if (itemCount === 0) {
+        return ['""', Order.ATOMIC];
+    } else if (itemCount === 1) {
+        const element = generator.valueToCode(block, 'ADD0', Order.NONE) || '""';
+        return [`String.valueOf(${element})`, Order.FUNCTION_CALL];
+    } else {
+        const elements = [];
+        for (let i = 0; i < itemCount; i++) {
+            const element = generator.valueToCode(block, 'ADD' + i, Order.NONE) || '""';
+            elements.push(`String.valueOf(${element})`);
+        }
+        return [elements.join(' + '), Order.ADDITION];
+    }
+};
+
+// Standard Blockly text_append block
+javaGenerator.forBlock['text_append'] = function (block, generator) {
+    const varName = generator.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Names.NameType.VARIABLE);
+    const value = generator.valueToCode(block, 'TEXT', Order.NONE) || '""';
+    return `${varName} += String.valueOf(${value});\n`;
+};
+
+// Essentials print block
+javaGenerator.forBlock['essentials_print'] = function (block, generator) {
+    const msg = generator.valueToCode(block, 'TEXT', Order.NONE) || '""';
+    return `System.out.println(${msg});\n`;
+};
+
 // Text literal
 javaGenerator.forBlock['text_literal'] = function (block, generator) {
     const text = block.getFieldValue('TEXT');

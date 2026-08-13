@@ -37,6 +37,7 @@ import './generators/java/functions.js'; // Functions & methods
 import './generators/java/lists.js'; // ArrayList operations
 import './generators/java/collections.js'; // HashMap & HashSet
 import './generators/java/oop.js'; // Classes, OOP, I/O, error handling
+import './generators/javascript.js'; // JavaScript generator & block definitions
 import './modules/initializer.js';
 
 import './styles/tutorials.css';
@@ -99,19 +100,18 @@ export default function App() {
     showToast(`Downloaded ${getFileName(currentLanguage)}`, 'success');
   };
 
-  // CRITICAL: Regenerate code when language changes
+  // CRITICAL: Update toolbox & code when language changes
   useEffect(() => {
     if (mainWorkspace) {
-      const newCode = generateCode(mainWorkspace, currentLanguage);
-      setCode(newCode);
-    }
-  }, [currentLanguage, mainWorkspace]);
-
-  // CRITICAL: Update toolbox when language changes (show/hide language-specific modules)
-  useEffect(() => {
-    if (mainWorkspace) {
-      const newToolboxConfig = getToolboxConfig(currentLanguage);
-      mainWorkspace.updateToolbox(newToolboxConfig);
+      try {
+        window._currentLanguage = currentLanguage;
+        const newToolboxConfig = getToolboxConfig(currentLanguage);
+        mainWorkspace.updateToolbox(newToolboxConfig);
+        const newCode = generateCode(mainWorkspace, currentLanguage);
+        setCode(newCode);
+      } catch (err) {
+        console.error("Error updating workspace for language:", currentLanguage, err);
+      }
     }
   }, [currentLanguage, mainWorkspace]);
 
@@ -315,6 +315,7 @@ export default function App() {
             isCollapsed={isCollapsed}
             onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
             onDownload={downloadFile}
+            currentLanguage={currentLanguage}
           />
         </div>
         {FEATURE_FLAGS.feature_tutorials && activeTutorial && (

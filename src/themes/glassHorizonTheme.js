@@ -9,12 +9,14 @@ function getVar(name, fallback) {
 }
 
 function alpha(hexOrVar, alphaValue = 0.4) {
+  if (!hexOrVar || typeof hexOrVar !== 'string') return '#306998';
   // Supports CSS color string or hex; for CSS var assume pre-blended from CSS.
   if (hexOrVar.startsWith('var(')) return hexOrVar; // Expect pre-defined rgba vars
 
   // Parse hex color
   const hex = hexOrVar.replace('#', '');
   const bigint = parseInt(hex.length === 3 ? hex.split('').map(c => c + c).join('') : hex, 16);
+  if (isNaN(bigint)) return '#306998';
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;

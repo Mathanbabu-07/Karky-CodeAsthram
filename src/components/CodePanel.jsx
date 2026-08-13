@@ -4,10 +4,14 @@ import { FiDownload, FiEye, FiEyeOff, FiClipboard, FiPlay } from 'react-icons/fi
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-java';
 import '../CodePanel.css';
 import AlivePythonIcon from './AlivePythonIcon';
 import CodeExecutionModal from './modals/CodeExecutionModal';
 import InputPromptModal from './modals/InputPromptModal';
+import { executeJavaCode } from '../utils/javaRunner';
+import { executeJSCode } from '../utils/jsRunner';
 import axios from 'axios';
 
 // Prefer same-origin proxy in dev to avoid CSP/CORS issues; override via VITE_API_BASE if needed
@@ -68,6 +72,7 @@ export default function CodePanel({
   isCollapsed,
   onToggleCollapse,
   onDownload,
+  currentLanguage = 'python',
 }) {
   const [showToast, setShowToast] = useState(false);
   const [showExecutionModal, setShowExecutionModal] = useState(false);
@@ -102,8 +107,40 @@ export default function CodePanel({
     setExecutionOutput('');
     setShowExecutionModal(true);
 
+    if (currentLanguage === 'java') {
+      try {
+        const result = executeJavaCode(code);
+        if (result.status === 'success') {
+          setExecutionOutput(result.output);
+        } else {
+          setExecutionError(result.output);
+        }
+      } catch (err) {
+        setExecutionError(`Java Execution Error: ${err.message}`);
+      } finally {
+        setIsExecuting(false);
+      }
+      return;
+    }
+
+    if (currentLanguage === 'javascript') {
+      try {
+        const result = await executeJSCode(code);
+        if (result.status === 'success') {
+          setExecutionOutput(result.output);
+        } else {
+          setExecutionError(result.output);
+        }
+      } catch (err) {
+        setExecutionError(`JavaScript Execution Error: ${err.message}`);
+      } finally {
+        setIsExecuting(false);
+      }
+      return;
+    }
+
     try {
-  const response = await postWithFallback('/run', { code });
+      const response = await postWithFallback('/run', { code, language: currentLanguage });
       // Backward compatible: if server returns { output }, show it directly
       if (response.data && response.data.output && !response.data.status) {
         setExecutionOutput(response.data.output || 'No output');
@@ -201,7 +238,31 @@ export default function CodePanel({
       <div className={`code-panel ${isCollapsed ? 'collapsed' : ''}`}>
         <div className="code-panel-header">
           <div className="header-icon-container">
-            <AlivePythonIcon />
+            {currentLanguage === 'java' ? (
+              <img
+                src="/java_logo.png"
+                alt="Java Logo"
+                style={{
+                  width: '85px',
+                  height: '85px',
+                  objectFit: 'contain',
+                  display: 'block'
+                }}
+              />
+            ) : currentLanguage === 'javascript' ? (
+              <img
+                src="/js_logo.png"
+                alt="JavaScript Logo"
+                style={{
+                  width: '85px',
+                  height: '85px',
+                  objectFit: 'contain',
+                  display: 'block'
+                }}
+              />
+            ) : (
+              <AlivePythonIcon />
+            )}
           </div>
           <div className="code-panel-action-pod">
             <button onClick={handleRunCode} title="Run Code" disabled={isExecuting}>
@@ -210,7 +271,7 @@ export default function CodePanel({
             <button onClick={handleCopy} title="Copy Code">
               <FiClipboard />
             </button>
-            <button onClick={onDownload} title="Download Python Script">
+            <button onClick={onDownload} title={`Download ${currentLanguage === 'java' ? 'Java' : currentLanguage === 'javascript' ? 'JavaScript' : 'Python'} Script`}>
               <FiDownload />
             </button>
             <button
@@ -223,12 +284,16 @@ export default function CodePanel({
         </div>
         <div className="code-content-wrapper">
           {!code?.trim() && (
-            <div className="code-empty-state">No code yet - build projects to see python here.</div>
+            <div className="code-empty-state">No code yet - build projects to see {currentLanguage} code here.</div>
           )}
           <Editor
             value={code}
             onValueChange={() => {}} // Read-only
-            highlight={(code) => highlight(code, languages.python, 'python')}
+            highlight={(code) => {
+              const lang = (currentLanguage || 'python').toLowerCase();
+              const grammar = languages[lang] || languages.python;
+              return highlight(code, grammar, lang);
+            }}
             padding={20}
             className="code-editor"
             style={{

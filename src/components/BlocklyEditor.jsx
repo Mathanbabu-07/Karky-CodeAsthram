@@ -51,6 +51,7 @@ import '../plugins/custom-toolbox/CustomCollapsibleCategory.js';
 
 export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
   const blocklyDiv = useRef(null);
+  const workspaceRef = useRef(null);
 
   useEffect(() => {
     // Build a theme snapshot from current CSS variables BEFORE injecting Blockly,
@@ -65,6 +66,7 @@ export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspace
       zoom: { controls: true, wheel: true, startScale: 0.8 },
       media: '/media/',
     });
+    workspaceRef.current = workspace;
 
     if (onWorkspaceCreated) {
       onWorkspaceCreated(workspace);
@@ -98,18 +100,28 @@ export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspace
     // A short delay to ensure the toolbox DOM is fully rendered before injecting
     const injectionTimeout = setTimeout(setupIconInjection, 100);
 
-    // --- Debounced code generation ---
+    // --- Real-time instant code generation ---
     let codeTimer = null;
-    const generateCode = () => {
+    const generateCode = (event) => {
+      if (event && (event.type === Blockly.Events.VIEWPORT_CHANGE || event.type === Blockly.Events.SELECTED)) {
+        return;
+      }
       clearTimeout(codeTimer);
       codeTimer = setTimeout(() => {
         try {
-          const code = globalThis.Python.workspaceToCode(workspace);
+          const lang = window._currentLanguage || 'python';
+          let generator = globalThis.Python;
+          if (lang === 'java' && globalThis.Java) {
+            generator = globalThis.Java;
+          } else if (lang === 'javascript' && globalThis.JavaScript) {
+            generator = globalThis.JavaScript;
+          }
+          const code = generator ? generator.workspaceToCode(workspace) : '';
           onCodeChange?.(code);
         } catch (err) {
-          console.error("Python code generation error:", err);
+          console.error("Code generation error:", err);
         }
-      }, 80);
+      }, 50);
     };
     workspace.addChangeListener(generateCode);
     generateCode();
@@ -137,9 +149,22 @@ export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspace
       backpack?.dispose?.();
       workspace.removeChangeListener(generateCode);
       workspace.dispose();
+      workspaceRef.current = null;
       window.removeEventListener('python-pop-theme-change', onThemeChange);
     };
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, []);
+
+  // Update toolbox dynamically when toolboxConfig changes (e.g. language change)
+  useEffect(() => {
+    if (workspaceRef.current && toolboxConfig) {
+      try {
+        workspaceRef.current.updateToolbox(toolboxConfig);
+        setTimeout(() => injectCategoryIcons(iconMap), 50);
+      } catch (err) {
+        console.error("Error updating Blockly toolbox:", err);
+      }
+    }
+  }, [toolboxConfig]); // Empty dependency array ensures this runs only once on mount
 
   return <div ref={blocklyDiv} className="blockly-container" />;
 }

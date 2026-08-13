@@ -262,4 +262,102 @@ javaGenerator.forBlock['math_random_float'] = function (block, generator) {
     return ['new Random().nextDouble()', Order.FUNCTION_CALL];
 };
 
+javaGenerator.forBlock['logic_null'] = function (block, generator) {
+    return ['null', Order.ATOMIC];
+};
+
+javaGenerator.forBlock['logic_ternary'] = function (block, generator) {
+    const condition = generator.valueToCode(block, 'IF', Order.CONDITIONAL) || 'false';
+    const thenCode = generator.valueToCode(block, 'THEN', Order.CONDITIONAL) || 'null';
+    const elseCode = generator.valueToCode(block, 'ELSE', Order.CONDITIONAL) || 'null';
+    return [`(${condition}) ? ${thenCode} : ${elseCode}`, Order.CONDITIONAL];
+};
+
+// ==================== LOOP BLOCKS ====================
+
+javaGenerator.forBlock['controls_repeat_ext'] = function (block, generator) {
+    const repeats = generator.valueToCode(block, 'TIMES', Order.NONE) || '0';
+    const branch = generator.statementToCode(block, 'DO');
+    return `for (int i = 0; i < ${repeats}; i++) {\n${branch}}\n`;
+};
+
+javaGenerator.forBlock['controls_whileUntil'] = function (block, generator) {
+    const until = block.getFieldValue('MODE') === 'UNTIL';
+    let argument0 = generator.valueToCode(block, 'BOOL', Order.NONE) || 'false';
+    if (until) {
+        argument0 = '!' + argument0;
+    }
+    const branch = generator.statementToCode(block, 'DO');
+    return `while (${argument0}) {\n${branch}}\n`;
+};
+
+javaGenerator.forBlock['controls_for'] = function (block, generator) {
+    const varId = block.getFieldValue('VAR');
+    const variable0 = generator.getVariableName ? generator.getVariableName(varId) : (block.getField('VAR') ? block.getField('VAR').getText() : (varId || 'i'));
+    const argument0 = generator.valueToCode(block, 'FROM', Order.ASSIGNMENT) || '0';
+    const argument1 = generator.valueToCode(block, 'TO', Order.ASSIGNMENT) || '0';
+    const increment = generator.valueToCode(block, 'BY', Order.ASSIGNMENT) || '1';
+    const branch = generator.statementToCode(block, 'DO');
+    return `for (int ${variable0} = ${argument0}; ${variable0} <= ${argument1}; ${variable0} += ${increment}) {\n${branch}}\n`;
+};
+
+javaGenerator.forBlock['controls_forEach'] = function (block, generator) {
+    const varId = block.getFieldValue('VAR');
+    const variable0 = generator.getVariableName ? generator.getVariableName(varId) : (block.getField('VAR') ? block.getField('VAR').getText() : (varId || 'item'));
+    const argument0 = generator.valueToCode(block, 'LIST', Order.ASSIGNMENT) || 'new ArrayList<>()';
+    const branch = generator.statementToCode(block, 'DO');
+    return `for (var ${variable0} : ${argument0}) {\n${branch}}\n`;
+};
+
+javaGenerator.forBlock['controls_flow_statements'] = function (block, generator) {
+    const action = block.getFieldValue('FLOW');
+    return action === 'BREAK' ? 'break;\n' : 'continue;\n';
+};
+
+// ==================== PROCEDURES BLOCKS ====================
+
+javaGenerator.forBlock['procedures_defnoreturn'] = function (block, generator) {
+    const funcName = block.getFieldValue('NAME') || 'myFunction';
+    const branch = generator.statementToCode(block, 'STACK');
+    const args = [];
+    const variables = block.getVars ? block.getVars() : [];
+    for (let i = 0; i < variables.length; i++) {
+        args[i] = 'Object ' + variables[i];
+    }
+    return `public static void ${funcName}(${args.join(', ')}) {\n${branch}}\n`;
+};
+
+javaGenerator.forBlock['procedures_defreturn'] = function (block, generator) {
+    const funcName = block.getFieldValue('NAME') || 'myFunction';
+    const branch = generator.statementToCode(block, 'STACK');
+    const returnValue = generator.valueToCode(block, 'RETURN', Order.NONE) || '';
+    const returnStr = returnValue ? `    return ${returnValue};\n` : '';
+    const args = [];
+    const variables = block.getVars ? block.getVars() : [];
+    for (let i = 0; i < variables.length; i++) {
+        args[i] = 'Object ' + variables[i];
+    }
+    return `public static Object ${funcName}(${args.join(', ')}) {\n${branch}${returnStr}}\n`;
+};
+
+javaGenerator.forBlock['procedures_callnoreturn'] = function (block, generator) {
+    const funcName = block.getFieldValue('NAME') || 'myFunction';
+    const args = [];
+    const variables = block.getVars ? block.getVars() : [];
+    for (let i = 0; i < variables.length; i++) {
+        args[i] = generator.valueToCode(block, 'ARG' + i, Order.NONE) || 'null';
+    }
+    return `${funcName}(${args.join(', ')});\n`;
+};
+
+javaGenerator.forBlock['procedures_callreturn'] = function (block, generator) {
+    const funcName = block.getFieldValue('NAME') || 'myFunction';
+    const args = [];
+    const variables = block.getVars ? block.getVars() : [];
+    for (let i = 0; i < variables.length; i++) {
+        args[i] = generator.valueToCode(block, 'ARG' + i, Order.NONE) || 'null';
+    }
+    return [`${funcName}(${args.join(', ')})`, Order.FUNCTION_CALL];
+};
+
 export { javaGenerator };

@@ -55,11 +55,16 @@ export default function CodeExecutionModal({ isOpen, onClose, output, isLoading,
     }
 
     if (error) {
+      const isHtmlError = typeof error === 'string' && (error.includes('<span') || error.includes('<div'));
       return (
         <div className="execution-error">
           <h3>Error</h3>
-          <pre>{error}</pre>
-          {error.includes('server is currently unavailable') && (
+          {isHtmlError ? (
+            <div dangerouslySetInnerHTML={{ __html: error }} />
+          ) : (
+            <pre>{error}</pre>
+          )}
+          {typeof error === 'string' && error.includes('server is currently unavailable') && (
             <p className="server-status-note">
               <small>Note: The Python execution server may be temporarily down for maintenance.</small>
             </p>

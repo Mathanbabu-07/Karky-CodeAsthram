@@ -1,10 +1,70 @@
 import { javaGenerator } from '../java.js';
 import { Order } from 'blockly/javascript';
 
-// Create dictionary (HashMap)
+// Dedicated Java HashMap creation: new HashMap<Key, Val>()
+javaGenerator.forBlock['java_hashmap_create'] = function (block, generator) {
+    generator.addImport('java.util.HashMap');
+    const kType = block.getFieldValue('KEY_TYPE') || 'String';
+    const vType = block.getFieldValue('VAL_TYPE') || 'String';
+    return [`new HashMap<${kType}, ${vType}>()`, Order.FUNCTION_CALL];
+};
+
+// Dedicated Java HashMap put: map.put(k, v);
+javaGenerator.forBlock['java_hashmap_put'] = function (block, generator) {
+    generator.addImport('java.util.HashMap');
+    const map = generator.valueToCode(block, 'MAP', Order.MEMBER) || 'map';
+    const key = generator.valueToCode(block, 'KEY', Order.NONE) || '""';
+    const value = generator.valueToCode(block, 'VALUE', Order.NONE) || 'null';
+    return `${map}.put(${key}, ${value});\n`;
+};
+
+// Dedicated Java HashMap get: map.get(k)
+javaGenerator.forBlock['java_hashmap_get'] = function (block, generator) {
+    const map = generator.valueToCode(block, 'MAP', Order.MEMBER) || 'map';
+    const key = generator.valueToCode(block, 'KEY', Order.NONE) || '""';
+    return [`${map}.get(${key})`, Order.MEMBER];
+};
+
+// Dedicated Java HashSet creation: new HashSet<Type>()
+javaGenerator.forBlock['java_hashset_create'] = function (block, generator) {
+    generator.addImport('java.util.HashSet');
+    const type = block.getFieldValue('TYPE') || 'String';
+    return [`new HashSet<${type}>()`, Order.FUNCTION_CALL];
+};
+
+// Dedicated Java HashSet add: set.add(item);
+javaGenerator.forBlock['java_hashset_add'] = function (block, generator) {
+    generator.addImport('java.util.HashSet');
+    const set = generator.valueToCode(block, 'SET', Order.MEMBER) || 'set';
+    const item = generator.valueToCode(block, 'ITEM', Order.NONE) || 'null';
+    return `${set}.add(${item});\n`;
+};
+
+// Create dictionary (HashMap generic)
 javaGenerator.forBlock['essentials_dict_create'] = function (block, generator) {
     generator.addImport('java.util.HashMap');
-    return ['new HashMap<>()', Order.FUNCTION_CALL];
+
+    const entries = [];
+    const count = block.itemCount_ !== undefined ? block.itemCount_ : 0;
+    for (let i = 0; i < count; i++) {
+        const keyInput = block.getInput('KEY' + i) ? 'KEY' + i : (block.getInput('KEY_' + i) ? 'KEY_' + i : null);
+        const valInput = block.getInput('VALUE' + i) ? 'VALUE' + i : (block.getInput('VALUE_' + i) ? 'VALUE_' + i : null);
+
+        const key = keyInput ? generator.valueToCode(block, keyInput, Order.NONE) : '';
+        const value = valInput ? generator.valueToCode(block, valInput, Order.NONE) : '';
+
+        if (key && value) {
+            entries.push(`${key}, ${value}`);
+        }
+    }
+
+    if (entries.length === 0) {
+        return ['new HashMap<>()', Order.FUNCTION_CALL];
+    }
+
+    generator.addImport('java.util.Map');
+    const code = `new HashMap<>(Map.of(${entries.join(', ')}))`;
+    return [code, Order.FUNCTION_CALL];
 };
 
 // Dictionary statements

@@ -1,15 +1,39 @@
 import { javaGenerator } from '../java.js';
 import { Order } from 'blockly/javascript';
 
+// Dedicated Java try/catch block
+javaGenerator.forBlock['java_try_catch'] = function (block, generator) {
+    const tryBody = generator.statementToCode(block, 'TRY');
+    const exType = block.getFieldValue('EX_TYPE') || 'Exception';
+    const varName = block.getFieldValue('VAR') || 'e';
+    const catchBody = generator.statementToCode(block, 'CATCH');
+    return `try {\n${tryBody}} catch (${exType} ${varName}) {\n${catchBody}}\n`;
+};
+
+// Dedicated Java throw block
+javaGenerator.forBlock['java_throw'] = function (block, generator) {
+    const exType = block.getFieldValue('EX_TYPE') || 'Exception';
+    const msg = generator.valueToCode(block, 'MSG', Order.NONE) || '""';
+    return `throw new ${exType}(${msg});\n`;
+};
+
 // Blockly's built-in tuple/list creation blocks
 javaGenerator.forBlock['lists_create_with'] = function (block, generator) {
     generator.addImport('java.util.ArrayList');
     generator.addImport('java.util.Arrays');
 
     const elements = [];
-    for (let i = 0; i < block.itemCount_; i++) {
-        const element = generator.valueToCode(block, 'ADD' + i, Order.NONE) || 'null';
-        elements.push(element);
+    const count = block.itemCount_ !== undefined ? block.itemCount_ : (block.inputList ? block.inputList.length : 0);
+    for (let i = 0; i < count; i++) {
+        let element = '';
+        if (block.getInput('ADD' + i)) {
+            element = generator.valueToCode(block, 'ADD' + i, Order.NONE);
+        } else if (block.getInput('ITEM' + i)) {
+            element = generator.valueToCode(block, 'ITEM' + i, Order.NONE);
+        }
+        if (element !== null && element !== '') {
+            elements.push(element);
+        }
     }
 
     if (elements.length === 0) {
@@ -23,9 +47,14 @@ javaGenerator.forBlock['lists_create_with'] = function (block, generator) {
 // Create tuple (Java uses arrays for tuples)
 javaGenerator.forBlock['tuples_create_with'] = function (block, generator) {
     const elements = [];
-    for (let i = 0; i < block.itemCount_; i++) {
-        const element = generator.valueToCode(block, 'ADD' + i, Order.NONE) || 'null';
-        elements.push(element);
+    for (let i = 0; i < (block.itemCount_ || 0); i++) {
+        let element = 'null';
+        if (block.getInput('ADD' + i)) {
+            element = generator.valueToCode(block, 'ADD' + i, Order.NONE);
+        } else if (block.getInput('ITEM' + i)) {
+            element = generator.valueToCode(block, 'ITEM' + i, Order.NONE);
+        }
+        elements.push(element || 'null');
     }
 
     const code = `new Object[]{${elements.join(', ')}}`;
@@ -35,9 +64,14 @@ javaGenerator.forBlock['tuples_create_with'] = function (block, generator) {
 // Text join/create
 javaGenerator.forBlock['text_join'] = function (block, generator) {
     const elements = [];
-    for (let i = 0; i < block.itemCount_; i++) {
-        const element = generator.valueToCode(block, 'ADD' + i, Order.NONE) || '""';
-        elements.push(element);
+    for (let i = 0; i < (block.itemCount_ || 0); i++) {
+        let element = '""';
+        if (block.getInput('ADD' + i)) {
+            element = generator.valueToCode(block, 'ADD' + i, Order.NONE);
+        } else if (block.getInput('ITEM' + i)) {
+            element = generator.valueToCode(block, 'ITEM' + i, Order.NONE);
+        }
+        elements.push(element || '""');
     }
 
     if (elements.length === 0) {
@@ -54,28 +88,36 @@ javaGenerator.forBlock['text_create_join_item'] = function (block, generator) {
     return null; // This is a helper block
 };
 
-// Dictionary/map comprehension (convert to Stream operations)
+// Dictionary creation block
 javaGenerator.forBlock['dicts_create_with'] = function (block, generator) {
     generator.addImport('java.util.HashMap');
 
-    const elements = [];
-    for (let i = 0; i < block.itemCount_; i++) {
-        const key = generator.valueToCode(block, 'KEY' + i, Order.NONE) || '""';
-        const value = generator.valueToCode(block, 'VALUE' + i, Order.NONE) || 'null';
-        elements.push(`put(${key}, ${value})`);
+    const entries = [];
+    const count = block.itemCount_ !== undefined ? block.itemCount_ : 0;
+    for (let i = 0; i < count; i++) {
+        const keyInput = block.getInput('KEY' + i) ? 'KEY' + i : (block.getInput('KEY_' + i) ? 'KEY_' + i : null);
+        const valInput = block.getInput('VALUE' + i) ? 'VALUE' + i : (block.getInput('VALUE_' + i) ? 'VALUE_' + i : null);
+
+        const key = keyInput ? generator.valueToCode(block, keyInput, Order.NONE) : '';
+        const value = valInput ? generator.valueToCode(block, valInput, Order.NONE) : '';
+
+        if (key && value) {
+            entries.push(`${key}, ${value}`);
+        }
     }
 
-    if (elements.length === 0) {
+    if (entries.length === 0) {
         return ['new HashMap<>()', Order.FUNCTION_CALL];
     }
 
-    const code = `new HashMap<>() {{ ${elements.join('; ')}; }}`;
+    generator.addImport('java.util.Map');
+    const code = `new HashMap<>(Map.of(${entries.join(', ')}))`;
     return [code, Order.FUNCTION_CALL];
 };
 
 // List comprehension (convert to Stream)
 javaGenerator.forBlock['controls_list_comprehension'] = function (block, generator) {
-    const variable = generator.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Names.NameType.VARIABLE);
+    const variable = generator.nameDB_.getName(block.getFieldValue('VAR'), 'VARIABLE');
     const list = generator.valueToCode(block, 'LIST', Order.NONE) || 'new ArrayList<>()';
     const expression = generator.valueToCode(block, 'EXPRESSION', Order.NONE) || variable;
     const condition = generator.valueToCode(block, 'CONDITION', Order.NONE);
@@ -94,8 +136,8 @@ javaGenerator.forBlock['controls_list_comprehension'] = function (block, generat
 
 // Dict comprehension
 javaGenerator.forBlock['controls_dict_comprehension'] = function (block, generator) {
-    const keyVar = generator.nameDB_.getName(block.getFieldValue('KEY_VAR'), Blockly.Names.NameType.VARIABLE);
-    const valueVar = generator.nameDB_.getName(block.getFieldValue('VALUE_VAR'), Blockly.Names.NameType.VARIABLE);
+    const keyVar = generator.nameDB_.getName(block.getFieldValue('KEY_VAR'), 'VARIABLE');
+    const valueVar = generator.nameDB_.getName(block.getFieldValue('VALUE_VAR'), 'VARIABLE');
     const list = generator.valueToCode(block, 'LIST', Order.NONE) || 'new ArrayList<>()';
     const keyExpr = generator.valueToCode(block, 'KEY_EXPR', Order.NONE) || keyVar;
     const valueExpr = generator.valueToCode(block, 'VALUE_EXPR', Order.NONE) || valueVar;

@@ -1,6 +1,21 @@
 import * as Blockly from "blockly/core";
 Blockly.defineBlocksWithJsonArray([
   {
+    "type": "control_switch",
+    "message0": "switch %1",
+    "args0": [
+      { "type": "input_value", "name": "VALUE" }
+    ],
+    "message1": "%1",
+    "args1": [
+      { "type": "input_statement", "name": "DO" }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#9B59B6",
+    "tooltip": "Switch statement for multi-way branching."
+  },
+  {
     "type": "control_pass_simple",
     "message0": "pass",
     "previousStatement": null,

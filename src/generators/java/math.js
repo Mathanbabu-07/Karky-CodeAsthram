@@ -1,6 +1,19 @@
 import { javaGenerator } from '../java.js';
 import { Order } from 'blockly/javascript';
 
+// Dedicated Math.pow
+javaGenerator.forBlock['java_math_pow'] = function (block, generator) {
+    const base = generator.valueToCode(block, 'BASE', Order.NONE) || '1';
+    const exp = generator.valueToCode(block, 'EXP', Order.NONE) || '1';
+    return [`Math.pow(${base}, ${exp})`, Order.FUNCTION_CALL];
+};
+
+// Dedicated Math.sqrt
+javaGenerator.forBlock['java_math_sqrt'] = function (block, generator) {
+    const num = generator.valueToCode(block, 'NUM', Order.NONE) || '0';
+    return [`Math.sqrt(${num})`, Order.FUNCTION_CALL];
+};
+
 // Numeric literal
 javaGenerator.forBlock['essentials_num_literal'] = function (block, generator) {
     const number = parseFloat(block.getFieldValue('NUM'));

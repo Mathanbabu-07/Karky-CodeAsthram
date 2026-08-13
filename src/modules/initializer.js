@@ -154,6 +154,7 @@ import './essentials/oop.js';
 import './turtle/blocks.js';
 import '../generators/python/turtle.js';
 import '../generators/python/automation_devops.js';
+import './java/definitions.js';
 
 import { FieldMultilineInput } from '@blockly/field-multilineinput';
 

@@ -1,15 +1,72 @@
 import { javaGenerator } from '../java.js';
 import { Order } from 'blockly/javascript';
 
-// Create list
+// Dedicated Native Array creation: new int[size]
+javaGenerator.forBlock['java_array_create'] = function (block, generator) {
+    const type = block.getFieldValue('TYPE') || 'int';
+    const size = generator.valueToCode(block, 'SIZE', Order.NONE) || '10';
+    return [`new ${type}[${size}]`, Order.UNARY_POSTFIX];
+};
+
+// Dedicated Native Array index assignment: arr[idx] = val;
+javaGenerator.forBlock['java_array_get_set'] = function (block, generator) {
+    const array = generator.valueToCode(block, 'ARRAY', Order.MEMBER) || 'arr';
+    const index = generator.valueToCode(block, 'INDEX', Order.NONE) || '0';
+    const value = generator.valueToCode(block, 'VALUE', Order.ASSIGNMENT) || '0';
+    return `${array}[${index}] = ${value};\n`;
+};
+
+// Dedicated Native Array length: arr.length
+javaGenerator.forBlock['java_array_length'] = function (block, generator) {
+    const array = generator.valueToCode(block, 'ARRAY', Order.MEMBER) || 'arr';
+    return [`${array}.length`, Order.MEMBER];
+};
+
+// Dedicated ArrayList creation: new ArrayList<String>()
+javaGenerator.forBlock['java_arraylist_create'] = function (block, generator) {
+    generator.addImport('java.util.ArrayList');
+    const type = block.getFieldValue('TYPE') || 'String';
+    return [`new ArrayList<${type}>()`, Order.FUNCTION_CALL];
+};
+
+// Dedicated ArrayList add: list.add(item);
+javaGenerator.forBlock['java_arraylist_add'] = function (block, generator) {
+    generator.addImport('java.util.ArrayList');
+    const list = generator.valueToCode(block, 'LIST', Order.MEMBER) || 'list';
+    const item = generator.valueToCode(block, 'ITEM', Order.NONE) || 'null';
+    return `${list}.add(${item});\n`;
+};
+
+// Dedicated ArrayList get: list.get(index)
+javaGenerator.forBlock['java_arraylist_get'] = function (block, generator) {
+    const list = generator.valueToCode(block, 'LIST', Order.MEMBER) || 'list';
+    const index = generator.valueToCode(block, 'INDEX', Order.NONE) || '0';
+    return [`${list}.get(${index})`, Order.MEMBER];
+};
+
+// Dedicated ArrayList size: list.size()
+javaGenerator.forBlock['java_arraylist_size'] = function (block, generator) {
+    const list = generator.valueToCode(block, 'LIST', Order.MEMBER) || 'list';
+    return [`${list}.size()`, Order.MEMBER];
+};
+
+// Create list (generic)
 javaGenerator.forBlock['essentials_list_create'] = function (block, generator) {
     generator.addImport('java.util.ArrayList');
     generator.addImport('java.util.Arrays');
 
     const elements = [];
-    for (let i = 0; i < block.itemCount_; i++) {
-        const element = generator.valueToCode(block, 'ADD' + i, Order.NONE) || 'null';
-        elements.push(element);
+    const count = block.itemCount_ !== undefined ? block.itemCount_ : (block.inputList ? block.inputList.length : 0);
+    for (let i = 0; i < count; i++) {
+        let element = '';
+        if (block.getInput('ITEM' + i)) {
+            element = generator.valueToCode(block, 'ITEM' + i, Order.NONE);
+        } else if (block.getInput('ADD' + i)) {
+            element = generator.valueToCode(block, 'ADD' + i, Order.NONE);
+        }
+        if (element !== null && element !== '') {
+            elements.push(element);
+        }
     }
 
     if (elements.length === 0) {
