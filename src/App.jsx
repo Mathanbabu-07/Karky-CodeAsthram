@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import BlocklyEditor from './components/BlocklyEditor';
 import Toolbar from './components/Toolbar';
 import BoardSelector from './components/BoardSelector';
@@ -56,8 +56,8 @@ export default function App() {
   // NEW: Multi-language support
   const [currentLanguage, setCurrentLanguage] = useState('python');
 
-  // Get the toolbox configuration dynamically based on language
-  const toolboxConfig = getToolboxConfig(currentLanguage);
+  // Get the toolbox configuration dynamically based on language (memoized to prevent re-render flickering)
+  const toolboxConfig = useMemo(() => getToolboxConfig(currentLanguage), [currentLanguage]);
 
 
   // Helper: Generate code in selected language

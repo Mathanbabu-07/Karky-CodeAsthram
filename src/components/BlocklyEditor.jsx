@@ -102,9 +102,10 @@ import { Backpack } from "@blockly/workspace-backpack";
 import '@blockly/toolbox-search';
 import '../plugins/custom-toolbox/CustomCollapsibleCategory.js';
 
-export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
+function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
   const blocklyDiv = useRef(null);
   const workspaceRef = useRef(null);
+  const prevConfigRef = useRef(null);
 
   useEffect(() => {
     // Build a theme snapshot from current CSS variables BEFORE injecting Blockly,
@@ -120,6 +121,7 @@ export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspace
       media: '/media/',
     });
     workspaceRef.current = workspace;
+    prevConfigRef.current = toolboxConfig;
 
     if (onWorkspaceCreated) {
       onWorkspaceCreated(workspace);
@@ -141,12 +143,18 @@ export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspace
 
     // --- Icon Injection with MutationObserver ---
     let iconObserver = null;
+    let isInjecting = false;
     const setupIconInjection = () => {
       const toolboxDiv = document.querySelector('.blocklyToolboxDiv');
       if (toolboxDiv) {
         injectCategoryIcons(iconMap); // Initial injection
-        // Re-inject icons if the toolbox is re-rendered by Blockly
-        iconObserver = new MutationObserver(() => injectCategoryIcons(iconMap));
+        // Re-inject icons safely if the toolbox is modified by Blockly
+        iconObserver = new MutationObserver(() => {
+          if (isInjecting) return;
+          isInjecting = true;
+          injectCategoryIcons(iconMap);
+          setTimeout(() => { isInjecting = false; }, 50);
+        });
         iconObserver.observe(toolboxDiv, { childList: true, subtree: true });
       }
     };
@@ -207,9 +215,10 @@ export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspace
     };
   }, []);
 
-  // Update toolbox dynamically when toolboxConfig changes (e.g. language change)
+  // Update toolbox dynamically ONLY when toolboxConfig reference actually changes
   useEffect(() => {
-    if (workspaceRef.current && toolboxConfig) {
+    if (workspaceRef.current && toolboxConfig && prevConfigRef.current !== toolboxConfig) {
+      prevConfigRef.current = toolboxConfig;
       try {
         workspaceRef.current.updateToolbox(toolboxConfig);
         setTimeout(() => injectCategoryIcons(iconMap), 50);
@@ -217,7 +226,9 @@ export default function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspace
         console.error("Error updating Blockly toolbox:", err);
       }
     }
-  }, [toolboxConfig]); // Empty dependency array ensures this runs only once on mount
+  }, [toolboxConfig]);
 
   return <div ref={blocklyDiv} className="blockly-container" />;
 }
+
+export default React.memo(BlocklyEditor);
