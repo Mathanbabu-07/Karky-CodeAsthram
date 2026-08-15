@@ -68,9 +68,9 @@ export default function App() {
         case 'python':
           return globalThis.Python?.workspaceToCode(workspace) || '';
         case 'java':
-          return globalThis.Java?.workspaceToCode(workspace) || '// Java generator not yet loaded';
+          return globalThis.Java ? globalThis.Java.workspaceToCode(workspace) : '';
         case 'javascript':
-          return globalThis.JavaScript?.workspaceToCode(workspace) || '// JavaScript generator not yet loaded';
+          return globalThis.JavaScript ? globalThis.JavaScript.workspaceToCode(workspace) : '';
         default:
           return '';
       }
@@ -259,12 +259,26 @@ export default function App() {
 
   // Handler: Language change
   const handleLanguageChange = (newLanguage) => {
+    if (newLanguage === currentLanguage) return;
+
     setCurrentLanguage(newLanguage);
 
-    // Regenerate code in new language
     if (mainWorkspace) {
-      const newCode = generateCode(mainWorkspace, newLanguage);
-      setCode(newCode);
+      try {
+        // Clear all blocks from previous language to give a fresh workspace
+        mainWorkspace.clear();
+        // Hide any flyout / popups
+        if (mainWorkspace.hideChaff) {
+          mainWorkspace.hideChaff();
+        }
+        window._currentLanguage = newLanguage;
+        const newToolboxConfig = getToolboxConfig(newLanguage);
+        mainWorkspace.updateToolbox(newToolboxConfig);
+        const newCode = generateCode(mainWorkspace, newLanguage);
+        setCode(newCode);
+      } catch (err) {
+        console.error("Error changing language workspace:", err);
+      }
     }
 
     showToast(`Switched to ${newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1)}`, 'info');

@@ -144,41 +144,51 @@ a:hover { color: var(--accent-500); text-decoration: underline; }
 }
 
 .main-layout.toolbox-visible .blocklyToolboxDiv {
-  width: 250px !important;
+  width: 270px !important;
+  min-width: 270px !important;
+  max-width: 270px !important;
   opacity: 1 !important;
   padding: 4px !important;
 }
 
 .blocklyTreeRow {
-  padding: 10px 16px !important;
-  border-radius: 8px !important;
-  margin: 6px 10px !important;
-  font-weight: 500;
-  color: var(--text) !important;
+  padding: 8px 10px !important;
+  border-radius: 10px !important;
+  margin: 4px 4px !important;
+  font-weight: 600;
+  color: var(--text-white, #FFFFFF) !important;
   transition: all 0.2s ease;
-  border-left: 4px solid transparent !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
 }
 
 .blocklyTreeRow:hover {
-  background-color: var(--primary-a08) !important;
-  transform: translateX(4px);
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  transform: translateX(3px);
+  border: none !important;
 }
 
 .blocklyTreeSelected {
-  background-color: var(--primary-500) !important;
-  color: var(--text-white) !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
   font-weight: 700 !important;
-  border-left: 4px solid var(--accent-500) !important;
+  border: none !important;
 }
 
 .blocklyTreeLabel {
   font-family: var(--font-sans);
 }
 
-.blocklyToolboxDiv .blocklyTreeSeparator {
-  height: 1px;
-  border-bottom: 1px solid var(--bg-panel-hover);
-  margin: 8px 16px !important;
+.blocklyToolboxDiv .blocklyTreeSeparator,
+.blocklyTreeSeparator {
+  display: none !important;
+  border: none !important;
+  height: 0 !important;
+  margin: 0 !important;
 }
 
 /* === Code Panel === */

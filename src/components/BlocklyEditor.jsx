@@ -25,6 +25,59 @@ try {
       return this.getVariableMap().getAllVariables();
     };
   }
+
+  // --- Smooth 0.8s Disappearance Transition for Flyout Blocks across All Modules/Languages ---
+  if (Blockly && Blockly.Flyout && Blockly.Flyout.prototype) {
+    const flyoutProto = Blockly.Flyout.prototype;
+    if (!flyoutProto._smoothHideInstalled) {
+      flyoutProto._smoothHideInstalled = true;
+      const origShow = flyoutProto.show;
+      const origHide = flyoutProto.hide;
+
+      flyoutProto.show = function(...args) {
+        if (this._smoothHideTimeout) {
+          clearTimeout(this._smoothHideTimeout);
+          this._smoothHideTimeout = null;
+        }
+        const svgGroup = this.getSvgRoot ? this.getSvgRoot() : (this.svgGroup_ || this.container_);
+        if (svgGroup) {
+          svgGroup.classList.remove('flyout-smooth-hiding');
+          svgGroup.style.opacity = '1';
+          svgGroup.style.transform = 'none';
+          svgGroup.style.pointerEvents = 'auto';
+        }
+        return origShow.apply(this, args);
+      };
+
+      flyoutProto.hide = function() {
+        const svgGroup = this.getSvgRoot ? this.getSvgRoot() : (this.svgGroup_ || this.container_);
+        if (!svgGroup || !this.isVisible()) {
+          return origHide.call(this);
+        }
+
+        if (this._smoothHideTimeout) {
+          clearTimeout(this._smoothHideTimeout);
+        }
+
+        svgGroup.classList.add('flyout-smooth-hiding');
+
+        this._smoothHideTimeout = setTimeout(() => {
+          try {
+            origHide.call(this);
+          } catch (e) {
+            // Non-fatal
+          }
+          if (svgGroup) {
+            svgGroup.classList.remove('flyout-smooth-hiding');
+            svgGroup.style.opacity = '';
+            svgGroup.style.transform = '';
+            svgGroup.style.pointerEvents = '';
+          }
+          this._smoothHideTimeout = null;
+        }, 800);
+      };
+    }
+  }
 } catch (e) {
   // Non-fatal: if the shape of Blockly is unexpected, don't block initialization.
   // eslint-disable-next-line no-console

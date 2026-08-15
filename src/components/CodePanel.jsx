@@ -8,6 +8,8 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-java';
 import '../CodePanel.css';
 import AlivePythonIcon from './AlivePythonIcon';
+import AliveJavaIcon from './AliveJavaIcon';
+import AliveJSIcon from './AliveJSIcon';
 import CodeExecutionModal from './modals/CodeExecutionModal';
 import InputPromptModal from './modals/InputPromptModal';
 import { executeJavaCode } from '../utils/javaRunner';
@@ -239,27 +241,9 @@ export default function CodePanel({
         <div className="code-panel-header">
           <div className="header-icon-container">
             {currentLanguage === 'java' ? (
-              <img
-                src="/java_logo.png"
-                alt="Java Logo"
-                style={{
-                  width: '85px',
-                  height: '85px',
-                  objectFit: 'contain',
-                  display: 'block'
-                }}
-              />
+              <AliveJavaIcon />
             ) : currentLanguage === 'javascript' ? (
-              <img
-                src="/js_logo.png"
-                alt="JavaScript Logo"
-                style={{
-                  width: '85px',
-                  height: '85px',
-                  objectFit: 'contain',
-                  display: 'block'
-                }}
-              />
+              <AliveJSIcon />
             ) : (
               <AlivePythonIcon />
             )}

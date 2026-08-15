@@ -1,41 +1,64 @@
 // src/utils/toolboxIconInjector.js
 
 /**
- * A utility to safely inject custom icons into the Blockly toolbox categories.
- * It operates on the rendered DOM to avoid interfering with Blockly's internal toolbox management.
+ * Utility to safely inject custom icon pods into Blockly toolbox categories.
+ * Creates the rounded dark pod badge and vector icon next to category labels matching Image 1.
  */
 
-/**
- * Injects custom SVG icons into the main toolbox categories.
- * It iterates through the provided icon map, finds the corresponding category element by its ID,
- * and prepends the icon image if it's not already present.
- *
- * @param {Object.<string, string>} iconMap - A map where keys are category themeKeys (e.g., "essentials")
- *   and values are the corresponding icon filenames (e.g., "essentials.svg").
- */
+const slugify = (str) =>
+  str.toLowerCase().replace(/\s+/g, '_').replace(/[&/]/g, 'and');
+
 export function injectCategoryIcons(iconMap) {
-  // Iterate over the map of icons to be injected
-  for (const [key, iconFile] of Object.entries(iconMap)) {
-    // Construct the stable ID for the category's DOM element
-    const categoryId = `cat_${key}`;
-    const categoryEl = document.getElementById(categoryId);
+  const categories = document.querySelectorAll('.blocklyToolboxCategory, .blocklyTreeRow');
+  categories.forEach((categoryEl) => {
+    const label = categoryEl.querySelector('.blocklyToolboxCategoryLabel, .blocklyTreeLabel');
+    if (!label) return;
 
-    if (categoryEl) {
-      // Find the label element within the category row
-      const label = categoryEl.querySelector('.blocklyTreeLabel');
-      if (!label) continue;
-
-      // Prevent re-injection by checking if an icon already exists
-      if (label.querySelector('.category-icon')) continue;
-
-      // Create the image element for the icon
-      const img = document.createElement('img');
-      img.src = `/assets/icons/${iconFile}`;
-      img.className = 'category-icon';
-      img.setAttribute('aria-hidden', 'true');
-
-      // Prepend the icon to the label for proper alignment
-      label.prepend(img);
+    if (categoryEl.querySelector('.category-icon-pod') || categoryEl.closest('.toolbox-search-label') || categoryEl.id === 'toolbox-search-input') {
+      return;
     }
-  }
+
+    const text = label.textContent.trim();
+    if (!text) return;
+    const slug = slugify(text);
+
+    const iconFile = iconMap[slug] || `${slug}.svg`;
+
+    // Hide default Blockly category icon
+    const defaultIcon = categoryEl.querySelector('.blocklyToolboxCategoryIcon, .blocklyTreeIcon');
+    if (defaultIcon) {
+      defaultIcon.style.display = 'none';
+    }
+
+    // Remove any legacy chevron element if present
+    const chevron = categoryEl.querySelector('.category-chevron');
+    if (chevron) {
+      chevron.remove();
+    }
+
+    // Create left group wrapper for icon pod + label
+    const leftGroup = document.createElement('div');
+    leftGroup.className = 'category-left-group';
+
+    // Create rounded icon pod container
+    const pod = document.createElement('div');
+    pod.className = 'category-icon-pod';
+
+    const img = document.createElement('img');
+    img.src = `/assets/icons/${iconFile}`;
+    img.className = 'category-icon';
+    img.setAttribute('aria-hidden', 'true');
+    img.onerror = () => {
+      img.src = '/assets/icons/essentials.svg';
+    };
+
+    pod.appendChild(img);
+    leftGroup.appendChild(pod);
+
+    // Move label into left group
+    if (label.parentNode) {
+      label.parentNode.insertBefore(leftGroup, label);
+      leftGroup.appendChild(label);
+    }
+  });
 }

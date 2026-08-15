@@ -1,9 +1,1 @@
-## 5. Verification & Quality Assurance Plan
-
-### Automated Test Suites
-- Create `scratch/test_js_generation.js` to verify block code generation for all JavaScript categories.
-- Validate generated code against Node.js runtime evaluation without syntax errors.
-
-### Manual UI Verification
-- Select **JavaScript** from the header dropdown and verify that `JAVASCRIPT_MODULES` correctly loads in the left category toolbox.
-- Verify block drag-and-drop, layout snapping, live code panel previewing, file download (`script.js`), and run execution output display.
+Analyze both uploaded videos: use the **first video as the correct reference behavior** and fix the **second video's toolbox interaction bug** where the toolbox/category interaction closes or disappears too quickly before the user can access the block list. Identify the event/state/hover/click handling causing the premature closing and make the toolbox interaction stable and persistent exactly like the first reference, while preserving the existing Python, Java, and JavaScript functionality and UI.
