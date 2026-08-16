@@ -26,7 +26,7 @@ try {
     };
   }
 
-  // --- Smooth 0.8s Disappearance Transition for Flyout Blocks across All Modules/Languages ---
+  // --- Smooth 0.8s Disappearance Transition for Flyout Blocks & Scroll Margin Line across All Modules/Languages ---
   if (Blockly && Blockly.Flyout && Blockly.Flyout.prototype) {
     const flyoutProto = Blockly.Flyout.prototype;
     if (!flyoutProto._smoothHideInstalled) {
@@ -34,24 +34,55 @@ try {
       const origShow = flyoutProto.show;
       const origHide = flyoutProto.hide;
 
+      const getFlyoutTargets = (flyoutInstance) => {
+        const targets = [];
+        const svgGroup = flyoutInstance.getSvgRoot ? flyoutInstance.getSvgRoot() : (flyoutInstance.svgGroup_ || flyoutInstance.container_);
+        if (svgGroup) {
+          targets.push(svgGroup);
+          if (flyoutInstance.svgBackground_ && !targets.includes(flyoutInstance.svgBackground_)) {
+            targets.push(flyoutInstance.svgBackground_);
+          }
+        }
+        // Extract flyout workspace vertical scrollbar SVG elements
+        const vScroll = flyoutInstance.workspace_ && flyoutInstance.workspace_.scrollbar ? flyoutInstance.workspace_.scrollbar.vScroll : null;
+        if (vScroll) {
+          if (vScroll.outerSvg && !targets.includes(vScroll.outerSvg)) {
+            targets.push(vScroll.outerSvg);
+          }
+          if (vScroll.svgHandle && !targets.includes(vScroll.svgHandle)) {
+            targets.push(vScroll.svgHandle);
+          }
+          if (vScroll.svgBackground && !targets.includes(vScroll.svgBackground)) {
+            targets.push(vScroll.svgBackground);
+          }
+        }
+        if (flyoutInstance.scrollbar_) {
+          const sbSvg = flyoutInstance.scrollbar_.svgGroup_ || flyoutInstance.scrollbar_.outerSvg_ || flyoutInstance.scrollbar_.svgHandle_;
+          if (sbSvg && !targets.includes(sbSvg)) {
+            targets.push(sbSvg);
+          }
+        }
+        return targets;
+      };
+
       flyoutProto.show = function(...args) {
         if (this._smoothHideTimeout) {
           clearTimeout(this._smoothHideTimeout);
           this._smoothHideTimeout = null;
         }
-        const svgGroup = this.getSvgRoot ? this.getSvgRoot() : (this.svgGroup_ || this.container_);
-        if (svgGroup) {
-          svgGroup.classList.remove('flyout-smooth-hiding');
-          svgGroup.style.opacity = '1';
-          svgGroup.style.transform = 'none';
-          svgGroup.style.pointerEvents = 'auto';
-        }
+        const targets = getFlyoutTargets(this);
+        targets.forEach(el => {
+          el.classList.remove('flyout-smooth-hiding');
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.pointerEvents = 'auto';
+        });
         return origShow.apply(this, args);
       };
 
       flyoutProto.hide = function() {
-        const svgGroup = this.getSvgRoot ? this.getSvgRoot() : (this.svgGroup_ || this.container_);
-        if (!svgGroup || !this.isVisible()) {
+        const targets = getFlyoutTargets(this);
+        if (targets.length === 0 || !this.isVisible()) {
           return origHide.call(this);
         }
 
@@ -59,7 +90,7 @@ try {
           clearTimeout(this._smoothHideTimeout);
         }
 
-        svgGroup.classList.add('flyout-smooth-hiding');
+        targets.forEach(el => el.classList.add('flyout-smooth-hiding'));
 
         this._smoothHideTimeout = setTimeout(() => {
           try {
@@ -67,12 +98,12 @@ try {
           } catch (e) {
             // Non-fatal
           }
-          if (svgGroup) {
-            svgGroup.classList.remove('flyout-smooth-hiding');
-            svgGroup.style.opacity = '';
-            svgGroup.style.transform = '';
-            svgGroup.style.pointerEvents = '';
-          }
+          targets.forEach(el => {
+            el.classList.remove('flyout-smooth-hiding');
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.pointerEvents = '';
+          });
           this._smoothHideTimeout = null;
         }, 800);
       };

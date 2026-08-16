@@ -202,13 +202,18 @@
   box-shadow: 0 0 0 3px rgba(48, 105, 152, 0.3);
 }
 
-/* --- Smooth 0.8s Disappearance Transition for Flyouts across All Languages --- */
+/* --- Smooth 0.8s Disappearance Transition for Flyouts and Scroll Margins across All Languages --- */
 .blocklyToolboxFlyout,
-.blocklyFlyout {
+.blocklyFlyout,
+.blocklyFlyoutBackground,
+.blocklyScrollbarVertical,
+.blocklyScrollbarHandle,
+.blocklyFlyoutScrollbar {
   will-change: opacity, transform;
 }
 
-.flyout-smooth-hiding {
+.flyout-smooth-hiding,
+.flyout-smooth-hiding * {
   opacity: 0 !important;
   transform: translateX(-14px) !important;
   pointer-events: none !important;
