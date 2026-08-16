@@ -209,7 +209,12 @@ function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
     // --- Real-time instant code generation ---
     let codeTimer = null;
     const generateCode = (event) => {
-      if (event && (event.type === Blockly.Events.VIEWPORT_CHANGE || event.type === Blockly.Events.SELECTED)) {
+      if (event && (
+        event.type === Blockly.Events.VIEWPORT_CHANGE ||
+        event.type === Blockly.Events.SELECTED ||
+        event.type === Blockly.Events.BLOCK_DRAG ||
+        event.isStart
+      )) {
         return;
       }
       clearTimeout(codeTimer);

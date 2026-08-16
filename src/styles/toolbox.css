@@ -212,10 +212,17 @@
   will-change: opacity, transform;
 }
 
-.flyout-smooth-hiding,
-.flyout-smooth-hiding * {
+.flyout-smooth-hiding {
   opacity: 0 !important;
   transform: translateX(-14px) !important;
   pointer-events: none !important;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Ensure dragged blocks inside or outside flyout remain 100% visible with zero flicker */
+.blocklyDraggable.blocklyDragging,
+.blocklyDragging,
+.blocklyDragging * {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
