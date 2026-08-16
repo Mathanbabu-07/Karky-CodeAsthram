@@ -74,32 +74,47 @@ javaGenerator.forBlock['text_multiline'] = function (block, generator) {
 
 // Text concatenation
 javaGenerator.forBlock['text_concat'] = function (block, generator) {
-    const text1 = generator.valueToCode(block, 'A', Order.ADDITION) || '""';
-    const text2 = generator.valueToCode(block, 'B', Order.ADDITION) || '""';
-    const code = `${text1} + ${text2}`;
-    return [code, Order.ADDITION];
+    if (block.getInput('A') || block.getInput('B')) {
+        const text1 = block.getInput('A') ? (generator.valueToCode(block, 'A', Order.ADDITION) || '""') : '""';
+        const text2 = block.getInput('B') ? (generator.valueToCode(block, 'B', Order.ADDITION) || '""') : '""';
+        return [`${text1} + ${text2}`, Order.ADDITION];
+    }
+    const elements = [];
+    let i = 0;
+    while (block.getInput('ADD' + i)) {
+        elements.push(`String.valueOf(${generator.valueToCode(block, 'ADD' + i, Order.NONE) || '""'})`);
+        i++;
+    }
+    if (elements.length === 0) return ['""', Order.ATOMIC];
+    if (elements.length === 1) return [elements[0], Order.ATOMIC];
+    return [elements.join(' + '), Order.ADDITION];
 };
 
 // Text format (using String.format)
 javaGenerator.forBlock['text_format'] = function (block, generator) {
-    const template = generator.valueToCode(block, 'TEMPLATE', Order.NONE) || '""';
-    const values = generator.valueToCode(block, 'VALUES', Order.NONE) || '""';
-    const code = `String.format(${template}, ${values})`;
-    return [code, Order.FUNCTION_CALL];
+    const tInput = block.getInput('TEMPLATE') ? 'TEMPLATE' : (block.getInput('TEXT') ? 'TEXT' : (block.getInput('FSTRING') ? 'FSTRING' : null));
+    const template = tInput ? (generator.valueToCode(block, tInput, Order.NONE) || '""') : '""';
+    const vInput = block.getInput('VALUES') ? 'VALUES' : (block.getInput('VALUE') ? 'VALUE' : null);
+    const values = vInput ? (generator.valueToCode(block, vInput, Order.NONE) || '""') : '""';
+    return [`String.format(${template}, ${values})`, Order.FUNCTION_CALL];
 };
 
 // Text length
 javaGenerator.forBlock['text_length'] = function (block, generator) {
-    const text = generator.valueToCode(block, 'TEXT', Order.MEMBER) || '""';
+    const tInput = block.getInput('TEXT') ? 'TEXT' : (block.getInput('VALUE') ? 'VALUE' : (block.getInput('STRING') ? 'STRING' : null));
+    const text = tInput ? (generator.valueToCode(block, tInput, Order.MEMBER) || '""') : '""';
     const code = `${text}.length()`;
     return [code, Order.MEMBER];
 };
 
 // Text substring
 javaGenerator.forBlock['text_substring'] = function (block, generator) {
-    const text = generator.valueToCode(block, 'STRING', Order.MEMBER) || '""';
-    const start = generator.valueToCode(block, 'FROM', Order.NONE) || '0';
-    const end = generator.valueToCode(block, 'TO', Order.NONE);
+    const sInput = block.getInput('STRING') ? 'STRING' : (block.getInput('TEXT') ? 'TEXT' : (block.getInput('VALUE') ? 'VALUE' : null));
+    const text = sInput ? (generator.valueToCode(block, sInput, Order.MEMBER) || '""') : '""';
+    const fInput = block.getInput('FROM') ? 'FROM' : (block.getInput('AT') ? 'AT' : (block.getInput('START') ? 'START' : null));
+    const start = fInput ? (generator.valueToCode(block, fInput, Order.NONE) || '0') : '0';
+    const tInput = block.getInput('TO') ? 'TO' : (block.getInput('END') ? 'END' : null);
+    const end = tInput ? generator.valueToCode(block, tInput, Order.NONE) : null;
 
     let code;
     if (end) {
@@ -112,7 +127,8 @@ javaGenerator.forBlock['text_substring'] = function (block, generator) {
 
 // Text transform (toUpperCase, toLowerCase)
 javaGenerator.forBlock['text_transform'] = function (block, generator) {
-    const text = generator.valueToCode(block, 'TEXT', Order.MEMBER) || '""';
+    const tInput = block.getInput('TEXT') ? 'TEXT' : (block.getInput('VALUE') ? 'VALUE' : null);
+    const text = tInput ? (generator.valueToCode(block, tInput, Order.MEMBER) || '""') : '""';
     const mode = block.getFieldValue('MODE');
 
     let code;
@@ -124,9 +140,8 @@ javaGenerator.forBlock['text_transform'] = function (block, generator) {
             code = `${text}.toLowerCase()`;
             break;
         case 'TITLE':
-            // Java doesn't have built-in title case, use simple implementation
-            generator.addImport('java.util.stream.Collectors');
-            generator.addImport('java.util.Arrays');
+            generator.addImport && generator.addImport('java.util.stream.Collectors');
+            generator.addImport && generator.addImport('java.util.Arrays');
             code = `Arrays.stream(${text}.split(" ")).map(w -> w.isEmpty() ? w : Character.toUpperCase(w.charAt(0)) + w.substring(1).toLowerCase()).collect(Collectors.joining(" "))`;
             break;
         default:
@@ -137,25 +152,30 @@ javaGenerator.forBlock['text_transform'] = function (block, generator) {
 
 // Text replace
 javaGenerator.forBlock['text_replace'] = function (block, generator) {
-    const text = generator.valueToCode(block, 'TEXT', Order.MEMBER) || '""';
-    const from = generator.valueToCode(block, 'FROM', Order.NONE) || '""';
-    const to = generator.valueToCode(block, 'TO', Order.NONE) || '""';
+    const tInput = block.getInput('TEXT') ? 'TEXT' : (block.getInput('STRING') ? 'STRING' : (block.getInput('VALUE') ? 'VALUE' : null));
+    const text = tInput ? (generator.valueToCode(block, tInput, Order.MEMBER) || '""') : '""';
+    const fromInput = block.getInput('FROM') ? 'FROM' : (block.getInput('OLD') ? 'OLD' : null);
+    const from = fromInput ? (generator.valueToCode(block, fromInput, Order.NONE) || '""') : '""';
+    const toInput = block.getInput('TO') ? 'TO' : (block.getInput('NEW') ? 'NEW' : null);
+    const to = toInput ? (generator.valueToCode(block, toInput, Order.NONE) || '""') : '""';
     const code = `${text}.replace(${from}, ${to})`;
     return [code, Order.MEMBER];
 };
 
 // Text split
 javaGenerator.forBlock['text_split_join'] = function (block, generator) {
-    const mode = block.getFieldValue('MODE');
-    const text = generator.valueToCode(block, 'STRING', Order.MEMBER) || '""';
-    const delimiter = generator.valueToCode(block, 'DELIM', Order.NONE) || '" "';
+    const mode = block.getFieldValue('MODE') || 'SPLIT';
+    const sInput = block.getInput('STRING') ? 'STRING' : (block.getInput('TEXT') ? 'TEXT' : (block.getInput('INPUT') ? 'INPUT' : null));
+    const text = sInput ? (generator.valueToCode(block, sInput, Order.MEMBER) || '""') : '""';
+    const dInput = block.getInput('DELIM') ? 'DELIM' : (block.getInput('DELIMITER') ? 'DELIMITER' : (block.getInput('SEP') ? 'SEP' : null));
+    const delimiter = dInput ? (generator.valueToCode(block, dInput, Order.NONE) || '" "') : '" "';
 
     let code;
     if (mode === 'SPLIT') {
         code = `${text}.split(${delimiter})`;
-        generator.addImport('java.util.Arrays');
+        generator.addImport && generator.addImport('java.util.Arrays');
     } else { // JOIN
-        generator.addImport('java.lang.String');
+        generator.addImport && generator.addImport('java.lang.String');
         code = `String.join(${delimiter}, ${text})`;
     }
     return [code, Order.MEMBER];
@@ -163,14 +183,17 @@ javaGenerator.forBlock['text_split_join'] = function (block, generator) {
 
 // Text print
 javaGenerator.forBlock['text_print'] = function (block, generator) {
-    const msg = generator.valueToCode(block, 'TEXT', Order.NONE) || '""';
+    const tInput = block.getInput('TEXT') ? 'TEXT' : (block.getInput('VALUE') ? 'VALUE' : null);
+    const msg = tInput ? (generator.valueToCode(block, tInput, Order.NONE) || '""') : '""';
     return `System.out.println(${msg});\n`;
 };
 
 // Text print with f-string (use String.format)
 javaGenerator.forBlock['text_print_fstring'] = function (block, generator) {
-    const template = generator.valueToCode(block, 'TEXT', Order.NONE) || '""';
-    const values = generator.valueToCode(block, 'VALUES', Order.NONE) || '';
+    const tInput = block.getInput('TEXT') ? 'TEXT' : (block.getInput('TEMPLATE') ? 'TEMPLATE' : (block.getInput('FSTRING') ? 'FSTRING' : null));
+    const template = tInput ? (generator.valueToCode(block, tInput, Order.NONE) || '""') : '""';
+    const vInput = block.getInput('VALUES') ? 'VALUES' : (block.getInput('VALUE') ? 'VALUE' : null);
+    const values = vInput ? generator.valueToCode(block, vInput, Order.NONE) : '';
 
     if (values) {
         return `System.out.println(String.format(${template}, ${values}));\n`;
@@ -180,15 +203,18 @@ javaGenerator.forBlock['text_print_fstring'] = function (block, generator) {
 
 // Text is empty
 javaGenerator.forBlock['text_is_empty'] = function (block, generator) {
-    const text = generator.valueToCode(block, 'TEXT', Order.MEMBER) || '""';
+    const tInput = block.getInput('TEXT') ? 'TEXT' : (block.getInput('VALUE') ? 'VALUE' : (block.getInput('STRING') ? 'STRING' : null));
+    const text = tInput ? (generator.valueToCode(block, tInput, Order.MEMBER) || '""') : '""';
     const code = `${text}.isEmpty()`;
     return [code, Order.MEMBER];
 };
 
 // Text search/find
 javaGenerator.forBlock['text_search'] = function (block, generator) {
-    const text = generator.valueToCode(block, 'TEXT', Order.MEMBER) || '""';
-    const search = generator.valueToCode(block, 'FIND', Order.NONE) || '""';
+    const tInput = block.getInput('TEXT') ? 'TEXT' : (block.getInput('STRING') ? 'STRING' : (block.getInput('VALUE') ? 'VALUE' : null));
+    const text = tInput ? (generator.valueToCode(block, tInput, Order.MEMBER) || '""') : '""';
+    const fInput = block.getInput('FIND') ? 'FIND' : (block.getInput('SUB') ? 'SUB' : (block.getInput('SEARCH') ? 'SEARCH' : null));
+    const search = fInput ? (generator.valueToCode(block, fInput, Order.NONE) || '""') : '""';
     const mode = block.getFieldValue('MODE') || 'CONTAINS';
 
     let code;

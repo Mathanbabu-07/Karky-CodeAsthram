@@ -25,46 +25,48 @@ javaGenerator.forBlock['java_primitive_type'] = function (block, generator) {
 // Java type cast: (int) value
 javaGenerator.forBlock['java_type_cast'] = function (block, generator) {
     const type = block.getFieldValue('TYPE') || 'int';
-    const value = generator.valueToCode(block, 'VALUE', Order.UNARY_PREFIX) || '0';
-    return [`(${type}) ${value}`, Order.UNARY_PREFIX];
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('NUM') ? 'NUM' : null);
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.UNARY_NEGATION || Order.NONE) || '0') : '0';
+    return [`(${type}) ${value}`, Order.UNARY_NEGATION || Order.NONE];
 };
 
 // Java constant declaration: final double PI = 3.14;
 javaGenerator.forBlock['java_constant'] = function (block, generator) {
     const type = block.getFieldValue('TYPE') || 'double';
     const varName = block.getFieldValue('VAR') || 'MAX_VAL';
-    const value = generator.valueToCode(block, 'VALUE', Order.ASSIGNMENT) || '0';
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : null);
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.ASSIGNMENT) || '0') : '0';
     return `final ${type} ${varName} = ${value};\n`;
 };
 
 // Variable assignment (generic)
 javaGenerator.forBlock['essentials_var_set'] = function (block, generator) {
     const varId = block.getFieldValue('VAR');
-    const varName = generator.getVariableName ? generator.getVariableName(varId) : (block.getField('VAR') ? block.getField('VAR').getText() : varId);
-    const value = generator.valueToCode(block, 'VALUE', Order.ASSIGNMENT) || 'null';
-    // Use 'var' for type inference (Java 10+)
+    const varName = generator.getVariableName ? generator.getVariableName(varId) : (block.getField('VAR') ? block.getField('VAR').getText() : (varId || 'x'));
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : null);
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.ASSIGNMENT) || 'null') : 'null';
     return `var ${varName} = ${value};\n`;
 };
 
 // Variable get
 javaGenerator.forBlock['essentials_var_get'] = function (block, generator) {
     const varId = block.getFieldValue('VAR');
-    const varName = generator.getVariableName ? generator.getVariableName(varId) : (block.getField('VAR') ? block.getField('VAR').getText() : varId);
+    const varName = generator.getVariableName ? generator.getVariableName(varId) : (block.getField('VAR') ? block.getField('VAR').getText() : (varId || 'x'));
     return [varName, Order.ATOMIC];
 };
 
 // Import statement
 javaGenerator.forBlock['essentials_import_simple'] = function (block, generator) {
     const packageName = block.getFieldValue('PACKAGE') || '';
-    if (packageName) {
+    if (packageName && generator.addImport) {
         generator.addImport(packageName);
     }
-    return ''; // Imports are handled at the top
+    return '';
 };
 
 // Scope keyword (not really applicable in Java, skip)
 javaGenerator.forBlock['essentials_scope_keyword'] = function (block, generator) {
-    return ''; // Java doesn't have global/nonlocal keywords
+    return '';
 };
 
 // Variable undefined/null
@@ -74,22 +76,25 @@ javaGenerator.forBlock['essentials_var_undefined'] = function (block, generator)
 
 // Type checking (instanceof)
 javaGenerator.forBlock['essentials_is_instance'] = function (block, generator) {
-    const value = generator.valueToCode(block, 'VALUE', Order.RELATIONAL) || 'null';
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : (block.getInput('OBJ') ? 'OBJ' : null));
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.RELATIONAL) || 'null') : 'null';
     const type = block.getFieldValue('TYPE') || 'Object';
     return [`${value} instanceof ${type}`, Order.RELATIONAL];
 };
 
 // Type of (getClass)
 javaGenerator.forBlock['essentials_type_of'] = function (block, generator) {
-    const value = generator.valueToCode(block, 'VALUE', Order.MEMBER) || 'null';
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : (block.getInput('OBJ') ? 'OBJ' : null));
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.MEMBER) || 'null') : 'null';
     return [`${value}.getClass().getSimpleName()`, Order.MEMBER];
 };
 
 // Type casting
 javaGenerator.forBlock['essentials_cast'] = function (block, generator) {
-    const value = generator.valueToCode(block, 'VALUE', Order.UNARY_PREFIX) || 'null';
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : (block.getInput('NUM') ? 'NUM' : null));
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.UNARY_NEGATION || Order.NONE) || 'null') : 'null';
     const type = block.getFieldValue('TYPE') || 'Object';
-    return [`(${type}) ${value}`, Order.UNARY_PREFIX];
+    return [`(${type}) ${value}`, Order.UNARY_NEGATION || Order.NONE];
 };
 
 // Default if none (null coalescing)

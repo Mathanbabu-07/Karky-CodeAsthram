@@ -33,12 +33,30 @@ function formatClassBody(className, rawBody, generator) {
     return result;
 }
 
+function getStatement(generator, block, ...names) {
+    for (const name of names) {
+        if (block.getInput(name)) {
+            return generator.statementToCode(block, name) || '';
+        }
+    }
+    return '';
+}
+
+function getValue(generator, block, order, ...names) {
+    for (const name of names) {
+        if (block.getInput(name)) {
+            return generator.valueToCode(block, name, order) || '';
+        }
+    }
+    return '';
+}
+
 // Dedicated Java class definition
 javaGenerator.forBlock['java_class_define'] = function (block, generator) {
     const access = block.getFieldValue('ACCESS');
     const accessPrefix = access ? `${access} ` : '';
     const name = block.getFieldValue('NAME') || 'MyClass';
-    const body = generator.statementToCode(block, 'MEMBERS');
+    const body = getStatement(generator, block, 'MEMBERS', 'STACK', 'BODY', 'DO');
     const formattedBody = formatClassBody(name, body, generator);
     return `${accessPrefix}class ${name} {\n${formattedBody}}\n`;
 };
@@ -50,14 +68,16 @@ javaGenerator.forBlock['java_field_define'] = function (block, generator) {
     const staticPrefix = isStatic ? ' static' : '';
     const type = block.getFieldValue('TYPE') || 'int';
     const name = block.getFieldValue('NAME') || 'myField';
-    const value = generator.valueToCode(block, 'VALUE', Order.ASSIGNMENT) || '0';
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : null);
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.ASSIGNMENT) || '0') : '0';
     return `${access}${staticPrefix} ${type} ${name} = ${value};\n`;
 };
 
 // Dedicated Java object instantiation: new MyClass(args)
 javaGenerator.forBlock['java_instantiate'] = function (block, generator) {
     const className = block.getFieldValue('CLASS') || 'MyClass';
-    const args = generator.valueToCode(block, 'ARGS', Order.NONE) || '';
+    const argsInput = block.getInput('ARGS') ? 'ARGS' : (block.getInput('ARG') ? 'ARG' : null);
+    const args = argsInput ? (generator.valueToCode(block, argsInput, Order.NONE) || '') : '';
     return [`new ${className}(${args})`, Order.FUNCTION_CALL];
 };
 
@@ -65,7 +85,7 @@ javaGenerator.forBlock['java_instantiate'] = function (block, generator) {
 javaGenerator.forBlock['oop_class'] = function (block, generator) {
     const className = block.getFieldValue('NAME') || 'MyClass';
     const superClass = block.getFieldValue('EXTENDS');
-    const body = generator.statementToCode(block, 'MEMBERS');
+    const body = getStatement(generator, block, 'MEMBERS', 'STACK', 'BODY', 'DO');
     const formattedBody = formatClassBody(className, body, generator);
 
     let code = `class ${className}`;
@@ -80,12 +100,13 @@ javaGenerator.forBlock['oop_class'] = function (block, generator) {
 javaGenerator.forBlock['oop_constructor'] = function (block, generator) {
     const className = block.getFieldValue('CLASS') || 'MyClass';
     const args = [];
+    const blockArgs = block.arguments_ || [];
 
-    for (let i = 0; i < block.arguments_.length; i++) {
-        args.push('var ' + generator.nameDB_.getName(block.arguments_[i], 'VARIABLE'));
+    for (let i = 0; i < blockArgs.length; i++) {
+        args.push('var ' + generator.nameDB_.getName(blockArgs[i], 'VARIABLE'));
     }
 
-    const body = generator.statementToCode(block, 'STACK');
+    const body = getStatement(generator, block, 'STACK', 'BODY', 'DO', 'MEMBERS');
     const code = `    public ${className}(${args.join(', ')}) {\n${generator.prefixLines(body, '    ')}    }\n`;
     return code;
 };
@@ -94,12 +115,13 @@ javaGenerator.forBlock['oop_constructor'] = function (block, generator) {
 javaGenerator.forBlock['oop_method'] = function (block, generator) {
     const methodName = block.getFieldValue('NAME') || 'myMethod';
     const args = [];
+    const blockArgs = block.arguments_ || [];
 
-    for (let i = 0; i < block.arguments_.length; i++) {
-        args.push('var ' + generator.nameDB_.getName(block.arguments_[i], 'VARIABLE'));
+    for (let i = 0; i < blockArgs.length; i++) {
+        args.push('var ' + generator.nameDB_.getName(blockArgs[i], 'VARIABLE'));
     }
 
-    const body = generator.statementToCode(block, 'STACK');
+    const body = getStatement(generator, block, 'STACK', 'BODY', 'DO', 'MEMBERS');
     const returnType = block.hasReturn_ ? 'Object' : 'void';
 
     const code = `    public ${returnType} ${methodName}(${args.join(', ')}) {\n${generator.prefixLines(body, '    ')}    }\n`;
@@ -109,8 +131,11 @@ javaGenerator.forBlock['oop_method'] = function (block, generator) {
 // Super init call
 javaGenerator.forBlock['oop_super_init'] = function (block, generator) {
     const args = [];
-    for (let i = 0; i < block.argCount_; i++) {
-        args.push(generator.valueToCode(block, 'ARG' + i, Order.NONE) || 'null');
+    let i = 0;
+    while (block.getInput('ARG' + i) || block.getInput('ADD' + i)) {
+        const inp = block.getInput('ARG' + i) ? ('ARG' + i) : ('ADD' + i);
+        args.push(generator.valueToCode(block, inp, Order.NONE) || 'null');
+        i++;
     }
     return `super(${args.join(', ')});\n`;
 };
@@ -119,10 +144,16 @@ javaGenerator.forBlock['oop_super_init'] = function (block, generator) {
 javaGenerator.forBlock['oop_super_call'] = function (block, generator) {
     const method = block.getFieldValue('METHOD') || 'method';
     const args = [];
-    for (let i = 0; i < block.argCount_; i++) {
-        args.push(generator.valueToCode(block, 'ARG' + i, Order.NONE) || 'null');
+    let i = 0;
+    while (block.getInput('ARG' + i) || block.getInput('ADD' + i)) {
+        const inp = block.getInput('ARG' + i) ? ('ARG' + i) : ('ADD' + i);
+        args.push(generator.valueToCode(block, inp, Order.NONE) || 'null');
+        i++;
     }
-    return [`super.${method}(${args.join(', ')})`, Order.MEMBER];
+    if (block.outputConnection) {
+        return [`super.${method}(${args.join(', ')})`, Order.MEMBER];
+    }
+    return `super.${method}(${args.join(', ')});\n`;
 };
 
 // Dedicated System.out.println

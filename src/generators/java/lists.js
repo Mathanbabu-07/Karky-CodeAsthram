@@ -105,9 +105,12 @@ javaGenerator.forBlock['essentials_list_get'] = function (block, generator) {
 
 // List set
 javaGenerator.forBlock['essentials_list_set'] = function (block, generator) {
-    const list = generator.valueToCode(block, 'LIST', Order.MEMBER) || 'new ArrayList<>()';
-    const index = generator.valueToCode(block, 'INDEX', Order.NONE) || '0';
-    const value = generator.valueToCode(block, 'VALUE', Order.NONE) || 'null';
+    const lInput = block.getInput('LIST') ? 'LIST' : (block.getInput('ARRAY') ? 'ARRAY' : null);
+    const list = lInput ? (generator.valueToCode(block, lInput, Order.MEMBER) || 'new ArrayList<>()') : 'new ArrayList<>()';
+    const idxInput = block.getInput('INDEX') ? 'INDEX' : (block.getInput('AT') ? 'AT' : (block.getInput('NUM') ? 'NUM' : null));
+    const index = idxInput ? (generator.valueToCode(block, idxInput, Order.NONE) || '0') : '0';
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('ITEM') ? 'ITEM' : (block.getInput('TO') ? 'TO' : null));
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.NONE) || 'null') : 'null';
     return `${list}.set(${index}, ${value});\n`;
 };
 

@@ -1,6 +1,24 @@
 import { javaGenerator } from '../java.js';
 import { Order } from 'blockly/javascript';
 
+function getStatement(generator, block, ...names) {
+    for (const name of names) {
+        if (block.getInput(name)) {
+            return generator.statementToCode(block, name) || '';
+        }
+    }
+    return '';
+}
+
+function getValue(generator, block, order, ...names) {
+    for (const name of names) {
+        if (block.getInput(name)) {
+            return generator.valueToCode(block, name, order) || '';
+        }
+    }
+    return '';
+}
+
 // Dedicated Java method definition
 javaGenerator.forBlock['java_method_def'] = function (block, generator) {
     const access = block.getFieldValue('ACCESS') || 'public';
@@ -9,21 +27,20 @@ javaGenerator.forBlock['java_method_def'] = function (block, generator) {
     const returnType = block.getFieldValue('RETURN_TYPE') || 'void';
     const name = block.getFieldValue('NAME') || 'myMethod';
     const params = block.getFieldValue('PARAMS') || '';
-    const body = generator.statementToCode(block, 'STACK') || generator.statementToCode(block, 'DO') || generator.statementToCode(block, 'BODY');
+    const body = getStatement(generator, block, 'DO', 'STACK', 'BODY', 'DO0');
     return `${access} ${isStatic}${returnType} ${name}(${params}) {\n${body}}\n`;
 };
 
 // Function definition (generic)
 javaGenerator.forBlock['essentials_function_def'] = function (block, generator) {
-    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME') || 'myFunc', 'PROCEDURE');
     const args = [];
 
-    // Get arguments
     for (let i = 0; i < (block.arguments_ || []).length; i++) {
         args.push('Object ' + generator.nameDB_.getName(block.arguments_[i], 'VARIABLE'));
     }
 
-    const branch = generator.statementToCode(block, 'STACK');
+    const branch = getStatement(generator, block, 'STACK', 'DO', 'BODY', 'DO0');
     const returnType = block.hasReturn_ ? 'Object' : 'void';
 
     return `public static ${returnType} ${funcName}(${args.join(', ')}) {\n${branch}}\n`;
@@ -31,7 +48,7 @@ javaGenerator.forBlock['essentials_function_def'] = function (block, generator) 
 
 // Procedure call (no return)
 javaGenerator.forBlock['procedures_callnoreturn'] = function (block, generator) {
-    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME') || 'myFunc', 'PROCEDURE');
     const args = [];
 
     for (let i = 0; i < (block.arguments_ || []).length; i++) {
@@ -43,7 +60,7 @@ javaGenerator.forBlock['procedures_callnoreturn'] = function (block, generator) 
 
 // Procedure call (with return)
 javaGenerator.forBlock['procedures_callreturn'] = function (block, generator) {
-    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME'), 'PROCEDURE');
+    const funcName = generator.nameDB_.getName(block.getFieldValue('NAME') || 'myFunc', 'PROCEDURE');
     const args = [];
 
     for (let i = 0; i < (block.arguments_ || []).length; i++) {
@@ -56,18 +73,21 @@ javaGenerator.forBlock['procedures_callreturn'] = function (block, generator) {
 // Lambda expression (Java 8+)
 javaGenerator.forBlock['control_lambda_expr'] = function (block, generator) {
     const args = [];
-    for (let i = 0; i < block.arguments_.length; i++) {
-        args.push(generator.nameDB_.getName(block.arguments_[i], Blockly.Names.NameType.VARIABLE));
+    const blockArgs = block.arguments_ || [];
+    for (let i = 0; i < blockArgs.length; i++) {
+        args.push(generator.nameDB_.getName(blockArgs[i], 'VARIABLE'));
     }
 
-    const expression = generator.valueToCode(block, 'RETURN', Order.NONE) || 'null';
+    const retInput = block.getInput('RETURN') ? 'RETURN' : (block.getInput('VALUE') ? 'VALUE' : (block.getInput('EXPR') ? 'EXPR' : null));
+    const expression = retInput ? (generator.valueToCode(block, retInput, Order.NONE) || 'null') : 'null';
     const code = `(${args.join(', ')}) -> ${expression}`;
-    return [code, Order.LAMBDA];
+    return [code, Order.FUNCTION_CALL];
 };
 
 // Return statement
 javaGenerator.forBlock['control_return'] = function (block, generator) {
-    const value = generator.valueToCode(block, 'VALUE', Order.NONE);
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : (block.getInput('EXPR') ? 'EXPR' : null));
+    const value = valInput ? generator.valueToCode(block, valInput, Order.NONE) : null;
     if (value) {
         return `return ${value};\n`;
     }
@@ -76,7 +96,8 @@ javaGenerator.forBlock['control_return'] = function (block, generator) {
 
 // Function callable check (not really applicable in Java, but we can check for null)
 javaGenerator.forBlock['functions_callable'] = function (block, generator) {
-    const value = generator.valueToCode(block, 'FUNCTION', Order.RELATIONAL) || 'null';
+    const fInput = block.getInput('FUNC') ? 'FUNC' : (block.getInput('FUNCTION') ? 'FUNCTION' : (block.getInput('VALUE') ? 'VALUE' : null));
+    const value = fInput ? (generator.valueToCode(block, fInput, Order.RELATIONAL) || 'null') : 'null';
     return [`${value} != null`, Order.RELATIONAL];
 };
 
@@ -94,16 +115,19 @@ javaGenerator.forBlock['control_function_docstring'] = function (block, generato
 
 // Partial apply (not directly supported in Java, but can use lambdas)
 javaGenerator.forBlock['control_partial_apply'] = function (block, generator) {
-    const func = generator.valueToCode(block, 'FUNCTION', Order.MEMBER) || 'null';
+    const fInput = block.getInput('FUNC') ? 'FUNC' : (block.getInput('FUNCTION') ? 'FUNCTION' : (block.getInput('VALUE') ? 'VALUE' : null));
+    const func = fInput ? (generator.valueToCode(block, fInput, Order.MEMBER) || 'null') : 'null';
     const args = [];
 
-    for (let i = 0; i < block.argCount_; i++) {
-        args.push(generator.valueToCode(block, 'ARG' + i, Order.NONE) || 'null');
+    let i = 0;
+    while (block.getInput('ARG' + i) || block.getInput('ADD' + i)) {
+        const inp = block.getInput('ARG' + i) ? ('ARG' + i) : ('ADD' + i);
+        args.push(generator.valueToCode(block, inp, Order.NONE) || 'null');
+        i++;
     }
 
-    // Create a lambda that captures the arguments
     const code = `() -> ${func}(${args.join(', ')})`;
-    return [code, Order.LAMBDA];
+    return [code, Order.FUNCTION_CALL];
 };
 
 export { javaGenerator };

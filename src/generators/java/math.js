@@ -58,9 +58,12 @@ javaGenerator.forBlock['essentials_num_round'] = function (block, generator) {
 
 // Clamp (min/max)
 javaGenerator.forBlock['essentials_num_clamp'] = function (block, generator) {
-    const value = generator.valueToCode(block, 'VALUE', Order.NONE) || '0';
-    const min = generator.valueToCode(block, 'MIN', Order.NONE) || '0';
-    const max = generator.valueToCode(block, 'MAX', Order.NONE) || '100';
+    const valInput = block.getInput('NUM') ? 'NUM' : (block.getInput('VALUE') ? 'VALUE' : null);
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.NONE) || '0') : '0';
+    const minInput = block.getInput('MIN') ? 'MIN' : (block.getInput('LOW') ? 'LOW' : null);
+    const min = minInput ? (generator.valueToCode(block, minInput, Order.NONE) || '0') : '0';
+    const maxInput = block.getInput('MAX') ? 'MAX' : (block.getInput('HIGH') ? 'HIGH' : null);
+    const max = maxInput ? (generator.valueToCode(block, maxInput, Order.NONE) || '100') : '100';
     const code = `Math.max(${min}, Math.min(${max}, ${value}))`;
     return [code, Order.FUNCTION_CALL];
 };
@@ -75,7 +78,7 @@ javaGenerator.forBlock['essentials_num_compare'] = function (block, generator) {
         'EQ': ' == ',
         'NEQ': ' != '
     };
-    const operator = OPERATORS[block.getFieldValue('OP')];
+    const operator = OPERATORS[block.getFieldValue('OP')] || ' == ';
     const argument0 = generator.valueToCode(block, 'A', Order.RELATIONAL) || '0';
     const argument1 = generator.valueToCode(block, 'B', Order.RELATIONAL) || '0';
     const code = argument0 + operator + argument1;
@@ -98,22 +101,25 @@ javaGenerator.forBlock['essentials_num_max'] = function (block, generator) {
 
 // Random integer
 javaGenerator.forBlock['essentials_num_rand_int'] = function (block, generator) {
-    const min = generator.valueToCode(block, 'MIN', Order.NONE) || '0';
-    const max = generator.valueToCode(block, 'MAX', Order.NONE) || '100';
-    generator.addImport('java.util.Random');
+    const minInput = block.getInput('MIN') ? 'MIN' : (block.getInput('LOW') ? 'LOW' : (block.getInput('FROM') ? 'FROM' : null));
+    const min = minInput ? (generator.valueToCode(block, minInput, Order.NONE) || '0') : '0';
+    const maxInput = block.getInput('MAX') ? 'MAX' : (block.getInput('HIGH') ? 'HIGH' : (block.getInput('TO') ? 'TO' : null));
+    const max = maxInput ? (generator.valueToCode(block, maxInput, Order.NONE) || '100') : '100';
+    generator.addImport && generator.addImport('java.util.Random');
     const code = `(new Random().nextInt(${max} - ${min} + 1) + ${min})`;
     return [code, Order.FUNCTION_CALL];
 };
 
 // Random float
 javaGenerator.forBlock['essentials_num_rand_float'] = function (block, generator) {
-    generator.addImport('java.util.Random');
+    generator.addImport && generator.addImport('java.util.Random');
     return ['new Random().nextDouble()', Order.FUNCTION_CALL];
 };
 
 // Expression grouping (parentheses)
 javaGenerator.forBlock['essentials_expr_group'] = function (block, generator) {
-    const value = generator.valueToCode(block, 'VALUE', Order.NONE) || '0';
+    const valInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('EXPR') ? 'EXPR' : (block.getInput('NUM') ? 'NUM' : null));
+    const value = valInput ? (generator.valueToCode(block, valInput, Order.NONE) || '0') : '0';
     return ['(' + value + ')', Order.ATOMIC];
 };
 
