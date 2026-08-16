@@ -32,7 +32,9 @@
   --text-primary: var(--text);
   --text-secondary: var(--muted-text);
   --toolbox-bg: var(--muted-1);
-  --toolbox-fg: var(--text);
+  --toolbox-fg: #0B1B2B;
+  --toolbox-pod-bg: rgba(0, 0, 0, 0.06);
+  --toolbox-icon-filter: brightness(0);
   --toolbox-border: var(--editor-gutter);
   --toolbox-hover-bg: color-mix(in srgb, var(--primary-500) 8%, transparent);
   --toolbox-selected-bg: color-mix(in srgb, var(--primary-500) 12%, var(--muted-1));
@@ -97,7 +99,9 @@
   --text-primary: var(--text);
   --text-secondary: var(--muted-text);
   --toolbox-bg: var(--muted-1);
-  --toolbox-fg: var(--text);
+  --toolbox-fg: #FFFFFF;
+  --toolbox-pod-bg: rgba(255, 255, 255, 0.08);
+  --toolbox-icon-filter: brightness(0) invert(1);
   --toolbox-border: var(--editor-gutter);
   --toolbox-hover-bg: color-mix(in srgb, var(--primary-500) 14%, transparent);
   --toolbox-selected-bg: color-mix(in srgb, var(--primary-500) 18%, var(--muted-1));

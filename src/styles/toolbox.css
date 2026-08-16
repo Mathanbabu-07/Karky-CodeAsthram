@@ -66,7 +66,7 @@
   box-shadow: none !important;
   outline: none !important;
   background: transparent !important;
-  color: var(--text-white, #FFFFFF) !important;
+  color: var(--toolbox-fg, var(--text, #0B1B2B)) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 600 !important;
   font-size: 14px !important;
@@ -95,9 +95,9 @@
 .blocklyToolboxCategory:hover,
 .blocklyTreeRow:hover,
 .custom-category-row:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: var(--toolbox-hover-bg, rgba(255, 255, 255, 0.08)) !important;
   transform: translateX(2px) !important;
-  color: #FFFFFF !important;
+  color: var(--toolbox-fg, var(--text)) !important;
   border: none !important;
 }
 
@@ -105,48 +105,53 @@
 .blocklyToolboxCategory.blocklyToolboxCategorySelected,
 .blocklyTreeRow.blocklyTreeSelected,
 .blocklyTreeRow.blocklyTreeSelected.custom-category-row {
-  background: rgba(255, 255, 255, 0.12) !important;
+  background: var(--toolbox-selected-bg, rgba(255, 255, 255, 0.12)) !important;
   font-weight: 700 !important;
-  color: #FFFFFF !important;
+  color: var(--toolbox-fg, var(--text)) !important;
   border: none !important;
 }
 
-/* --- Icon Pod Styling (Matching Reference Images) --- */
+/* --- Icon Pod Styling --- */
 .category-icon-pod {
   width: 36px;
   height: 36px;
   min-width: 36px;
   min-height: 36px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--toolbox-pod-bg, rgba(255, 255, 255, 0.07));
   border: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   transition: all 0.25s ease;
   flex-shrink: 0 !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .category-icon {
   width: 18px;
   height: 18px;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* Crisp white vector icon inside pod */
+  filter: var(--toolbox-icon-filter, brightness(0) invert(1));
   opacity: 0.95;
   transition: all 0.2s ease;
 }
 
 .blocklyToolboxCategory:hover .category-icon-pod,
 .blocklyTreeRow:hover .category-icon-pod {
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--toolbox-pod-bg, rgba(255, 255, 255, 0.14));
   transform: scale(1.04);
 }
 
 .blocklyToolboxCategory.blocklyToolboxCategorySelected .category-icon-pod,
 .blocklyTreeRow.blocklyTreeSelected .category-icon-pod {
-  background: var(--primary-500, #306998);
+  background: var(--primary-500, #306998) !important;
   box-shadow: 0 0 10px rgba(48, 105, 152, 0.5);
+}
+
+.blocklyToolboxCategory.blocklyToolboxCategorySelected .category-icon,
+.blocklyTreeRow.blocklyTreeSelected .category-icon {
+  filter: brightness(0) invert(1) !important;
 }
 
 /* --- Category Label Text --- */
@@ -155,7 +160,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 14px !important;
   font-weight: 600 !important;
-  color: var(--text-white, #FFFFFF) !important;
+  color: var(--toolbox-fg, var(--text, #0B1B2B)) !important;
   line-height: 1.3 !important;
   white-space: nowrap !important;
   margin: 0 !important;

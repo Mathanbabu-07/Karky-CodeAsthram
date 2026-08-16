@@ -49,9 +49,10 @@ javascriptGenerator.forBlock['essentials_num_round'] = function(block, generator
 };
 
 javascriptGenerator.forBlock['essentials_num_clamp'] = function(block, generator) {
-  const val = generator.valueToCode(block, 'VALUE', generator.ORDER_NONE) || '0';
-  const min = generator.valueToCode(block, 'MIN', generator.ORDER_NONE) || '0';
-  const max = generator.valueToCode(block, 'MAX', generator.ORDER_NONE) || '100';
+  const valInput = block.getInput('NUM') ? 'NUM' : (block.getInput('VALUE') ? 'VALUE' : null);
+  const val = valInput ? (generator.valueToCode(block, valInput, generator.ORDER_NONE) || '0') : '0';
+  const min = block.getInput('MIN') ? (generator.valueToCode(block, 'MIN', generator.ORDER_NONE) || '0') : '0';
+  const max = block.getInput('MAX') ? (generator.valueToCode(block, 'MAX', generator.ORDER_NONE) || '100') : '100';
   return [`Math.min(Math.max(${val}, ${min}), ${max})`, generator.ORDER_FUNCTION_CALL];
 };
 

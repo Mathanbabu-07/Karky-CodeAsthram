@@ -28,9 +28,18 @@ javascriptGenerator.forBlock['text_print_fstring'] = function(block, generator) 
 };
 
 javascriptGenerator.forBlock['text_concat'] = function(block, generator) {
-  const a = generator.valueToCode(block, 'A', generator.ORDER_ADDITION) || '""';
-  const b = generator.valueToCode(block, 'B', generator.ORDER_ADDITION) || '""';
-  return [`String(${a}) + String(${b})`, generator.ORDER_ADDITION];
+  const elements = [];
+  const itemCount = block.itemCount_ !== undefined ? block.itemCount_ : 2;
+  for (let i = 0; i < itemCount; i++) {
+    const val = generator.valueToCode(block, 'ADD' + i, generator.ORDER_NONE);
+    if (val) {
+      elements.push(`String(${val})`);
+    }
+  }
+  if (elements.length === 0) {
+    return ['""', generator.ORDER_ATOMIC];
+  }
+  return [elements.join(' + '), generator.ORDER_ADDITION];
 };
 
 javascriptGenerator.forBlock['text_length'] = function(block, generator) {

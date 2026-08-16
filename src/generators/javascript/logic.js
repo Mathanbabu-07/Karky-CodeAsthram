@@ -122,3 +122,63 @@ javascriptGenerator.forBlock['essentials_num_compare'] = function(block, generat
   const b = generator.valueToCode(block, 'B', generator.ORDER_NONE) || '0';
   return [`${a} ${op} ${b}`, generator.ORDER_RELATIONAL];
 };
+
+javascriptGenerator.forBlock['essentials_bool_true'] = function() {
+  return ['true', javascriptGenerator.ORDER_ATOMIC];
+};
+
+javascriptGenerator.forBlock['essentials_bool_false'] = function() {
+  return ['false', javascriptGenerator.ORDER_ATOMIC];
+};
+
+javascriptGenerator.forBlock['essentials_logic_and'] = function(block, generator) {
+  const a = generator.valueToCode(block, 'A', generator.ORDER_LOGICAL_AND) || 'false';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_LOGICAL_AND) || 'false';
+  return [`${a} && ${b}`, generator.ORDER_LOGICAL_AND];
+};
+
+javascriptGenerator.forBlock['essentials_logic_or'] = function(block, generator) {
+  const a = generator.valueToCode(block, 'A', generator.ORDER_LOGICAL_OR) || 'false';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_LOGICAL_OR) || 'false';
+  return [`${a} || ${b}`, generator.ORDER_LOGICAL_OR];
+};
+
+javascriptGenerator.forBlock['essentials_logic_not'] = function(block, generator) {
+  const a = generator.valueToCode(block, 'A', generator.ORDER_UNARY_NEGATION) || 'false';
+  return [`!${a}`, generator.ORDER_UNARY_NEGATION];
+};
+
+javascriptGenerator.forBlock['essentials_compare'] = function(block, generator) {
+  const rawOp = block.getFieldValue('OP');
+  const opMap = {
+    'EQ': '===',
+    'NEQ': '!==',
+    'LT': '<',
+    'LTE': '<=',
+    'GT': '>',
+    'GTE': '>='
+  };
+  const op = opMap[rawOp] || rawOp || '===';
+  const a = generator.valueToCode(block, 'A', generator.ORDER_NONE) || '0';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_NONE) || '0';
+  return [`${a} ${op} ${b}`, generator.ORDER_RELATIONAL];
+};
+
+javascriptGenerator.forBlock['essentials_in_operator'] = function(block, generator) {
+  const a = generator.valueToCode(block, 'A', generator.ORDER_NONE) || 'item';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_NONE) || 'container';
+  return [`(${b} && typeof ${b}.includes === 'function' ? ${b}.includes(${a}) : ${a} in ${b})`, generator.ORDER_FUNCTION_CALL];
+};
+
+javascriptGenerator.forBlock['essentials_not_in_operator'] = function(block, generator) {
+  const a = generator.valueToCode(block, 'A', generator.ORDER_NONE) || 'item';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_NONE) || 'container';
+  return [`!(${b} && typeof ${b}.includes === 'function' ? ${b}.includes(${a}) : ${a} in ${b})`, generator.ORDER_LOGICAL_NOT];
+};
+
+javascriptGenerator.forBlock['essentials_ternary'] = function(block, generator) {
+  const a = generator.valueToCode(block, 'A', generator.ORDER_CONDITIONAL) || 'null';
+  const cond = generator.valueToCode(block, 'CONDITION', generator.ORDER_CONDITIONAL) || 'false';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_CONDITIONAL) || 'null';
+  return [`${cond} ? ${a} : ${b}`, generator.ORDER_CONDITIONAL];
+};
