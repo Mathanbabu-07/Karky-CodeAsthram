@@ -172,25 +172,39 @@ function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
       flyout_css_class: 'backpack-flyout'
     });
 
-    // --- Icon Injection with MutationObserver ---
+    // --- Icon Injection with MutationObserver & Staged Retries ---
     let iconObserver = null;
     let isInjecting = false;
-    const setupIconInjection = () => {
-      const toolboxDiv = document.querySelector('.blocklyToolboxDiv');
-      if (toolboxDiv) {
-        injectCategoryIcons(iconMap); // Initial injection
-        // Re-inject icons safely if the toolbox is modified by Blockly
-        iconObserver = new MutationObserver(() => {
-          if (isInjecting) return;
-          isInjecting = true;
-          injectCategoryIcons(iconMap);
-          setTimeout(() => { isInjecting = false; }, 50);
-        });
-        iconObserver.observe(toolboxDiv, { childList: true, subtree: true });
+
+    const performIconInjection = () => {
+      if (isInjecting) return;
+      isInjecting = true;
+      try {
+        injectCategoryIcons(iconMap);
+      } catch (err) {
+        // Non-fatal
+      } finally {
+        setTimeout(() => { isInjecting = false; }, 30);
       }
     };
-    // A short delay to ensure the toolbox DOM is fully rendered before injecting
-    const injectionTimeout = setTimeout(setupIconInjection, 100);
+
+    // Perform immediate injection and staged retries to guarantee initial load icons
+    performIconInjection();
+    const t0 = setTimeout(performIconInjection, 30);
+    const t1 = setTimeout(performIconInjection, 100);
+    const t2 = setTimeout(performIconInjection, 300);
+    const t3 = setTimeout(performIconInjection, 600);
+
+    const setupObserver = () => {
+      const targetDiv = document.querySelector('.blocklyToolboxDiv') || blocklyDiv.current;
+      if (targetDiv && !iconObserver) {
+        performIconInjection();
+        iconObserver = new MutationObserver(() => performIconInjection());
+        iconObserver.observe(targetDiv, { childList: true, subtree: true });
+      }
+    };
+    setupObserver();
+    const t4 = setTimeout(setupObserver, 150);
 
     // --- Real-time instant code generation ---
     let codeTimer = null;
@@ -233,7 +247,11 @@ function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
     return () => {
       // Cleanup all resources
       clearTimeout(codeTimer);
-      clearTimeout(injectionTimeout);
+      clearTimeout(t0);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
       iconObserver?.disconnect();
       window.removeEventListener("resize", onResize);
       workspaceSearch?.dispose?.();
