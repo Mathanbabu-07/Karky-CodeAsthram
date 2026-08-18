@@ -70,14 +70,33 @@ try {
           clearTimeout(this._smoothHideTimeout);
           this._smoothHideTimeout = null;
         }
+
+        const res = origShow.apply(this, args);
+
+        const svgGroup = this.getSvgRoot ? this.getSvgRoot() : (this.svgGroup_ || this.container_);
+        if (svgGroup && svgGroup.style) {
+          svgGroup.style.display = 'block';
+        }
+        if (this.container_ && this.container_.style) {
+          this.container_.style.display = 'block';
+        }
+        if (this.svgBackground_ && this.svgBackground_.style) {
+          this.svgBackground_.style.display = 'block';
+        }
+
         const targets = getFlyoutTargets(this);
         targets.forEach(el => {
-          el.classList.remove('flyout-smooth-hiding');
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-          el.style.pointerEvents = 'auto';
+          if (el && el.style) {
+            el.classList.remove('flyout-smooth-hiding');
+            el.style.display = 'block';
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            el.style.pointerEvents = 'auto';
+            el.style.visibility = 'visible';
+          }
         });
-        return origShow.apply(this, args);
+
+        return res;
       };
 
       flyoutProto.hide = function() {
