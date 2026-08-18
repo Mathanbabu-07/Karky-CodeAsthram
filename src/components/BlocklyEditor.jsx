@@ -26,7 +26,7 @@ try {
     };
   }
 
-  // --- Smooth 0.8s Disappearance Transition for Flyout Blocks & Scroll Margin Line across All Modules/Languages ---
+  // --- Smooth Disappearance Transition for Flyout Blocks & Scroll Margin Line across All Modules/Languages ---
   if (Blockly && Blockly.Flyout && Blockly.Flyout.prototype) {
     const flyoutProto = Blockly.Flyout.prototype;
     if (!flyoutProto._smoothHideInstalled) {
@@ -81,83 +81,23 @@ try {
       };
 
       flyoutProto.hide = function() {
-        const toolbox = this.targetWorkspace_ ? this.targetWorkspace_.getToolbox() : (this.workspace_ ? this.workspace_.getToolbox() : null);
-        if (toolbox && toolbox._isDirectSwitching) {
-          // Direct category module switching: bypass hide animation to keep toolbox continuously open
-          return;
-        }
-
         const targets = getFlyoutTargets(this);
-        if (targets.length === 0 || !this.isVisible()) {
-          return origHide.call(this);
-        }
-
         if (this._smoothHideTimeout) {
           clearTimeout(this._smoothHideTimeout);
-        }
-
-        targets.forEach(el => el.classList.add('flyout-smooth-hiding'));
-
-        this._smoothHideTimeout = setTimeout(() => {
-          try {
-            origHide.call(this);
-          } catch (e) {
-            // Non-fatal
-          }
-          targets.forEach(el => {
-            el.classList.remove('flyout-smooth-hiding');
-            el.style.opacity = '';
-            el.style.transform = '';
-            el.style.pointerEvents = '';
-          });
           this._smoothHideTimeout = null;
-        }, 800);
-      };
-    }
-  }
-
-  // --- Single-Source-of-Truth Module Selection Controller for Toolbox ---
-  if (Blockly && Blockly.Toolbox && Blockly.Toolbox.prototype) {
-    const toolboxProto = Blockly.Toolbox.prototype;
-    if (!toolboxProto._moduleControllerInstalled) {
-      toolboxProto._moduleControllerInstalled = true;
-      const origOnClick = toolboxProto.onClick_;
-      const origSetSelectedItem = toolboxProto.setSelectedItem;
-
-      toolboxProto.onClick_ = function(e) {
-        const item = this.getToolboxItemFromTarget_(e.target);
-        if (!item || !item.isSelectable()) {
-          return origOnClick.call(this, e);
         }
 
-        // Single-source-of-truth comparison with active selected item
-        if (this.selectedItem_ === item) {
-          // Clicked currently opened module again -> close only that module's block list
-          this._isDirectSwitching = false;
-          this.clearSelection();
-        } else {
-          // Clicked a closed module OR a different module -> switch directly without closing/hiding
-          this._isDirectSwitching = true;
-          try {
-            this.setSelectedItem(item);
-          } finally {
-            this._isDirectSwitching = false;
-          }
-        }
-      };
+        // Call native origHide immediately to keep Blockly core state perfectly synchronized
+        const result = origHide.call(this);
 
-      toolboxProto.setSelectedItem = function(item) {
-        const isSwitching = this.selectedItem_ !== null && item !== null && this.selectedItem_ !== item;
-        if (isSwitching) {
-          this._isDirectSwitching = true;
-        }
-        try {
-          return origSetSelectedItem.call(this, item);
-        } finally {
-          if (isSwitching) {
-            this._isDirectSwitching = false;
-          }
-        }
+        targets.forEach(el => {
+          el.classList.remove('flyout-smooth-hiding');
+          el.style.opacity = '';
+          el.style.transform = '';
+          el.style.pointerEvents = '';
+        });
+
+        return result;
       };
     }
   }
