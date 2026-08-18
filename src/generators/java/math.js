@@ -206,4 +206,40 @@ javaGenerator.forBlock['control_math_stats'] = function (block, generator) {
     return [code, Order.FUNCTION_CALL];
 };
 
+// Decimal creation (BigDecimal)
+javaGenerator.forBlock['control_decimal_create'] = function (block, generator) {
+    const valInput = block.getInput('VAL') ? 'VAL' : (block.getInput('VALUE') ? 'VALUE' : (block.getInput('NUM') ? 'NUM' : null));
+    const val = valInput ? (generator.valueToCode(block, valInput, Order.NONE) || '"0.0"') : '"0.0"';
+    generator.addImport && generator.addImport('java.math.BigDecimal');
+    return [`new BigDecimal(${val})`, Order.FUNCTION_CALL];
+};
+
+// Fraction creation
+javaGenerator.forBlock['control_fraction_create'] = function (block, generator) {
+    const numInput = block.getInput('NUM') ? 'NUM' : (block.getInput('NUMERATOR') ? 'NUMERATOR' : (block.getInput('A') ? 'A' : null));
+    const num = numInput ? (generator.valueToCode(block, numInput, Order.NONE) || '1') : '1';
+    const denInput = block.getInput('DEN') ? 'DEN' : (block.getInput('DENOMINATOR') ? 'DENOMINATOR' : (block.getInput('B') ? 'B' : null));
+    const den = denInput ? (generator.valueToCode(block, denInput, Order.NONE) || '1') : '1';
+    return [`((double)${num} / ${den})`, Order.DIVISION];
+};
+
+// Complex number creation
+javaGenerator.forBlock['control_complex_create'] = function (block, generator) {
+    const rInput = block.getInput('REAL') ? 'REAL' : (block.getInput('A') ? 'A' : null);
+    const real = rInput ? (generator.valueToCode(block, rInput, Order.NONE) || '0') : '0';
+    const iInput = block.getInput('IMAG') ? 'IMAG' : (block.getInput('B') ? 'B' : null);
+    const imag = iInput ? (generator.valueToCode(block, iInput, Order.NONE) || '0') : '0';
+    return [`new double[]{${real}, ${imag}}`, Order.FUNCTION_CALL];
+};
+
+// Accumulate (sum/product over range/array)
+javaGenerator.forBlock['control_accumulate'] = function (block, generator) {
+    const op = block.getFieldValue('OP') || 'SUM';
+    const lInput = block.getInput('LIST') ? 'LIST' : (block.getInput('TARGET') ? 'TARGET' : (block.getInput('VALUE') ? 'VALUE' : null));
+    const list = lInput ? (generator.valueToCode(block, lInput, Order.NONE) || 'new int[]{}') : 'new int[]{}';
+    generator.addImport && generator.addImport('java.util.Arrays');
+    const func = op === 'PRODUCT' ? 'reduce(1, (a, b) -> a * b)' : 'sum()';
+    return [`Arrays.stream(${list}).${func}`, Order.FUNCTION_CALL];
+};
+
 export { javaGenerator };
