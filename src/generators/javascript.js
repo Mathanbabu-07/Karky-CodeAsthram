@@ -12,6 +12,7 @@ import './javascript/arrays.js';
 import './javascript/objects.js';
 import './javascript/collections.js';
 import './javascript/oop.js';
+import './javascript/sorting.js';
 
 // Ensure Blockly is available globally
 if (!globalThis.Blockly) {
