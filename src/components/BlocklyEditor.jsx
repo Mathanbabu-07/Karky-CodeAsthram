@@ -73,15 +73,25 @@ try {
 
         const res = origShow.apply(this, args);
 
+        // Only restore visibility/opacity — do NOT touch transform.
+        // Blockly sets an SVG translate() on the flyout group to position it correctly.
+        // Overriding transform='none' pushes all blocks to (0,0) behind the toolbox.
         const svgGroup = this.getSvgRoot ? this.getSvgRoot() : (this.svgGroup_ || this.container_);
         if (svgGroup && svgGroup.style) {
           svgGroup.style.display = 'block';
+          svgGroup.style.opacity = '1';
+          svgGroup.style.visibility = 'visible';
+          svgGroup.style.pointerEvents = 'auto';
+          svgGroup.classList.remove('flyout-smooth-hiding');
         }
         if (this.container_ && this.container_.style) {
           this.container_.style.display = 'block';
         }
         if (this.svgBackground_ && this.svgBackground_.style) {
           this.svgBackground_.style.display = 'block';
+          this.svgBackground_.style.opacity = '1';
+          this.svgBackground_.style.visibility = 'visible';
+          this.svgBackground_.classList.remove('flyout-smooth-hiding');
         }
 
         const targets = getFlyoutTargets(this);
@@ -90,7 +100,9 @@ try {
             el.classList.remove('flyout-smooth-hiding');
             el.style.display = 'block';
             el.style.opacity = '1';
-            el.style.transform = 'none';
+            // NOTE: intentionally NOT setting el.style.transform here —
+            // Blockly's origShow() sets the SVG transform attribute to position
+            // the flyout panel. Resetting it to 'none' breaks flyout positioning.
             el.style.pointerEvents = 'auto';
             el.style.visibility = 'visible';
           }
@@ -112,7 +124,7 @@ try {
         targets.forEach(el => {
           el.classList.remove('flyout-smooth-hiding');
           el.style.opacity = '';
-          el.style.transform = '';
+          // Do NOT reset transform — Blockly manages flyout SVG positioning
           el.style.pointerEvents = '';
         });
 
@@ -150,6 +162,14 @@ function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
   const prevConfigRef = useRef(null);
 
   useEffect(() => {
+    // Slim scrollbars: set thickness BEFORE inject so Blockly allocates
+    // only 6px of layout space for scrollbar zones (default is 15px).
+    // scrollbarThickness is a static property on the Scrollbar class, NOT
+    // an inject option — this is the correct Blockly v12 API.
+    if (Blockly.Scrollbar) {
+      Blockly.Scrollbar.scrollbarThickness = 6;
+    }
+
     // Build a theme snapshot from current CSS variables BEFORE injecting Blockly,
     // so initial workspace colors match the active app theme.
     const initialTheme = getGlassHorizonTheme();
