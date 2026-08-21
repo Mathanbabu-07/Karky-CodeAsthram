@@ -591,6 +591,84 @@
 .toolbar-left {
   display: flex;
   align-items: center;
+  gap: 0;
+}
+
+/* ── KTA Partner Badge — proper co-brand chip ─────────────── */
+.toolbar-partner-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 12px;
+}
+
+.partner-divider {
+  width: 1px;
+  height: 32px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.20) 30%,
+    rgba(255, 255, 255, 0.20) 70%,
+    transparent
+  );
+  flex-shrink: 0;
+}
+
+/* The chip that contains the logo — white background is intentional */
+.partner-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 5px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.8);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.partner-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* Logo shown at natural colors inside the white chip */
+.toolbar-kta-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+
+.partner-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a3a6b;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+/* Light theme: slightly less prominent chip */
+[data-theme="light"] .partner-chip {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(48, 105, 152, 0.15);
+  box-shadow: 0 1px 5px rgba(48, 105, 152, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+[data-theme="light"] .partner-divider {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(48, 105, 152, 0.25) 30%,
+    rgba(48, 105, 152, 0.25) 70%,
+    transparent
+  );
 }
 
 /* NEW: Center section for language and mode controls */

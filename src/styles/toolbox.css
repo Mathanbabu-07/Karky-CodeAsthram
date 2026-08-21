@@ -207,67 +207,42 @@
   box-shadow: 0 0 0 3px rgba(48, 105, 152, 0.3);
 }
 
-/* --- Smooth Disappearance Transition for Flyouts across All Languages --- */
-.blocklyToolboxFlyout,
-.blocklyFlyout,
-.blocklyFlyoutBackground {
-  will-change: opacity, transform;
-}
-
 /* =====================================================================
    SLIM BLOCKLY SCROLLBARS — floating pill style
-   Blockly.Scrollbar.scrollbarThickness = 6 (set in BlocklyEditor.jsx)
-   handles the layout allocation. CSS here controls visual appearance:
-   invisible track, semi-transparent pill handle, hover fade-in.
+   Blockly.Scrollbar.scrollbarThickness = 6 handles layout allocation.
+   CSS only styles the visuals: invisible track, semi-transparent pill.
    ===================================================================== */
 
-/* Hide the scrollbar background track entirely — completely invisible */
+/* Scrollbar track background: completely invisible */
 .blocklyScrollbarBackground {
   opacity: 0 !important;
+  fill: transparent !important;
+  stroke: none !important;
 }
 
-/* Scrollbar outer SVG — allow pointer events only on the handle */
-.blocklyScrollbarVertical,
-.blocklyScrollbarHorizontal {
-  opacity: 1;
-}
-
-/* Scrollbar thumb — soft pill, barely visible at rest */
+/* Scrollbar thumb handle: soft translucent pill */
 .blocklyScrollbarHandle {
-  fill: rgba(180, 200, 230, 0.22) !important;
+  fill: rgba(180, 200, 230, 0.25) !important;
   rx: 3px !important;
   ry: 3px !important;
-  transition: fill 0.25s ease, opacity 0.25s ease;
+  transition: fill 0.2s ease;
 }
 
-/* Hover: the handle becomes clearly visible */
+/* Hover on scrollbars: brighten handle */
 .blocklyScrollbarVertical:hover .blocklyScrollbarHandle,
-.blocklyScrollbarHorizontal:hover .blocklyScrollbarHandle {
+.blocklyScrollbarHorizontal:hover .blocklyScrollbarHandle,
+.blocklyFlyoutScrollbar:hover .blocklyScrollbarHandle {
   fill: rgba(180, 200, 230, 0.65) !important;
 }
 
-/* Flyout scrollbar — same treatment */
-.blocklyFlyoutScrollbar .blocklyScrollbarHandle {
-  fill: rgba(160, 185, 220, 0.22) !important;
-}
-.blocklyFlyoutScrollbar:hover .blocklyScrollbarHandle {
-  fill: rgba(160, 185, 220, 0.65) !important;
-}
-
-/* Light theme variants */
+/* Light theme overrides */
 [data-theme="light"] .blocklyScrollbarHandle {
-  fill: rgba(48, 105, 152, 0.18) !important;
+  fill: rgba(48, 105, 152, 0.22) !important;
 }
 [data-theme="light"] .blocklyScrollbarVertical:hover .blocklyScrollbarHandle,
-[data-theme="light"] .blocklyScrollbarHorizontal:hover .blocklyScrollbarHandle {
-  fill: rgba(48, 105, 152, 0.50) !important;
-}
-
-.flyout-smooth-hiding {
-  opacity: 0 !important;
-  transform: translateX(-14px) !important;
-  pointer-events: none !important;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+[data-theme="light"] .blocklyScrollbarHorizontal:hover .blocklyScrollbarHandle,
+[data-theme="light"] .blocklyFlyoutScrollbar:hover .blocklyScrollbarHandle {
+  fill: rgba(48, 105, 152, 0.55) !important;
 }
 
 /* Ensure dragged blocks inside or outside flyout remain 100% visible with zero flicker */

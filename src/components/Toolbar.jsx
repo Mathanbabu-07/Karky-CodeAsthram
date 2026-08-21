@@ -17,6 +17,7 @@ import {
 import './Toolbar.css';
 import fullLogo from '../../CodeAsthram_full_logo.png';
 import shortLogo from '../../CodeAsthram_short_logo.png';
+import ktaLogo from '/assets/kta_logo.png';
 import { FEATURE_FLAGS } from '../config';
 import { toggleTheme } from '../utils/theme';
 
@@ -371,6 +372,14 @@ export default function Toolbar({
         <canvas ref={canvasRef} className="toolbar-alive-canvas" aria-hidden="true" />
         <div className="toolbar-left">
           <img src={fullLogo} alt="CodeAsthram Full Logo" className="toolbar-logo-full" />
+          {/* KTA co-brand chip */}
+          <div className="toolbar-partner-badge">
+            <div className="partner-divider" />
+            <div className="partner-chip">
+              <img src={ktaLogo} alt="Karky Tamil Academy" className="toolbar-kta-logo" />
+              <span className="partner-name">Karky Tamil Academy</span>
+            </div>
+          </div>
         </div>
 
         {/* Language Selector */}
