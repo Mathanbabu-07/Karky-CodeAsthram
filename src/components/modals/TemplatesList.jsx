@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiChevronsRight, FiChevronLeft, FiChevronRight, FiSearch, FiFilter } from 'react-icons/fi';
-import { TEMPLATES } from '../../templates';
+import { getTemplatesForLanguage } from '../../templates';
 
-export default function TemplatesList({ onSelectTemplate, onClose }) {
+export default function TemplatesList({ onSelectTemplate, onClose, currentLanguage = 'python' }) {
   const [direction, setDirection] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
@@ -11,25 +11,31 @@ export default function TemplatesList({ onSelectTemplate, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentFilteredIndex, setCurrentFilteredIndex] = useState(0);
 
+  // Source templates specifically for the active language
+  const availableTemplates = useMemo(() => {
+    return getTemplatesForLanguage(currentLanguage);
+  }, [currentLanguage]);
+
   // Filter and search templates
   const filteredTemplates = useMemo(() => {
-    return TEMPLATES.filter(template => {
+    return availableTemplates.filter(template => {
       const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
       const matchesDifficulty = selectedDifficulty === 'All' || template.difficulty === selectedDifficulty;
       return matchesSearch && matchesDifficulty;
     });
-  }, [searchTerm, selectedDifficulty]);
+  }, [availableTemplates, searchTerm, selectedDifficulty]);
 
-  // Reset to first template when filters change
+  // Reset to first template when filters or language change
   useEffect(() => {
     setCurrentFilteredIndex(0);
-  }, [filteredTemplates]);
+  }, [filteredTemplates, currentLanguage]);
 
-  const currentTemplate = filteredTemplates[currentFilteredIndex] || TEMPLATES[0];
+  const currentTemplate = filteredTemplates[currentFilteredIndex] || availableTemplates[0] || null;
 
   const handleSelectTemplate = useCallback(async () => {
+    if (!currentTemplate) return;
     setIsLoading(true);
     try {
       await onSelectTemplate(currentTemplate);
@@ -113,15 +119,20 @@ export default function TemplatesList({ onSelectTemplate, onClose }) {
       >
         <div className="templates-modal-header">
           <div className="header-content">
-            <h2 id="templates-modal-title">Load a Template</h2>
-            <p>Select a pre-built project to get started.</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h2 id="templates-modal-title">Load a Template</h2>
+              <span className="tech-tag" style={{ textTransform: 'capitalize', fontSize: '11px', padding: '2px 8px' }}>
+                {currentLanguage}
+              </span>
+            </div>
+            <p>Select a pre-built {currentLanguage} project to get started.</p>
           </div>
           <div className="header-controls">
             <div className="search-container">
               <FiSearch className="search-icon" />
               <input
                 type="text"
-                placeholder="Search templates..."
+                placeholder={`Search ${currentLanguage} templates...`}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
@@ -158,7 +169,7 @@ export default function TemplatesList({ onSelectTemplate, onClose }) {
               </select>
             </div>
             <div className="filter-stats">
-              {filteredTemplates.length} of {TEMPLATES.length} templates
+              {filteredTemplates.length} of {availableTemplates.length} templates
             </div>
           </motion.div>
         )}

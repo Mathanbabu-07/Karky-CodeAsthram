@@ -495,3 +495,374 @@ export const TUTORIALS = [
     }
   }
 ];
+
+export const PYTHON_TUTORIALS = TUTORIALS;
+
+export const JAVASCRIPT_TUTORIALS = [
+  {
+    id: "js-hello-world",
+    title: "JavaScript Hello, World!",
+    difficulty: "Beginner",
+    estimatedTime: "5 minutes",
+    language: "javascript",
+    learningObjectives: ["Output messages to the browser developer console.", "Understand console.log in JavaScript."],
+    prerequisites: ["None"],
+    stages: [
+      {
+        stageNumber: 1,
+        title: "Step 1: Add the console.log block",
+        intention: "To display output in JavaScript, console.log is the core command.",
+        instructionText: "First, let's clear the workspace and add the console.log block.",
+        explanation: "console.log() prints messages or values directly to the JavaScript console.",
+        expectedOutcome: "A standalone console.log block appears on the workspace.",
+        accessibilityText: "Stage 1 adds the console.log block.",
+        actions: [
+          { type: "clearWorkspace" },
+          {
+            type: "addBlock",
+            blockXml: `<block type="js_console_log" id="js_log_block" x="38" y="38"></block>`
+          }
+        ]
+      },
+      {
+        stageNumber: 2,
+        title: "Step 2: Add and Connect a Message String",
+        intention: "Connect a text string to console.log to print a greeting.",
+        instructionText: "Create a text block and connect it to the console.log block's input.",
+        explanation: "Strings in JavaScript can be enclosed in single or double quotes.",
+        expectedOutcome: "A text block snaps into the console.log block.",
+        accessibilityText: "Stage 2 adds a text block to console.log.",
+        actions: [
+          {
+            type: "addBlock",
+            blockXml: `<block type="text" id="js_text_block"><field name="TEXT">Hello, JavaScript World!</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "js_text_block",
+            parentBlockId: "js_log_block",
+            connectionName: "TEXT"
+          }
+        ]
+      }
+    ],
+    summary: {
+      text: "Awesome! You have written and logged your first JavaScript program."
+    }
+  },
+  {
+    id: "js-variables-let-const",
+    title: "Variables with let & const",
+    difficulty: "Beginner",
+    estimatedTime: "6 minutes",
+    language: "javascript",
+    learningObjectives: ["Declare mutable variables with let.", "Store and inspect numbers in JavaScript."],
+    prerequisites: ["JavaScript Hello, World!"],
+    stages: [
+      {
+        stageNumber: 1,
+        title: "Step 1: Declare a variable with let",
+        intention: "In modern JavaScript (ES6+), 'let' is used to declare variables whose values can change.",
+        instructionText: "Add a 'let' variable declaration block.",
+        explanation: "let allows you to declare a block-scoped local variable.",
+        expectedOutcome: "A 'let score = 100' block appears.",
+        actions: [
+          { type: "clearWorkspace" },
+          {
+            type: "addBlock",
+            blockXml: `<block type="js_var_let" id="var_let_block" x="38" y="38"><field name="VAR">score</field></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="math_number" id="num_score"><field name="NUM">100</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "num_score",
+            parentBlockId: "var_let_block",
+            connectionName: "VALUE"
+          }
+        ]
+      },
+      {
+        stageNumber: 2,
+        title: "Step 2: Log the variable to console",
+        intention: "Display the stored score on the console.",
+        instructionText: "Add a console.log block and pass the score variable into it.",
+        explanation: "Referencing the variable name outputs its current value.",
+        expectedOutcome: "console.log(score) is appended.",
+        actions: [
+          {
+            type: "addBlock",
+            blockXml: `<block type="js_console_log" id="log_score_block"></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="variables_get" id="get_score_block"><field name="VAR">score</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "get_score_block",
+            parentBlockId: "log_score_block",
+            connectionName: "TEXT"
+          },
+          {
+            type: "connect",
+            childBlockId: "log_score_block",
+            parentBlockId: "var_let_block",
+            connectionName: "NEXT"
+          }
+        ]
+      }
+    ],
+    summary: {
+      text: "Great job! You now understand declaring and using JavaScript variables."
+    }
+  },
+  {
+    id: "js-conditionals-decision",
+    title: "Decision Making with If-Else",
+    difficulty: "Intermediate",
+    estimatedTime: "7 minutes",
+    language: "javascript",
+    learningObjectives: ["Use if-else statements in JavaScript.", "Evaluate boolean comparisons with strict equality."],
+    prerequisites: ["Variables with let & const"],
+    stages: [
+      {
+        stageNumber: 1,
+        title: "Step 1: Declare an age variable",
+        intention: "Create an age variable to test against a driving eligibility requirement.",
+        instructionText: "Clear the workspace and initialize let age = 18.",
+        explanation: "Conditional branches will evaluate whether this value meets criteria.",
+        expectedOutcome: "let age = 18 block is placed.",
+        actions: [
+          { type: "clearWorkspace" },
+          {
+            type: "addBlock",
+            blockXml: `<block type="js_var_let" id="var_age_block" x="38" y="38"><field name="VAR">age</field></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="math_number" id="num_age"><field name="NUM">18</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "num_age",
+            parentBlockId: "var_age_block",
+            connectionName: "VALUE"
+          }
+        ]
+      },
+      {
+        stageNumber: 2,
+        title: "Step 2: Add an if-else statement",
+        intention: "Create a conditional branch that checks if age >= 18.",
+        instructionText: "Add an if-else block with a comparison condition.",
+        explanation: "if (age >= 18) executes the then-branch when true, and the else-branch otherwise.",
+        expectedOutcome: "An if-else branch is connected.",
+        actions: [
+          {
+            type: "addBlock",
+            blockXml: `<block type="js_if_else" id="if_else_block"></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="js_logic_compare" id="compare_age"><field name="OP">&gt;=</field></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="variables_get" id="get_age_comp"><field name="VAR">age</field></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="math_number" id="num_18"><field name="NUM">18</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "get_age_comp",
+            parentBlockId: "compare_age",
+            connectionName: "A"
+          },
+          {
+            type: "connect",
+            childBlockId: "num_18",
+            parentBlockId: "compare_age",
+            connectionName: "B"
+          },
+          {
+            type: "connect",
+            childBlockId: "compare_age",
+            parentBlockId: "if_else_block",
+            connectionName: "COND"
+          },
+          {
+            type: "connect",
+            childBlockId: "if_else_block",
+            parentBlockId: "var_age_block",
+            connectionName: "NEXT"
+          }
+        ]
+      }
+    ],
+    summary: {
+      text: "Well done! You have mastered conditional logic in JavaScript."
+    }
+  }
+];
+
+export const JAVA_TUTORIALS = [
+  {
+    id: "java-hello-world",
+    title: "Java Hello, World!",
+    difficulty: "Beginner",
+    estimatedTime: "5 minutes",
+    language: "java",
+    learningObjectives: ["Learn how Java executes in a Main class.", "Understand System.out.println output in Java."],
+    prerequisites: ["None"],
+    stages: [
+      {
+        stageNumber: 1,
+        title: "Step 1: Add a Print Statement",
+        intention: "Java programs use System.out.println() to print text lines to standard output.",
+        instructionText: "Clear the workspace and add a print block.",
+        explanation: "The CodeAsthram Java generator automatically wraps top-level blocks in a clean public class Main with a public static void main method.",
+        expectedOutcome: "A print block appears on the workspace.",
+        actions: [
+          { type: "clearWorkspace" },
+          {
+            type: "addBlock",
+            blockXml: `<block type="text_print" id="java_print_block" x="38" y="38"></block>`
+          }
+        ]
+      },
+      {
+        stageNumber: 2,
+        title: "Step 2: Provide the Java Greeting String",
+        intention: "Connect a text string to be printed by the Java program.",
+        instructionText: "Add a text block with 'Hello, Java World!' and connect it to print.",
+        explanation: "Java String literals are double-quoted character sequences.",
+        expectedOutcome: "A string block is connected to the print statement.",
+        actions: [
+          {
+            type: "addBlock",
+            blockXml: `<block type="text" id="java_text_block"><field name="TEXT">Hello, Java World!</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "java_text_block",
+            parentBlockId: "java_print_block",
+            connectionName: "TEXT"
+          }
+        ]
+      }
+    ],
+    summary: {
+      text: "Congratulations! You've created your first working Java program."
+    }
+  },
+  {
+    id: "java-variables-numbers",
+    title: "Variables and Arithmetic in Java",
+    difficulty: "Beginner",
+    estimatedTime: "6 minutes",
+    language: "java",
+    learningObjectives: ["Store numeric values in Java variables.", "Perform arithmetic calculations and output results."],
+    prerequisites: ["Java Hello, World!"],
+    stages: [
+      {
+        stageNumber: 1,
+        title: "Step 1: Set a base price variable",
+        intention: "Store an initial value in a variable named 'price'.",
+        instructionText: "Clear the workspace and set price = 50.",
+        explanation: "Java generates strongly-typed variable declarations for all assigned variables.",
+        expectedOutcome: "A variable assignment block is added.",
+        actions: [
+          { type: "clearWorkspace" },
+          {
+            type: "addBlock",
+            blockXml: `<block type="variables_set" id="java_set_price" x="38" y="38"><field name="VAR">price</field></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="math_number" id="java_num_price"><field name="NUM">50</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "java_num_price",
+            parentBlockId: "java_set_price",
+            connectionName: "VALUE"
+          }
+        ]
+      },
+      {
+        stageNumber: 2,
+        title: "Step 2: Calculate total with tax and print",
+        intention: "Calculate price * 1.18 and print the final value.",
+        instructionText: "Add an arithmetic multiplication block and connect it to a print block.",
+        explanation: "Java computes double-precision floating point arithmetic accurately.",
+        expectedOutcome: "A calculation and print block are chained.",
+        actions: [
+          {
+            type: "addBlock",
+            blockXml: `<block type="text_print" id="java_print_total"></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="math_arithmetic" id="java_math_mult"><field name="OP">MULTIPLY</field></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="variables_get" id="java_get_price"><field name="VAR">price</field></block>`
+          },
+          {
+            type: "addBlock",
+            blockXml: `<block type="math_number" id="java_num_tax"><field name="NUM">1.18</field></block>`
+          },
+          {
+            type: "connect",
+            childBlockId: "java_get_price",
+            parentBlockId: "java_math_mult",
+            connectionName: "A"
+          },
+          {
+            type: "connect",
+            childBlockId: "java_num_tax",
+            parentBlockId: "java_math_mult",
+            connectionName: "B"
+          },
+          {
+            type: "connect",
+            childBlockId: "java_math_mult",
+            parentBlockId: "java_print_total",
+            connectionName: "TEXT"
+          },
+          {
+            type: "connect",
+            childBlockId: "java_print_total",
+            parentBlockId: "java_set_price",
+            connectionName: "NEXT"
+          }
+        ]
+      }
+    ],
+    summary: {
+      text: "Great work! You have learned how Java computes arithmetic on variables."
+    }
+  }
+];
+
+export const TUTORIALS_BY_LANGUAGE = {
+  python: PYTHON_TUTORIALS,
+  javascript: JAVASCRIPT_TUTORIALS,
+  java: JAVA_TUTORIALS
+};
+
+/**
+ * Returns tutorials list for the active language.
+ * @param {string} language - 'python' | 'javascript' | 'java'
+ * @returns {Array} List of tutorial objects
+ */
+export function getTutorialsForLanguage(language = 'python') {
+  const normalized = (language || 'python').toLowerCase();
+  return TUTORIALS_BY_LANGUAGE[normalized] || PYTHON_TUTORIALS;
+}

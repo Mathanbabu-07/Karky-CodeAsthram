@@ -10,7 +10,7 @@ import { FiDownload } from 'react-icons/fi';
 import CodePanel from './components/CodePanel';
 import TutorialsList from './components/tutorials/TutorialsList';
 import TutorialController from './components/tutorials/TutorialController';
-import { TUTORIALS } from './tutorials';
+import { getTutorialsForLanguage } from './tutorials';
 import { FEATURE_FLAGS } from './config';
 import TemplatesList from './components/modals/TemplatesList';
 
@@ -184,7 +184,7 @@ export default function App() {
         globalThis.Blockly.Xml.clearWorkspaceAndLoadFromXml(dom.documentElement, mainWorkspace);
         setTimeout(() => {
           try {
-            const newCode = globalThis.Python.workspaceToCode(mainWorkspace);
+            const newCode = generateCode(mainWorkspace, currentLanguage);
             setCode(newCode);
           } catch (e) {
             console.error('Code generation error after load:', e);
@@ -203,7 +203,7 @@ export default function App() {
     if (confirmed) {
       mainWorkspace.clear();
       try {
-        const freshCode = globalThis.Python.workspaceToCode(mainWorkspace);
+        const freshCode = generateCode(mainWorkspace, currentLanguage);
         setCode(freshCode);
       } catch (e) {
         console.error('Code generation error after clearing:', e);
@@ -230,7 +230,7 @@ export default function App() {
 
     const onFinishedLoading = () => {
       try {
-        const newCode = globalThis.Python.workspaceToCode(mainWorkspace);
+        const newCode = generateCode(mainWorkspace, currentLanguage);
         setCode(newCode);
       } catch (e) {
         console.error('Code generation error after load:', e);
@@ -260,6 +260,11 @@ export default function App() {
   // Handler: Language change
   const handleLanguageChange = (newLanguage) => {
     if (newLanguage === currentLanguage) return;
+
+    // Reset tutorial state to prevent cross-language mismatch
+    setActiveTutorial(null);
+    setShowTutorials(false);
+    setShowTemplatesModal(false);
 
     setCurrentLanguage(newLanguage);
 
@@ -341,14 +346,17 @@ export default function App() {
         )}
         {FEATURE_FLAGS.feature_tutorials && showTutorials && !activeTutorial && (
           <TutorialsList
-            tutorials={TUTORIALS}
+            tutorials={getTutorialsForLanguage(currentLanguage)}
             onSelectTutorial={handleSelectTutorial}
+            onClose={() => setShowTutorials(false)}
+            currentLanguage={currentLanguage}
           />
         )}
         {showTemplatesModal && (
           <TemplatesList
             onSelectTemplate={handleLoadTemplate}
             onClose={() => setShowTemplatesModal(false)}
+            currentLanguage={currentLanguage}
           />
         )}
         {toast.visible && (

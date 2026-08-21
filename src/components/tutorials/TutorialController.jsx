@@ -8,22 +8,51 @@ const TutorialController = ({ tutorial, workspace, onClose }) => {
   const [currentStageIndex, setCurrentStageIndex] = useState(0);
   const [isMinimized, setIsMinimized] = useState(false);
 
-  useEffect(() => {
-    if (workspace && tutorial) {
-      applyActions(workspace, tutorial.stages[0].actions);
+  const stages = tutorial?.stages || [];
+  const currentStage = stages[currentStageIndex] || stages[0] || null;
+  const hasNext = currentStageIndex < stages.length - 1;
+  const hasPrevious = currentStageIndex > 0;
+
+  const handleNext = () => {
+    if (hasNext) {
+      const nextStageIndex = currentStageIndex + 1;
+      const nextStage = stages[nextStageIndex];
+      if (nextStage && workspace) {
+        applyActions(workspace, nextStage.actions);
+      }
+      setCurrentStageIndex(nextStageIndex);
     }
-    // NOTE: Do not clear the workspace when the tutorial controller unmounts.
-    // The tutorial should not remove the user's blocks when they close/finish
-    // the tutorial. Any workspace resetting for navigation is handled
-    // explicitly in navigation handlers (e.g. handleBack).
-    return undefined;
+  };
+
+  const handleBack = () => {
+    if (hasPrevious) {
+      const prevStageIndex = currentStageIndex - 1;
+      if (workspace) {
+        workspace.clear();
+        for (let i = 0; i <= prevStageIndex; i++) {
+          if (stages[i]) {
+            applyActions(workspace, stages[i].actions);
+          }
+        }
+      }
+      setCurrentStageIndex(prevStageIndex);
+    }
+  };
+
+  useEffect(() => {
+    if (workspace && stages.length > 0 && stages[0]?.actions) {
+      applyActions(workspace, stages[0].actions);
+    }
   }, [workspace, tutorial]);
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.key === 'n') {
+      if (event.target && (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.isContentEditable)) {
+        return;
+      }
+      if (event.key === 'n' || event.key === 'N') {
         handleNext();
-      } else if (event.key === 'p') {
+      } else if (event.key === 'p' || event.key === 'P') {
         handleBack();
       } else if (event.key === 'Escape') {
         onClose();
@@ -34,12 +63,13 @@ const TutorialController = ({ tutorial, workspace, onClose }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [currentStageIndex]);
+  }, [currentStageIndex, hasNext, hasPrevious]);
 
   useEffect(() => {
-    const lastAction = currentStage.actions[currentStage.actions.length - 1];
-    if (workspace && lastAction && lastAction.type === 'addBlock') {
-      const blockId = lastAction.blockXml.match(/id="([^"]+)"/)[1];
+    const lastAction = currentStage?.actions?.[currentStage.actions.length - 1];
+    if (workspace && lastAction && lastAction.type === 'addBlock' && lastAction.blockXml) {
+      const match = lastAction.blockXml.match(/id="([^"]+)"/);
+      const blockId = match ? match[1] : null;
       if (blockId) {
         setTimeout(() => {
           const block = workspace.getBlockById(blockId);
@@ -55,35 +85,11 @@ const TutorialController = ({ tutorial, workspace, onClose }) => {
         }, 100);
       }
     }
-  }, [currentStageIndex, workspace]);
+  }, [currentStageIndex, workspace, currentStage]);
 
-  if (!tutorial) {
+  if (!tutorial || stages.length === 0) {
     return null;
   }
-
-  const handleNext = () => {
-    if (currentStageIndex < tutorial.stages.length - 1) {
-      const nextStageIndex = currentStageIndex + 1;
-      const nextStage = tutorial.stages[nextStageIndex];
-      applyActions(workspace, nextStage.actions);
-      setCurrentStageIndex(nextStageIndex);
-    }
-  };
-
-  const handleBack = () => {
-    if (currentStageIndex > 0) {
-      const prevStageIndex = currentStageIndex - 1;
-      workspace.clear();
-      for (let i = 0; i <= prevStageIndex; i++) {
-        applyActions(workspace, tutorial.stages[i].actions);
-      }
-      setCurrentStageIndex(prevStageIndex);
-    }
-  };
-
-  const currentStage = tutorial.stages[currentStageIndex];
-  const hasNext = currentStageIndex < tutorial.stages.length - 1;
-  const hasPrevious = currentStageIndex > 0;
 
   const panelVariants = {
     hidden: { x: '100%' },
