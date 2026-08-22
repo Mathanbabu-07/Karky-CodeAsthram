@@ -68,13 +68,27 @@ function BlocklyEditor({ toolboxConfig, onCodeChange, onWorkspaceCreated }) {
     // Build a theme snapshot from current CSS variables BEFORE injecting Blockly,
     // so initial workspace colors match the active app theme.
     const initialTheme = getGlassHorizonTheme();
+    const isDark = (document.documentElement.getAttribute('data-theme') || 'light') === 'dark';
     const workspace = Blockly.inject(blocklyDiv.current, {
       toolbox: toolboxConfig,
       trashcan: true,
       scrollbars: true,
       renderer: "geras",
       theme: initialTheme,
-      zoom: { controls: true, wheel: true, startScale: 0.8 },
+      grid: {
+        spacing: 24,
+        length: 2,
+        colour: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(15, 23, 42, 0.07)',
+        snap: true,
+      },
+      zoom: {
+        controls: true,
+        wheel: true,
+        startScale: 0.85,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2
+      },
       media: '/media/',
     });
     workspaceRef.current = workspace;

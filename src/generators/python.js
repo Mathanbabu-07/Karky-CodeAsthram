@@ -50,6 +50,22 @@ globalThis.Blockly = Blockly;
 const Python = pythonGenerator;
 globalThis.Python = Python;
 
+// Fail-safe blockToCode wrapper so missing block definitions never crash code generation
+const originalPythonBlockToCode = pythonGenerator.blockToCode;
+pythonGenerator.blockToCode = function (block, opt_thisOnly) {
+  if (!block) return '';
+  if (!pythonGenerator.forBlock[block.type]) {
+    console.warn(`[Python Generator] Missing generator for block "${block.type}". Using fallback comment.`);
+    return `# ${block.type}\n`;
+  }
+  try {
+    return originalPythonBlockToCode.call(pythonGenerator, block, opt_thisOnly);
+  } catch (err) {
+    console.error(`[Python Generator] Error in generator for "${block.type}":`, err);
+    return `# Error in ${block.type}: ${err.message}\n`;
+  }
+};
+
 // Custom import handling
 pythonGenerator.imports_ = new Set();
 pythonGenerator.addImport = function (module) {

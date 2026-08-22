@@ -1,54 +1,38 @@
 import React from 'react';
+import { FiArrowLeft, FiArrowRight, FiCheck } from 'react-icons/fi';
 
-const TutorialControls = ({ onNext, onBack, onClose, hasPrevious, hasNext }) => {
-  const showGlobalToast = (message) => {
-    try {
-      const container = document.getElementById('logoutToast');
-      const m = document.getElementById('logoutToastMessage');
-      const icon = document.getElementById('logoutToastIcon');
-      if (!container || !m) {
-        // Fallback to alert if the global toast container is not available
-        alert(message);
-        return;
-      }
-      m.textContent = message || '';
-      // Leave icon untouched; session API will render icons when used
-      container.classList.remove('hidden', 'opacity-0');
-      container.classList.add('opacity-100');
-      setTimeout(() => {
-        container.classList.remove('opacity-100');
-        container.classList.add('opacity-0');
-        setTimeout(() => container.classList.add('hidden'), 500);
-      }, 4000);
-    } catch (e) {
-      // Graceful fallback
-      try { alert(message); } catch {};
-    }
-  };
-
-  const handleFinish = () => {
-    // Congratulate the user via a small toast and close the tutorial UI.
-    // Do NOT clear the Blockly workspace here.
-    showGlobalToast("Congratulations! You've successfully completed this tutorial.");
-    if (typeof onClose === 'function') onClose();
-  };
-
+const TutorialControls = ({ onNext, onBack, onFinish, hasPrevious, hasNext }) => {
   return (
-    <div className="tutorial-controls">
+    <div className="walkthrough-controls-bar">
       <button
         onClick={onBack}
         disabled={!hasPrevious}
-        className="tutorial-button secondary"
+        className="walkthrough-ctrl-btn secondary"
+        title="Previous Step (P)"
       >
-        Back
+        <FiArrowLeft />
+        <span>Previous</span>
+        <kbd className="ctrl-kbd">P</kbd>
       </button>
+
       {hasNext ? (
-        <button onClick={onNext} className="tutorial-button primary">
-          Next
+        <button
+          onClick={onNext}
+          className="walkthrough-ctrl-btn primary"
+          title="Next Step (N)"
+        >
+          <span>Next Step</span>
+          <FiArrowRight />
+          <kbd className="ctrl-kbd primary">N</kbd>
         </button>
       ) : (
-        <button onClick={handleFinish} className="tutorial-button primary">
-          Finish
+        <button
+          onClick={onFinish}
+          className="walkthrough-ctrl-btn finish"
+          title="Finish Tutorial"
+        >
+          <FiCheck />
+          <span>Finish Tutorial</span>
         </button>
       )}
     </div>
@@ -56,3 +40,5 @@ const TutorialControls = ({ onNext, onBack, onClose, hasPrevious, hasNext }) => 
 };
 
 export default TutorialControls;
+
+

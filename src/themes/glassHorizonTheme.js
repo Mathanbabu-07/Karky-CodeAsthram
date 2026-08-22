@@ -34,12 +34,12 @@ function alpha(hexOrVar, alphaValue = 0.4) {
 }
 
 export function getGlassHorizonTheme() {
-  const primary = getVar('--primary-500', '#306998');
-  const info = getVar('--info', '#4584B6');
-  const bg = getVar('--workspace-bg', '#ffffff');
-  const toolboxBg = getVar('--toolbox-bg', '#E6EEF9');
-  const toolboxFg = getVar('--toolbox-fg', '#0B1B2B');
-  const gutter = getVar('--editor-gutter', '#E1E8F2');
+  const primary = getVar('--primary-500', '#2563eb');
+  const info = getVar('--info', '#0284c7');
+  const bg = getVar('--workspace-bg', '#f8fafc');
+  const toolboxBg = getVar('--toolbox-bg', '#f8fafc');
+  const toolboxFg = getVar('--toolbox-fg', '#0f172a');
+  const gutter = getVar('--editor-gutter', '#e2e8f0');
   // Build category styles AND block styles from current CSS duotone palette
   const toolboxPalette = getToolboxThemesFromCss().light; // CSS-driven palette
   const categoryStyles = {};
@@ -100,6 +100,9 @@ export function getGlassHorizonTheme() {
   blockStyles['logic_blocks'] = { colourPrimary: info, colourSecondary: alpha(info, 0.8), colourTertiary: alpha(info, 0.6) };
   blockStyles['math_blocks'] = { colourPrimary: getVar('--pink-500', '#F472B6'), colourSecondary: getVar('--pink-400', '#F687C1'), colourTertiary: getVar('--pink-300', '#F9A8D4') };
 
+  const isDark = (typeof document !== 'undefined' && document.documentElement.getAttribute('data-theme') === 'dark');
+  const scrollbarColour = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)';
+
   return Blockly.Theme.defineTheme('glassHorizon', {
     base: Blockly.Themes.Classic,
     componentStyles: {
@@ -108,7 +111,8 @@ export function getGlassHorizonTheme() {
       toolboxForegroundColour: toolboxFg,
       flyoutBackgroundColour: toolboxBg,
       flyoutForegroundColour: toolboxFg,
-      scrollbarColour: alpha(primary, 0.4),
+      scrollbarColour: scrollbarColour,
+      scrollbarOpacity: 0.2,
       insertionMarkerColour: primary,
     },
     fontStyle: {

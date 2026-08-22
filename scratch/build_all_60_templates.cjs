@@ -1,4 +1,10 @@
-import ROCKET_LAUNCH_XML from './rocket_launch_height.xml?raw';
+const fs = require('fs');
+const path = require('path');
+
+const targetIndexJs = path.resolve(__dirname, '../src/templates/index.js');
+
+// Python XML imports at top
+const pythonImports = `import ROCKET_LAUNCH_XML from './rocket_launch_height.xml?raw';
 import AQUARIUM_ECOSYSTEM_XML from './aquarium_ecosystem.xml?raw';
 import DIGESTIVE_PATH_XML from './digestive_path.xml?raw';
 import DNA_COPYING_SIMULATOR_XML from './dna_copying_simulator.xml?raw';
@@ -18,12 +24,15 @@ import PROJECT17_RIVER_JOURNEY_XML from './project17_river_journey.xml?raw';
 import PROJECT18_WEATHER_DETECTIVES_XML from './project18_weather_detectives.xml?raw';
 import PROJECT19_FESTIVAL_DISCOUNT_XML from './project19_festival_discount.xml?raw';
 import PROJECT20_SMART_CITY_ALERT_XML from './project20_smart_city_alert.xml?raw';
+`;
 
+// Build all JavaScript XMLs
+const jsXmlDefs = `
 // =====================================================================
 // JAVASCRIPT TEMPLATES (20 Comprehensive Templates across all levels)
 // =====================================================================
 
-const JS_COUNTER_THRESHOLD_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_COUNTER_THRESHOLD_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_let" x="30" y="30">
     <field name="VAR">counter</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
@@ -69,9 +78,9 @@ const JS_COUNTER_THRESHOLD_XML = `<xml xmlns="https://developers.google.com/bloc
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_GREETING_BOT_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_GREETING_BOT_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">userName</field>
     <value name="VALUE"><block type="text"><field name="TEXT">Alex</field></block></value>
@@ -115,9 +124,9 @@ const JS_GREETING_BOT_XML = `<xml xmlns="https://developers.google.com/blockly/x
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_TRAFFIC_LIGHT_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_TRAFFIC_LIGHT_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_let" x="30" y="30">
     <field name="VAR">lightState</field>
     <value name="VALUE"><block type="text"><field name="TEXT">RED</field></block></value>
@@ -139,9 +148,9 @@ const JS_TRAFFIC_LIGHT_XML = `<xml xmlns="https://developers.google.com/blockly/
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_SIMPLE_CALCULATOR_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_SIMPLE_CALCULATOR_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_function_decl" x="30" y="30">
     <field name="NAME">calculateTotal</field>
     <field name="PARAMS">price, quantity, discount</field>
@@ -183,9 +192,9 @@ const JS_SIMPLE_CALCULATOR_XML = `<xml xmlns="https://developers.google.com/bloc
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_TEMP_CONVERTER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_TEMP_CONVERTER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_function_decl" x="30" y="30">
     <field name="NAME">celsiusToFahrenheit</field>
     <field name="PARAMS">c</field>
@@ -223,9 +232,9 @@ const JS_TEMP_CONVERTER_XML = `<xml xmlns="https://developers.google.com/blockly
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_NUMBER_GUESSING_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_NUMBER_GUESSING_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">secretTarget</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">42</field></block></value>
@@ -250,9 +259,9 @@ const JS_NUMBER_GUESSING_XML = `<xml xmlns="https://developers.google.com/blockl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_GROCERY_TOTAL_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_GROCERY_TOTAL_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">itemPrices</field>
     <value name="VALUE"><block type="js_array_create"><field name="ITEMS">12.5, 4.0, 7.99, 15.2</field></block></value>
@@ -284,9 +293,9 @@ const JS_GROCERY_TOTAL_XML = `<xml xmlns="https://developers.google.com/blockly/
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_ARRAY_TRANSFORMER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_ARRAY_TRANSFORMER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">numbers</field>
     <value name="VALUE">
@@ -322,9 +331,9 @@ const JS_ARRAY_TRANSFORMER_XML = `<xml xmlns="https://developers.google.com/bloc
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_JSON_PROCESSOR_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_JSON_PROCESSOR_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">userProfile</field>
     <value name="VALUE">
@@ -348,9 +357,9 @@ const JS_JSON_PROCESSOR_XML = `<xml xmlns="https://developers.google.com/blockly
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_WORD_FREQUENCY_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_WORD_FREQUENCY_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">wordMap</field>
     <value name="VALUE"><block type="js_map_create"></block></value>
@@ -382,9 +391,9 @@ const JS_WORD_FREQUENCY_XML = `<xml xmlns="https://developers.google.com/blockly
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_PALINDROME_CHECKER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_PALINDROME_CHECKER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_function_decl" x="30" y="30">
     <field name="NAME">isPalindrome</field>
     <field name="PARAMS">str</field>
@@ -416,9 +425,9 @@ const JS_PALINDROME_CHECKER_XML = `<xml xmlns="https://developers.google.com/blo
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_UNIQUE_TAG_EXTRACTOR_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_UNIQUE_TAG_EXTRACTOR_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">tagSet</field>
     <value name="VALUE"><block type="js_set_create"></block></value>
@@ -442,9 +451,9 @@ const JS_UNIQUE_TAG_EXTRACTOR_XML = `<xml xmlns="https://developers.google.com/b
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_STUDENT_RANKING_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_STUDENT_RANKING_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">scores</field>
     <value name="VALUE"><block type="js_array_create"><field name="ITEMS">88, 95, 72, 100, 84</field></block></value>
@@ -458,9 +467,9 @@ const JS_STUDENT_RANKING_XML = `<xml xmlns="https://developers.google.com/blockl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_FIBONACCI_GENERATOR_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_FIBONACCI_GENERATOR_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_let" x="30" y="30">
     <field name="VAR">a</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
@@ -503,9 +512,9 @@ const JS_FIBONACCI_GENERATOR_XML = `<xml xmlns="https://developers.google.com/bl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_ASYNC_SIMULATOR_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_ASYNC_SIMULATOR_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_async_func" x="30" y="30">
     <field name="NAME">fetchUserData</field>
     <field name="PARAMS">userId</field>
@@ -536,9 +545,9 @@ const JS_ASYNC_SIMULATOR_XML = `<xml xmlns="https://developers.google.com/blockl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_OOP_CART_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_OOP_CART_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_class_define" x="30" y="30">
     <field name="NAME">ShoppingCart</field>
     <statement name="BODY">
@@ -588,9 +597,9 @@ const JS_OOP_CART_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_BANK_ACCOUNT_CLASS_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_BANK_ACCOUNT_CLASS_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_class_define" x="30" y="30">
     <field name="NAME">BankAccount</field>
     <statement name="BODY">
@@ -629,9 +638,9 @@ const JS_BANK_ACCOUNT_CLASS_XML = `<xml xmlns="https://developers.google.com/blo
       </block>
     </statement>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_TASK_SCHEDULER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_TASK_SCHEDULER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_async_func" x="30" y="30">
     <field name="NAME">executeWithRetry</field>
     <field name="PARAMS">taskId, retries</field>
@@ -654,9 +663,9 @@ const JS_TASK_SCHEDULER_XML = `<xml xmlns="https://developers.google.com/blockly
       </block>
     </statement>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_MATRIX_TRANSFORM_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_MATRIX_TRANSFORM_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_var_const" x="30" y="30">
     <field name="VAR">matrix</field>
     <value name="VALUE"><block type="js_array_create"><field name="ITEMS">[1, 2], [3, 4]</field></block></value>
@@ -666,9 +675,9 @@ const JS_MATRIX_TRANSFORM_XML = `<xml xmlns="https://developers.google.com/block
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JS_EVENT_EMITTER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JS_EVENT_EMITTER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="js_class_define" x="30" y="30">
     <field name="NAME">EventEmitter</field>
     <statement name="BODY">
@@ -683,13 +692,16 @@ const JS_EVENT_EMITTER_XML = `<xml xmlns="https://developers.google.com/blockly/
       </block>
     </statement>
   </block>
-</xml>`;
+</xml>\`;
+`;
 
+// Build all Java XMLs
+const javaXmlDefs = `
 // =====================================================================
 // JAVA TEMPLATES (20 Comprehensive Templates across all levels)
 // =====================================================================
 
-const JAVA_GRADE_CALCULATOR_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_GRADE_CALCULATOR_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">score</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">85</field></block></value>
@@ -740,9 +752,9 @@ const JAVA_GRADE_CALCULATOR_XML = `<xml xmlns="https://developers.google.com/blo
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_EVEN_ODD_CLASSIFIER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_EVEN_ODD_CLASSIFIER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">num</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">24</field></block></value>
@@ -770,9 +782,9 @@ const JAVA_EVEN_ODD_CLASSIFIER_XML = `<xml xmlns="https://developers.google.com/
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_TEMP_CONVERTER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_TEMP_CONVERTER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="procedures_defreturn" x="30" y="30">
     <field name="NAME">celsiusToFahrenheit</field>
     <value name="RETURN">
@@ -808,9 +820,9 @@ const JAVA_TEMP_CONVERTER_XML = `<xml xmlns="https://developers.google.com/block
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_LEAP_YEAR_CHECKER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_LEAP_YEAR_CHECKER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">year</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">2024</field></block></value>
@@ -838,9 +850,9 @@ const JAVA_LEAP_YEAR_CHECKER_XML = `<xml xmlns="https://developers.google.com/bl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_MULTIPLICATION_TABLE_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_MULTIPLICATION_TABLE_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">tableNum</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">7</field></block></value>
@@ -864,9 +876,9 @@ const JAVA_MULTIPLICATION_TABLE_XML = `<xml xmlns="https://developers.google.com
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_SIMPLE_INTEREST_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_SIMPLE_INTEREST_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">principal</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">10000</field></block></value>
@@ -910,9 +922,9 @@ const JAVA_SIMPLE_INTEREST_XML = `<xml xmlns="https://developers.google.com/bloc
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_VOWEL_COUNTER_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_VOWEL_COUNTER_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">ch</field>
     <value name="VALUE"><block type="text"><field name="TEXT">E</field></block></value>
@@ -935,9 +947,9 @@ const JAVA_VOWEL_COUNTER_XML = `<xml xmlns="https://developers.google.com/blockl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_ARRAYLIST_INVENTORY_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_ARRAYLIST_INVENTORY_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">inventory</field>
     <value name="VALUE">
@@ -977,9 +989,9 @@ const JAVA_ARRAYLIST_INVENTORY_XML = `<xml xmlns="https://developers.google.com/
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_BANK_ACCOUNT_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_BANK_ACCOUNT_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">balance</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">5000</field></block></value>
@@ -1029,9 +1041,9 @@ const JAVA_BANK_ACCOUNT_XML = `<xml xmlns="https://developers.google.com/blockly
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_HASHMAP_PHONEBOOK_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_HASHMAP_PHONEBOOK_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="java_hashmap_create" x="30" y="30">
     <field name="VAR">contacts</field>
     <next>
@@ -1059,9 +1071,9 @@ const JAVA_HASHMAP_PHONEBOOK_XML = `<xml xmlns="https://developers.google.com/bl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_HASHSET_UNIQUE_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_HASHSET_UNIQUE_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="java_hashset_create" x="30" y="30">
     <field name="VAR">uniqueVisitors</field>
     <next>
@@ -1082,9 +1094,9 @@ const JAVA_HASHSET_UNIQUE_XML = `<xml xmlns="https://developers.google.com/block
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_ARRAY_STATS_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_ARRAY_STATS_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">numbers</field>
     <value name="VALUE">
@@ -1108,9 +1120,9 @@ const JAVA_ARRAY_STATS_XML = `<xml xmlns="https://developers.google.com/blockly/
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_STRING_REVERSAL_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_STRING_REVERSAL_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">original</field>
     <value name="VALUE"><block type="text"><field name="TEXT">BlocklyJava</field></block></value>
@@ -1125,9 +1137,9 @@ const JAVA_STRING_REVERSAL_XML = `<xml xmlns="https://developers.google.com/bloc
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_FIBONACCI_LOOP_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_FIBONACCI_LOOP_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">a</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
@@ -1170,9 +1182,9 @@ const JAVA_FIBONACCI_LOOP_XML = `<xml xmlns="https://developers.google.com/block
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_OOP_STUDENT_RECORD_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_OOP_STUDENT_RECORD_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="java_class_define" x="30" y="30">
     <field name="NAME">Student</field>
     <statement name="BODY">
@@ -1188,9 +1200,9 @@ const JAVA_OOP_STUDENT_RECORD_XML = `<xml xmlns="https://developers.google.com/b
       </block>
     </statement>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_SHAPE_POLYMORPHISM_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_SHAPE_POLYMORPHISM_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="java_class_define" x="30" y="30">
     <field name="NAME">Rectangle</field>
     <statement name="BODY">
@@ -1206,9 +1218,9 @@ const JAVA_SHAPE_POLYMORPHISM_XML = `<xml xmlns="https://developers.google.com/b
       </block>
     </statement>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_CUSTOM_STACK_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_CUSTOM_STACK_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="java_arraylist_create" x="30" y="30">
     <field name="VAR">stack</field>
     <next>
@@ -1231,9 +1243,9 @@ const JAVA_CUSTOM_STACK_XML = `<xml xmlns="https://developers.google.com/blockly
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_EXCEPTION_GUARD_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_EXCEPTION_GUARD_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="java_try_catch" x="30" y="30">
     <field name="EX">ArithmeticException</field>
     <statement name="TRY">
@@ -1254,9 +1266,9 @@ const JAVA_EXCEPTION_GUARD_XML = `<xml xmlns="https://developers.google.com/bloc
       </block>
     </statement>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_BINARY_SEARCH_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_BINARY_SEARCH_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">sortedArray</field>
     <value name="VALUE">
@@ -1275,9 +1287,9 @@ const JAVA_BINARY_SEARCH_XML = `<xml xmlns="https://developers.google.com/blockl
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
 
-const JAVA_MATRIX_MULTIPLICATION_XML = `<xml xmlns="https://developers.google.com/blockly/xml">
+const JAVA_MATRIX_MULTIPLICATION_XML = \`<xml xmlns="https://developers.google.com/blockly/xml">
   <block type="variables_set" x="30" y="30">
     <field name="VAR">dim</field>
     <value name="VALUE"><block type="math_number"><field name="NUM">3</field></block></value>
@@ -1287,8 +1299,11 @@ const JAVA_MATRIX_MULTIPLICATION_XML = `<xml xmlns="https://developers.google.co
       </block>
     </next>
   </block>
-</xml>`;
+</xml>\`;
+`;
 
+// Catalog arrays
+const catalogDefs = `
 // =====================================================================
 // MASTER TEMPLATES CATALOG BY LANGUAGE
 // =====================================================================
@@ -1920,3 +1935,13 @@ export function getTemplatesForLanguage(language = 'python') {
 
 // Default export: Python templates for backwards compatibility
 export const TEMPLATES = PYTHON_TEMPLATES;
+`;
+
+const finalFileContent = pythonImports + jsXmlDefs + javaXmlDefs + catalogDefs;
+fs.writeFileSync(targetIndexJs, finalFileContent, 'utf8');
+
+console.log("Successfully wrote templates to src/templates/index.js!");
+console.log("Python templates count:", 20);
+console.log("JavaScript templates count:", 20);
+console.log("Java templates count:", 20);
+console.log("Total templates across all 3 languages:", 60);

@@ -22,25 +22,41 @@ const getReadableText = (bgHex) => {
   }
 };
 
-// Build a base palette from current CSS tokens with a standardized alternation
-// Even-indexed suites -> primary family; odd-indexed suites -> accent family
+// Build a base palette from current CSS tokens with harmonic semantic distribution
 const buildBasePaletteFromCss = () => {
-  const primary = getCssVar("--primary-500", "#306998");
-  const accent = getCssVar("--accent-500", "#FFD43B");
+  const primary = getCssVar("--primary-500", "#2563eb");
+  const accent = getCssVar("--accent-500", "#f59e0b");
+
+  const semanticHues = {
+    essentials: '#2563eb',          // Vibrant Indigo Blue
+    data_science: '#059669',        // Emerald Green
+    web_dev: '#7c3aed',             // Purple Violet
+    software_engineering: '#0284c7',// Sky Blue
+    cloud_devops: '#d97706',        // Warm Amber
+    database: '#0891b2',            // Cyan Teal
+    testing: '#10b981',             // Mint Green
+    advanced: '#64748b',            // Slate Grey
+    variables: '#3b82f6',
+    functions: '#ec4899',
+    logic: '#0284c7',
+    math: '#8b5cf6',
+    text: '#059669',
+    loops: '#d97706'
+  };
 
   const base = {};
+  const hueKeys = ['#2563eb', '#059669', '#7c3aed', '#0284c7', '#d97706', '#0891b2', '#10b981', '#ec4899'];
+
   SUITES.forEach((suite, idx) => {
-    if (!suite || typeof suite !== 'object') return; // Skip malformed entries
+    if (!suite || typeof suite !== 'object') return;
     const themeKey = suite.themeKey || `suite_${idx}`;
-    const isEven = idx % 2 === 0;
-    const baseHue = isEven ? primary : accent;
-    const lightness = isEven ? (-6 - (idx % 3) * 4) : (-4 - (idx % 3) * 3);
-    base[themeKey] = adjustColor(baseHue, { lightness });
+    const baseColor = semanticHues[themeKey] || hueKeys[idx % hueKeys.length];
+    base[themeKey] = baseColor;
   });
-  // Consistent assignments for common categories
-  base.variables = accent;
-  base.functions = primary;
-  base.default = adjustColor(primary, { lightness: -6 });
+
+  // Assign standard builtins
+  Object.assign(base, semanticHues);
+  base.default = primary;
   return base;
 };
 

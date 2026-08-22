@@ -114,57 +114,32 @@ javaGenerator.forBlock['essentials_list_set'] = function (block, generator) {
     return `${list}.set(${index}, ${value});\n`;
 };
 
-// List statements (add, remove, clear, etc.)
+// List statements (add, insert, remove, clear)
 javaGenerator.forBlock['essentials_list_statements'] = function (block, generator) {
-    const list = generator.valueToCode(block, 'LIST', Order.MEMBER) || 'new ArrayList<>()';
-    const mode = block.getFieldValue('MODE');
+    const list = (block.getInput('LIST') ? generator.valueToCode(block, 'LIST', Order.MEMBER) : '') || 'new ArrayList<>()';
+    const op = block.getFieldValue('OP') || block.getFieldValue('MODE') || 'APPEND';
+    const item = (block.getInput('ITEM') ? generator.valueToCode(block, 'ITEM', Order.NONE) : '') || 'null';
+    const index = (block.getInput('INDEX') ? generator.valueToCode(block, 'INDEX', Order.NONE) : '') || '0';
 
-    let code;
-    switch (mode) {
+    switch (op) {
         case 'APPEND':
-            const item = generator.valueToCode(block, 'ITEM', Order.NONE) || 'null';
-            code = `${list}.add(${item});\n`;
-            break;
-        case 'REMOVE':
-            const removeItem = generator.valueToCode(block, 'ITEM', Order.NONE) || 'null';
-            code = `${list}.remove(${removeItem});\n`;
-            break;
-        case 'CLEAR':
-            code = `${list}.clear();\n`;
-            break;
+            return `${list}.add(${item});\n`;
         case 'INSERT':
-            const index = generator.valueToCode(block, 'INDEX', Order.NONE) || '0';
-            const insertItem = generator.valueToCode(block, 'ITEM', Order.NONE) || 'null';
-            code = `${list}.add(${index}, ${insertItem});\n`;
-            break;
+            return `${list}.add(${index}, ${item});\n`;
+        case 'REMOVE':
+            return `${list}.remove(${item});\n`;
+        case 'CLEAR':
+            return `${list}.clear();\n`;
         default:
-            code = '';
+            return `${list}.add(${item});\n`;
     }
-    return code;
 };
 
-// List expressions (contains, indexOf, etc.)
+// List expressions (pop, get expressions)
 javaGenerator.forBlock['essentials_list_expressions'] = function (block, generator) {
-    const list = generator.valueToCode(block, 'LIST', Order.MEMBER) || 'new ArrayList<>()';
-    const mode = block.getFieldValue('MODE');
-
-    let code;
-    switch (mode) {
-        case 'CONTAINS':
-            const item = generator.valueToCode(block, 'ITEM', Order.NONE) || 'null';
-            code = `${list}.contains(${item})`;
-            break;
-        case 'INDEX_OF':
-            const searchItem = generator.valueToCode(block, 'ITEM', Order.NONE) || 'null';
-            code = `${list}.indexOf(${searchItem})`;
-            break;
-        case 'IS_EMPTY':
-            code = `${list}.isEmpty()`;
-            break;
-        default:
-            code = 'false';
-    }
-    return [code, Order.MEMBER];
+    const list = (block.getInput('LIST') ? generator.valueToCode(block, 'LIST', Order.MEMBER) : '') || 'new ArrayList<>()';
+    const index = (block.getInput('INDEX') ? generator.valueToCode(block, 'INDEX', Order.NONE) : '') || '0';
+    return [`${list}.remove(${index})`, Order.FUNCTION_CALL];
 };
 
 // List sort

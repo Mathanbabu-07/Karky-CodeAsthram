@@ -17,8 +17,8 @@ export default defineConfig({
       }
     },
     headers: {
-      // Allow our API hosts and dev websockets under CSP
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws: wss: https://fonts.googleapis.com https://fonts.gstatic.com *.google.com https://python.tarcin.in http://192.168.1.3:5000 http://127.0.0.1:5000 https://python.tarcin.in; img-src 'self' data: https:; media-src 'self';"
+      // Allow our API hosts, data URIs, and dev websockets under CSP
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' ws: wss: https://fonts.googleapis.com https://fonts.gstatic.com *.google.com https://python.tarcin.in http://192.168.1.3:5000 http://127.0.0.1:5000; img-src 'self' data: blob: https:; media-src 'self';"
     }
   },
   build: {

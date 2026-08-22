@@ -1,7 +1,7 @@
 // src/assets/iconMap.js
 
 /**
- * Maps category keys or module name slugs to their SVG icon filenames.
+ * Maps category keys, module names, or slugs to their SVG icon filenames.
  * Located in `public/assets/icons/`.
  */
 const iconMap = {
@@ -30,21 +30,39 @@ const iconMap = {
   standard_library: 'standard_library.svg',
   tools_testing: 'tools_testing.svg',
 
-  // Category name slugs (Universal & Python modules)
+  // Category name slugs (Universal, Python, JavaScript, and Java)
   variables: 'variables.svg',
+  variables_and_types: 'variables.svg',
+  basics_and_types: 'variables.svg',
   text: 'text.svg',
   math: 'math.svg',
   logic: 'logic.svg',
+  operators_and_logic: 'logic.svg',
   loops: 'loops.svg',
+  control_and_loops: 'loops.svg',
   if_else: 'if_else.svg',
   functions: 'functions.svg',
+  functions_and_scope: 'functions.svg',
+  methods: 'functions.svg',
+  methods_and_functions: 'functions.svg',
   sorting: 'sorting.svg',
   lists: 'lists.svg',
+  arrays_and_methods: 'lists.svg',
+  arrays_and_lists: 'lists.svg',
   dictionaries: 'dicts.svg',
   dicts: 'dicts.svg',
+  objects_and_json: 'dicts.svg',
   sets: 'sets.svg',
+  maps_and_sets: 'sets.svg',
   classes: 'classes.svg',
+  oop_and_classes: 'classes.svg',
   files: 'files.svg',
+  console_and_io: 'io_formats.svg',
+  console_and_i_and_o: 'io_formats.svg',
+  io_and_system: 'io_formats.svg',
+  i_and_o_and_system: 'io_formats.svg',
+  async_and_exceptions: 'concurrency_async.svg',
+  exceptions_and_utilities: 'tools_testing.svg',
   tools: 'tools.svg',
   graphics: 'graphics.svg',
   comprehensions: 'comprehensions.svg',

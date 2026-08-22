@@ -111,3 +111,59 @@ javascriptGenerator.forBlock['math_single'] = function(block, generator) {
   }
   return [code, generator.ORDER_FUNCTION_CALL];
 };
+
+javascriptGenerator.forBlock['math_ops_multi'] = function(block, generator) {
+  const op = block.getFieldValue('OP') || 'POW';
+  const a = generator.valueToCode(block, 'A', generator.ORDER_NONE) || '0';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_NONE) || '0';
+  switch (op) {
+    case 'POW':
+      return [`Math.pow(${a}, ${b})`, generator.ORDER_FUNCTION_CALL];
+    case 'MOD':
+      return [`${a} % ${b}`, generator.ORDER_MULTIPLICATIVE];
+    case 'LOG':
+      return [`Math.log(${a}) / Math.log(${b})`, generator.ORDER_FUNCTION_CALL];
+    default:
+      return [`Math.pow(${a}, ${b})`, generator.ORDER_FUNCTION_CALL];
+  }
+};
+
+javascriptGenerator.forBlock['control_math_stats'] = function(block, generator) {
+  const mode = block.getFieldValue('MODE') || 'SUM';
+  const list = generator.valueToCode(block, 'LIST', generator.ORDER_NONE) || '[]';
+  switch (mode) {
+    case 'SUM':
+      return [`${list}.reduce((a, b) => a + b, 0)`, generator.ORDER_FUNCTION_CALL];
+    case 'MEAN':
+    case 'AVERAGE':
+      return [`(${list}.reduce((a, b) => a + b, 0) / ${list}.length)`, generator.ORDER_DIVISION];
+    case 'MIN':
+      return [`Math.min(...${list})`, generator.ORDER_FUNCTION_CALL];
+    case 'MAX':
+      return [`Math.max(...${list})`, generator.ORDER_FUNCTION_CALL];
+    default:
+      return [`${list}.reduce((a, b) => a + b, 0)`, generator.ORDER_FUNCTION_CALL];
+  }
+};
+
+javascriptGenerator.forBlock['control_decimal_create'] = function(block, generator) {
+  const val = generator.valueToCode(block, 'NUM', generator.ORDER_NONE) || '0';
+  return [`Number(${val})`, generator.ORDER_FUNCTION_CALL];
+};
+
+javascriptGenerator.forBlock['control_fraction_create'] = function(block, generator) {
+  const num = generator.valueToCode(block, 'NUM', generator.ORDER_NONE) || '0';
+  const den = generator.valueToCode(block, 'DEN', generator.ORDER_NONE) || '1';
+  return [`(${num} / ${den})`, generator.ORDER_DIVISION];
+};
+
+javascriptGenerator.forBlock['control_complex_create'] = function(block, generator) {
+  const real = generator.valueToCode(block, 'REAL', generator.ORDER_NONE) || '0';
+  const imag = generator.valueToCode(block, 'IMAG', generator.ORDER_NONE) || '0';
+  return [`({ real: ${real}, imag: ${imag} })`, generator.ORDER_ATOMIC];
+};
+
+javascriptGenerator.forBlock['control_accumulate'] = function(block, generator) {
+  const list = generator.valueToCode(block, 'LIST', generator.ORDER_NONE) || '[]';
+  return [`${list}.reduce((acc, curr) => [...acc, (acc.length ? acc[acc.length - 1] : 0) + curr], [])`, generator.ORDER_FUNCTION_CALL];
+};

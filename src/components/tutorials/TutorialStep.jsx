@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FiInfo, FiHelpCircle, FiCheckCircle, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 const TutorialStep = ({ stage }) => {
   const [isExplanationVisible, setIsExplanationVisible] = useState(false);
@@ -8,76 +9,70 @@ const TutorialStep = ({ stage }) => {
     return null;
   }
 
-  const getAccessibilityTextFromActions = (actions) => {
-    if (!actions || actions.length === 0) return 'No new blocks or changes in this step.';
-    const actionDescriptions = actions.map(action => {
-      switch (action.type) {
-        case 'addBlock':
-          const type = action.blockXml.match(/type="([^"]+)"/);
-          return `Add a ${type ? type[1] : 'new'} block.`;
-        case 'connect':
-          return `Connect block ${action.childBlockId} to ${action.parentBlockId}.`;
-        case 'setField':
-          return `Set field ${action.fieldName} on block ${action.blockId} to ${action.value}.`;
-        case 'clearWorkspace':
-          return 'Clear the workspace.';
-        default:
-          return 'A change was made to the workspace.';
-      }
-    }).join(' ');
-    return actionDescriptions;
-  };
-
   return (
-    <div className="tutorial-step">
-      <h4 className="tutorial-step-title">{stage.title}</h4>
+    <div className="walkthrough-step-container">
+      {/* Objective */}
+      {stage.intention && (
+        <div className="walkthrough-objective-card">
+          <div className="walkthrough-objective-icon">
+            <FiInfo />
+          </div>
+          <div className="walkthrough-objective-text">
+            <span className="walkthrough-objective-label">Step Objective</span>
+            <p className="walkthrough-objective-desc">{stage.intention}</p>
+          </div>
+        </div>
+      )}
 
-      <div className="tutorial-section">
-        <strong className="tutorial-section-title">Intention</strong>
-        <p className="tutorial-section-content">{stage.intention}</p>
+      {/* Instructions Card */}
+      <div className="walkthrough-instruction-card">
+        <h4 className="walkthrough-step-headline">{stage.title}</h4>
+        <p className="walkthrough-instruction-text">{stage.instructionText}</p>
       </div>
 
-      <div className="tutorial-section">
-        <strong className="tutorial-section-title">Instructions</strong>
-        <p className="tutorial-section-content">{stage.instructionText}</p>
-      </div>
+      {/* Collapsible Deep-Dive / Concept Explanation */}
+      {stage.explanation && (
+        <div className="walkthrough-concept-accordion">
+          <button
+            className="walkthrough-concept-toggle"
+            onClick={() => setIsExplanationVisible(!isExplanationVisible)}
+            aria-expanded={isExplanationVisible}
+          >
+            <div className="walkthrough-concept-title">
+              <FiHelpCircle className="walkthrough-concept-icon" />
+              <span>Concept Explanation</span>
+            </div>
+            {isExplanationVisible ? <FiChevronUp /> : <FiChevronDown />}
+          </button>
+          <AnimatePresence>
+            {isExplanationVisible && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="walkthrough-concept-body"
+              >
+                <p className="walkthrough-concept-text">{stage.explanation}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
 
-      <div className="tutorial-section">
-        <button
-          className="tutorial-section-toggle"
-          onClick={() => setIsExplanationVisible(!isExplanationVisible)}
-          aria-expanded={isExplanationVisible}
-        >
-          <strong className="tutorial-section-title">Explanation</strong>
-          <span>{isExplanationVisible ? '-' : '+'}</span>
-        </button>
-        <AnimatePresence>
-          {isExplanationVisible && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="tutorial-section-collapsible"
-            >
-              <p className="tutorial-section-content">
-                {stage.explanation || 'No explanation provided for this step.'}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <div className="tutorial-section">
-        <strong className="tutorial-section-title">Expected Outcome</strong>
-        <p className="tutorial-section-content">{stage.expectedOutcome}</p>
-      </div>
-
-      <div className="visually-hidden" aria-live="polite">
-        {stage.accessibilityText || getAccessibilityTextFromActions(stage.actions)}
-      </div>
+      {/* Expected Outcome */}
+      {stage.expectedOutcome && (
+        <div className="walkthrough-outcome-card">
+          <FiCheckCircle className="walkthrough-outcome-icon" />
+          <div className="walkthrough-outcome-text">
+            <strong>Expected Output:</strong> {stage.expectedOutcome}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default TutorialStep;
+
+

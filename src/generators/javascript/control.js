@@ -134,14 +134,37 @@ javascriptGenerator.forBlock['control_return'] = function(block, generator) {
 };
 
 javascriptGenerator.forBlock['control_try_except'] = function(block, generator) {
-  const tryBranch = generator.statementToCode(block, 'TRY');
-  const catchBranch = generator.statementToCode(block, 'EXCEPT');
+  const tryBranch = generator.statementToCode(block, 'TRY') || generator.statementToCode(block, 'DO');
+  const catchBranch = generator.statementToCode(block, 'EXCEPT') || generator.statementToCode(block, 'CATCH');
   return `try {\n${tryBranch}} catch (err) {\n${catchBranch}}\n`;
 };
 
 javascriptGenerator.forBlock['control_try_except_finally'] = function(block, generator) {
-  const tryBranch = generator.statementToCode(block, 'TRY');
-  const catchBranch = generator.statementToCode(block, 'EXCEPT');
+  const tryBranch = generator.statementToCode(block, 'TRY') || generator.statementToCode(block, 'DO');
+  const catchBranch = generator.statementToCode(block, 'EXCEPT') || generator.statementToCode(block, 'CATCH');
   const finallyBranch = generator.statementToCode(block, 'FINALLY');
   return `try {\n${tryBranch}} catch (err) {\n${catchBranch}} finally {\n${finallyBranch}}\n`;
+};
+
+javascriptGenerator.forBlock['control_raise_exception'] = function(block, generator) {
+  const msg = (block.getInput('MESSAGE') ? generator.valueToCode(block, 'MESSAGE', generator.ORDER_NONE) : (block.getInput('EXPR') ? generator.valueToCode(block, 'EXPR', generator.ORDER_NONE) : '')) || '"Error"';
+  return `throw new Error(${msg});\n`;
+};
+
+javascriptGenerator.forBlock['control_pass'] = function() {
+  return '// pass\n';
+};
+
+javascriptGenerator.forBlock['control_pass_simple'] = function() {
+  return '// pass\n';
+};
+
+javascriptGenerator.forBlock['control_flow_break_continue'] = function(block) {
+  const flow = block.getFieldValue('FLOW') || 'BREAK';
+  return flow === 'BREAK' ? 'break;\n' : 'continue;\n';
+};
+
+javascriptGenerator.forBlock['control_while_true_inline'] = function(block, generator) {
+  const branch = generator.statementToCode(block, 'DO');
+  return `while (true) {\n${branch}}\n`;
 };

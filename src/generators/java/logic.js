@@ -114,7 +114,7 @@ javaGenerator.forBlock['control_logical_combine'] = function (block, generator) 
 javaGenerator.forBlock['control_if_truthy'] = function (block, generator) {
     const vInput = block.getInput('VALUE') ? 'VALUE' : (block.getInput('VAL') ? 'VAL' : (block.getInput('EXPR') ? 'EXPR' : null));
     const val = vInput ? (generator.valueToCode(block, vInput, Order.NONE) || 'false') : 'false';
-    const branch = generator.statementToCode(block, 'DO') || generator.statementToCode(block, 'STACK') || '';
+    const branch = (block.getInput('DO') ? generator.statementToCode(block, 'DO') : (block.getInput('STACK') ? generator.statementToCode(block, 'STACK') : '')) || '';
     return `if (${val} != null && !Boolean.FALSE.equals(${val})) {\n${branch}}\n`;
 };
 

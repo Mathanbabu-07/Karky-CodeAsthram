@@ -23,7 +23,7 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   z-index: 10;
 }
 
@@ -734,111 +734,96 @@
   /* Tighter gap for a unified group */
 }
 
-/* Buttons inside the capsule */
-.toolbar button,
-.toolbar .load-label {
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  /* Circular buttons */
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--toolbar-icon-color);
-  transition: all 0.2s ease-in-out;
-  position: relative;
-  /* For glow effect */
-}
-
-/* .toolbar button:hover,
-.toolbar .load-label:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 12px 2px var(--button-hover-glow);
-} */
-
-.toolbar button:active,
-.toolbar .load-label:active {
-  transform: scale(0.95);
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.toolbar button svg,
-.toolbar .load-label svg {
-  width: 22px;
-  height: 22px;
-}
-
-/* --- FINAL FIX: Unify all toolbar buttons including load-label --- */
-.toolbar button,
-.toolbar .load-label {
+/* Buttons inside the control capsule */
+.toolbar .capsule-button-group button,
+.toolbar .capsule-button-group .load-label {
   all: unset;
-  /* Remove native button/label styles */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   cursor: pointer;
   color: var(--toolbar-icon-color);
   background-color: transparent;
-  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.15s ease-in-out;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   box-sizing: border-box;
 }
 
-.toolbar button:hover,
-.toolbar .load-label:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 12px 2px var(--button-hover-glow);
+.toolbar .capsule-button-group button:hover,
+.toolbar .capsule-button-group .load-label:hover {
+  background-color: rgba(37, 99, 235, 0.08);
+  color: var(--primary-500);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--button-hover-glow);
 }
 
-.toolbar button:active,
-.toolbar .load-label:active {
+.toolbar .capsule-button-group button:active,
+.toolbar .capsule-button-group .load-label:active {
   transform: scale(0.95);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(37, 99, 235, 0.14);
 }
 
-.toolbar button svg,
-.toolbar .load-label svg {
-  width: 22px;
-  height: 22px;
+.toolbar .capsule-button-group button svg,
+.toolbar .capsule-button-group .load-label svg {
+  width: 20px;
+  height: 20px;
   pointer-events: none;
+  transition: transform 0.2s ease;
 }
 
-/* Duo-tone button styles per theme */
+.toolbar .capsule-button-group button:hover svg,
+.toolbar .capsule-button-group .load-label:hover svg {
+  transform: scale(1.08);
+}
+
+/* Light Theme Button Styles */
 [data-theme="light"] .toolbar .capsule-button-group button,
 [data-theme="light"] .toolbar .capsule-button-group .load-label {
-  background-color: var(--primary-500);
-  color: var(--text-white);
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #334155;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 [data-theme="light"] .toolbar .capsule-button-group button:hover,
-[data-theme="light"] .toolbar .capsule-button-group .load-label:hover,
-[data-theme="light"] .toolbar .capsule-button-group button:active,
-[data-theme="light"] .toolbar .capsule-button-group .load-label:active {
-  background-color: var(--accent-500);
-  color: var(--text);
-  /* dark icon on gold */
+[data-theme="light"] .toolbar .capsule-button-group .load-label:hover {
+  background-color: #ffffff;
+  color: #2563eb;
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(245, 158, 11, 0.25);
 }
 
+/* Dark Theme Button Styles */
 [data-theme="dark"] .toolbar .capsule-button-group button,
 [data-theme="dark"] .toolbar .capsule-button-group .load-label {
-  background-color: var(--accent-500);
-  color: var(--text-dark);
-  /* dark icon on gold in dark mode */
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="dark"] .toolbar .capsule-button-group button:hover,
-[data-theme="dark"] .toolbar .capsule-button-group .load-label:hover,
-[data-theme="dark"] .toolbar .capsule-button-group button:active,
-[data-theme="dark"] .toolbar .capsule-button-group .load-label:active {
-  background-color: var(--primary-600);
-  color: var(--text-white);
-  /* white icon on blue */
+[data-theme="dark"] .toolbar .capsule-button-group .load-label:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.3), 0 0 6px rgba(59, 130, 246, 0.3);
+}
+
+/* Active Toggle State (e.g. Code Panel open) with Signature Gold Focus */
+[data-theme="light"] .toolbar .capsule-button-group button.active-toggle {
+  background-color: rgba(37, 99, 235, 0.10) !important;
+  color: #2563eb !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3) !important;
+}
+
+[data-theme="dark"] .toolbar .capsule-button-group button.active-toggle {
+  background-color: rgba(59, 130, 246, 0.22) !important;
+  color: #fbbf24 !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.35) !important;
 }
 
 /* Swap logo appearance by theme; use filter to render white logos as dark on light bg */

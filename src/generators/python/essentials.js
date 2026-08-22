@@ -364,3 +364,8 @@ Python.forBlock['essentials_safe_input'] = function (block) {
   }
   return [`${type}(input(${prompt}))`, Python.ORDER_FUNCTION_CALL];
 };
+
+Python.forBlock['essentials_input_raw'] = function (block) {
+  const prompt = Python.valueToCode(block, 'PROMPT', Python.ORDER_NONE) || "''";
+  return [`input(${prompt})`, Python.ORDER_FUNCTION_CALL];
+};

@@ -1,5 +1,3 @@
-/* src/styles/toolbox.css */
-
 /* --- Root Toolbox Container --- */
 .blocklyToolboxDiv,
 .blocklyToolbox {
@@ -13,12 +11,12 @@
   padding: 10px 6px !important;
   perspective: none !important;
   border: none !important;
-  border-right: 2px solid var(--accent-500, #3B82F6) !important;
+  border-right: 1px solid var(--toolbox-border, #e2e8f0) !important;
   width: 270px !important;
   min-width: 270px !important;
   max-width: 270px !important;
   box-sizing: border-box !important;
-  background-color: var(--toolbox-bg, #0B132B) !important;
+  background-color: var(--toolbox-bg, #f8fafc) !important;
   transform: translateZ(0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,10 +57,6 @@
   padding: 6px 10px !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
   border: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
-  border-left: none !important;
-  border-right: none !important;
   box-shadow: none !important;
   outline: none !important;
   background: transparent !important;
@@ -82,6 +76,48 @@
   cursor: pointer !important;
 }
 
+/* Reset outer category container for Search bar */
+.blocklyToolboxCategory:has(#toolbox-search-input),
+.blocklyToolboxCategory:has(input),
+.blocklyTreeRow:has(#toolbox-search-input),
+.blocklyTreeRow:has(input),
+.blocklyToolboxCategory:has(.toolbox-search-label),
+.blocklyTreeRow:has(.toolbox-search-label) {
+  padding: 0 !important;
+  margin: 4px 4px 8px 4px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: unset !important;
+  height: auto !important;
+  cursor: default !important;
+}
+
+.blocklyToolboxCategory:has(#toolbox-search-input):hover,
+.blocklyToolboxCategory:has(input):hover,
+.blocklyTreeRow:has(#toolbox-search-input):hover,
+.blocklyTreeRow:has(input):hover,
+.blocklyToolboxCategory:has(.toolbox-search-label):hover,
+.blocklyTreeRow:has(.toolbox-search-label):hover {
+  background: transparent !important;
+  transform: none !important;
+}
+
+/* CSS safety net: hide any stray icon pod inside the search row,
+   regardless of whether the input has appeared yet.
+   This covers the JS race window before the MutationObserver fires. */
+.blocklyToolboxCategory:has(#toolbox-search-input) .category-icon-pod,
+.blocklyToolboxCategory:has(input) .category-icon-pod,
+.blocklyToolboxCategory:has(.toolbox-search-label) .category-icon-pod,
+.blocklyTreeRow:has(#toolbox-search-input) .category-icon-pod,
+.blocklyTreeRow:has(input) .category-icon-pod,
+.blocklyTreeRow:has(.toolbox-search-label) .category-icon-pod,
+.toolbox-search-label .category-icon-pod,
+.toolbox-search-label ~ .category-icon-pod,
+.toolbox-search-label + * .category-icon-pod {
+  display: none !important;
+}
+
 /* --- Left Group Wrapper (Icon Pod + Label) --- */
 .category-left-group {
   display: flex !important;
@@ -95,63 +131,138 @@
 .blocklyToolboxCategory:hover,
 .blocklyTreeRow:hover,
 .custom-category-row:hover {
-  background: var(--toolbox-hover-bg, rgba(255, 255, 255, 0.08)) !important;
+  background: var(--toolbox-hover-bg, rgba(37, 99, 235, 0.06)) !important;
   transform: translateX(2px) !important;
   color: var(--toolbox-fg, var(--text)) !important;
-  border: none !important;
 }
 
-/* --- Main Category Selected State --- */
+/* --- Main Category Selected State with Signature Gold Accent --- */
 .blocklyToolboxCategory.blocklyToolboxCategorySelected,
 .blocklyTreeRow.blocklyTreeSelected,
 .blocklyTreeRow.blocklyTreeSelected.custom-category-row {
-  background: var(--toolbox-selected-bg, rgba(255, 255, 255, 0.12)) !important;
+  background: var(--toolbox-selected-bg, rgba(37, 99, 235, 0.10)) !important;
   font-weight: 700 !important;
   color: var(--toolbox-fg, var(--text)) !important;
-  border: none !important;
+  border-left: 3.5px solid var(--accent-500, #f59e0b) !important;
+  padding-left: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* --- Icon Pod Styling --- */
+[data-theme="dark"] .blocklyToolboxCategory.blocklyToolboxCategorySelected,
+[data-theme="dark"] .blocklyTreeRow.blocklyTreeSelected {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-left: 3.5px solid var(--accent-400, #fbbf24) !important;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.15) !important;
+}
+
+/* --- Icon Pod Base Styling --- */
 .category-icon-pod {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  border-radius: 10px;
-  background: var(--toolbox-pod-bg, rgba(255, 255, 255, 0.07));
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  border-radius: 9px;
+  background: var(--toolbox-pod-bg, rgba(15, 23, 42, 0.06));
   border: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   transition: all 0.25s ease;
   flex-shrink: 0 !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 .category-icon {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   object-fit: contain;
-  filter: var(--toolbox-icon-filter, brightness(0) invert(1));
+  filter: var(--toolbox-icon-filter, none);
   opacity: 0.95;
   transition: all 0.2s ease;
 }
 
 .blocklyToolboxCategory:hover .category-icon-pod,
 .blocklyTreeRow:hover .category-icon-pod {
-  background: var(--toolbox-pod-bg, rgba(255, 255, 255, 0.14));
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
-.blocklyToolboxCategory.blocklyToolboxCategorySelected .category-icon-pod,
-.blocklyTreeRow.blocklyTreeSelected .category-icon-pod {
-  background: var(--primary-500, #306998) !important;
-  box-shadow: 0 0 10px rgba(48, 105, 152, 0.5);
+/* =========================================================================
+   VIBRANT SEMANTIC CATEGORY PODS & SIGNATURE GOLD / ACCENT TINTS
+   ========================================================================= */
+
+/* Variables: Royal Indigo */
+.category-pod-variables,
+.category-pod-variables_and_types,
+.category-pod-basics_and_types {
+  background: rgba(59, 130, 246, 0.14) !important;
 }
 
-.blocklyToolboxCategory.blocklyToolboxCategorySelected .category-icon,
-.blocklyTreeRow.blocklyTreeSelected .category-icon {
-  filter: brightness(0) invert(1) !important;
+/* Loops / Control: Signature Python Gold / Warm Amber */
+.category-pod-loops,
+.category-pod-control_and_loops,
+.category-pod-control_computation {
+  background: rgba(245, 158, 11, 0.18) !important;
+}
+
+/* Logic & Decisions: Cyan Teal */
+.category-pod-logic,
+.category-pod-operators_and_logic {
+  background: rgba(6, 182, 212, 0.14) !important;
+}
+
+/* Math: Violet Purple */
+.category-pod-math {
+  background: rgba(139, 92, 246, 0.14) !important;
+}
+
+/* Text & Strings: Emerald Green */
+.category-pod-text,
+.category-pod-text_and_localization {
+  background: rgba(16, 185, 129, 0.14) !important;
+}
+
+/* Functions & Methods: Rose Fuchsia */
+.category-pod-functions,
+.category-pod-functions_and_scope,
+.category-pod-methods,
+.category-pod-methods_and_functions {
+  background: rgba(236, 72, 153, 0.14) !important;
+}
+
+/* Lists & Arrays: Sky Blue */
+.category-pod-lists,
+.category-pod-arrays_and_methods,
+.category-pod-arrays_and_lists {
+  background: rgba(2, 132, 199, 0.14) !important;
+}
+
+/* Dictionaries & Objects: Coral */
+.category-pod-dicts,
+.category-pod-dictionaries,
+.category-pod-objects_and_json {
+  background: rgba(249, 115, 22, 0.14) !important;
+}
+
+/* Sets & Maps: Teal */
+.category-pod-sets,
+.category-pod-maps_and_sets {
+  background: rgba(20, 184, 166, 0.14) !important;
+}
+
+/* Classes & OOP: Purple Orchid */
+.category-pod-classes,
+.category-pod-oop_and_classes {
+  background: rgba(168, 85, 247, 0.14) !important;
+}
+
+/* Sorting & Algorithms: Gold Amber */
+.category-pod-sorting {
+  background: rgba(234, 179, 8, 0.18) !important;
+}
+
+/* If/Else: Coral Rose */
+.category-pod-if_else {
+  background: rgba(244, 63, 94, 0.14) !important;
 }
 
 /* --- Category Label Text --- */
@@ -176,41 +287,112 @@
   border: none !important;
 }
 
-/* --- Search Input --- */
-.toolbox-search-label .blocklyTreeLabel,
-.toolbox-search-label .blocklyToolboxCategoryLabel {
-  padding: 0 !important;
-  width: 100%;
+/* Strictly hide any icon pod or tree icon inside any search container */
+.blocklyToolboxCategory:has(input) .category-icon-pod,
+.blocklyToolboxCategory:has(#toolbox-search-input) .category-icon-pod,
+.blocklyToolboxCategory:has(input) .category-left-group,
+.blocklyToolboxCategory:has(#toolbox-search-input) .category-left-group,
+.blocklyTreeRow:has(input) .category-icon-pod,
+.blocklyTreeRow:has(#toolbox-search-input) .category-icon-pod,
+.blocklyTreeRow:has(input) .category-left-group,
+.blocklyTreeRow:has(#toolbox-search-input) .category-left-group,
+.toolbox-search-label .category-icon-pod,
+.toolbox-search-label .category-left-group {
+  display: none !important;
 }
 
-.toolbox-search-label input[type="search"] {
-  width: calc(100% - 16px);
-  padding: 8px 10px;
-  margin: 4px 8px 10px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13.5px;
-  outline: none;
-  transition: all 0.2s;
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #FFFFFF;
+/* ===========================================================================
+   SEARCH INPUT — EXACT ROOT CAUSE FIX
+   @blockly/toolbox-search sets id="toolbox-search-input" on BOTH:
+     - the outer container <div>  (blocklyToolboxCategoryContainer)
+     - the inner <input>
+   Using bare #toolbox-search-input styled BOTH as search boxes → double search.
+   Fix: qualify every selector with the `input` type to target only the <input>,
+   and explicitly suppress all visual styling on the container <div>.
+   =========================================================================== */
+
+/* Suppress the outer container div that shares the id — zero it out */
+div#toolbox-search-input,
+div.blocklyToolboxCategoryContainer:has(input#toolbox-search-input) {
+  all: unset !important;
+  display: block !important;
+  width: 100% !important;
+  padding: 4px 4px 8px 4px !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.toolbox-search-label input[type="search"]::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+/* The actual search <input> element */
+input#toolbox-search-input,
+.blocklyToolboxDiv input[type="search"] {
+  width: 100% !important;
+  height: 38px !important;
+  padding: 6px 12px 6px 36px !important;
+  margin: 0 !important;
+  border: 1px solid var(--toolbox-border, #e2e8f0) !important;
+  border-radius: 10px !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  outline: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background-color: var(--surface-1, #ffffff) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: 11px center !important;
+  background-size: 15px 15px !important;
+  color: var(--text, #0f172a) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  box-sizing: border-box !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: block !important;
 }
 
-.toolbox-search-label input[type="search"]:focus {
-  border-color: var(--primary-500, #306998);
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 3px rgba(48, 105, 152, 0.3);
+input#toolbox-search-input::-webkit-search-decoration,
+input#toolbox-search-input::-webkit-search-cancel-button,
+input#toolbox-search-input::-webkit-search-results-button,
+input#toolbox-search-input::-webkit-search-results-decoration {
+  -webkit-appearance: none !important;
+  display: none !important;
+}
+
+[data-theme="dark"] input#toolbox-search-input,
+[data-theme="dark"] .blocklyToolboxDiv input[type="search"] {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: 11px center !important;
+  background-size: 15px 15px !important;
+}
+
+input#toolbox-search-input::placeholder,
+.blocklyToolboxDiv input[type="search"]::placeholder {
+  color: var(--muted-text, #64748b) !important;
+  opacity: 0.85 !important;
+}
+
+input#toolbox-search-input:focus,
+.blocklyToolboxDiv input[type="search"]:focus {
+  border-color: var(--primary-500, #2563eb) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(37, 99, 235, 0.22)) !important;
+}
+
+[data-theme="dark"] input#toolbox-search-input:focus,
+[data-theme="dark"] .blocklyToolboxDiv input[type="search"]:focus {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: var(--primary-500, #3b82f6) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(59, 130, 246, 0.35)) !important;
 }
 
 /* =====================================================================
-   SLIM BLOCKLY SCROLLBARS — floating pill style
+   SLIM FLOATING BLOCKLY SCROLLBARS
    Blockly.Scrollbar.scrollbarThickness = 6 handles layout allocation.
-   CSS only styles the visuals: invisible track, semi-transparent pill.
+   CSS renders invisible track and subtle translucent floating pill.
    ===================================================================== */
 
 /* Scrollbar track background: completely invisible */
@@ -222,9 +404,9 @@
 
 /* Scrollbar thumb handle: soft translucent pill */
 .blocklyScrollbarHandle {
-  fill: rgba(180, 200, 230, 0.25) !important;
-  rx: 3px !important;
-  ry: 3px !important;
+  fill: rgba(255, 255, 255, 0.12) !important;
+  rx: 4px !important;
+  ry: 4px !important;
   transition: fill 0.2s ease;
 }
 
@@ -232,17 +414,17 @@
 .blocklyScrollbarVertical:hover .blocklyScrollbarHandle,
 .blocklyScrollbarHorizontal:hover .blocklyScrollbarHandle,
 .blocklyFlyoutScrollbar:hover .blocklyScrollbarHandle {
-  fill: rgba(180, 200, 230, 0.65) !important;
+  fill: rgba(255, 255, 255, 0.32) !important;
 }
 
-/* Light theme overrides */
+/* Light theme overrides: subtle neutral slate pill */
 [data-theme="light"] .blocklyScrollbarHandle {
-  fill: rgba(48, 105, 152, 0.22) !important;
+  fill: rgba(15, 23, 42, 0.12) !important;
 }
 [data-theme="light"] .blocklyScrollbarVertical:hover .blocklyScrollbarHandle,
 [data-theme="light"] .blocklyScrollbarHorizontal:hover .blocklyScrollbarHandle,
 [data-theme="light"] .blocklyFlyoutScrollbar:hover .blocklyScrollbarHandle {
-  fill: rgba(48, 105, 152, 0.55) !important;
+  fill: rgba(15, 23, 42, 0.28) !important;
 }
 
 /* Ensure dragged blocks inside or outside flyout remain 100% visible with zero flicker */
@@ -252,3 +434,25 @@
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+/* =====================================================================
+   WORKSPACE FLOATING CONTROLS (Zoom +, -, Reset & Trashcan)
+   ===================================================================== */
+
+.blocklyZoom,
+.blocklyTrash {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.blocklyZoom:hover,
+.blocklyTrash:hover {
+  transform: scale(1.06);
+}
+
+/* Light Theme */
+[data-theme="light"] .blocklyZoom,
+[data-theme="light"] .blocklyTrash {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+

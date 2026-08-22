@@ -89,3 +89,26 @@ javascriptGenerator.forBlock['control_while_true_inline'] = function(block, gene
   const branch = generator.statementToCode(block, 'DO');
   return `while (${cond}) {\n${branch}}\n`;
 };
+
+javascriptGenerator.forBlock['controls_repeat_ext'] = function(block, generator) {
+  const repeats = generator.valueToCode(block, 'TIMES', generator.ORDER_ASSIGNMENT) || '0';
+  const branch = generator.statementToCode(block, 'DO');
+  return `for (let _i = 0; _i < ${repeats}; _i++) {\n${branch}}\n`;
+};
+
+javascriptGenerator.forBlock['control_for_indexed'] = function(block, generator) {
+  const idx = block.getFieldValue('INDEX_VAR') || 'i';
+  const item = block.getFieldValue('ITEM_VAR') || 'item';
+  const list = generator.valueToCode(block, 'LIST', generator.ORDER_NONE) || '[]';
+  const branch = generator.statementToCode(block, 'DO');
+  return `for (let ${idx} = 0; ${idx} < ${list}.length; ${idx}++) {\n  const ${item} = ${list}[${idx}];\n${branch}}\n`;
+};
+
+javascriptGenerator.forBlock['control_for_zip'] = function(block, generator) {
+  const var1 = block.getFieldValue('VAR1') || 'a';
+  const var2 = block.getFieldValue('VAR2') || 'b';
+  const list1 = generator.valueToCode(block, 'LIST1', generator.ORDER_NONE) || '[]';
+  const list2 = generator.valueToCode(block, 'LIST2', generator.ORDER_NONE) || '[]';
+  const branch = generator.statementToCode(block, 'DO');
+  return `for (let _zi = 0; _zi < Math.min(${list1}.length, ${list2}.length); _zi++) {\n  const ${var1} = ${list1}[_zi];\n  const ${var2} = ${list2}[_zi];\n${branch}}\n`;
+};

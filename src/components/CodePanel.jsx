@@ -1,6 +1,8 @@
 // src/components/CodePanel.jsx
 import React, { useState } from 'react';
-import { FiDownload, FiEye, FiEyeOff, FiClipboard, FiPlay } from 'react-icons/fi';
+import { FiDownload, FiEye, FiEyeOff, FiClipboard, FiPlay, FiCheck, FiCode } from 'react-icons/fi';
+import { SiPython, SiJavascript } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa6';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
@@ -8,9 +10,6 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-java';
 import '../CodePanel.css';
-import AlivePythonIcon from './AlivePythonIcon';
-import AliveJavaIcon from './AliveJavaIcon';
-import AliveJSIcon from './AliveJSIcon';
 import CodeExecutionModal from './modals/CodeExecutionModal';
 import InputPromptModal from './modals/InputPromptModal';
 import { executeJavaCode } from '../utils/javaRunner';
@@ -21,8 +20,6 @@ import axios from 'axios';
 const API_BASE = import.meta?.env?.VITE_API_BASE || '/api';
 
 // Helper to POST with fallback
-// - In dev: use VITE_API_BASE if set; otherwise only '/api' (avoid remote to prevent CORS/CSP noise)
-// - In prod: prefer VITE_API_BASE if set, else try remote host
 async function postWithFallback(path, data) {
   let candidates;
   if (import.meta?.env?.DEV) {
@@ -41,8 +38,6 @@ async function postWithFallback(path, data) {
     const normalizedPath = path.startsWith('/') ? path : `/${path}`;
     const url = `${normalizedBase}${normalizedPath}`;
     try {
-      // Optionally include credentials (cookies) for prod stickiness if enabled via env.
-      // Requires backend CORS to set 'Access-Control-Allow-Credentials: true' and allow the exact origin.
       const isAbsolute = /^https?:\/\//i.test(normalizedBase);
       const forceCreds = String(import.meta?.env?.VITE_API_WITH_CREDENTIALS || '').toLowerCase() === 'true';
       return await axios.post(
@@ -57,18 +52,37 @@ async function postWithFallback(path, data) {
       lastError = err;
       const status = err?.response?.status;
       const isNetwork = !status && (err?.code === 'ERR_NETWORK' || err?.message?.includes('Network'));
-      // Retry on proxy or transient upstream issues; otherwise break early
       if (status && ![502, 503, 504].includes(status)) {
         break;
       }
       if (!status && !isNetwork) {
         break;
       }
-      // else continue to next candidate
     }
   }
   throw lastError;
 }
+
+const LANGUAGE_LABELS = {
+  python: {
+    name: 'Python',
+    label: 'script.py',
+    icon: SiPython,
+    colorClass: 'python',
+  },
+  javascript: {
+    name: 'JavaScript',
+    label: 'script.js',
+    icon: SiJavascript,
+    colorClass: 'javascript',
+  },
+  java: {
+    name: 'Java',
+    label: 'Main.java',
+    icon: FaJava,
+    colorClass: 'java',
+  },
+};
 
 export default function CodePanel({
   code,
@@ -77,7 +91,7 @@ export default function CodePanel({
   onDownload,
   currentLanguage = 'python',
 }) {
-  const [showToast, setShowToast] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [showExecutionModal, setShowExecutionModal] = useState(false);
   const [executionOutput, setExecutionOutput] = useState('');
   const [executionError, setExecutionError] = useState('');
@@ -86,21 +100,24 @@ export default function CodePanel({
   const [awaitingPrompt, setAwaitingPrompt] = useState('');
   const [isSubmittingInput, setIsSubmittingInput] = useState(false);
 
-  // Helper to append output HTML fragments
+  const langInfo = LANGUAGE_LABELS[currentLanguage] || LANGUAGE_LABELS.python;
+  const LangIcon = langInfo.icon;
+
   const appendOutput = (html) => {
     if (!html) return;
     setExecutionOutput(prev => prev ? `${prev}<br>${html}` : html);
   };
 
   const handleCopy = () => {
+    if (!code) return;
     navigator.clipboard.writeText(code);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2000);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const handleRunCode = async () => {
     if (!code.trim()) {
-      setExecutionError('No code to execute. Please generate some code first.');
+      setExecutionError('No code to execute. Place blocks on the workspace first.');
       setShowExecutionModal(true);
       return;
     }
@@ -144,11 +161,9 @@ export default function CodePanel({
 
     try {
       const response = await postWithFallback('/run', { code, language: currentLanguage });
-      // Backward compatible: if server returns { output }, show it directly
       if (response.data && response.data.output && !response.data.status) {
-        setExecutionOutput(response.data.output || 'No output');
+        setExecutionOutput(response.data.output || 'Execution completed with no output.');
       } else if (response.data && response.data.status) {
-        // New interactive protocol
         const { status, output_html, exec_id, prompt } = response.data;
         if (output_html) setExecutionOutput(output_html);
         if (exec_id) setExecId(exec_id);
@@ -161,22 +176,19 @@ export default function CodePanel({
       let errorMessage = 'An error occurred while executing the code.';
 
       if (error.response) {
-        // Server responded with error status
         if (error.response.status === 502) {
-          errorMessage = 'Code execution server is currently unavailable. Please try again later.';
+          errorMessage = 'Python execution server is currently unavailable. Please verify backend service.';
         } else if (error.response.status === 400) {
-          errorMessage = 'Invalid code or request. Please check your code and try again.';
+          errorMessage = 'Invalid syntax or request. Please inspect your block configuration.';
         } else if (error.response.status >= 500) {
-          errorMessage = 'Server error occurred. Please try again later.';
+          errorMessage = 'Server runtime error occurred while executing program.';
         } else {
           errorMessage = error.response.data?.error || `Server error: ${error.response.status}`;
         }
       } else if (error.request) {
-        // Network error
-        errorMessage = 'Network error: Unable to connect to the code execution server.';
+        errorMessage = 'Network error: Unable to reach the execution server.';
       } else {
-        // Other error
-        errorMessage = error.message || 'Unknown error occurred.';
+        errorMessage = error.message || 'Unknown execution error occurred.';
       }
 
       setExecutionError(errorMessage);
@@ -187,34 +199,29 @@ export default function CodePanel({
 
   const submitUserInput = async (value) => {
     if (!execId) {
-      // No active execution session
-      setExecutionError('No active session to receive input. Please run the code again.');
+      setExecutionError('No active execution session to receive input. Please run again.');
       return;
     }
     setIsSubmittingInput(true);
     try {
       const payload = {
         exec_id: String(execId),
-        // Some backends expect `input`, others `text`; send both for compatibility
         input: String(value ?? ''),
-        text: String(value ?? '')
+        text: String(value ?? ''),
       };
-  const res = await postWithFallback(`/input?exec_id=${encodeURIComponent(String(execId))}`, payload);
+      const res = await postWithFallback(`/input?exec_id=${encodeURIComponent(String(execId))}`, payload);
       const { status, output_html, prompt } = res.data || {};
       if (output_html) {
-        // Append incremental output
         appendOutput(output_html);
       }
       if (status === 'await_input') {
         setAwaitingPrompt(prompt || 'Input required:');
       } else {
-        // Completed or error
         setAwaitingPrompt('');
         setExecId(null);
       }
     } catch (error) {
       console.error('Input submit error:', error);
-      // If backend returned rich HTML (e.g., Missing/Invalid exec_id), surface it in the modal
       const html = error?.response?.data?.output_html;
       if (html) {
         appendOutput(html);
@@ -225,9 +232,9 @@ export default function CodePanel({
       } else if (error?.response?.status) {
         setExecutionError(`Input error: Server responded with ${error.response.status}.`);
       } else if (error?.request) {
-        setExecutionError('Input error: Network issue while contacting the execution server.');
+        setExecutionError('Input error: Network issue contacting execution backend.');
       } else {
-        setExecutionError('Failed to send input to the execution server.');
+        setExecutionError('Failed to send input to execution backend.');
       }
       setAwaitingPrompt('');
       setExecId(null);
@@ -239,67 +246,97 @@ export default function CodePanel({
   return (
     <>
       <div className={`code-panel ${isCollapsed ? 'collapsed' : ''}`}>
+        {/* Modern Header */}
         <div className="code-panel-header">
-          <div className="header-icon-container">
-            {currentLanguage === 'java' ? (
-              <AliveJavaIcon />
-            ) : currentLanguage === 'javascript' ? (
-              <AliveJSIcon />
-            ) : (
-              <AlivePythonIcon />
-            )}
+          <div className="code-panel-title-group">
+            <div className={`code-panel-lang-badge ${langInfo.colorClass}`}>
+              <LangIcon />
+            </div>
+            <div className="code-panel-meta">
+              <span className="code-panel-lang-name">{langInfo.name}</span>
+              <span className="code-panel-filename">{langInfo.label}</span>
+            </div>
           </div>
+
           <div className="code-panel-action-pod">
-            <button onClick={handleRunCode} title="Run Code" disabled={isExecuting}>
+            <button
+              type="button"
+              className="action-btn run"
+              onClick={handleRunCode}
+              title={`Execute ${langInfo.name} Code`}
+              disabled={isExecuting}
+            >
               <FiPlay />
             </button>
-            <button onClick={handleCopy} title="Copy Code">
-              <FiClipboard />
+            <button
+              type="button"
+              className="action-btn copy"
+              onClick={handleCopy}
+              title="Copy Code to Clipboard"
+            >
+              {copied ? <FiCheck style={{ color: '#22c55e' }} /> : <FiClipboard />}
             </button>
-            <button onClick={onDownload} title={`Download ${currentLanguage === 'java' ? 'Java' : currentLanguage === 'javascript' ? 'JavaScript' : 'Python'} Script`}>
+            <button
+              type="button"
+              className="action-btn download"
+              onClick={onDownload}
+              title={`Download ${langInfo.label}`}
+            >
               <FiDownload />
             </button>
             <button
+              type="button"
+              className="action-btn toggle"
               onClick={onToggleCollapse}
-              title={isCollapsed ? 'Show Code' : 'Hide Code'}
+              title={isCollapsed ? 'Expand Code View' : 'Hide Code View'}
             >
               {isCollapsed ? <FiEye /> : <FiEyeOff />}
             </button>
           </div>
         </div>
+
+        {/* Code Body */}
         <div className="code-content-wrapper">
-          {!code?.trim() && (
-            <div className="code-empty-state">No code yet - build projects to see {currentLanguage} code here.</div>
+          {!code?.trim() ? (
+            <div className="code-empty-state">
+              <div className="empty-state-icon">
+                <FiCode />
+              </div>
+              <h4 className="empty-state-title">No Blocks Placed</h4>
+              <p className="empty-state-desc">
+                Drag blocks from the toolbox onto the canvas to generate live {langInfo.name} code.
+              </p>
+            </div>
+          ) : (
+            <Editor
+              value={code}
+              onValueChange={() => {}}
+              highlight={(code) => {
+                const lang = (currentLanguage || 'python').toLowerCase();
+                const grammar = languages[lang] || languages.python;
+                return highlight(code, grammar, lang);
+              }}
+              padding={16}
+              className="code-editor"
+              style={{
+                fontFamily: 'var(--font-mono, monospace)',
+                fontSize: 13.5,
+              }}
+            />
           )}
-          <Editor
-            value={code}
-            onValueChange={() => {}} // Read-only
-            highlight={(code) => {
-              const lang = (currentLanguage || 'python').toLowerCase();
-              const grammar = languages[lang] || languages.python;
-              return highlight(code, grammar, lang);
-            }}
-            padding={20}
-            className="code-editor"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 14,
-            }}
-          />
         </div>
       </div>
-      {showToast && (
-        <div className="toast-notification">
-          Code copied to clipboard!
-        </div>
-      )}
+
+      {/* Modals */}
       <CodeExecutionModal
         isOpen={showExecutionModal}
         onClose={() => setShowExecutionModal(false)}
         output={executionOutput}
         isLoading={isExecuting}
         error={executionError}
+        language={currentLanguage}
       />
+
       <InputPromptModal
         isOpen={!!awaitingPrompt}
         prompt={awaitingPrompt}

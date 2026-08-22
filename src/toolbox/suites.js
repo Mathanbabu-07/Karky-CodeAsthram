@@ -393,9 +393,10 @@ export const PYTHON_MODULES = [
 ];
 
 // JAVA-SPECIFIC MODULES
+// JAVA-SPECIFIC MODULES
 export const JAVA_MODULES = [
   {
-    name: "Java Basics",
+    name: "Variables & Types",
     icon: PiCode,
     themeKey: "java_basics",
     blocks: [
@@ -413,7 +414,7 @@ export const JAVA_MODULES = [
     ],
   },
   {
-    name: "Java Control & Loops",
+    name: "Control & Loops",
     icon: PiHourglass,
     themeKey: "java_control",
     blocks: [
@@ -432,7 +433,7 @@ export const JAVA_MODULES = [
     ],
   },
   {
-    name: "Java Methods",
+    name: "Methods & Functions",
     icon: PiFunction,
     themeKey: "java_methods",
     blocks: [
@@ -444,7 +445,7 @@ export const JAVA_MODULES = [
     ],
   },
   {
-    name: "Java Arrays & Lists",
+    name: "Arrays & Lists",
     icon: PiTreeStructure,
     themeKey: "java_collections",
     blocks: [
@@ -464,7 +465,7 @@ export const JAVA_MODULES = [
     ],
   },
   {
-    name: "Java Maps & Sets",
+    name: "Maps & Sets",
     icon: PiDatabase,
     themeKey: "java_maps",
     blocks: [
@@ -482,7 +483,7 @@ export const JAVA_MODULES = [
     ],
   },
   {
-    name: "Java OOP & Classes",
+    name: "OOP & Classes",
     icon: PiBuildings,
     themeKey: "java_oop",
     blocks: [
@@ -497,7 +498,7 @@ export const JAVA_MODULES = [
     ],
   },
   {
-    name: "Java I/O & System",
+    name: "I/O & System",
     icon: PiFile,
     themeKey: "java_io",
     blocks: [
@@ -511,7 +512,7 @@ export const JAVA_MODULES = [
     ],
   },
   {
-    name: "Java Exceptions & Utilities",
+    name: "Exceptions & Utilities",
     icon: PiTestTube,
     themeKey: "java_exceptions",
     blocks: [
@@ -536,7 +537,7 @@ export const JAVA_MODULES = [
 // JAVASCRIPT-SPECIFIC MODULES
 export const JAVASCRIPT_MODULES = [
   {
-    name: "JS Variables & Types",
+    name: "Variables & Types",
     icon: PiCode,
     themeKey: "js_basics",
     blocks: [
@@ -551,7 +552,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Operators & Logic",
+    name: "Operators & Logic",
     icon: PiFunction,
     themeKey: "js_operators",
     blocks: [
@@ -569,7 +570,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Control & Loops",
+    name: "Control & Loops",
     icon: PiHourglass,
     themeKey: "js_control",
     blocks: [
@@ -589,7 +590,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Functions & Scope",
+    name: "Functions & Scope",
     icon: PiFunction,
     themeKey: "js_functions",
     blocks: [
@@ -604,7 +605,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Arrays & Methods",
+    name: "Arrays & Methods",
     icon: PiTreeStructure,
     themeKey: "js_arrays",
     blocks: [
@@ -621,7 +622,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Objects & JSON",
+    name: "Objects & JSON",
     icon: PiBracketsCurly,
     themeKey: "js_objects",
     blocks: [
@@ -635,7 +636,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Maps & Sets",
+    name: "Maps & Sets",
     icon: PiDatabase,
     themeKey: "js_maps",
     blocks: [
@@ -648,7 +649,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS OOP & Classes",
+    name: "OOP & Classes",
     icon: PiBuildings,
     themeKey: "js_classes",
     blocks: [
@@ -663,7 +664,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Console & I/O",
+    name: "Console & I/O",
     icon: PiFile,
     themeKey: "js_io",
     blocks: [
@@ -676,7 +677,7 @@ export const JAVASCRIPT_MODULES = [
     ],
   },
   {
-    name: "JS Async & Exceptions",
+    name: "Async & Exceptions",
     icon: PiTestTube,
     themeKey: "js_async",
     blocks: [

@@ -13,7 +13,8 @@ import TutorialController from './components/tutorials/TutorialController';
 import { getTutorialsForLanguage } from './tutorials';
 import { FEATURE_FLAGS } from './config';
 import TemplatesList from './components/modals/TemplatesList';
-
+import WorkspaceTransitionLoader from './components/common/WorkspaceTransitionLoader';
+import ToastNotification from './components/common/ToastNotification';
 
 import './styles.css';
 import './styles/toolbox.css';
@@ -37,6 +38,7 @@ import './generators/java/functions.js'; // Functions & methods
 import './generators/java/lists.js'; // ArrayList operations
 import './generators/java/collections.js'; // HashMap & HashSet
 import './generators/java/oop.js'; // Classes, OOP, I/O, error handling
+import './generators/java/sorting.js'; // Sorting operations
 import './generators/javascript.js'; // JavaScript generator & block definitions
 import './modules/initializer.js';
 
@@ -55,6 +57,13 @@ export default function App() {
 
   // NEW: Multi-language support
   const [currentLanguage, setCurrentLanguage] = useState('python');
+
+  // NEW: Graceful Workspace Transition Loader state
+  const [transitionState, setTransitionState] = useState({
+    isVisible: false,
+    targetLanguage: 'python',
+    customMessage: '',
+  });
 
   // Get the toolbox configuration dynamically based on language (memoized to prevent re-render flickering)
   const toolboxConfig = useMemo(() => getToolboxConfig(currentLanguage), [currentLanguage]);
@@ -100,17 +109,15 @@ export default function App() {
     showToast(`Downloaded ${getFileName(currentLanguage)}`, 'success');
   };
 
-  // CRITICAL: Update toolbox & code when language changes
+  // Update workspace code and language state when language changes
   useEffect(() => {
     if (mainWorkspace) {
       try {
         window._currentLanguage = currentLanguage;
-        const newToolboxConfig = getToolboxConfig(currentLanguage);
-        mainWorkspace.updateToolbox(newToolboxConfig);
         const newCode = generateCode(mainWorkspace, currentLanguage);
         setCode(newCode);
       } catch (err) {
-        console.error("Error updating workspace for language:", currentLanguage, err);
+        console.error("Error generating code for language:", currentLanguage, err);
       }
     }
   }, [currentLanguage, mainWorkspace]);
@@ -211,49 +218,124 @@ export default function App() {
     }
   };
 
-  const handleCapture = () => {
-    captureWorkspaceScreenshot(
+  const handleCapture = async () => {
+    const success = await captureWorkspaceScreenshot(
       '.blockly-container',
-      'code-asthram-workspace.png',
-      ['.floating-code-panel']
+      `code-asthram-${currentLanguage}-workspace.png`,
+      ['.code-panel', '.code-execution-modal-overlay']
     );
+    if (success) {
+      showToast('Workspace screenshot downloaded!', 'success');
+    }
   };
 
 
+  // Gracefully transition between programming environments
+  const triggerTransition = (targetLanguage, customMessage, callback) => {
+    setTransitionState({
+      isVisible: true,
+      targetLanguage,
+      customMessage,
+    });
+
+    // Execute state and workspace transformations at peak of backdrop blur
+    setTimeout(() => {
+      try {
+        callback?.();
+      } catch (err) {
+        console.error('Transition callback error:', err);
+      }
+    }, 180);
+
+    // Gracefully dismiss loader
+    setTimeout(() => {
+      setTransitionState((prev) => ({ ...prev, isVisible: false }));
+    }, 560);
+  };
+
   const handleSelectTutorial = (tutorial) => {
-    setActiveTutorial(tutorial);
-    setShowTutorials(false); // Hide the list when a tutorial starts
+    if (!tutorial) return;
+    const targetLanguage = tutorial.language || currentLanguage;
+    if (targetLanguage !== currentLanguage) {
+      triggerTransition(
+        targetLanguage,
+        `Configuring ${targetLanguage.charAt(0).toUpperCase() + targetLanguage.slice(1)} for "${tutorial.title}"`,
+        () => {
+          setCurrentLanguage(targetLanguage);
+          window._currentLanguage = targetLanguage;
+          if (mainWorkspace) {
+            try {
+              const newToolboxConfig = getToolboxConfig(targetLanguage);
+              mainWorkspace.updateToolbox(newToolboxConfig);
+            } catch (err) {
+              console.error("Error updating toolbox for tutorial language:", err);
+            }
+          }
+          setActiveTutorial(tutorial);
+          setShowTutorials(false);
+        }
+      );
+    } else {
+      setActiveTutorial(tutorial);
+      setShowTutorials(false);
+    }
   };
 
   const handleLoadTemplate = (template) => {
-    if (!mainWorkspace) return;
+    if (!mainWorkspace || !template) return;
 
-    const onFinishedLoading = () => {
+    const targetLanguage = template.language || currentLanguage;
+    const isLanguageSwitch = targetLanguage !== currentLanguage;
+
+    const performLoad = () => {
+      if (isLanguageSwitch) {
+        setCurrentLanguage(targetLanguage);
+        window._currentLanguage = targetLanguage;
+        try {
+          const newToolboxConfig = getToolboxConfig(targetLanguage);
+          mainWorkspace.updateToolbox(newToolboxConfig);
+        } catch (err) {
+          console.error("Error updating toolbox on template load:", err);
+        }
+      }
+
+      const onFinishedLoading = () => {
+        try {
+          const newCode = generateCode(mainWorkspace, targetLanguage);
+          setCode(newCode);
+        } catch (e) {
+          console.error('Code generation error after load:', e);
+          showToast("Code generation failed after loading template.");
+        } finally {
+          mainWorkspace.removeChangeListener(onFinishedLoading);
+        }
+      };
+
+      mainWorkspace.addChangeListener(event => {
+        if (event.type === globalThis.Blockly.Events.FINISHED_LOADING) {
+          onFinishedLoading();
+        }
+      });
+
       try {
-        const newCode = generateCode(mainWorkspace, currentLanguage);
-        setCode(newCode);
+        const xml = globalThis.Blockly.utils.xml.textToDom(template.workspaceXml);
+        globalThis.Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, mainWorkspace);
+        setShowTemplatesModal(false);
       } catch (e) {
-        console.error('Code generation error after load:', e);
-        showToast("Code generation failed after loading template.");
-      } finally {
+        console.error("Error loading template XML:", e);
+        showToast("Failed to load template: Invalid XML");
         mainWorkspace.removeChangeListener(onFinishedLoading);
       }
     };
 
-    mainWorkspace.addChangeListener(event => {
-      if (event.type === globalThis.Blockly.Events.FINISHED_LOADING) {
-        onFinishedLoading();
-      }
-    });
-
-    try {
-      const xml = globalThis.Blockly.utils.xml.textToDom(template.workspaceXml);
-      globalThis.Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, mainWorkspace);
-      setShowTemplatesModal(false);
-    } catch (e) {
-      console.error("Error loading template XML:", e);
-      showToast("Failed to load template: Invalid XML");
-      mainWorkspace.removeChangeListener(onFinishedLoading); // Clean up listener on error
+    if (isLanguageSwitch) {
+      triggerTransition(
+        targetLanguage,
+        `Loading "${template.title}" (${targetLanguage.toUpperCase()})`,
+        performLoad
+      );
+    } else {
+      performLoad();
     }
   };
 
@@ -261,32 +343,35 @@ export default function App() {
   const handleLanguageChange = (newLanguage) => {
     if (newLanguage === currentLanguage) return;
 
-    // Reset tutorial state to prevent cross-language mismatch
-    setActiveTutorial(null);
-    setShowTutorials(false);
-    setShowTemplatesModal(false);
+    triggerTransition(
+      newLanguage,
+      `Switching to ${newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1)} Environment`,
+      () => {
+        // Reset tutorial state to prevent cross-language mismatch
+        setActiveTutorial(null);
+        setShowTutorials(false);
+        setShowTemplatesModal(false);
 
-    setCurrentLanguage(newLanguage);
+        setCurrentLanguage(newLanguage);
 
-    if (mainWorkspace) {
-      try {
-        // Clear all blocks from previous language to give a fresh workspace
-        mainWorkspace.clear();
-        // Hide any flyout / popups
-        if (mainWorkspace.hideChaff) {
-          mainWorkspace.hideChaff();
+        if (mainWorkspace) {
+          try {
+            // Clear all blocks from previous language to give a fresh workspace
+            mainWorkspace.clear();
+            if (mainWorkspace.hideChaff) {
+              mainWorkspace.hideChaff();
+            }
+            window._currentLanguage = newLanguage;
+            const newToolboxConfig = getToolboxConfig(newLanguage);
+            mainWorkspace.updateToolbox(newToolboxConfig);
+            const newCode = generateCode(mainWorkspace, newLanguage);
+            setCode(newCode);
+          } catch (err) {
+            console.error("Error changing language workspace:", err);
+          }
         }
-        window._currentLanguage = newLanguage;
-        const newToolboxConfig = getToolboxConfig(newLanguage);
-        mainWorkspace.updateToolbox(newToolboxConfig);
-        const newCode = generateCode(mainWorkspace, newLanguage);
-        setCode(newCode);
-      } catch (err) {
-        console.error("Error changing language workspace:", err);
       }
-    }
-
-    showToast(`Switched to ${newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1)}`, 'info');
+    );
   };
 
   // Handler: Fundamentals mode toggle
@@ -309,7 +394,6 @@ export default function App() {
 
   return (
     <>
-
       <Toolbar
         onSave={saveWorkspaceXML}
         onLoad={loadWorkspaceXML}
@@ -342,6 +426,7 @@ export default function App() {
             tutorial={activeTutorial}
             workspace={mainWorkspace}
             onClose={() => setActiveTutorial(null)}
+            onExploreMore={() => setShowTutorials(true)}
           />
         )}
         {FEATURE_FLAGS.feature_tutorials && showTutorials && !activeTutorial && (
@@ -359,12 +444,21 @@ export default function App() {
             currentLanguage={currentLanguage}
           />
         )}
-        {toast.visible && (
-          <div className="toast-notification">
-            {toast.message}
-          </div>
-        )}
+        {/* Global Toast Notification */}
+        <ToastNotification
+          visible={toast.visible}
+          message={toast.message}
+          type={toast.type || 'info'}
+          onClose={() => setToast({ visible: false, message: '', type: 'info' })}
+        />
       </div>
+
+      {/* Modern Graceful Language Transition Loader */}
+      <WorkspaceTransitionLoader
+        isVisible={transitionState.isVisible}
+        targetLanguage={transitionState.targetLanguage}
+        customMessage={transitionState.customMessage}
+      />
     </>
   );
 }

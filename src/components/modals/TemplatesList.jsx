@@ -1,334 +1,565 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiChevronsRight, FiChevronLeft, FiChevronRight, FiSearch, FiFilter } from 'react-icons/fi';
-import { getTemplatesForLanguage } from '../../templates';
+import {
+  FiX,
+  FiSearch,
+  FiClock,
+  FiAward,
+  FiCode,
+  FiPlay,
+  FiGrid,
+  FiList,
+  FiCopy,
+  FiCheck,
+  FiLayers,
+  FiArrowRight,
+} from 'react-icons/fi';
+import { SiPython, SiJavascript } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa6';
+import {
+  PYTHON_TEMPLATES,
+  JAVASCRIPT_TEMPLATES,
+  JAVA_TEMPLATES,
+} from '../../templates';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-java';
+
+// Generate code preview from XML safely in headless mode
+function generatePreviewCode(workspaceXml, language = 'python') {
+  try {
+    if (!globalThis.Blockly || !workspaceXml) return '// No code preview available';
+    
+    const headlessWs = new globalThis.Blockly.Workspace();
+    const dom = globalThis.Blockly.utils.xml.textToDom(workspaceXml);
+    globalThis.Blockly.Xml.domToWorkspace(dom, headlessWs);
+
+    let code = '';
+    const lang = (language || 'python').toLowerCase();
+    if (lang === 'javascript' && globalThis.JavaScript) {
+      code = globalThis.JavaScript.workspaceToCode(headlessWs);
+    } else if (lang === 'java' && globalThis.Java) {
+      code = globalThis.Java.workspaceToCode(headlessWs);
+    } else if (globalThis.Python) {
+      code = globalThis.Python.workspaceToCode(headlessWs);
+    }
+
+    headlessWs.dispose();
+    return code.trim() || `// Pre-built ${language} starter template`;
+  } catch (err) {
+    return `// ${language.toUpperCase()} Template Preview\n// Load this project to view all interactive blocks in the workspace.`;
+  }
+}
 
 export default function TemplatesList({ onSelectTemplate, onClose, currentLanguage = 'python' }) {
-  const [direction, setDirection] = useState(0);
+  const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage || 'all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
-  const [showFilters, setShowFilters] = useState(false);
+  const [selectedTag, setSelectedTag] = useState('All');
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
+  const [previewTemplate, setPreviewTemplate] = useState(null);
+  const [previewCode, setPreviewCode] = useState('');
+  const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentFilteredIndex, setCurrentFilteredIndex] = useState(0);
 
-  // Source templates specifically for the active language
-  const availableTemplates = useMemo(() => {
-    return getTemplatesForLanguage(currentLanguage);
+  // Combine all templates with language tags
+  const allTemplates = useMemo(() => {
+    return [
+      ...PYTHON_TEMPLATES.map(t => ({ ...t, language: 'python' })),
+      ...JAVASCRIPT_TEMPLATES.map(t => ({ ...t, language: 'javascript' })),
+      ...JAVA_TEMPLATES.map(t => ({ ...t, language: 'java' })),
+    ];
+  }, []);
+
+  // Sync selected language when parent currentLanguage changes
+  useEffect(() => {
+    if (currentLanguage) {
+      setSelectedLanguage(currentLanguage);
+    }
   }, [currentLanguage]);
 
-  // Filter and search templates
+  // Extract all unique tags
+  const allTags = useMemo(() => {
+    const tagsSet = new Set();
+    const baseList = selectedLanguage === 'all'
+      ? allTemplates
+      : allTemplates.filter(t => t.language === selectedLanguage);
+    baseList.forEach(t => t.tags?.forEach(tag => tagsSet.add(tag)));
+    return ['All', ...Array.from(tagsSet).sort()];
+  }, [allTemplates, selectedLanguage]);
+
+  // Filter templates
   const filteredTemplates = useMemo(() => {
-    return availableTemplates.filter(template => {
-      const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-      const matchesDifficulty = selectedDifficulty === 'All' || template.difficulty === selectedDifficulty;
-      return matchesSearch && matchesDifficulty;
+    return allTemplates.filter(t => {
+      const matchesLang = selectedLanguage === 'all' || t.language === selectedLanguage;
+      const matchesSearch =
+        t.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        t.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        t.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      const matchesDifficulty = selectedDifficulty === 'All' || t.difficulty === selectedDifficulty;
+      const matchesTag = selectedTag === 'All' || t.tags?.includes(selectedTag);
+
+      return matchesLang && matchesSearch && matchesDifficulty && matchesTag;
     });
-  }, [availableTemplates, searchTerm, selectedDifficulty]);
+  }, [allTemplates, selectedLanguage, searchTerm, selectedDifficulty, selectedTag]);
 
-  // Reset to first template when filters or language change
-  useEffect(() => {
-    setCurrentFilteredIndex(0);
-  }, [filteredTemplates, currentLanguage]);
+  // Open Preview Drawer
+  const handleOpenPreview = (template, e) => {
+    e?.stopPropagation();
+    setPreviewTemplate(template);
+    const code = generatePreviewCode(template.workspaceXml, template.language);
+    setPreviewCode(code);
+  };
 
-  const currentTemplate = filteredTemplates[currentFilteredIndex] || availableTemplates[0] || null;
+  // Close Preview Drawer
+  const handleClosePreview = () => {
+    setPreviewTemplate(null);
+    setPreviewCode('');
+  };
 
-  const handleSelectTemplate = useCallback(async () => {
-    if (!currentTemplate) return;
+  // Copy Preview Code
+  const handleCopyCode = () => {
+    if (!previewCode) return;
+    navigator.clipboard.writeText(previewCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  // Load Template
+  const handleLoad = async (template) => {
     setIsLoading(true);
     try {
-      await onSelectTemplate(currentTemplate);
-    } catch (error) {
-      console.error('Error loading template:', error);
+      await onSelectTemplate(template);
+    } catch (err) {
+      console.error('Error loading template:', err);
     } finally {
       setIsLoading(false);
+      handleClosePreview();
     }
-  }, [currentTemplate, onSelectTemplate]);
-
-  const handleNext = useCallback(() => {
-    setDirection(1);
-    setCurrentFilteredIndex((prevIndex) => (prevIndex + 1) % filteredTemplates.length);
-  }, [filteredTemplates.length]);
-
-  const handlePrev = useCallback(() => {
-    setDirection(-1);
-    setCurrentFilteredIndex((prevIndex) => (prevIndex - 1 + filteredTemplates.length) % filteredTemplates.length);
-  }, [filteredTemplates.length]);
+  };
 
   // Keyboard navigation
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      switch (event.key) {
-        case 'ArrowLeft':
-          event.preventDefault();
-          handlePrev();
-          break;
-        case 'ArrowRight':
-          event.preventDefault();
-          handleNext();
-          break;
-        case 'Enter':
-          event.preventDefault();
-          handleSelectTemplate();
-          break;
-        case 'Escape':
-          event.preventDefault();
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (previewTemplate) {
+          handleClosePreview();
+        } else {
           onClose();
-          break;
+        }
       }
     };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [handlePrev, handleNext, handleSelectTemplate, onClose]);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [previewTemplate, onClose]);
 
   const modalVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, scale: 0.97, y: 12 },
+    visible: { opacity: 1, scale: 1, y: 0 },
+    exit: { opacity: 0, scale: 0.97, y: 12 },
   };
 
-  const cardVariants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 400 : -400,
-      opacity: 0,
-      scale: 0.8,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
-    exit: (direction) => ({
-      x: direction < 0 ? 400 : -400,
-      opacity: 0,
-      scale: 0.8,
-    }),
+  const getDifficultyColor = (diff) => {
+    switch (diff?.toLowerCase()) {
+      case 'beginner':
+        return { bg: 'rgba(34, 197, 94, 0.12)', border: 'rgba(34, 197, 94, 0.25)', text: '#4ade80' };
+      case 'intermediate':
+        return { bg: 'rgba(234, 179, 8, 0.12)', border: 'rgba(234, 179, 8, 0.25)', text: '#facc15' };
+      case 'advanced':
+        return { bg: 'rgba(239, 68, 68, 0.12)', border: 'rgba(239, 68, 68, 0.25)', text: '#f87171' };
+      default:
+        return { bg: 'rgba(56, 189, 248, 0.12)', border: 'rgba(56, 189, 248, 0.25)', text: '#38bdf8' };
+    }
+  };
+
+  const renderLangIcon = (lang) => {
+    switch (lang?.toLowerCase()) {
+      case 'python':
+        return <SiPython className="lang-vector-icon python" />;
+      case 'javascript':
+        return <SiJavascript className="lang-vector-icon javascript" />;
+      case 'java':
+        return <FaJava className="lang-vector-icon java" />;
+      default:
+        return <FiCode className="lang-vector-icon" />;
+    }
   };
 
   return (
-    <div className="templates-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="templates-modal-title">
+    <div
+      className="templates-hub-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="templates-hub-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget && onClose) {
+          onClose();
+        }
+      }}
+    >
       <motion.div
-        className="templates-modal"
+        className="templates-hub-modal"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
       >
-        <div className="templates-modal-header">
-          <div className="header-content">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h2 id="templates-modal-title">Load a Template</h2>
-              <span className="tech-tag" style={{ textTransform: 'capitalize', fontSize: '11px', padding: '2px 8px' }}>
-                {currentLanguage}
-              </span>
+        {/* Header Section */}
+        <div className="templates-hub-header">
+          <div className="hub-title-group">
+            <div className="hub-title-badge">
+              <FiLayers className="hub-title-icon" />
+              <h2 id="templates-hub-title">Project Templates</h2>
             </div>
-            <p>Select a pre-built {currentLanguage} project to get started.</p>
+            <p className="hub-subtitle">
+              Pre-configured algorithmic and domain-specific project templates for immediate exploration.
+            </p>
           </div>
-          <div className="header-controls">
-            <div className="search-container">
-              <FiSearch className="search-icon" />
-              <input
-                type="text"
-                placeholder={`Search ${currentLanguage} templates...`}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-              />
-            </div>
+
+          <button onClick={onClose} className="hub-close-btn" aria-label="Close project templates">
+            <FiX />
+          </button>
+        </div>
+
+        {/* Navigation & Filter Bar */}
+        <div className="hub-nav-bar">
+          {/* Language Tabs */}
+          <div className="hub-lang-tabs">
             <button
-              onClick={() => setShowFilters(!showFilters)}
-              className={`filter-toggle ${showFilters ? 'active' : ''}`}
-              aria-label="Toggle filters"
+              className={`hub-lang-tab ${selectedLanguage === 'all' ? 'active' : ''}`}
+              onClick={() => setSelectedLanguage('all')}
             >
-              <FiFilter />
+              <FiLayers className="tab-icon" />
+              <span>All Projects</span>
+              <span className="hub-count-pill">{allTemplates.length}</span>
+            </button>
+            <button
+              className={`hub-lang-tab ${selectedLanguage === 'python' ? 'active' : ''}`}
+              onClick={() => setSelectedLanguage('python')}
+            >
+              <SiPython className="tab-icon python" />
+              <span>Python</span>
+              <span className="hub-count-pill">{PYTHON_TEMPLATES.length}</span>
+            </button>
+            <button
+              className={`hub-lang-tab ${selectedLanguage === 'javascript' ? 'active' : ''}`}
+              onClick={() => setSelectedLanguage('javascript')}
+            >
+              <SiJavascript className="tab-icon javascript" />
+              <span>JavaScript</span>
+              <span className="hub-count-pill">{JAVASCRIPT_TEMPLATES.length}</span>
+            </button>
+            <button
+              className={`hub-lang-tab ${selectedLanguage === 'java' ? 'active' : ''}`}
+              onClick={() => setSelectedLanguage('java')}
+            >
+              <FaJava className="tab-icon java" />
+              <span>Java</span>
+              <span className="hub-count-pill">{JAVA_TEMPLATES.length}</span>
             </button>
           </div>
-        </div>
-        {showFilters && (
-          <motion.div
-            className="filters-panel"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="filter-group">
-              <label>Difficulty:</label>
-              <select
-                value={selectedDifficulty}
-                onChange={(e) => setSelectedDifficulty(e.target.value)}
-                className="difficulty-select"
+
+          {/* Search & Layout Controls */}
+          <div className="hub-search-controls">
+            <div className="hub-search-box">
+              <FiSearch className="hub-search-icon" />
+              <input
+                type="text"
+                placeholder="Search templates or tags..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="hub-search-input"
+              />
+              {searchTerm && (
+                <button onClick={() => setSearchTerm('')} className="hub-search-clear">
+                  <FiX />
+                </button>
+              )}
+            </div>
+
+            <div className="hub-view-toggle">
+              <button
+                className={`hub-view-btn ${viewMode === 'grid' ? 'active' : ''}`}
+                onClick={() => setViewMode('grid')}
+                title="Grid View"
               >
-                <option value="All">All Levels</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-              </select>
+                <FiGrid />
+              </button>
+              <button
+                className={`hub-view-btn ${viewMode === 'list' ? 'active' : ''}`}
+                onClick={() => setViewMode('list')}
+                title="List View"
+              >
+                <FiList />
+              </button>
             </div>
-            <div className="filter-stats">
-              {filteredTemplates.length} of {availableTemplates.length} templates
+          </div>
+        </div>
+
+        {/* Sub-Filters: Difficulty & Topic Tags */}
+        <div className="hub-filter-chips-row">
+          <div className="hub-chip-group">
+            <span className="hub-filter-label">Difficulty:</span>
+            {['All', 'Beginner', 'Intermediate', 'Advanced'].map((diff) => (
+              <button
+                key={diff}
+                className={`hub-filter-chip ${selectedDifficulty === diff ? 'active' : ''}`}
+                onClick={() => setSelectedDifficulty(diff)}
+              >
+                {diff}
+              </button>
+            ))}
+          </div>
+
+          {allTags.length > 2 && (
+            <div className="hub-chip-group tags-scroll">
+              <span className="hub-filter-label">Topic:</span>
+              {allTags.slice(0, 10).map((tag) => (
+                <button
+                  key={tag}
+                  className={`hub-filter-chip ${selectedTag === tag ? 'active' : ''}`}
+                  onClick={() => setSelectedTag(tag)}
+                >
+                  {tag}
+                </button>
+              ))}
             </div>
-          </motion.div>
-        )}
-        <div className="templates-carousel-wrapper">
-          <button onClick={handlePrev} className="carousel-nav-btn prev" aria-label="Previous template">
-            <FiChevronLeft />
-          </button>
-          <div className="templates-modal-content">
-            <AnimatePresence initial={false} custom={direction} mode="wait">
-              <motion.div
-                key={currentFilteredIndex}
-                className="template-card"
-                custom={direction}
-                variants={cardVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: 'spring', stiffness: 200, damping: 25 },
-                  opacity: { duration: 0.3 },
-                  scale: { duration: 0.3 },
+          )}
+        </div>
+
+        {/* Main Content Area */}
+        <div className="hub-content-container">
+          {filteredTemplates.length === 0 ? (
+            <div className="hub-empty-state">
+              <div className="empty-icon-wrap">
+                <FiSearch />
+              </div>
+              <h3>No projects match your filters</h3>
+              <p>Try adjusting your search query, language selection, or difficulty level.</p>
+              <button
+                className="hub-reset-filters-btn"
+                onClick={() => {
+                  setSearchTerm('');
+                  setSelectedDifficulty('All');
+                  setSelectedTag('All');
+                  setSelectedLanguage('all');
                 }}
               >
-                <div className="template-card-preview">
-                  {/* Full-bleed tech frame loader utilizing entire panel */}
-                  <svg className="template-techframe" viewBox="0 0 160 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="tfGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="var(--primary-500)" />
-                        <stop offset="100%" stopColor="var(--accent-500)" />
-                      </linearGradient>
-                      <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="var(--panel-border)" strokeWidth="0.5" />
-                      </pattern>
-                      <mask id="fadeMask">
-                        <linearGradient id="maskGrad" x1="0" y1="0" x2="1" y2="0">
-                          <stop offset="0%" stopColor="white" stopOpacity="0"/>
-                          <stop offset="10%" stopColor="white" stopOpacity="1"/>
-                          <stop offset="90%" stopColor="white" stopOpacity="1"/>
-                          <stop offset="100%" stopColor="white" stopOpacity="0"/>
-                        </linearGradient>
-                        <rect x="0" y="0" width="160" height="160" fill="url(#maskGrad)"/>
-                      </mask>
-                    </defs>
+                Reset Filters
+              </button>
+            </div>
+          ) : viewMode === 'grid' ? (
+            <div className="hub-grid-layout">
+              {filteredTemplates.map((template) => {
+                const diffStyle = getDifficultyColor(template.difficulty);
+                return (
+                  <motion.div
+                    key={template.id}
+                    className="hub-project-card"
+                    whileHover={{ y: -3, transition: { duration: 0.15 } }}
+                  >
+                    <div className="hub-card-top">
+                      <div className="hub-card-badges">
+                        <span
+                          className="hub-diff-badge"
+                          style={{
+                            backgroundColor: diffStyle.bg,
+                            borderColor: diffStyle.border,
+                            color: diffStyle.text,
+                          }}
+                        >
+                          <FiAward style={{ marginRight: '4px' }} />
+                          {template.difficulty}
+                        </span>
+                        <span className="hub-time-badge">
+                          <FiClock style={{ marginRight: '4px' }} />
+                          {template.estimatedTime}
+                        </span>
+                        <span className="hub-lang-tag">
+                          {renderLangIcon(template.language)}
+                          <span>{template.language}</span>
+                        </span>
+                      </div>
+                      <h3 className="hub-card-title">{template.title}</h3>
+                      <p className="hub-card-desc">{template.description}</p>
+                    </div>
 
-                    {/* background tech grid */}
-                    <rect x="0" y="0" width="160" height="160" fill="url(#grid)" opacity="0.35" />
+                    <div className="hub-card-bottom">
+                      <div className="hub-card-tags">
+                        {template.tags?.slice(0, 3).map((tag) => (
+                          <span key={tag} className="hub-tag-pill">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
 
-                    {/* tech frame border */}
-                    <rect x="2" y="2" width="156" height="156" rx="10" ry="10" fill="none" stroke="url(#tfGrad)" strokeWidth="2" />
-                    <rect x="8" y="8" width="144" height="144" rx="8" ry="8" fill="none" stroke="url(#tfGrad)" strokeWidth="1" opacity="0.6" />
+                      <div className="hub-card-actions">
+                        <button
+                          className="hub-preview-btn"
+                          onClick={(e) => handleOpenPreview(template, e)}
+                          title="Preview generated code"
+                        >
+                          <FiCode />
+                          Preview
+                        </button>
+                        <button
+                          className="hub-load-btn"
+                          onClick={() => handleLoad(template)}
+                          disabled={isLoading}
+                          title={template.language !== currentLanguage ? `Loads template and switches workspace to ${template.language.toUpperCase()}` : 'Loads template into workspace'}
+                        >
+                          <FiPlay />
+                          {template.language !== currentLanguage ? `Load (${template.language.toUpperCase()})` : 'Load Template'}
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="hub-list-layout">
+              {filteredTemplates.map((template) => {
+                const diffStyle = getDifficultyColor(template.difficulty);
+                return (
+                  <div key={template.id} className="hub-list-item">
+                    <div className="hub-list-info">
+                      <div className="hub-list-title-row">
+                        <span className="hub-list-lang-icon">{renderLangIcon(template.language)}</span>
+                        <h4 className="hub-list-title">{template.title}</h4>
+                        <span
+                          className="hub-diff-badge"
+                          style={{
+                            backgroundColor: diffStyle.bg,
+                            borderColor: diffStyle.border,
+                            color: diffStyle.text,
+                          }}
+                        >
+                          {template.difficulty}
+                        </span>
+                        <span className="hub-time-badge">{template.estimatedTime}</span>
+                      </div>
+                      <p className="hub-list-desc">{template.description}</p>
+                      <div className="hub-card-tags">
+                        {template.tags?.map((tag) => (
+                          <span key={tag} className="hub-tag-pill">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-                    {/* moving sweep */}
-                    <g className="techframe-sweep" mask="url(#fadeMask)">
-                      <rect x="-160" y="0" width="80" height="160" fill="url(#tfGrad)" opacity="0.15" />
-                    </g>
-
-                    {/* block-flow path using puzzle-like blocks */}
-                    <g className="block-flow">
-                      {/* simple puzzle-like blocks approximated with rect + circles */}
-                      <g transform="translate(18,34)">
-                        <rect x="0" y="0" width="36" height="20" rx="3" fill="var(--primary-500)" />
-                        <circle cx="36" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-                      <g transform="translate(60,34)">
-                        <rect x="0" y="0" width="36" height="20" rx="3" fill="var(--accent-500)" />
-                        <circle cx="0" cy="10" r="3" fill="var(--surface-1)" />
-                        <circle cx="36" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-                      <g transform="translate(102,34)">
-                        <rect x="0" y="0" width="36" height="20" rx="3" fill="var(--primary-600)" />
-                        <circle cx="0" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-
-                      <g transform="translate(28,70)">
-                        <rect x="0" y="0" width="30" height="20" rx="3" fill="var(--accent-500)" />
-                        <circle cx="30" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-                      <g transform="translate(66,70)">
-                        <rect x="0" y="0" width="30" height="20" rx="3" fill="var(--primary-500)" />
-                        <circle cx="0" cy="10" r="3" fill="var(--surface-1)" />
-                        <circle cx="30" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-                      <g transform="translate(104,70)">
-                        <rect x="0" y="0" width="30" height="20" rx="3" fill="var(--accent-500)" />
-                        <circle cx="0" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-
-                      <g transform="translate(40,106)">
-                        <rect x="0" y="0" width="24" height="20" rx="3" fill="var(--primary-600)" />
-                        <circle cx="24" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-                      <g transform="translate(70,106)">
-                        <rect x="0" y="0" width="24" height="20" rx="3" fill="var(--accent-500)" />
-                        <circle cx="0" cy="10" r="3" fill="var(--surface-1)" />
-                        <circle cx="24" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-                      <g transform="translate(100,106)">
-                        <rect x="0" y="0" width="24" height="20" rx="3" fill="var(--primary-500)" />
-                        <circle cx="0" cy="10" r="3" fill="var(--surface-1)" />
-                      </g>
-                    </g>
-
-                    {/* faint corner accents */}
-                    <g opacity="0.5" stroke="url(#tfGrad)" strokeWidth="1">
-                      <path d="M8 20 L8 8 L20 8" />
-                      <path d="M140 8 L152 8 L152 20" />
-                      <path d="M8 140 L8 152 L20 152" />
-                      <path d="M152 140 L152 152 L140 152" />
-                    </g>
-                  </svg>
-                </div>
-                <div className="template-card-details">
-                  <h3>{currentTemplate.title}</h3>
-                  <p>{currentTemplate.description}</p>
-                  <div className="template-meta">
-                    <span className="difficulty-tag">{currentTemplate.difficulty}</span>
-                    <span className="time-tag">{currentTemplate.estimatedTime}</span>
+                    <div className="hub-list-actions">
+                      <button
+                        className="hub-preview-btn"
+                        onClick={(e) => handleOpenPreview(template, e)}
+                      >
+                        <FiCode />
+                        Preview
+                      </button>
+                      <button
+                        className="hub-load-btn"
+                        onClick={() => handleLoad(template)}
+                        disabled={isLoading}
+                        title={template.language !== currentLanguage ? `Loads template and switches workspace to ${template.language.toUpperCase()}` : 'Loads template into workspace'}
+                      >
+                        <FiPlay />
+                        {template.language !== currentLanguage ? `Load (${template.language.toUpperCase()})` : 'Load'}
+                      </button>
+                    </div>
                   </div>
-                  <div className="template-card-tags">
-                    {currentTemplate.tags.map((tag) => (
-                      <span key={tag} className="tech-tag">{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-          <button onClick={handleNext} className="carousel-nav-btn next" aria-label="Next template">
-            <FiChevronRight />
-          </button>
+                );
+              })}
+            </div>
+          )}
         </div>
-        <div className="templates-modal-footer">
-          <button onClick={onClose} className="close-modal-btn">
+
+        {/* Footer Stats */}
+        <div className="hub-footer">
+          <span className="hub-footer-count">
+            Showing <strong>{filteredTemplates.length}</strong> of{' '}
+            <strong>{allTemplates.length}</strong> project templates
+          </span>
+          <button onClick={onClose} className="hub-footer-close">
             <FiX />
             Close
           </button>
-          <button
-            onClick={handleSelectTemplate}
-            disabled={isLoading}
-            className={`load-template-btn primary ${isLoading ? 'loading' : ''}`}
-          >
-            {isLoading ? (
-              <>
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  style={{ width: 16, height: 16, border: '2px solid var(--text)', borderTop: '2px solid transparent', borderRadius: '50%' }}
-                />
-                Loading...
-              </>
-            ) : (
-              <>
-                <FiChevronsRight />
-                Load Template
-              </>
-            )}
-          </button>
         </div>
+
+        {/* Live Code Preview Drawer Overlay */}
+        <AnimatePresence>
+          {previewTemplate && (
+            <motion.div
+              className="hub-preview-drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: '0%' }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+            >
+              <div className="preview-drawer-header">
+                <div>
+                  <div className="preview-lang-pill">
+                    {renderLangIcon(previewTemplate.language)}
+                    <span>{previewTemplate.language.toUpperCase()} PROJECT</span>
+                  </div>
+                  <h3>{previewTemplate.title}</h3>
+                  <p>{previewTemplate.description}</p>
+                </div>
+                <button onClick={handleClosePreview} className="preview-close-btn" aria-label="Close preview">
+                  <FiX />
+                </button>
+              </div>
+
+              <div className="preview-code-container">
+                <div className="preview-code-header">
+                  <span className="preview-code-tab">
+                    <FiCode /> Generated Source Code
+                  </span>
+                  <button onClick={handleCopyCode} className="preview-copy-btn">
+                    {copied ? (
+                      <>
+                        <FiCheck style={{ color: '#4ade80' }} /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <FiCopy /> Copy Code
+                      </>
+                    )}
+                  </button>
+                </div>
+                <pre className="preview-code-block">
+                  <code
+                    dangerouslySetInnerHTML={{
+                      __html: highlight(
+                        previewCode,
+                        languages[previewTemplate.language] || languages.python,
+                        previewTemplate.language
+                      ),
+                    }}
+                  />
+                </pre>
+              </div>
+
+              <div className="preview-drawer-footer">
+                <button onClick={handleClosePreview} className="preview-cancel-btn">
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleLoad(previewTemplate)}
+                  className="preview-load-btn"
+                  disabled={isLoading}
+                >
+                  <FiPlay />
+                  {previewTemplate.language !== currentLanguage ? `Switch to ${previewTemplate.language.toUpperCase()} & Load` : 'Load into Workspace'}
+                  <FiArrowRight />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </div>
   );

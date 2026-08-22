@@ -2,9 +2,10 @@ import { javascriptGenerator } from 'blockly/javascript';
 
 // Sub-phases 6.1 & 6.2: JavaScript Native Arrays & Higher-Order Iterators Generators
 
-javascriptGenerator.forBlock['js_array_create'] = function(block) {
+javascriptGenerator.forBlock['js_array_create'] = function(block, generator) {
   const items = block.getFieldValue('ITEMS') || '';
-  return [`[${items}]`, javascriptGenerator.ORDER_ATOMIC];
+  const gen = generator || javascriptGenerator;
+  return [`[${items}]`, gen.ORDER_ATOMIC];
 };
 
 javascriptGenerator.forBlock['js_array_push_pop'] = function(block, generator) {

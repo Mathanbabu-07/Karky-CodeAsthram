@@ -96,16 +96,26 @@ javaGenerator.forBlock['oop_class'] = function (block, generator) {
     return code;
 };
 
+function getParams(block, generator) {
+    const args = [];
+    let i = 0;
+    while (block.getFieldValue('P' + i) || block.getFieldValue('ARG' + i)) {
+        const val = block.getFieldValue('P' + i) || block.getFieldValue('ARG' + i);
+        if (val) args.push('var ' + generator.nameDB_.getName(val, 'VARIABLE'));
+        i++;
+    }
+    if (args.length === 0 && block.arguments_ && Array.isArray(block.arguments_)) {
+        for (let j = 0; j < block.arguments_.length; j++) {
+            args.push('var ' + generator.nameDB_.getName(block.arguments_[j], 'VARIABLE'));
+        }
+    }
+    return args;
+}
+
 // Constructor
 javaGenerator.forBlock['oop_constructor'] = function (block, generator) {
     const className = block.getFieldValue('CLASS') || 'MyClass';
-    const args = [];
-    const blockArgs = block.arguments_ || [];
-
-    for (let i = 0; i < blockArgs.length; i++) {
-        args.push('var ' + generator.nameDB_.getName(blockArgs[i], 'VARIABLE'));
-    }
-
+    const args = getParams(block, generator);
     const body = getStatement(generator, block, 'STACK', 'BODY', 'DO', 'MEMBERS');
     const code = `    public ${className}(${args.join(', ')}) {\n${generator.prefixLines(body, '    ')}    }\n`;
     return code;
@@ -114,13 +124,7 @@ javaGenerator.forBlock['oop_constructor'] = function (block, generator) {
 // Method definition
 javaGenerator.forBlock['oop_method'] = function (block, generator) {
     const methodName = block.getFieldValue('NAME') || 'myMethod';
-    const args = [];
-    const blockArgs = block.arguments_ || [];
-
-    for (let i = 0; i < blockArgs.length; i++) {
-        args.push('var ' + generator.nameDB_.getName(blockArgs[i], 'VARIABLE'));
-    }
-
+    const args = getParams(block, generator);
     const body = getStatement(generator, block, 'STACK', 'BODY', 'DO', 'MEMBERS');
     const returnType = block.hasReturn_ ? 'Object' : 'void';
 

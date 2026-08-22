@@ -345,6 +345,22 @@ class JavaGenerator extends JavascriptGenerator {
 // Create the Java generator instance
 const javaGenerator = new JavaGenerator();
 
+// Fail-safe blockToCode wrapper so missing block definitions never crash code generation
+const originalJavaBlockToCode = javaGenerator.blockToCode;
+javaGenerator.blockToCode = function (block, opt_thisOnly) {
+  if (!block) return '';
+  if (!javaGenerator.forBlock[block.type]) {
+    console.warn(`[Java Generator] Missing generator for block "${block.type}". Using fallback comment.`);
+    return `// ${block.type}\n`;
+  }
+  try {
+    return originalJavaBlockToCode.call(javaGenerator, block, opt_thisOnly);
+  } catch (err) {
+    console.error(`[Java Generator] Error in generator for "${block.type}":`, err);
+    return `// Error in ${block.type}: ${err.message}\n`;
+  }
+};
+
 // Export to global scope for Blockly - THIS IS CRITICAL
 globalThis.Java = javaGenerator;
 globalThis.javaGenerator = javaGenerator;
@@ -353,3 +369,4 @@ globalThis.javaGenerator = javaGenerator;
 console.log('✅ Java generator initialized:', globalThis.Java ? 'SUCCESS' : 'FAILED');
 
 export { javaGenerator };
+

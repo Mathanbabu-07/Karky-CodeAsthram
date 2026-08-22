@@ -391,14 +391,13 @@ export default function Toolbar({
         </div>
 
         <div className="toolbar-control-capsule">
-          <img src={shortLogo} alt="CodeAsthram Short Logo" className="toolbar-logo-short" />
-          <div className="capsule-divider"></div>
           <div className="capsule-button-group">
             <button
               type="button"
               onClick={onNew}
               onMouseEnter={(e) => handleMouseEnter(e, 'Start New Workspace')}
               onMouseLeave={handleMouseLeave}
+              aria-label="Start New Workspace"
             >
               <FiFilePlus />
             </button>
@@ -407,6 +406,7 @@ export default function Toolbar({
               onClick={onSave}
               onMouseEnter={(e) => handleMouseEnter(e, 'Save Workspace (.xml)')}
               onMouseLeave={handleMouseLeave}
+              aria-label="Save Workspace"
             >
               <FiUpload />
             </button>
@@ -415,6 +415,7 @@ export default function Toolbar({
               className="load-label"
               onMouseEnter={(e) => handleMouseEnter(e, 'Load Workspace (.xml)')}
               onMouseLeave={handleMouseLeave}
+              aria-label="Load Workspace"
             >
               <FiFolderPlus />
             </label>
@@ -428,7 +429,7 @@ export default function Toolbar({
             <button
               type="button"
               onClick={onCapture}
-              onMouseEnter={(e) => handleMouseEnter(e, 'Capture Workspace as PNG')}
+              onMouseEnter={(e) => handleMouseEnter(e, 'Capture Workspace (PNG)')}
               onMouseLeave={handleMouseLeave}
               aria-label="Capture Workspace as PNG"
             >
@@ -436,16 +437,18 @@ export default function Toolbar({
             </button>
             <button
               type="button"
+              className={!isCollapsed ? 'active-toggle' : ''}
               onClick={onToggleCollapse}
-              onMouseEnter={(e) => handleMouseEnter(e, isCollapsed ? 'Show Code' : 'Hide Code')}
+              onMouseEnter={(e) => handleMouseEnter(e, isCollapsed ? 'Open Code View' : 'Hide Code View')}
               onMouseLeave={handleMouseLeave}
+              aria-label="Toggle Code Panel"
             >
               {isCollapsed ? <FiCode /> : <FiEyeOff />}
             </button>
             <button
               type="button"
               onClick={onToggleTemplates}
-              onMouseEnter={(e) => handleMouseEnter(e, 'Load from Template')}
+              onMouseEnter={(e) => handleMouseEnter(e, 'Templates Hub')}
               onMouseLeave={handleMouseLeave}
               aria-label="Load from Template"
             >
@@ -455,7 +458,7 @@ export default function Toolbar({
               <button
                 type="button"
                 onClick={onToggleTutorials}
-                onMouseEnter={(e) => handleMouseEnter(e, 'Show Tutorials')}
+                onMouseEnter={(e) => handleMouseEnter(e, 'Guided Tutorials')}
                 onMouseLeave={handleMouseLeave}
                 aria-label="Show Tutorials"
               >
@@ -466,7 +469,7 @@ export default function Toolbar({
             <button
               type="button"
               onClick={() => { toggleTheme(); }}
-              onMouseEnter={(e) => handleMouseEnter(e, 'Toggle Theme')}
+              onMouseEnter={(e) => handleMouseEnter(e, themeName === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode')}
               onMouseLeave={handleMouseLeave}
               aria-label="Toggle Theme"
             >

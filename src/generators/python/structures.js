@@ -103,6 +103,11 @@ Python.forBlock['essentials_set_is_superset'] = function (block) {
     return [`${set1}.issuperset(${set2})`, Python.ORDER_FUNCTION_CALL];
 };
 
+Python.forBlock['essentials_set_length'] = function (block) {
+    const set = Python.valueToCode(block, 'SET', Python.ORDER_NONE) || 'set()';
+    return [`len(${set})`, Python.ORDER_FUNCTION_CALL];
+};
+
 Python.forBlock['essentials_dict_create'] = function (block) {
     const pairs = [];
     for (let i = 0; typeof block.itemCount_ !== 'undefined' && i < block.itemCount_; i++) {

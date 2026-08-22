@@ -1,23 +1,38 @@
+/* ==========================================================================
+   MODERN DEVELOPER TOOLTIP STYLES
+   ========================================================================== */
+
 .custom-tooltip {
-  position: fixed; /* Use fixed positioning to escape the parent's bounds */
-  background-color: #2d3748; /* A dark, modern background */
-  color: #f7fafc; /* Light text */
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
+  position: fixed;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f8fafc;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 12px;
   font-weight: 500;
-  z-index: 1000; /* Ensure it's on top of everything */
+  letter-spacing: -0.01em;
+  z-index: 10000;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px) translateX(-50%); /* Start slightly below and centered */
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-  pointer-events: none; /* Don't let the tooltip interfere with mouse events */
-  white-space: nowrap; /* Prevent text wrapping */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(6px) translateX(-50%);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 .custom-tooltip.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) translateX(-50%); /* Move to final position */
+  transform: translateY(0) translateX(-50%);
+}
+
+[data-theme="light"] .custom-tooltip {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }

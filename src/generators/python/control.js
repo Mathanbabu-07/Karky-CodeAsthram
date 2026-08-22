@@ -315,6 +315,28 @@ Python.forBlock['control_dict_comp'] = function (block) {
     return [code, Python.ORDER_ATOMIC];
 };
 
+Python.forBlock['control_dict_zip_comp'] = function (block) {
+    const keyExpr = Python.valueToCode(block, 'KEY_EXPR', Python.ORDER_NONE) || 'k';
+    const valueExpr = Python.valueToCode(block, 'VALUE_EXPR', Python.ORDER_NONE) || 'v';
+    const var1 = pythonGenerator.getVariableName(block.getFieldValue('VAR1')) || 'k';
+    const var2 = pythonGenerator.getVariableName(block.getFieldValue('VAR2')) || 'v';
+    const iter1 = Python.valueToCode(block, 'ITER1', Python.ORDER_NONE) || '[]';
+    const iter2 = Python.valueToCode(block, 'ITER2', Python.ORDER_NONE) || '[]';
+    const cond = Python.valueToCode(block, 'COND', Python.ORDER_NONE) || null;
+    let code = `{${keyExpr}: ${valueExpr} for ${var1}, ${var2} in zip(${iter1}, ${iter2})`;
+    if (cond) {
+        code += ` if ${cond}`;
+    }
+    code += '}';
+    return [code, Python.ORDER_ATOMIC];
+};
+
+Python.forBlock['control_switch'] = function (block) {
+    const val = Python.valueToCode(block, 'VALUE', Python.ORDER_NONE) || 'None';
+    const cases = Python.statementToCode(block, 'CASES') || '  pass\n';
+    return `match ${val}:\n${cases}`;
+};
+
 Python.forBlock['control_set_comp'] = function (block) {
     const expr = Python.valueToCode(block, 'EXPR', Python.ORDER_NONE) || 'None';
     const varName = pythonGenerator.getVariableName(block.getFieldValue('VAR'));

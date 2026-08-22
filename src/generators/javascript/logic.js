@@ -182,3 +182,9 @@ javascriptGenerator.forBlock['essentials_ternary'] = function(block, generator) 
   const b = generator.valueToCode(block, 'B', generator.ORDER_CONDITIONAL) || 'null';
   return [`${cond} ? ${a} : ${b}`, generator.ORDER_CONDITIONAL];
 };
+
+javascriptGenerator.forBlock['essentials_assert'] = function(block, generator) {
+  const cond = (block.getInput('TEST') ? generator.valueToCode(block, 'TEST', generator.ORDER_NONE) : (block.getInput('CONDITION') ? generator.valueToCode(block, 'CONDITION', generator.ORDER_NONE) : '')) || 'true';
+  const msg = (block.getInput('MESSAGE') ? generator.valueToCode(block, 'MESSAGE', generator.ORDER_NONE) : (block.getInput('MSG') ? generator.valueToCode(block, 'MSG', generator.ORDER_NONE) : '')) || '"Assertion failed"';
+  return `console.assert(${cond}, ${msg});\n`;
+};

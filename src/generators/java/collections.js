@@ -204,4 +204,29 @@ javaGenerator.forBlock['essentials_set_contains'] = function (block, generator) 
     return [`${set}.contains(${item})`, Order.MEMBER];
 };
 
+javaGenerator.forBlock['essentials_set_length'] = function (block, generator) {
+    const set = generator.valueToCode(block, 'SET', Order.MEMBER) || 'new HashSet<>()';
+    return [`${set}.size()`, Order.MEMBER];
+};
+
+javaGenerator.forBlock['essentials_set_symmetric_difference'] = function (block, generator) {
+    const set1 = generator.valueToCode(block, 'SET1', Order.NONE) || 'new HashSet<>()';
+    const set2 = generator.valueToCode(block, 'SET2', Order.NONE) || 'new HashSet<>()';
+    generator.addImport('java.util.HashSet');
+    const code = `new HashSet<>() {{ addAll(${set1}); addAll(${set2}); removeIf(x -> ${set1}.contains(x) && ${set2}.contains(x)); }}`;
+    return [code, Order.FUNCTION_CALL];
+};
+
+javaGenerator.forBlock['essentials_set_is_subset'] = function (block, generator) {
+    const set1 = generator.valueToCode(block, 'SET1', Order.MEMBER) || 'new HashSet<>()';
+    const set2 = generator.valueToCode(block, 'SET2', Order.NONE) || 'new HashSet<>()';
+    return [`${set2}.containsAll(${set1})`, Order.MEMBER];
+};
+
+javaGenerator.forBlock['essentials_set_is_superset'] = function (block, generator) {
+    const set1 = generator.valueToCode(block, 'SET1', Order.MEMBER) || 'new HashSet<>()';
+    const set2 = generator.valueToCode(block, 'SET2', Order.NONE) || 'new HashSet<>()';
+    return [`${set1}.containsAll(${set2})`, Order.MEMBER];
+};
+
 export { javaGenerator };

@@ -185,85 +185,99 @@ javascriptGenerator.forBlock['js_return'] = function(block, generator) {
   return `return ${val};\n`;
 };
 
-javascriptGenerator.forBlock['js_array_create'] = function(block) {
+javascriptGenerator.forBlock['js_array_create'] = function(block, generator) {
   const items = block.getFieldValue('ITEMS') || '';
-  return [`[${items}]`, generator.ORDER_ATOMIC];
+  const gen = generator || javascriptGenerator;
+  return [`[${items}]`, gen.ORDER_ATOMIC];
 };
 
 javascriptGenerator.forBlock['js_array_push_pop'] = function(block, generator) {
-  const arr = generator.valueToCode(block, 'ARR', generator.ORDER_MEMBER) || 'arr';
+  const gen = generator || javascriptGenerator;
+  const arr = gen.valueToCode(block, 'ARR', gen.ORDER_MEMBER) || 'arr';
   const action = block.getFieldValue('ACTION') || 'push';
-  const val = generator.valueToCode(block, 'VAL', generator.ORDER_NONE) || '';
+  const val = gen.valueToCode(block, 'VAL', gen.ORDER_NONE) || '';
   return `${arr}.${action}(${val});\n`;
 };
 
 javascriptGenerator.forBlock['js_array_get_set'] = function(block, generator) {
-  const arr = generator.valueToCode(block, 'ARR', generator.ORDER_MEMBER) || 'arr';
-  const idx = generator.valueToCode(block, 'INDEX', generator.ORDER_NONE) || '0';
-  return [`${arr}[${idx}]`, generator.ORDER_MEMBER];
+  const gen = generator || javascriptGenerator;
+  const arr = gen.valueToCode(block, 'ARR', gen.ORDER_MEMBER) || 'arr';
+  const idx = gen.valueToCode(block, 'INDEX', gen.ORDER_NONE) || '0';
+  return [`${arr}[${idx}]`, gen.ORDER_MEMBER];
 };
 
 javascriptGenerator.forBlock['js_array_length'] = function(block, generator) {
-  const arr = generator.valueToCode(block, 'ARR', generator.ORDER_MEMBER) || 'arr';
-  return [`${arr}.length`, generator.ORDER_MEMBER];
+  const gen = generator || javascriptGenerator;
+  const arr = gen.valueToCode(block, 'ARR', gen.ORDER_MEMBER) || 'arr';
+  return [`${arr}.length`, gen.ORDER_MEMBER];
 };
 
 javascriptGenerator.forBlock['js_array_map_filter'] = function(block, generator) {
-  const arr = generator.valueToCode(block, 'ARR', generator.ORDER_MEMBER) || 'arr';
+  const gen = generator || javascriptGenerator;
+  const arr = gen.valueToCode(block, 'ARR', gen.ORDER_MEMBER) || 'arr';
   const method = block.getFieldValue('METHOD') || 'map';
-  const cb = generator.valueToCode(block, 'CALLBACK', generator.ORDER_NONE) || 'x => x';
-  return [`${arr}.${method}(${cb})`, generator.ORDER_FUNCTION_CALL];
+  const cb = gen.valueToCode(block, 'CALLBACK', gen.ORDER_NONE) || 'x => x';
+  return [`${arr}.${method}(${cb})`, gen.ORDER_FUNCTION_CALL];
 };
 
 javascriptGenerator.forBlock['js_array_includes'] = function(block, generator) {
-  const arr = generator.valueToCode(block, 'ARR', generator.ORDER_MEMBER) || 'arr';
-  const val = generator.valueToCode(block, 'VAL', generator.ORDER_NONE) || '';
-  return [`${arr}.includes(${val})`, generator.ORDER_FUNCTION_CALL];
+  const gen = generator || javascriptGenerator;
+  const arr = gen.valueToCode(block, 'ARR', gen.ORDER_MEMBER) || 'arr';
+  const val = gen.valueToCode(block, 'VAL', gen.ORDER_NONE) || '';
+  return [`${arr}.includes(${val})`, gen.ORDER_FUNCTION_CALL];
 };
 
-javascriptGenerator.forBlock['js_object_create'] = function(block) {
-  const jsonStr = block.getFieldValue('JSON_STR') || '';
-  return [`{ ${jsonStr} }`, generator.ORDER_ATOMIC];
+javascriptGenerator.forBlock['js_object_create'] = function(block, generator) {
+  const items = block.getFieldValue('JSON_STR') || '';
+  const gen = generator || javascriptGenerator;
+  return [`{ ${items} }`, gen.ORDER_ATOMIC];
 };
 
 javascriptGenerator.forBlock['js_object_get_set'] = function(block, generator) {
-  const obj = generator.valueToCode(block, 'OBJ', generator.ORDER_MEMBER) || 'obj';
+  const gen = generator || javascriptGenerator;
+  const obj = gen.valueToCode(block, 'OBJ', gen.ORDER_MEMBER) || 'obj';
   const prop = block.getFieldValue('PROP') || 'prop';
-  return [`${obj}.${prop}`, generator.ORDER_MEMBER];
+  return [`${obj}.${prop}`, gen.ORDER_MEMBER];
 };
 
 javascriptGenerator.forBlock['js_json_stringify'] = function(block, generator) {
-  const obj = generator.valueToCode(block, 'OBJ', generator.ORDER_NONE) || '{}';
-  return [`JSON.stringify(${obj})`, generator.ORDER_FUNCTION_CALL];
+  const gen = generator || javascriptGenerator;
+  const obj = gen.valueToCode(block, 'OBJ', gen.ORDER_NONE) || '{}';
+  return [`JSON.stringify(${obj})`, gen.ORDER_FUNCTION_CALL];
 };
 
 javascriptGenerator.forBlock['js_json_parse'] = function(block, generator) {
-  const str = generator.valueToCode(block, 'STR', generator.ORDER_NONE) || '"{}"';
-  return [`JSON.parse(${str})`, generator.ORDER_FUNCTION_CALL];
+  const gen = generator || javascriptGenerator;
+  const str = gen.valueToCode(block, 'STR', gen.ORDER_NONE) || '"{}"';
+  return [`JSON.parse(${str})`, gen.ORDER_FUNCTION_CALL];
 };
 
-javascriptGenerator.forBlock['js_map_create'] = function() {
-  return ['new Map()', javascriptGenerator.ORDER_NEW];
+javascriptGenerator.forBlock['js_map_create'] = function(block, generator) {
+  const gen = generator || javascriptGenerator;
+  return ['new Map()', gen.ORDER_FUNCTION_CALL || gen.ORDER_ATOMIC];
 };
 
 javascriptGenerator.forBlock['js_map_set_get'] = function(block, generator) {
-  const map = generator.valueToCode(block, 'MAP', generator.ORDER_MEMBER) || 'map';
+  const gen = generator || javascriptGenerator;
+  const map = gen.valueToCode(block, 'MAP', gen.ORDER_MEMBER) || 'map';
   const action = block.getFieldValue('ACTION') || 'set';
-  const key = generator.valueToCode(block, 'KEY', generator.ORDER_NONE) || '';
-  const val = generator.valueToCode(block, 'VAL', generator.ORDER_NONE) || '';
+  const key = gen.valueToCode(block, 'KEY', gen.ORDER_NONE) || '';
+  const val = gen.valueToCode(block, 'VAL', gen.ORDER_NONE) || '';
   const args = action === 'set' ? `${key}, ${val}` : key;
-  return [`${map}.${action}(${args})`, generator.ORDER_FUNCTION_CALL];
+  return [`${map}.${action}(${args})`, gen.ORDER_FUNCTION_CALL];
 };
 
-javascriptGenerator.forBlock['js_set_create'] = function() {
-  return ['new Set()', javascriptGenerator.ORDER_NEW];
+javascriptGenerator.forBlock['js_set_create'] = function(block, generator) {
+  const gen = generator || javascriptGenerator;
+  return ['new Set()', gen.ORDER_FUNCTION_CALL || gen.ORDER_ATOMIC];
 };
 
 javascriptGenerator.forBlock['js_set_add_has'] = function(block, generator) {
-  const set = generator.valueToCode(block, 'SET', generator.ORDER_MEMBER) || 'set';
+  const gen = generator || javascriptGenerator;
+  const set = gen.valueToCode(block, 'SET', gen.ORDER_MEMBER) || 'set';
   const action = block.getFieldValue('ACTION') || 'add';
-  const val = generator.valueToCode(block, 'VAL', generator.ORDER_NONE) || '';
-  return [`${set}.${action}(${val})`, generator.ORDER_FUNCTION_CALL];
+  const val = gen.valueToCode(block, 'VAL', gen.ORDER_NONE) || '';
+  return [`${set}.${action}(${val})`, gen.ORDER_FUNCTION_CALL];
 };
 
 javascriptGenerator.forBlock['js_class_define'] = function(block, generator) {
